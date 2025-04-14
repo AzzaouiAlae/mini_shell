@@ -20,6 +20,7 @@ int main()
 {
     init_Tests();
     simple_tests();
+    redirects_Tests();
     ft_free_all();
     return (UnityEnd());
 }

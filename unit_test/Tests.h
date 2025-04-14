@@ -17,5 +17,7 @@ typedef struct s_split_tokens_data
 t_split_tokens_data *data();
 void split_tokens_test();
 void simple_tests();
+char *get_enum_str(int type);
+void redirects_Tests();
 
 #endif
