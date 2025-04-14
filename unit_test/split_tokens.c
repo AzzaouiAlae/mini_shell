@@ -122,7 +122,7 @@ void simple_test10()
 {
     data()->s = "grep hi <./test_files/infile";
 
-    t_token exp[] = { {"grep", e_args | e_cmd}, {"hi", e_args}, {"<", e_redir_in}, {"./test_files/infile", e_args}};
+    t_token exp[] = { {"grep", e_args | e_cmd}, {"hi", e_args}, {"<", e_redir_in}, {"./test_files/infile", e_file_name}};
     data()->exp = (t_token *)exp;
     data()->count = 4;
     split_tokens_test();
