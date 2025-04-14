@@ -9,5 +9,5 @@ void init_g_all()
 
 // int main(int argc, char *argv[], char *env[])
 // {
-
+//     printf("hello\n");
 // }

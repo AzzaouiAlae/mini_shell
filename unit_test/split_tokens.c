@@ -39,7 +39,7 @@ void simple_test2()
     data()->s = "env | sort | grep -v SHLVL | grep -v ^_ |echo \" hfh  $saaj\" ' dhdf $test'";
 
     t_token exp[] = { {"env", e_args | e_cmd}, {"|", e_pipe}, {"sort", e_args | e_cmd}, {"|", e_pipe},{"grep", e_args | e_cmd},{"-v", e_args},{"SHLVL", e_args},
-            {"|", e_pipe},{"grep", e_args | e_cmd},{"-v", e_args},{"^_", e_args},{"|", e_pipe},{"echo", e_args | e_cmd}, {"\" hfh  $saaj\"", e_double_quote | e_var_to_get},
+            {"|", e_pipe},{"grep", e_args | e_cmd},{"-v", e_args},{"^_", e_args},{"|", e_pipe},{"echo", e_args | e_cmd}, {"\" hfh  $saaj\"", e_double_quote | e_var_to_get | e_args},
             {"' dhdf $test'", e_quote}};
     data()->exp = (t_token *)exp;
     data()->count = 15;
@@ -50,7 +50,7 @@ void simple_test3()
 {
     data()->s = "echo \" hfh  $saaj\" ' dhdf $test'";
 
-    t_token exp[] = { {"echo", e_args | e_cmd}, {"\" hfh  $saaj\"", e_double_quote | e_var_to_get}, {"' dhdf $test'", e_quote},};
+    t_token exp[] = { {"echo", e_args | e_cmd}, {"\" hfh  $saaj\"", e_args | e_double_quote | e_var_to_get}, {"' dhdf $test'", e_quote},};
     data()->exp = (t_token *)exp;
     data()->count = 3;
     split_tokens_test();
@@ -90,7 +90,8 @@ void simple_test7()
 {
     data()->s = "cat ./test_files/infile_big | grep oi";
 
-    t_token exp[] = { {"cat", e_args | e_cmd}, {"./test_files/infile_big", e_args}, {"|", e_pipe}, {"grep", e_args | e_cmd}, {"oi", e_args}};
+    t_token exp[] = { {"cat", e_args | e_cmd}, {"./test_files/infile_big", e_args}, 
+    {"|", e_pipe}, {"grep", e_args | e_cmd}, {"oi", e_args}};
     data()->exp = (t_token *)exp;
     data()->count = 5;
     split_tokens_test();
@@ -100,7 +101,9 @@ void simple_test8()
 {
     data()->s = "cat minishell.h | grep \");\"$";
 
-    t_token exp[] = { {"cat", e_args | e_cmd}, {"minishell.h", e_args}, {"|", e_pipe}, {"grep", e_args | e_cmd}, {"\");\"", e_double_quote}, {"$", e_var_to_get}};
+    t_token exp[] = { {"cat", e_args | e_cmd}, {"minishell.h", e_args}, 
+    {"|", e_pipe}, {"grep", e_args | e_cmd}, {"\");\"", e_double_quote}, 
+    {"$", e_var_to_get}};
     data()->exp = (t_token *)exp;
     data()->count = 5;
     split_tokens_test();
@@ -238,7 +241,7 @@ void simple_test21()
 
     t_token exp[] = { 
         {"echo", e_args | e_cmd}, {"hh", e_args}, 
-        {"\"$test\"", e_double_quote | e_var_to_get} 
+        {"\"$test\"", e_args | e_double_quote | e_var_to_get} 
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -281,6 +284,15 @@ void simple_test24()
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
+    split_tokens_test();
+}
+
+void simple_test25()
+{
+    data()->s = "echo export GHOST=123";
+    t_token exp[] = {{"echo", e_args | e_cmd}, {"export", e_args}, {"GHOST=123", e_args}};
+    data()->exp = (t_token *)exp;
+    data()->count = 3;
     split_tokens_test();
 }
 
@@ -329,4 +341,5 @@ void simple_tests()
     RUN_TEST(simple_test22);
     RUN_TEST(simple_test23);
     RUN_TEST(simple_test24);
+    RUN_TEST(simple_test25);
 }

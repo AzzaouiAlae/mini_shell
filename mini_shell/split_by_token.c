@@ -95,14 +95,23 @@ void	args_type(void)
 	g_all.token->type = e_args;
 }
 
-void	var_to_get_in_double_quote(void)
+void	double_quote_type(void)
 {
 	char *s;
+	t_token **token;
+	int count;
 
+	token = g_all.tokens->content;
+	count = g_all.tokens->count;
 	s = ft_strchr(g_all.token_str->content, '$');
 	if (s && !ft_strchr(" |<>\t$\"'", s[1]))
 	{
-		g_all.token->type = e_double_quote | e_var_to_get;
+		if(!count || token[count - 1]->type == e_pipe)
+			g_all.token->type = e_double_quote | e_var_to_get | e_cmd | e_args;
+		else if(token[count - 1]->type & e_args)
+			g_all.token->type = e_double_quote | e_var_to_get | e_args;
+		else
+			g_all.token->type = e_double_quote | e_var_to_get;
 		return ;
 	}
 	g_all.token->type = e_double_quote;
@@ -135,7 +144,7 @@ void	get_type(t_token_type type)
 	if (type == e_args)
 		args_type();
 	else if(type == e_double_quote)
-		var_to_get_in_double_quote();
+		double_quote_type();
 	else if(type == e_var_to_get)
 		var_to_get_single_char();
 	else

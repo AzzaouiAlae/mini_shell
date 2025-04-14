@@ -7,13 +7,13 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "/home/aazzaoui/Desktop/projects/mini_shell/mini_shell/*.c",
-                "/home/aazzaoui/Desktop/projects/mini_shell/mini_shell/*/*.c",
+                "*.c",
+                "*/*.c",
                 "-o",
-                "/home/aazzaoui/Desktop/projects/mini_shell/mini_shell/mini_shell"
+                "${workspaceFolder}/mini_shell"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
