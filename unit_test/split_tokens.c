@@ -296,6 +296,16 @@ void simple_test25()
     split_tokens_test();
 }
 
+void redirects_Test1()
+{
+    data()->s = "grep hi <./test_files/infile";
+    t_token exp[] = {{"grep", e_args | e_cmd}, {"hi", e_args}, 
+        {"<", e_redir_in}, {"./test_files/infile", e_file_name}};
+    data()->exp = (t_token *)exp;
+    data()->count = 3;
+    split_tokens_test();
+}
+
 void split_tokens_test()
 {
     //arrange
@@ -315,6 +325,8 @@ void split_tokens_test()
         TEST_ASSERT_EQUAL_INT32(data()->exp[i].type, tokens[i]->type);
     }
 }
+
+
 
 void simple_tests()
 {
@@ -342,4 +354,5 @@ void simple_tests()
     RUN_TEST(simple_test23);
     RUN_TEST(simple_test24);
     RUN_TEST(simple_test25);
+    RUN_TEST(redirects_Test1);
 }
