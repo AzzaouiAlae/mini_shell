@@ -1,0 +1,11 @@
+#ifndef FT_FUNC_H
+# define FT_FUNC_H
+# include <stdlib.h>
+#include "../garbage_collector/garbage_collector.h"
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *s);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
+int	ft_strcmp(char *s1, char *s2);
+
+#endif

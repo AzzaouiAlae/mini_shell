@@ -1,0 +1,8 @@
+#!/bin/bash
+
+git add *
+git commit -m 'auto commit'
+git pull --rebase origin main
+git push
+rm .time
+touch .time

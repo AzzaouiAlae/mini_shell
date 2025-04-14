@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "ft_func.h": "c",
+        "compare": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "string.h": "c",
+        "stdio.h": "c"
+    }
+}
