@@ -142,7 +142,7 @@ void simple_test12()
 {
     data()->s = "echo hi < ./test_files/infile bye bye";
 
-    t_token exp[] = { {"echo", e_args | e_cmd}, {"hi", e_args}, {"<", e_redir_in}, {"./test_files/infile", e_args}, {"bye", e_args}, {"bye", e_args}};
+    t_token exp[] = { {"echo", e_args | e_cmd}, {"hi", e_args}, {"<", e_redir_in}, {"./test_files/infile", e_file_name}, {"bye", e_args}, {"bye", e_args}};
     data()->exp = (t_token *)exp;
     data()->count = 6;
     split_tokens_test();
@@ -152,7 +152,7 @@ void simple_test13()
 {
     data()->s = "grep hi <./test_files/infile_big <./test_files/infile";
 
-    t_token exp[] = { {"grep", e_args | e_cmd}, {"hi", e_args}, {"<", e_redir_in}, {"./test_files/infile_big", e_args}, {"<", e_redir_in}, {"./test_files/infile", e_args}};
+    t_token exp[] = { {"grep", e_args | e_cmd}, {"hi", e_args}, {"<", e_redir_in}, {"./test_files/infile_big", e_file_name}, {"<", e_redir_in}, {"./test_files/infile", e_args}};
     data()->exp = (t_token *)exp;
     data()->count = 6;
     split_tokens_test();
