@@ -5,8 +5,8 @@ char *get_enum_str(int type)
     t_cs_list *list = cs_list_new(1);
     int i = 0;
     char *strs[] = {"e_none", "e_args", "e_pipe", "e_heredoc",
- 		"e_redir_out_app", "e_redir_out_trun", "e_redir_in", "e_var",
- 		"e_quote", "e_double_quote", "e_file_name", "e_cmd", "e_path", "e_set_var", 0};
+ 		"e_redir_out_app", "e_redir_out_trun", "e_redir_in", "e_var_to_get",
+ 		"e_quote", "e_double_quote", "e_file_name", "e_cmd", "e_path", "e_set_var", "e_var_to_set" ,"e_delimiter", 0};
     for(int i = 1, j = 1; strs[j]; i *= 2, j++)
     {
         if((type & i) == i)
