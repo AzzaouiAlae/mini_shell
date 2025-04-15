@@ -1,0 +1,5 @@
+echo $"test"
+hh="hello        world"
+echo $hh
+hh="echo hello world | cat"
+hh=echo hello world | cat

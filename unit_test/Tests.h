@@ -13,11 +13,13 @@ typedef struct s_split_tokens_data
     int count;
 } t_split_tokens_data;
 
-
+void pipe_Test();
 t_split_tokens_data *data();
 void split_tokens_test();
 void simple_tests();
 char *get_enum_str(int type);
 void redirects_Tests();
+void builtins_Test();
+
 
 #endif
