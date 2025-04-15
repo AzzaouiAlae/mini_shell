@@ -7,11 +7,11 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "../mini_shell/*.c",
-                "../mini_shell/*/*.c",
-                "*.c",
-                "*/*.c",
-                "Unity-master/src/unity.c",
+                "${workspaceFolder}/../mini_shell/*.c",
+                "${workspaceFolder}/../mini_shell/*/*.c",
+                "${workspaceFolder}/*.c",
+                "${workspaceFolder}/*/*.c",
+                "${workspaceFolder}/Unity-master/src/unity.c",
                 "-o",
                 "${workspaceFolder}/mini_shell.a"
             ],

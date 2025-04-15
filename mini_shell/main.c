@@ -40,22 +40,22 @@ void print_tokens(char *s)
     }
 }
 
-int main(int argc, char *argv[], char *env[])
-{
-    char *input;
+// int main(int argc, char *argv[], char *env[])
+// {
+//     char *input;
 
-    init_g_all();
-    while(1)
-    {
-        input = readline("$>: ");
-        if(input && *input)
-            add_history(input);
-        if(input && !ft_strcmp(input, "exit"))
-            break;
-        print_tokens(input);
-        free(input);
-    }
-    free(input);
-    rl_clear_history();
-    return 1;
-}
+//     init_g_all();
+//     while(1)
+//     {
+//         input = readline("$>: ");
+//         if(input && *input)
+//             add_history(input);
+//         if(input && !ft_strcmp(input, "exit"))
+//             break;
+//         print_tokens(input);
+//         free(input);
+//     }
+//     free(input);
+//     rl_clear_history();
+//     return 1;
+// }

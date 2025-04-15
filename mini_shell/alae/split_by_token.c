@@ -376,22 +376,22 @@ void	check_tokens(t_split_data *data)
 	skip_space(data->s, &data->i);
 }
 
-// void split_tokens(char *s, char *sep, char *special_sep)
-// {
-// 	t_split_data	data;
+void split_tokens(char *s, char *sep, char *special_sep)
+{
+	t_split_data	data;
 
-// 	if(!g_all.tokens)
-// 		g_all.tokens = cs_list_new(sizeof(t_token *));
-// 	else
-// 		cs_list_clear(g_all.tokens);
-// 	data.i = 0;
-// 	data.ch = '\0';
-// 	data.s = s;
-// 	data.sep = sep;
-// 	data.special_sep = special_sep;
-// 	while (ft_strchr(" \t", s[data.i]))
-// 		data.i++;
-// 	while (s[data.i])
-// 		check_tokens(&data);
-// 	add_cmd(' ', 1);
-// }
+	if(!g_all.tokens)
+		g_all.tokens = cs_list_new(sizeof(t_token *));
+	else
+		cs_list_clear(g_all.tokens);
+	data.i = 0;
+	data.ch = '\0';
+	data.s = s;
+	data.sep = sep;
+	data.special_sep = special_sep;
+	while (ft_strchr(" \t", s[data.i]))
+		data.i++;
+	while (s[data.i])
+		check_tokens(&data);
+	add_cmd(' ', 1);
+}
