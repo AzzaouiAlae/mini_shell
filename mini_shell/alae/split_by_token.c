@@ -1,4 +1,4 @@
-#include "mini_shell.h"
+#include "../mini_shell.h"
 #include "split_by_token.h"
 
 int	is_all_space(char *str)
