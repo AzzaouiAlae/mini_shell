@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:27:58 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/15 21:53:26 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/15 21:54:10 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int  check_pipe(t_token token , int i)
 {
     if(!i && token.type & e_pipe)
     {
-        return();
+        return(0);
     }
 }
 
