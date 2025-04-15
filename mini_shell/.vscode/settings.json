@@ -5,6 +5,7 @@
         "type_traits": "c",
         "utility": "c",
         "string.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "cs_list.h": "c"
     }
 }

@@ -9,6 +9,7 @@
                 "-g",
                 "*.c",
                 "*/*.c",
+                "-lreadline",
                 "-o",
                 "${workspaceFolder}/mini_shell"
             ],

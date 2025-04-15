@@ -15,41 +15,53 @@ int	is_all_space(char *str)
 	return (i);
 }
 
-int	cmd_path_in_args_type(void)
+void redir_in_args_type(int count, t_token **tokens)
 {
-	if (g_all.tokens->count == 0)
-	{
-		if (ft_strchr(g_all.token_str->content, '/'))
-			g_all.token->type = e_args | e_cmd | e_path;
-		else
-			g_all.token->type = e_args | e_cmd;
-	}
-	if (g_all.tokens->count)
-	{
-		if (((t_token **)(g_all.tokens->content))[g_all.tokens->count - 1]->type == e_pipe)
-		{
-			if (ft_strchr(g_all.token_str->content, '/'))
-				g_all.token->type = e_args | e_cmd | e_path;
-			else
-				g_all.token->type = e_args | e_cmd;
-		}
-	}
-	return (g_all.token->type);
+	int type;
+
+	type = tokens[count - 1]->type;
+	if(type == e_redir_in || type == e_redir_out_app || 
+		type == e_redir_out_trun)
+		g_all.token->type = e_file_name;
+	else if(type == e_heredoc)
+		g_all.token->type = e_delimiter;
 }
 
-int	double_quote_in_args_type(void)
+void	cmd_path_in_args_type(void)
+{
+	t_token **tokens;
+	int count;
+	char *s;
+
+	count = g_all.tokens->count;
+	tokens = g_all.tokens->content;
+	if (count == 0 || tokens[count - 1]->type == e_pipe)
+	{
+		g_all.token->type = g_all.token->type | e_cmd;
+		if (ft_strchr(g_all.token_str->content, '/'))
+			g_all.token->type = g_all.token->type | e_path;
+	}
+	s = ft_strchr(g_all.token_str->content, '"');
+	if (s && ft_strchr(s + 1, '"'))
+		g_all.token->type = g_all.token->type | e_double_quote;
+	s = ft_strchr(g_all.token_str->content, '\'');
+	if (s && ft_strchr(s + 1, '\''))
+		g_all.token->type = g_all.token->type | e_quote;
+	if (count)
+		redir_in_args_type(count, tokens);
+}
+
+void	double_quote_in_args_type(void)
 {
 	char *s;
+
 	if (ft_strchr(g_all.token_str->content, '"'))
 	{
-		s = ft_strchr(g_all.token_str->content, '$');
-		if (s && !ft_strchr(" |<>\t$\"'", s[1]))
-		{
-			g_all.token->type = e_args | e_var_to_get;
-			return (1);
-		}
+		s = ft_strchr(g_all.token_str->content, '"');
+		s = ft_strchr(s, '$');
+		if (s && !ft_strchr(" |<>\t$\"", s[1]))
+			g_all.token->type = g_all.token->type | e_var_to_get;
 	}
-	return (0);
 }
 
 int	var_to_set_in_arg_type(void)
@@ -62,7 +74,7 @@ int	var_to_set_in_arg_type(void)
 	ch = '\0';
 	tokens = g_all.tokens->content;
 	res = !g_all.tokens->count || (tokens[g_all.tokens->count
-			- 1]->type & e_set_var) == e_set_var;
+			- 1]->type & e_set_var);
 	while (i < g_all.token_str->count && res)
 	{
 		if (ch == '\0' && s[i] == '=')
@@ -81,18 +93,39 @@ int	var_to_set_in_arg_type(void)
 
 void	args_type(void)
 {
+	g_all.token->type = e_args;
 	if (!ft_strcmp(g_all.token_str->content, "export") && !g_all.tokens->count)
 	{
 		g_all.token->type = e_set_var;
 		return ;
 	}
-	if (cmd_path_in_args_type())
-		return ;
-	if (double_quote_in_args_type())
-		return ;
-	if (var_to_set_in_arg_type())
-		return ;
-	g_all.token->type = e_args;
+	cmd_path_in_args_type();
+	double_quote_in_args_type();
+	var_to_set_in_arg_type();
+}
+
+void	redir_in_double_quote_type(t_token **token, int count)
+{
+	int res;
+
+	res = 0;
+	if(count && token && token[count - 1])
+	{
+		res = token[count - 1]->type == e_redir_in;
+		res += token[count - 1]->type == e_redir_out_app;
+		res += token[count - 1]->type == e_redir_out_trun;
+	}	
+	if(res)
+		g_all.token->type = e_double_quote | e_file_name;
+	else if (!count || token[count - 1]->type == e_pipe)
+		g_all.token->type = e_args | e_double_quote | e_cmd;
+	else if (count && token[count - 1]->type == e_heredoc)
+		g_all.token->type = e_double_quote | e_delimiter;
+	else if (count && token[count - 1]->type & e_cmd)
+		g_all.token->type = e_double_quote | e_args;
+	if(g_all.token->type)
+		return;
+	g_all.token->type = e_double_quote;
 }
 
 void	double_quote_type(void)
@@ -114,7 +147,7 @@ void	double_quote_type(void)
 			g_all.token->type = e_double_quote | e_var_to_get;
 		return ;
 	}
-	g_all.token->type = e_double_quote;
+	redir_in_double_quote_type(token, count);
 }
 
 void var_to_get_single_char()
@@ -126,7 +159,6 @@ void var_to_get_single_char()
 	t = g_all.tokens;
 	s = g_all.token_str->content;
 	res = s[0] == ' ' || s[0] == '\t';
-	
 	if(g_all.token_str->count - res > 1)
 	{
 		if (t->count == 0 || (((t_token **)(t->content))[t->count - 1])->type 
@@ -288,7 +320,7 @@ int	is_double_quote(t_split_data *data)
 {
 	if (data->s[data->i] == '"')
 	{
-		if (ft_strchr(data->sep, data->s[data->i - 1]))
+		if (!data->i || ft_strchr(data->sep, data->s[data->i - 1]))
 			add_cmd(data->s[data->i], e_double_quote);
 		else
 			add_cmd(data->s[data->i], 0);
@@ -344,22 +376,22 @@ void	check_tokens(t_split_data *data)
 	skip_space(data->s, &data->i);
 }
 
-void split_tokens(char *s, char *sep, char *special_sep)
-{
-	t_split_data	data;
+// void split_tokens(char *s, char *sep, char *special_sep)
+// {
+// 	t_split_data	data;
 
-	if(!g_all.tokens)
-		g_all.tokens = cs_list_new(sizeof(t_token *));
-	else
-		cs_list_clear(g_all.tokens);
-	data.i = 0;
-	data.ch = '\0';
-	data.s = s;
-	data.sep = sep;
-	data.special_sep = special_sep;
-	while (ft_strchr(" \t", s[data.i]))
-		data.i++;
-	while (s[data.i])
-		check_tokens(&data);
-	add_cmd(' ', 1);
-}
+// 	if(!g_all.tokens)
+// 		g_all.tokens = cs_list_new(sizeof(t_token *));
+// 	else
+// 		cs_list_clear(g_all.tokens);
+// 	data.i = 0;
+// 	data.ch = '\0';
+// 	data.s = s;
+// 	data.sep = sep;
+// 	data.special_sep = special_sep;
+// 	while (ft_strchr(" \t", s[data.i]))
+// 		data.i++;
+// 	while (s[data.i])
+// 		check_tokens(&data);
+// 	add_cmd(' ', 1);
+// }
