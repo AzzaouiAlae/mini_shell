@@ -77,7 +77,7 @@ void simple_test8()
     data()->s = "cat minishell.h | grep \");\"$";
 
     t_token exp[] = { {"cat", e_args | e_cmd}, {"minishell.h", e_args}, 
-    {"|", e_pipe}, {"grep", e_args | e_cmd}, {"\");\"", e_double_quote}, 
+    {"|", e_pipe}, {"grep", e_args | e_cmd}, {"\");\"", e_double_quote | e_args}, 
     {"$", e_var_to_get}};
     data()->exp = (t_token *)exp;
     data()->count = 5;
@@ -138,7 +138,7 @@ void simple_test14()
     data()->s = "echo <\"./test_files/infile\" \"bonjour       42\"";
 
     t_token exp[] = { {"echo", e_args | e_cmd}, {"<", e_redir_in}, 
-    {"\"./test_files/infile\"", e_double_quote}, 
+    {"\"./test_files/infile\"", e_double_quote | e_file_name}, 
     {"\"bonjour       42\"", e_double_quote}};
     data()->exp = (t_token *)exp;
     data()->count = 4;
@@ -150,7 +150,7 @@ void simple_test15()
     data()->s = "cat <\"1\"\"2\"\"3\"\"4\"\"5\"";
 
     t_token exp[] = { {"cat", e_args | e_cmd}, {"<", e_redir_in}, 
-    {"\"1\"\"2\"\"3\"\"4\"\"5\"", e_double_quote}};
+    {"\"1\"\"2\"\"3\"\"4\"\"5\"", e_double_quote | e_file_name}};
     data()->exp = (t_token *)exp;
     data()->count = 3;
     split_tokens_test();
@@ -160,7 +160,8 @@ void simple_test16()
 {
     data()->s = "cat hello\" this is a test $test\"";
 
-    t_token exp[] = { {"cat", e_args | e_cmd}, {"hello\" this is a test $test\"", e_args | e_var_to_get}, 
+    t_token exp[] = { {"cat", e_args | e_cmd}, 
+    {"hello\" this is a test $test\"", e_args | e_var_to_get | e_double_quote}, 
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -171,7 +172,8 @@ void simple_test17()
 {
     data()->s = "echo hh$test";
 
-    t_token exp[] = { {"echo", e_args | e_cmd}, {"hh", e_args}, {"$test", e_var_to_get} 
+    t_token exp[] = { {"echo", e_args | e_cmd}, 
+    {"hh", e_args}, {"$test", e_var_to_get} 
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
