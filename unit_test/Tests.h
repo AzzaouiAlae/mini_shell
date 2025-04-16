@@ -20,6 +20,7 @@ void simple_tests();
 char *get_enum_str(int type);
 void redirects_Tests();
 void builtins_Test();
+void Test_syntax_error();
 
 
 #endif

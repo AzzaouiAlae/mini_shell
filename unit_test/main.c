@@ -23,6 +23,7 @@ int main()
     redirects_Tests();
     pipe_Test();
     builtins_Test();
+    Test_syntax_error();
     ft_free_all();
     return (UnityEnd());
 }
