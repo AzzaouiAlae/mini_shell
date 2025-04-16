@@ -119,10 +119,7 @@ void	args_type(void)
 {
 	g_all.token->type = e_args;
 	if (!ft_strcmp(g_all.token_str->content, "export") && !g_all.tokens->count)
-	{
 		g_all.token->type = e_set_var;
-		return ;
-	}
 	cmd_path_in_args_type();
 	double_quote_in_args_type();
 	var_to_set_in_arg_type();
@@ -174,7 +171,9 @@ void var_to_get_single_char()
 	t = g_all.tokens;
 	s = g_all.token_str->content;
 	res = s[0] == ' ' || s[0] == '\t';
-	if(g_all.token_str->count - res > 1)
+	if(ft_strchr(g_all.token->s, '?'))
+		g_all.token->type = e_args | e_error_status;
+	else if(g_all.token_str->count - res > 1)
 	{
 		if (t->count == 0 || (((t_token **)(t->content))[t->count - 1])->type 
 		& e_pipe)
@@ -182,8 +181,7 @@ void var_to_get_single_char()
 		else
 			g_all.token->type = e_var_to_get;
 	}
-	else
-		g_all.token->type = e_args;
+	g_all.token->type = g_all.token->type | e_args;
 }
 
 void single_quote_type()
@@ -316,6 +314,17 @@ int	is_exp_var(t_split_data *data)
 	{
 		space_in_var_to_get(data);
 		data->i++;
+		if(data->s[data->i] == '?')
+		{
+			add_cmd('?', 0);
+			data->i++;
+			if(ft_strchr("\t ", data->s[data->i + 1]))
+			{
+				add_cmd(' ', 0);
+				data->i++;
+			}
+			return 1;
+		}
 		while (data->s[data->i] && !ft_strchr(data->sep, data->s[data->i]))
 		{
 			add_cmd(data->s[data->i], 0);
@@ -370,14 +379,10 @@ int	is_double_quote(t_split_data *data)
 
 void arg_type_quote(t_split_data *data)
 {
-	// if(!data->i)
-	// 	add_cmd(data->s[data->i], e_args);
-	// else if()
-	// {
-		
-	// }
-
-	
+	if(!data->i || !ft_strchr("\"'", data->s[data->i - 1]))
+		add_cmd(data->s[data->i], e_args);
+	else
+		add_cmd(data->s[data->i], 0);
 }
 
 int	is_arg(t_split_data *data)
@@ -387,7 +392,7 @@ int	is_arg(t_split_data *data)
 		&& !ft_strchr(data->special_sep, data->s[data->i]))
 	{
 		if (data->first_time)
-			add_cmd(data->s[data->i], e_args);
+			arg_type_quote(data);
 		else
 			add_cmd(data->s[data->i], 0);
 		data->first_time = 0;

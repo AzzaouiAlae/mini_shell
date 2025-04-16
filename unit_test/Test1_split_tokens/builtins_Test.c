@@ -214,7 +214,7 @@ void builtins_Test20() {
     data()->s = "echo $?";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"$?", e_error_status}
+        {"$?", e_error_status | e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -225,10 +225,11 @@ void builtins_Test21() {
     data()->s = "echo $?HELLO";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"$?HELLO", e_args | e_error_status}
+        {"$?", e_args | e_error_status},
+        {"HELLO", e_args}
     };
     data()->exp = (t_token *)exp;
-    data()->count = 2;
+    data()->count = 3;
     split_tokens_test();
 }
 
@@ -256,7 +257,7 @@ void builtins_Test23() {
 void builtins_Test24() {
     data()->s = "export hello";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"hello", e_args}
     };
     data()->exp = (t_token *)exp;
@@ -267,7 +268,7 @@ void builtins_Test24() {
 void builtins_Test25() {
     data()->s = "export HELLO=123";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"HELLO=123", e_var_to_set}
     };
     data()->exp = (t_token *)exp;
@@ -278,7 +279,7 @@ void builtins_Test25() {
 void builtins_Test26() {
     data()->s = "export A-";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"A-", e_args}
     };
     data()->exp = (t_token *)exp;
@@ -289,7 +290,7 @@ void builtins_Test26() {
 void builtins_Test27() {
     data()->s = "export HELLO=123 A";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"HELLO=123", e_var_to_set},
         {"A", e_args}
     };
@@ -301,7 +302,7 @@ void builtins_Test27() {
 void builtins_Test28() {
     data()->s = "export HELLO=\"123 A-\"";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"HELLO=\"123 A-\"", e_var_to_set | e_double_quote}
     };
     data()->exp = (t_token *)exp;
@@ -312,7 +313,7 @@ void builtins_Test28() {
 void builtins_Test29() {
     data()->s = "export hello world";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"hello", e_args},
         {"world", e_args}
     };
@@ -324,7 +325,7 @@ void builtins_Test29() {
 void builtins_Test30() {
     data()->s = "export HELLO-=123";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"HELLO-=123", e_var_to_set}
     };
     data()->exp = (t_token *)exp;
@@ -335,7 +336,7 @@ void builtins_Test30() {
 void builtins_Test31() {
     data()->s = "export =";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"=", e_var_to_set}
     };
     data()->exp = (t_token *)exp;
@@ -346,7 +347,7 @@ void builtins_Test31() {
 void builtins_Test32() {
     data()->s = "export 123";
     t_token exp[] = {
-        {"export", e_set_var},
+        {"export", e_set_var | e_cmd},
         {"123", e_args}
     };
     data()->exp = (t_token *)exp;
