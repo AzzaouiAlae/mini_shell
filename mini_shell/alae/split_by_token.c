@@ -88,6 +88,18 @@ void	double_quote_in_args_type(void)
 	}
 }
 
+int double_quote_in_var_to_set(char *str)
+{
+	char *s;
+
+	s = ft_strchr(str, '"');
+	if(!s)
+		return 0;
+	if(ft_strchr(s + 1, '"'))
+		return 1;
+	return 0;
+}
+
 int	var_to_set_in_arg_type(void)
 {
 	t_token	**tokens;
@@ -104,6 +116,8 @@ int	var_to_set_in_arg_type(void)
 		if (ch == '\0' && s[i] == '=')
 		{
 			g_all.token->type = e_var_to_set;
+			if(double_quote_in_var_to_set(&(s[i + 1])))
+				g_all.token->type =	g_all.token->type | e_double_quote;
 			return (1);
 		}
 		if (ch == '\0' && ft_strchr("\"'", s[i]))

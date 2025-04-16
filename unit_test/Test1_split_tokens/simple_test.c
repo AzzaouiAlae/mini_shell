@@ -87,7 +87,7 @@ void simple_test8()
 void simple_test9()
 {
     data()->s = "export GHOST=123 | env | grep GHOST";
-    t_token exp[] = { {"export", e_set_var}, {"GHOST=123", e_var_to_set}, {"|", e_pipe}, {"env", e_args | e_cmd}, {"|", e_pipe}, {"grep", e_args | e_cmd}, {"GHOST", e_args}};
+    t_token exp[] = { {"export", e_set_var | e_cmd}, {"GHOST=123", e_var_to_set}, {"|", e_pipe}, {"env", e_args | e_cmd}, {"|", e_pipe}, {"grep", e_args | e_cmd}, {"GHOST", e_args}};
     data()->exp = (t_token *)exp;
     data()->count = 6;
     split_tokens_test();
@@ -173,7 +173,7 @@ void simple_test17()
     data()->s = "echo hh$test";
 
     t_token exp[] = { {"echo", e_args | e_cmd}, 
-    {"hh", e_args}, {"$test", e_var_to_get} 
+    {"hh", e_args}, {"$test", e_var_to_get | e_args} 
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -184,7 +184,7 @@ void simple_test18()
 {
     data()->s = "echo hh $test";
 
-    t_token exp[] = { {"echo", e_args | e_cmd}, {"hh", e_args}, {" $test", e_var_to_get} 
+    t_token exp[] = { {"echo", e_args | e_cmd}, {"hh", e_args}, {" $test", e_var_to_get | e_args} 
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;

@@ -22,7 +22,7 @@ typedef struct s_cs_list
 	int		size_of_type;
 	int		count;
 	int		capacity;
-	int		free_contate;
+	int		free_content;
 }			t_cs_list;
 
 void		cs_list_add(t_cs_list *list, long item);

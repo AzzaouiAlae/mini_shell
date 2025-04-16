@@ -56,7 +56,7 @@ void pipe_test4()
 {
     data()->s = "export GHOST=123 | env | grep GHOST";
     t_token exp[] = {
-        {"export", e_set_var | e_args},
+        {"export", e_set_var | e_cmd},
         {"GHOST=123", e_var_to_set},
         {"|", e_pipe},
         {"env", e_args | e_cmd},

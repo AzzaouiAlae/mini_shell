@@ -7,6 +7,7 @@
         "string.h": "c",
         "stdio.h": "c",
         "cs_list.h": "c",
-        "ft_check_syntax.h": "c"
+        "ft_check_syntax.h": "c",
+        "garbage_collector.h": "c"
     }
 }

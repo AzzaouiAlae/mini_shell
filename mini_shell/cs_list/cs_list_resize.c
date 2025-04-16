@@ -17,7 +17,7 @@ void	cs_list_resize(t_cs_list *list, int capacity)
 	void	*mem;
 	void	*tmp;
 
-	if (list->free_contate)
+	if (list->free_content)
 		mem = ft_calloc(list->size_of_type, capacity);
 	else
 		mem = ft_calloc_without_save(list->size_of_type, capacity);
