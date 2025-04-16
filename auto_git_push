@@ -3,4 +3,4 @@
 /usr/bin/git add *
 /usr/bin/git commit -m 'auto commit'
 /usr/bin/git pull --rebase origin main
-/usr/bin/git push
+#/usr/bin/git push
