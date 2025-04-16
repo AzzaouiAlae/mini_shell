@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 22:17:25 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/16 23:57:32 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:57:58 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,39 @@ int check_redir(t_token **token , int i)
     return (1);
 }
 
-void ft_check_syntax_error()
+int ft_check_syntax_error()
 {
-//     t_token **token;
-//     int i;
-    
-//     token = g_all.tokens->content;
-//     g_all.cmd_error_status = 0;
-//     i = 0;
-//     while (token[i])
-//     {
-//         if (check_redir_in_out_in_first(token, i) == 0)
-//             return ;
-//         i++;
-//     }
+    t_token **token;
+    t_token *t;
+    t_token tokens[] = {
+        {"echo", e_cmd | e_args},
+        {"hello", e_args},
+        {"|", e_pipe},
+        {"|", e_pipe}
+    };
+    int i;
+    t = tokens;
+    token = &t;
+    g_all.cmd_error_status = 0;
+    i = 0;
+    while (token[i])
+    {
+        if (check_redir_in_out_in_first(token, i) == 0)
+            return (0);
+        if (check_redir(token, i) == 0)
+            return(0);
+        if (check_pipe(token, i) == 0)
+            return(0);
+        i++;
+    }
+    return(1);
 }
+
+// ----------------- RAH SALIT HANJI SBAH NDIR LES TESTS LHADCHI BACH NCHOFO CHI HAJA KHRA ---------------------
+
+
+
+// int main ()
+// {
+//     printf("return %d && status[%d]\n", ft_check_syntax_error(), g_all.cmd_error_status);
+// }

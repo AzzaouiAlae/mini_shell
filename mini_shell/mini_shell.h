@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/15 15:36:54 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:43:18 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ char *get_enum_str(int type);
 void print_tokens(char *s);
 void split_tokens(char *s, char *sep, char *special_sep);
 void init_g_all();
-void ft_check_syntax_error();
+int ft_check_syntax_error();
 
 #endif
