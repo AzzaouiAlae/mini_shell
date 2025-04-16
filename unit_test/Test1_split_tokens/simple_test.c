@@ -15,7 +15,7 @@ void simple_test2()
 
     t_token exp[] = { {"env", e_args | e_cmd}, {"|", e_pipe}, {"sort", e_args | e_cmd}, {"|", e_pipe},{"grep", e_args | e_cmd},{"-v", e_args},{"SHLVL", e_args},
             {"|", e_pipe},{"grep", e_args | e_cmd},{"-v", e_args},{"^_", e_args},{"|", e_pipe},{"echo", e_args | e_cmd}, {"\" hfh  $saaj\"", e_double_quote | e_var_to_get | e_args},
-            {"' dhdf $test'", e_quote}};
+            {"' dhdf $test'", e_quote | e_args}};
     data()->exp = (t_token *)exp;
     data()->count = 15;
     split_tokens_test();
@@ -25,7 +25,7 @@ void simple_test3()
 {
     data()->s = "echo \" hfh  $saaj\" ' dhdf $test'";
 
-    t_token exp[] = { {"echo", e_args | e_cmd}, {"\" hfh  $saaj\"", e_args | e_double_quote | e_var_to_get}, {"' dhdf $test'", e_quote},};
+    t_token exp[] = { {"echo", e_args | e_cmd}, {"\" hfh  $saaj\"", e_args | e_double_quote | e_var_to_get}, {"' dhdf $test'", e_quote | e_args},};
     data()->exp = (t_token *)exp;
     data()->count = 3;
     split_tokens_test();
@@ -107,7 +107,7 @@ void simple_test11()
 {
     data()->s = "grep hi \"<infile\" <         ./test_files/infile";
 
-    t_token exp[] = { {"grep", e_args | e_cmd}, {"hi", e_args}, {"\"<infile\"", e_double_quote}, {"<", e_redir_in}, {"./test_files/infile", e_file_name}};
+    t_token exp[] = { {"grep", e_args | e_cmd}, {"hi", e_args}, {"\"<infile\"", e_double_quote | e_args}, {"<", e_redir_in}, {"./test_files/infile", e_file_name}};
     data()->exp = (t_token *)exp;
     data()->count = 5;
     split_tokens_test();
@@ -231,7 +231,7 @@ void simple_test22()
 
     t_token exp[] = { 
         {"echo", e_args | e_cmd}, {"hh", e_args}, 
-        {"\"$ test\"", e_double_quote} 
+        {"\"$ test\"", e_double_quote | e_args} 
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;

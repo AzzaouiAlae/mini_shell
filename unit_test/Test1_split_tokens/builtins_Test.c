@@ -225,7 +225,7 @@ void builtins_Test21() {
     data()->s = "echo $?HELLO";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"$?HELLO", e_args}
+        {"$?HELLO", e_args | e_error_status}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -257,7 +257,7 @@ void builtins_Test24() {
     data()->s = "export hello";
     t_token exp[] = {
         {"export", e_set_var},
-        {"hello", e_var_to_set}
+        {"hello", e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -279,7 +279,7 @@ void builtins_Test26() {
     data()->s = "export A-";
     t_token exp[] = {
         {"export", e_set_var},
-        {"A-", e_var_to_set}
+        {"A-", e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -291,7 +291,7 @@ void builtins_Test27() {
     t_token exp[] = {
         {"export", e_set_var},
         {"HELLO=123", e_var_to_set},
-        {"A", e_var_to_set}
+        {"A", e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -313,8 +313,8 @@ void builtins_Test29() {
     data()->s = "export hello world";
     t_token exp[] = {
         {"export", e_set_var},
-        {"hello", e_var_to_set},
-        {"world", e_var_to_set}
+        {"hello", e_args},
+        {"world", e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -336,7 +336,7 @@ void builtins_Test31() {
     data()->s = "export =";
     t_token exp[] = {
         {"export", e_set_var},
-        {"=", e_args}
+        {"=", e_var_to_set}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -424,7 +424,7 @@ void builtins_Test39() {
     data()->s = "cd $PWD";
     t_token exp[] = {
         {"cd", e_args | e_cmd},
-        {"$PWD", e_args}
+        {"$PWD", e_var_to_get | e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -435,7 +435,7 @@ void builtins_Test40() {
     data()->s = "cd $PWD hi";
     t_token exp[] = {
         {"cd", e_args | e_cmd},
-        {"$PWD", e_args},
+        {"$PWD", e_var_to_get | e_args},
         {"hi", e_args}
     };
     data()->exp = (t_token *)exp;
@@ -502,11 +502,10 @@ void builtins_Test46() {
     data()->s = "exit +\"100\"";
     t_token exp[] = {
         {"exit", e_args | e_cmd},
-        {"+", e_args},
-        {"\"100\"", e_args | e_double_quote}
+        {"+\"100\"", e_args | e_double_quote}
     };
     data()->exp = (t_token *)exp;
-    data()->count = 3;
+    data()->count = 2;
     split_tokens_test();
 }
 
@@ -536,11 +535,10 @@ void builtins_Test49() {
     data()->s = "exit -\"100\"";
     t_token exp[] = {
         {"exit", e_args | e_cmd},
-        {"-", e_args},
-        {"\"100\"", e_args | e_double_quote}
+        {"-\"100\"", e_args | e_double_quote}
     };
     data()->exp = (t_token *)exp;
-    data()->count = 3;
+    data()->count = 2;
     split_tokens_test();
 }
 

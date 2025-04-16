@@ -14,7 +14,7 @@ char *get_enum_str(int type)
     char *strs[] = {"e_none", "e_args", "e_pipe", "e_heredoc",
  		"e_redir_out_app", "e_redir_out_trun", "e_redir_in", "e_var_to_get",
  		"e_quote", "e_double_quote", "e_file_name", "e_cmd", "e_path", 
-        "e_set_var", "e_var_to_set" ,"e_delimiter", 0};
+        "e_set_var", "e_var_to_set" ,"e_delimiter", "e_error_status", 0};
     for(int i = 1, j = 1; strs[j]; i *= 2, j++)
     {
         if((type & i) == i)
@@ -30,32 +30,33 @@ void print_tokens(char *s)
 {
     int i;
     t_token **t;
+    
     split_tokens(s, " |<>\t$", "\"'");
     i = 0;
+    t = g_all.tokens->content;
     while(i < g_all.tokens->count)
     {   
-        t = g_all.tokens->content;
         printf("%15s = %s\n", t[i]->s, get_enum_str(t[i]->type));
         i++;
     }
 }
 
-int main(int argc, char *argv[], char *env[])
-{
-    char *input;
+// int main(int argc, char *argv[], char *env[])
+// {
+//     char *input;
 
-    init_g_all();
-    while(1)
-    {
-        input = readline("$>: ");
-        if(input && *input)
-            add_history(input);
-        if(input && !ft_strcmp(input, "exit"))
-            break;
-        print_tokens(input);
-        free(input);
-    }
-    free(input);
-    rl_clear_history();
-    return 1;
-}
+//     init_g_all();
+//     while(1)
+//     {
+//         input = readline("$>: ");
+//         if(input && *input)
+//             add_history(input);
+//         if(input && !ft_strcmp(input, "exit"))
+//             break;
+//         print_tokens(input);
+//         free(input);
+//     }
+//     free(input);
+//     rl_clear_history();
+//     return 1;
+// }

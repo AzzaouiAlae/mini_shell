@@ -1,0 +1,4 @@
+< file1 'echo' hello | cat
+< file1 "echo" hello | cat
+< file1 "$T" hello | cat
+< file1 '$T' hello | cat

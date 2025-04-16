@@ -128,50 +128,41 @@ void	args_type(void)
 	var_to_set_in_arg_type();
 }
 
-void	redir_in_double_quote_type(t_token **token, int count)
+int cmd_double_quote(t_token **token, int count)
 {
-	int res;
-
-	res = 0;
-	if(count && token && token[count - 1])
-	{
-		res = token[count - 1]->type == e_redir_in;
-		res += token[count - 1]->type == e_redir_out_app;
-		res += token[count - 1]->type == e_redir_out_trun;
-	}	
-	if(res)
-		g_all.token->type = e_double_quote | e_file_name;
-	else if (!count || token[count - 1]->type == e_pipe)
-		g_all.token->type = e_args | e_double_quote | e_cmd;
-	else if (count && token[count - 1]->type == e_heredoc)
-		g_all.token->type = e_double_quote | e_delimiter;
-	else if (count && token[count - 1]->type & e_cmd)
-		g_all.token->type = e_double_quote | e_args;
-	if(g_all.token->type)
-		return;
-	g_all.token->type = e_double_quote;
+	if(count < 2)
+		return 0;
+	return (token[count - 1]->type & e_file_name && token[count - 2]->type &
+		(e_redir_in | e_redir_out_app | e_redir_out_trun) && (!(count - 2) || 
+		token[count - 3]->type & e_pipe));
 }
 
 void	double_quote_type(void)
 {
-	char *s;
 	t_token **token;
 	int count;
+	char *s;
+	int res;
 
+	res = 0;
 	token = g_all.tokens->content;
 	count = g_all.tokens->count;
+	g_all.token->type = e_double_quote;
+	if(!count || token[count - 1]->type & e_pipe || 
+			cmd_double_quote(token, count))
+		g_all.token->type = g_all.token->type | e_cmd | e_args;
 	s = ft_strchr(g_all.token_str->content, '$');
-	if (s && !ft_strchr(" |<>\t$\"'", s[1]))
-	{
-		if(!count || token[count - 1]->type == e_pipe)
-			g_all.token->type = e_double_quote | e_var_to_get | e_cmd | e_args;
-		else if(token[count - 1]->type & e_args)
-			g_all.token->type = e_double_quote | e_var_to_get | e_args;
-		else
-			g_all.token->type = e_double_quote | e_var_to_get;
-		return ;
-	}
-	redir_in_double_quote_type(token, count);
+	if(s && !ft_strchr(" |<>\t$\"'", *(s + 1)))
+		g_all.token->type = g_all.token->type | e_var_to_get;
+	if (count && token[count - 1]->type & (e_cmd | e_args))
+		g_all.token->type = g_all.token->type | e_args;
+	if(count)
+		res = token[count - 1]->type & 
+			(e_redir_in | e_redir_out_app | e_redir_out_trun);
+	if(res)
+		g_all.token->type = g_all.token->type | e_file_name;
+	else if (count && token[count - 1]->type == e_heredoc)
+		g_all.token->type = g_all.token->type | e_delimiter;
 }
 
 void var_to_get_single_char()
