@@ -27,15 +27,39 @@ void redir_in_args_type(int count, t_token **tokens)
 		g_all.token->type = e_delimiter;
 }
 
+int is_file_name_and_redir(t_token **tokens, int count)
+{
+	int res;
+
+	if(count < 2)
+		return 0;
+	if(tokens[count - 1]->type & e_file_name)
+	{
+		res = !(count - 2) || tokens[count - 3]->type & e_pipe || 
+			tokens[count - 3]->type & e_file_name;
+		if(tokens[count - 2]->type & e_redir_out_trun && res)
+			return 1;
+		if(tokens[count - 2]->type & e_redir_in && res)
+			return 1;
+		if(tokens[count - 2]->type & e_redir_out_app && res)
+			return 1;
+		if(tokens[count - 2]->type & e_heredoc && res)
+			return 1;
+	}
+	return 0;
+}
+
 void	cmd_path_in_args_type(void)
 {
 	t_token **tokens;
 	int count;
 	char *s;
+	int res;
 
 	count = g_all.tokens->count;
 	tokens = g_all.tokens->content;
-	if (count == 0 || tokens[count - 1]->type == e_pipe)
+	res = is_file_name_and_redir(tokens, count);
+	if (count == 0 || tokens[count - 1]->type == e_pipe || res)
 	{
 		g_all.token->type = g_all.token->type | e_cmd;
 		if (ft_strchr(g_all.token_str->content, '/'))
@@ -171,6 +195,20 @@ void var_to_get_single_char()
 		g_all.token->type = e_args;
 }
 
+void single_quote_type()
+{
+	int count;
+	t_token **tokens;
+
+	tokens = g_all.tokens->content;
+	count = g_all.tokens->count;
+	g_all.token->type = e_quote;
+	if(!count)
+		g_all.token->type = g_all.token->type | e_args | e_cmd;
+	if(count)
+		g_all.token->type = g_all.token->type | e_args;
+}
+
 void	get_type(t_token_type type)
 {
 	if (type == e_args)
@@ -179,6 +217,8 @@ void	get_type(t_token_type type)
 		double_quote_type();
 	else if(type == e_var_to_get)
 		var_to_get_single_char();
+	else if(type == e_quote)
+		single_quote_type();
 	else
 		g_all.token->type = type;
 }
@@ -335,6 +375,18 @@ int	is_double_quote(t_split_data *data)
 		return (1);
 	}
 	return (0);
+}
+
+void arg_type_quote(t_split_data *data)
+{
+	// if(!data->i)
+	// 	add_cmd(data->s[data->i], e_args);
+	// else if()
+	// {
+		
+	// }
+
+	
 }
 
 int	is_arg(t_split_data *data)

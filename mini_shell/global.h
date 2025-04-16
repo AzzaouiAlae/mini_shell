@@ -20,6 +20,7 @@ typedef enum e_token_type
 	e_set_var = 4096,
 	e_var_to_set = 8192,
 	e_delimiter = 16384,
+	e_error_status = 32768,
 }				t_token_type;
 
 typedef struct s_token

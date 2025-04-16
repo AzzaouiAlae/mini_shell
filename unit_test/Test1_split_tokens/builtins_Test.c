@@ -38,7 +38,7 @@ void builtins_Test4() {
     data()->s = "echo hello'world'";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"hello'world'", e_args}
+        {"hello'world'", e_args | e_quote}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -49,7 +49,7 @@ void builtins_Test5() {
     data()->s = "echo hello\"\"world";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"hello""world", e_args | e_double_quote}
+        {"hello\"\"world", e_args | e_double_quote}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -71,7 +71,7 @@ void builtins_Test7() {
     data()->s = "echo \"$PWD\"";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"\"$PWD\"", e_args | e_double_quote}
+        {"\"$PWD\"", e_args | e_double_quote | e_var_to_get}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -159,7 +159,7 @@ void builtins_Test15() {
     data()->s = "echo \"exit_code ->$? user ->$USER home -> $HOME\"";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"\"exit_code ->$? user ->$USER home -> $HOME\"", e_args | e_double_quote}
+        {"\"exit_code ->$? user ->$USER home -> $HOME\"", e_args | e_double_quote | e_var_to_get}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -214,7 +214,7 @@ void builtins_Test20() {
     data()->s = "echo $?";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"$?", e_args}
+        {"$?", e_error_status}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
