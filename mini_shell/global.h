@@ -35,6 +35,7 @@ typedef struct s_globale
     t_cs_list	*token_str;
 	t_token		*token;
 	int cmd_error_status;
+	t_token_type	last_cmd_type;
 } t_global;
 
 extern t_global g_all;

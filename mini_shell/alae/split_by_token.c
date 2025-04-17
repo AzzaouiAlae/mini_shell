@@ -305,11 +305,27 @@ int	is_pipe(t_split_data *data)
 	return (0);
 }
 
+int is_here_doc_delimiter(t_split_data *data)
+{
+	t_token *token;
+
+	if(!g_all.tokens->count)
+		return 0;
+	if(g_all.token->type & e_heredoc)
+		return 1;
+	return (0);
+}
+
 void space_in_var_to_get(t_split_data *data)
 {
 	t_token	**tokens;
 
 	tokens = g_all.tokens->content;
+	if(is_here_doc_delimiter(data))
+	{
+		add_cmd(data->s[data->i], e_delimiter);
+		return ;
+	}
 	if(g_all.tokens->count && tokens[g_all.tokens->count - 1]->type & e_args == e_args)
 	{
 		if(data->i && data->s[data->i - 1] == ' ')
@@ -321,6 +337,8 @@ void space_in_var_to_get(t_split_data *data)
 	}
 	add_cmd(data->s[data->i], e_var_to_get);
 }
+
+
 
 int	is_exp_var(t_split_data *data)
 {
@@ -348,6 +366,8 @@ int	is_exp_var(t_split_data *data)
 	}
 	return (0);
 }
+
+
 
 int	is_single_quote(t_split_data *data)
 {
