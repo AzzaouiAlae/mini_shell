@@ -228,8 +228,6 @@ void	get_type(t_token_type type)
 
 void	add_cmd(char ch, t_token_type new_token)
 {
-	static t_token_type	type;
-
 	if (g_all.tokens == NULL)
 		g_all.tokens = cs_list_new(sizeof(t_token *));
 	if (new_token)
@@ -238,11 +236,11 @@ void	add_cmd(char ch, t_token_type new_token)
 		{
 			g_all.token = ft_calloc(1, sizeof(t_token));
 			g_all.token->s = g_all.token_str->content;
-			get_type(type);
+			get_type(g_all.last_cmd_type);
 			cs_list_add(g_all.tokens, (long)g_all.token);
 		}
 		g_all.token_str = cs_list_new(1);
-		type = new_token;
+		g_all.last_cmd_type = new_token;
 	}
 	cs_list_add(g_all.token_str, ch);
 }
@@ -305,23 +303,12 @@ int	is_pipe(t_split_data *data)
 	return (0);
 }
 
-int is_here_doc_delimiter(t_split_data *data)
-{
-	t_token *token;
-
-	if(!g_all.tokens->count)
-		return 0;
-	if(g_all.token->type & e_heredoc)
-		return 1;
-	return (0);
-}
-
 void space_in_var_to_get(t_split_data *data)
 {
 	t_token	**tokens;
 
 	tokens = g_all.tokens->content;
-	if(is_here_doc_delimiter(data))
+	if(g_all.last_cmd_type & e_heredoc)
 	{
 		add_cmd(data->s[data->i], e_delimiter);
 		return ;
