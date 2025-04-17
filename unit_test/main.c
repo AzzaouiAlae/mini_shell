@@ -25,6 +25,7 @@ int main()
     pipe_Test();
     builtins_Test();
     // Test_syntax_error();
+    heredoc_Test();
     ft_free_all();
     return (UnityEnd());
 }

@@ -21,6 +21,7 @@ char *get_enum_str(int type);
 void redirects_Tests();
 void builtins_Test();
 void Test_syntax_error();
+void heredoc_Test();
 
 
 #endif
