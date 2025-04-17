@@ -2,5 +2,6 @@
     "files.associations": {
         "tests.h": "c",
         "unity.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "/home/aazzaoui/Desktop/mini_shell_repo/unit_test/Unity-master"
 }
