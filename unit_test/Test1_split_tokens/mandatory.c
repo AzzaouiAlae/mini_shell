@@ -30,7 +30,7 @@ void mandatory_Tests3()
     data()->s = "export HELLO=\"beautiful world\"";
     t_token exp[] = {
         {"export", e_set_var | e_cmd},
-        {"HELLO=\"beautiful world\"", e_var_to_set}
+        {"HELLO=\"beautiful world\"", e_var_to_set | e_double_quote}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -42,7 +42,7 @@ void mandatory_Test4()
     t_token exp[] = {
         {"echo", e_args | e_cmd},
         {"$PWD", e_var_to_get | e_args},
-        {"$OLDPWD", e_var_to_get | e_args}
+        {" $OLDPWD", e_var_to_get | e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -76,7 +76,7 @@ void mandatory_Test7()
 {
     data()->s = "$EMPTY";
     t_token exp[] = {
-        {"$EMPTY", e_var_to_get | e_args}
+        {"$EMPTY", e_var_to_get | e_args | e_cmd}
     };
     data()->exp = (t_token *)exp;
     data()->count = 1;
@@ -150,7 +150,7 @@ void mandatory_Test12()
 {
     data()->s = "/bin/ls";
     t_token exp[] = {
-        {"/bin/ls", e_args | e_cmd}
+        {"/bin/ls", e_args | e_cmd | e_path}
     };
     data()->exp = (t_token *)exp;
     data()->count = 1;
