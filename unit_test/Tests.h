@@ -22,6 +22,6 @@ void redirects_Tests();
 void builtins_Test();
 void Test_syntax_error();
 void heredoc_Test();
-
+void mandatory_Tests();
 
 #endif
