@@ -33,7 +33,7 @@ int is_file_name_and_redir(t_token **tokens, int count)
 
 	if(count < 2)
 		return 0;
-	if(tokens[count - 1]->type & e_file_name)
+	if(tokens[count - 1]->type & (e_file_name | e_delimiter))
 	{
 		res = !(count - 2) || tokens[count - 3]->type & e_pipe || 
 			tokens[count - 3]->type & e_file_name;
