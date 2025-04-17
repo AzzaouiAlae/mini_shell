@@ -6,7 +6,7 @@ void heredoc_Test1()
     t_token exp[] = {
         {"cat", e_args | e_cmd},
         {"<<", e_heredoc},
-        {"HERE", e_heredoc},
+        {"HERE", e_delimiter},
         {"|", e_pipe},
         {"ls", e_args | e_cmd}
     };
@@ -21,7 +21,7 @@ void heredoc_Test2()
     t_token exp[] = {
         {"cat", e_args | e_cmd},
         {"<<", e_heredoc},
-        {"HERE", e_heredoc}
+        {"HERE", e_delimiter}
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -34,15 +34,16 @@ void heredoc_Test3()
     t_token exp[] = {
         {"cat", e_args | e_cmd},
         {"<", e_redir_in},
-        {"minishell.h", e_args},
+        {"minishell.h", e_file_name},
         {"<<", e_heredoc},
-        {"HERE", e_heredoc},
-        {"<missing", e_args | e_redir_in},
+        {"HERE", e_delimiter},
+        {"<", e_redir_in},
+        {"missing", e_file_name},
         {"|", e_pipe},
         {"ls", e_args | e_cmd}
     };
     data()->exp = (t_token *)exp;
-    data()->count = 8;
+    data()->count = 9;
     split_tokens_test();
 }
 
@@ -52,9 +53,9 @@ void heredoc_Test4()
     t_token exp[] = {
         {"cat", e_args | e_cmd},
         {"<", e_redir_in},
-        {"minishell.h", e_args},
+        {"minishell.h", e_file_name},
         {"<<", e_heredoc},
-        {"HERE", e_heredoc},
+        {"HERE", e_delimiter},
         {"|", e_pipe},
         {"cat", e_args | e_cmd}
     };
@@ -69,9 +70,9 @@ void heredoc_Test5()
     t_token exp[] = {
         {"cat", e_args | e_cmd},
         {"<<", e_heredoc},
-        {"HERE", e_heredoc},
+        {"HERE", e_delimiter},
         {"<<", e_heredoc},
-        {"DOC", e_heredoc}
+        {"DOC", e_delimiter}
     };
     data()->exp = (t_token *)exp;
     data()->count = 5;
@@ -84,12 +85,13 @@ void heredoc_Test6()
     t_token exp[] = {
         {"cat", e_args | e_cmd},
         {"<", e_redir_in},
-        {"minishell.h", e_args},
+        {"minishell.h", e_file_name},
         {"<<", e_heredoc},
-        {"HERE", e_heredoc},
-        {"<missing", e_args | e_redir_in},
+        {"HERE", e_delimiter},
+        {"<", e_redir_in},
+        {"missing", e_file_name},
         {"<<", e_heredoc},
-        {"DOC", e_heredoc},
+        {"DOC", e_delimiter},
         {"|", e_pipe},
         {"echo", e_args | e_cmd},
         {"oi", e_args}
@@ -105,7 +107,7 @@ void heredoc_Test7()
     t_token exp[] = {
         {"cat", e_args | e_cmd},
         {"<<", e_heredoc},
-        {"$", e_args}
+        {"$", e_delimiter}
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -116,8 +118,8 @@ void heredoc_Test8()
     data()->s = "<< echo oi";
     t_token exp[] = {
         {"<<", e_heredoc},
-        {"echo", e_args | e_cmd},
-        {"oi", e_args}
+        {"echo", e_delimiter},
+        {"oi", e_args | e_cmd}
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -127,4 +129,11 @@ void heredoc_Test8()
 void heredoc_Test()
 {
     RUN_TEST(heredoc_Test1);
+    RUN_TEST(heredoc_Test2);
+    RUN_TEST(heredoc_Test3);
+    RUN_TEST(heredoc_Test4);
+    RUN_TEST(heredoc_Test5);
+    RUN_TEST(heredoc_Test6);
+    RUN_TEST(heredoc_Test7);
+    RUN_TEST(heredoc_Test8);
 }
