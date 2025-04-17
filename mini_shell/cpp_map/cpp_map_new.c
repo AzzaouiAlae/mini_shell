@@ -2,11 +2,11 @@
 
 t_cpp_map *cpp_map_new(int size_of_type)
 {
-    t_cpp_map *dict;
+    t_cpp_map *map;
 
-    dict = ft_calloc(1, sizeof(t_cpp_map));
-    dict->content = ft_calloc(23, sizeof(void *));
-    dict->capacity = 23;
-    dict->count = 0;
-    dict->max_size = (double)dict->capacity * .70;
+    map = ft_calloc(1, sizeof(t_cpp_map));
+    map->content = ft_calloc(23, sizeof(void *));
+    map->capacity = 23;
+    map->count = 0;
+    map->max_size = (double)map->capacity * .70;
 }
