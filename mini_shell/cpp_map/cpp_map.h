@@ -10,7 +10,11 @@ typedef struct key_value
 
 typedef struct s_dictionary
 {
-    t_cs_list	*list;
+    void         *content;
+    int         size_of_type;
+    int         count;
+    int         max_size;
+    int         capacity;
 }				t_dictionary;
 
 int dictionary_hash_function(char *str);
@@ -19,7 +23,7 @@ void dictionary_add(t_dictionary *dict, char *key, void *value);
 void *dictionary_get(t_dictionary *dict, char *key);
 void dictionary_delete(t_dictionary *dict, char *key);
 void dictionary_clear(t_dictionary *dict);
-
+int next_prime(int n);
 
 
 #endif
