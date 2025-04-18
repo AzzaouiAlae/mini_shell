@@ -16,7 +16,19 @@ void env_vars_Test1()
 
 void env_vars_Test2()
 {
-    
+    //arrange
+    t_cpp_map *map = g_all.custom_env;
+
+    //act
+    add_env_var("TEST=123456789");
+    add_env_var("TEST2=123456789");
+    add_env_var("TEST3=123456789");
+
+    //assert
+    TEST_ASSERT_EQUAL(77, map->count);
+    TEST_ASSERT_EQUAL_CHAR_ARRAY("123456789", ((t_cs_list *)cpp_map_get(map, "TEST"))->content, 10);
+    TEST_ASSERT_EQUAL_CHAR_ARRAY("123456789", ((t_cs_list *)cpp_map_get(map, "TEST2"))->content, 10);
+    TEST_ASSERT_EQUAL_CHAR_ARRAY("123456789", ((t_cs_list *)cpp_map_get(map, "TEST3"))->content, 10);
 }
 
 void Test_env_vars()

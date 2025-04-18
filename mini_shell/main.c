@@ -38,7 +38,7 @@ void print_tokens(char *s)
     t = g_all.tokens->content;
     while(i < g_all.tokens->count)
     {   
-        printf("%15s = %s\n", t[i]->s, get_enum_str(t[i]->type));
+        printf("%s = %s\n", t[i]->s, get_enum_str(t[i]->type));
         i++;
     }
 }
@@ -57,6 +57,7 @@ void print_tokens(char *s)
 //             break;
 //         print_tokens(input);
 //         free(input);
+//         g_all.line_count++;
 //     }
 //     free(input);
 //     rl_clear_history();

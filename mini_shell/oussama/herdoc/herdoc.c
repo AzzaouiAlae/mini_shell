@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 13:22:07 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:23:19 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	here_doc(t_token **delimiter, int i)
 	{
         if (!str)
         {
-            printf("warning: here-document at line 9 delimited by end-of-file (wanted `%s')", limiter);
+			printf("warning: here-document at line %d delimited by ", g_all.line_count);
+            printf("end-of-file (wanted `%s')", limiter);
             ft_exit(0);
         }
 		write(fd, str, ft_strlen(str));

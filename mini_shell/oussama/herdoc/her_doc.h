@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   her_doc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 12:42:26 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 12:58:59 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:14:57 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 #include "../../mini_shell.h"
 #include <fcntl.h>
 char	*create_file_name(void);
-int	here_doc(char *argv[], int *argc);
+int	here_doc(t_token **delimiter, int i);
 
 #endif

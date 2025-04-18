@@ -325,7 +325,10 @@ void space_in_var_to_get(t_split_data *data)
 	add_cmd(data->s[data->i], e_var_to_get);
 }
 
+void is_quote_after_exp_var()
+{
 
+}
 
 int	is_exp_var(t_split_data *data)
 {
@@ -344,7 +347,8 @@ int	is_exp_var(t_split_data *data)
 			}
 			return 1;
 		}
-		while (data->s[data->i] && !ft_strchr(data->sep, data->s[data->i]))
+		while (data->s[data->i] && !ft_strchr(data->sep, data->s[data->i]) && 
+			!ft_strchr(data->special_sep, data->s[data->i]))
 		{
 			add_cmd(data->s[data->i], 0);
 			data->i++;
@@ -360,7 +364,8 @@ int	is_single_quote(t_split_data *data)
 {
 	if (data->s[data->i] == '\'')
 	{
-		if (ft_strchr(data->sep, data->s[data->i - 1]))
+		if (ft_strchr(data->sep, data->s[data->i - 1]) || 
+			g_all.last_cmd_type & e_var_to_get)
 			add_cmd(data->s[data->i], e_quote);
 		else
 			add_cmd(data->s[data->i], 0);
@@ -381,7 +386,8 @@ int	is_double_quote(t_split_data *data)
 {
 	if (data->s[data->i] == '"')
 	{
-		if (!data->i || ft_strchr(data->sep, data->s[data->i - 1]))
+		if (!data->i || ft_strchr(data->sep, data->s[data->i - 1]) || 
+			g_all.last_cmd_type & e_var_to_get)
 			add_cmd(data->s[data->i], e_double_quote);
 		else
 			add_cmd(data->s[data->i], 0);
