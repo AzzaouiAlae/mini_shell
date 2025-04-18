@@ -6,6 +6,7 @@ void init_g_all(char *env[])
 {
     ft_bzero(&g_all, sizeof(t_global));
     g_all.env = env;
+    init_env_map();
 }
 
 char *get_enum_str(int type)

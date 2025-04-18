@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/18 19:29:21 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:28:30 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ char *get_enum_str(int type);
 void print_tokens(char *s);
 void split_tokens(char *s, char *sep, char *special_sep);
 void init_g_all(char *env[]);
+void init_env_map();
+
 #endif
