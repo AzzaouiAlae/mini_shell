@@ -7,12 +7,12 @@ void		cpp_map_clear(t_cpp_map *map)
     t_cs_list **lists;
     t_key_value **key_values;
 
-    index = 0;
-    while(index < map->capacity)
+    index = -1;
+    lists = map->content;
+    while(++index < map->capacity)
     {
-        lists = map->content;
         if(!lists[index])
-            return ;
+            continue;
         i = 0;
         while(lists[index]->count > i)
         {
