@@ -247,7 +247,7 @@ void	add_cmd(char ch, t_token_type new_token)
 
 void	skip_space(char *s, int *i)
 {
-	while (ft_strchr(" \t", s[*i]))
+	while (ft_strchr(" \t\n", s[*i]))
 		(*i)++;
 }
 

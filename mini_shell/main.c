@@ -31,7 +31,7 @@ void print_tokens(char *s)
     int i;
     t_token **t;
     
-    split_tokens(s, " |<>\t$", "\"'");
+    split_tokens(s, " |<>\t$\n", "\"'");
     i = 0;
     t = g_all.tokens->content;
     while(i < g_all.tokens->count)
