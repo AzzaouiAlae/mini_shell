@@ -5,7 +5,7 @@ t_cpp_map *map;
 void Test_cpp_map1()
 {
     //arrange
-    map = cpp_map_new(sizeof(int));
+    map = cpp_map_new();
 
     //act
     cpp_map_add(map, "", (void *)10);

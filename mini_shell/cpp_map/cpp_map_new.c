@@ -1,6 +1,6 @@
 #include "cpp_map.h"
 
-t_cpp_map *cpp_map_new(int size_of_type)
+t_cpp_map *cpp_map_new()
 {
     t_cpp_map *map;
 
@@ -11,7 +11,7 @@ t_cpp_map *cpp_map_new(int size_of_type)
     map->max_size = (double)map->capacity * .70;
 }
 
-t_cpp_map *cpp_map_new_capacity(int size_of_type, int capacity)
+t_cpp_map *cpp_map_new_capacity(int capacity)
 {
     t_cpp_map *map;
 

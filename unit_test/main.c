@@ -10,16 +10,16 @@ void tearDown(void)
     
 }
 
-void init_Tests()
+void init_Tests(char **env)
 {
     data()->sep = " |<>\t$";
     data()->special_sep = "\"'";
-    init_g_all();
+    init_g_all(env);
 }
 
-int main()
+int main(int argc, char **argv, char **env)
 {
-    init_Tests();
+    init_Tests(env);
     simple_tests();
     redirects_Tests();
     pipe_Test();

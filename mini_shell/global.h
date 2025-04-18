@@ -36,6 +36,8 @@ typedef struct s_globale
 	t_token		*token;
 	int cmd_error_status;
 	t_token_type	last_cmd_type;
+	char **env;
+	t_cpp_map *custom_env;
 } t_global;
 
 extern t_global g_all;

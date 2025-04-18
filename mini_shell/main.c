@@ -2,9 +2,10 @@
 
 t_global g_all;
 
-void init_g_all()
+void init_g_all(char *env[])
 {
     ft_bzero(&g_all, sizeof(t_global));
+    g_all.env = env;
 }
 
 char *get_enum_str(int type)
@@ -45,7 +46,7 @@ void print_tokens(char *s)
 // {
 //     char *input;
 
-//     init_g_all();
+//     init_g_all(env);
 //     while(1)
 //     {
 //         input = readline("$>: ");

@@ -11,14 +11,14 @@ typedef struct key_value
 typedef struct s_cpp_map
 {
 	void	*content;
-	int		size_of_type;
 	int		count;
 	int		max_size;
 	int		capacity;
 }			t_cpp_map;
 
 int			cpp_map_hash_function(char *str);
-t_cpp_map	*cpp_map_new(int size_of_type);
+t_cpp_map	*cpp_map_new(void);
+t_cpp_map	*cpp_map_new_capacity(int capacity);
 void		cpp_map_add(t_cpp_map *map, char *key, void *value);
 void		*cpp_map_get(t_cpp_map *map, char *key);
 void		cpp_map_delete(t_cpp_map *map, char *key);
