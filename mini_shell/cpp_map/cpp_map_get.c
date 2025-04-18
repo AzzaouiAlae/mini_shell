@@ -11,7 +11,7 @@ void *cpp_map_get(t_cpp_map *map, char *key)
     index = cpp_map_hash_function(key) % map->capacity;
     lists = map->content;
     if(!lists[index])
-        return ;
+        return NULL;
     i = 0;
     while(lists[index]->count > i)
     {

@@ -5,7 +5,7 @@ int is_prime(int n)
     int i;
 
     i = 2;
-    while(i / 2 < n)
+    while(i < n / 2)
     {
         if (n % i == 0)
             return 0;

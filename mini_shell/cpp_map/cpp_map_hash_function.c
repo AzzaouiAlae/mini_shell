@@ -6,6 +6,8 @@ int cpp_map_hash_function(char *str)
 
     num = 1;
     while(str && *str)
-        num *= *str++;
+        num += *str++;
+    str--;
+    num = num * *str;
     return (int)(num);
 }
