@@ -206,7 +206,7 @@ void single_quote_type()
 	tokens = g_all.tokens->content;
 	count = g_all.tokens->count;
 	g_all.token->type = e_quote;
-	if(!count)
+	if(!count || cmd_double_quote(tokens, count))
 		g_all.token->type = g_all.token->type | e_args | e_cmd;
 	if(count)
 		g_all.token->type = g_all.token->type | e_args;
@@ -325,11 +325,6 @@ void space_in_var_to_get(t_split_data *data)
 	add_cmd(data->s[data->i], e_var_to_get);
 }
 
-void is_quote_after_exp_var()
-{
-
-}
-
 int	is_exp_var(t_split_data *data)
 {
 	if (data->s[data->i] == '$')
@@ -357,8 +352,6 @@ int	is_exp_var(t_split_data *data)
 	}
 	return (0);
 }
-
-
 
 int	is_single_quote(t_split_data *data)
 {

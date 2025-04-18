@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 22:23:19 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:37:21 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_limiter_rem(int i, char *filename)
     cs_list_inset_at(g_all.tokens, i - 1, (long)filename);
 }
 
-int	here_doc(t_token **delimiter, int i)
+int	here_doc(t_token **tokens, int i)
 {
 	int (fd);
 	char *(limiter), *(str), *(file_name);
@@ -28,7 +28,7 @@ int	here_doc(t_token **delimiter, int i)
 	if (fd == -1)
 		return (perror("ERROR HERDOC FILE"), ft_exit(127), 0);
 	str = readline(">");
-	limiter = ft_strjoin(delimiter[i]->s, "\n");
+	limiter = ft_strjoin(tokens[i]->s, "\n");
 	while (ft_strncmp(limiter, str, ft_strlen(limiter)) != 0
 		|| ft_strncmp(limiter, str, ft_strlen(limiter) - 1) != 0)
 	{

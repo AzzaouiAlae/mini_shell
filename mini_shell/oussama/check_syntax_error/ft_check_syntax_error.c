@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_syntax_error.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 22:17:25 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 10:26:24 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:33:30 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int check_redir(t_token **token , int i)
 
 int ft_check_syntax_error()
 {
-    t_token **tokens = NULL;
+    t_token **tokens;
     int i;
+    
     tokens = g_all.tokens->content;
     g_all.cmd_error_status = 0;
     i = 0;

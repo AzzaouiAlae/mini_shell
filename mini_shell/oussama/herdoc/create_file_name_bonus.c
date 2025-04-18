@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_file_name_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:33:14 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 12:44:09 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:25:25 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ char	*create_file_name(void)
 			file[8] = '0';
 		}
 	}
+	free(file);
+	return (NULL);
 }

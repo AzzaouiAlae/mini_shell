@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 12:42:26 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 22:14:57 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:37:42 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 #include "../../mini_shell.h"
 #include <fcntl.h>
 char	*create_file_name(void);
-int	here_doc(t_token **delimiter, int i);
+int     here_doc(t_token **tokens, int i);
 
 #endif
