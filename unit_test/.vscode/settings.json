@@ -4,7 +4,13 @@
         "unity.h": "c",
         "compare": "c",
         "type_traits": "c",
-        "utility": "c"
+        "utility": "c",
+        "ctype.h": "c",
+        "ft_func.h": "c",
+        "stdio.h": "c",
+        "ft_check_syntax.h": "c",
+        "string.h": "c",
+        "mini_shell.h": "c"
     },
     "cmake.sourceDirectory": "/home/aazzaoui/Desktop/mini_shell_repo/unit_test/Unity-master"
 }

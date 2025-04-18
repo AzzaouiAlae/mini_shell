@@ -24,7 +24,7 @@ int main()
     redirects_Tests();
     pipe_Test();
     builtins_Test();
-    // Test_syntax_error();
+    Test_syntax_error();
     heredoc_Test();
     mandatory_Tests();
     ft_free_all();
