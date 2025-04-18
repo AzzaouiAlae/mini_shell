@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/18 11:03:33 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/18 12:59:34 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "global.h"
 # include <ctype.h>
 # include <stdio.h>
+# include <unistd.h>
 # include <string.h>
 
 char *get_enum_str(int type);
