@@ -24,6 +24,6 @@ void		*cpp_map_get(t_cpp_map *map, char *key);
 void		cpp_map_delete(t_cpp_map *map, char *key);
 void		cpp_map_clear(t_cpp_map *map);
 int			next_prime(int n);
-void	cpp_map_resize(t_cpp_map *map, int capacity);
+void		cpp_map_resize(t_cpp_map *map, int capacity);
 
 #endif

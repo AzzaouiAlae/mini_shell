@@ -11,6 +11,7 @@
                 "${workspaceFolder}/../mini_shell/cs_list/*.c",
                 "${workspaceFolder}/../mini_shell/ft_func/*.c",
                 "${workspaceFolder}/../mini_shell/alae/*.c",
+                "${workspaceFolder}/../mini_shell/cpp_map/*.c",
                 "${workspaceFolder}/../mini_shell/garbage_collector/*.c",
                 "${workspaceFolder}/../mini_shell/oussama/check_syntax_error/*.c",
                 "${workspaceFolder}/*.c",

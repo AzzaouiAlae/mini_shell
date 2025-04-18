@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/18 12:59:34 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/18 18:28:29 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "oussama/check_syntax_error/ft_check_syntax.h"
+#include "cpp_map/cpp_map.h"
 #include "global.h"
 # include <ctype.h>
 # include <stdio.h>
