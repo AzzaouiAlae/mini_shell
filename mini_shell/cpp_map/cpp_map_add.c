@@ -33,7 +33,7 @@ void add_item(t_cpp_map *map, t_cs_list **lists, t_key_value *kvp, int i)
     }
     else
     {
-        lists[i] = cs_list_new(sizeof(t_key_value *));
+        lists[i] = cs_list_new_capacity(sizeof(t_key_value *), 4);
         cs_list_add(lists[i], (long)kvp);
         map->count++;
     }
