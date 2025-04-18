@@ -23,5 +23,6 @@ void builtins_Test();
 void Test_syntax_error();
 void heredoc_Test();
 void mandatory_Tests();
+void Test_cpp_map();
 
 #endif
