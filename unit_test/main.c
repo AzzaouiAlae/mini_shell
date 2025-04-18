@@ -28,6 +28,7 @@ int main(int argc, char **argv, char **env)
     heredoc_Test();
     mandatory_Tests();
     Test_cpp_map();
+    Test_env_vars();
     ft_free_all();
     return (UnityEnd());
 }
