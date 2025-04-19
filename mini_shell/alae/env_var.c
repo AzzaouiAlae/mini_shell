@@ -48,8 +48,9 @@ char *get_key_in_token(t_token *token)
     s = ft_strchr(token, '$');
     if(!s)
         return NULL;
+    s++;
     len = 0;
-    while(ft_strchr(token, s[len]))
+    while(ft_strchr(" |<>\t$\"'", s[len]))
         len++;
     
 
