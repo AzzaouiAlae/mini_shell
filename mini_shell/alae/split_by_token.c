@@ -15,6 +15,11 @@ int	is_all_space(char *str)
 	return (i);
 }
 
+void delimiter_type()
+{
+	g_all.token->type = e_delimiter;
+}
+
 void redir_in_args_type(int count, t_token **tokens)
 {
 	int type;
@@ -24,7 +29,7 @@ void redir_in_args_type(int count, t_token **tokens)
 		type == e_redir_out_trun)
 		g_all.token->type = e_file_name;
 	else if(type == e_heredoc)
-		g_all.token->type = e_delimiter;
+		delimiter_type();
 }
 
 int is_file_name_and_redir(t_token **tokens, int count)
@@ -212,16 +217,40 @@ void single_quote_type()
 		g_all.token->type = g_all.token->type | e_args;
 }
 
+int is_cmd_in_var_to_set()
+{
+	int i;
+	int len;
+	char *s;
+
+	i = 0;
+	s =  g_all.token_str->content;
+	len = (int)ft_strchrlen(s, '=');
+	while(i < len && !ft_strchr(" |<>\t$\"'", s[i]))
+		i++;
+	return i != len;
+}
+
+void var_to_set_type()
+{
+	if(is_cmd_in_var_to_set())
+		g_all.token->type = e_cmd | e_args;
+	else
+		g_all.token->type = e_var_to_set;
+}
+
 void	get_type(t_token_type type)
 {
-	if (type == e_args)
-		args_type();
-	else if(type == e_double_quote)
-		double_quote_type();
-	else if(type == e_var_to_get)
+	if(type & e_var_to_get)
 		var_to_get_single_char();
-	else if(type == e_quote)
+	else if (type & e_args)
+		args_type();
+	else if(type & e_double_quote)
+		double_quote_type();
+	else if(type & e_quote)
 		single_quote_type();
+	else if(type & e_var_to_set)
+		var_to_set_type();
 	else
 		g_all.token->type = type;
 }
@@ -313,16 +342,13 @@ void space_in_var_to_get(t_split_data *data)
 		add_cmd(data->s[data->i], e_delimiter);
 		return ;
 	}
-	if(g_all.tokens->count && tokens[g_all.tokens->count - 1]->type & e_args == e_args)
+	if(data->i && !ft_strchr(" |<>\t", data->s[data->i - 1]))
 	{
-		if(data->i && data->s[data->i - 1] == ' ')
-		{
-			add_cmd(' ', e_var_to_get);
-			add_cmd(data->s[data->i], 0);
-			return ;
-		}
+		g_all.last_cmd_type = e_var_to_get | g_all.last_cmd_type;
+		add_cmd(data->s[data->i], 0);
 	}
-	add_cmd(data->s[data->i], e_var_to_get);
+	else
+		add_cmd(data->s[data->i], e_var_to_get);
 }
 
 int	is_exp_var(t_split_data *data)
@@ -357,11 +383,11 @@ int	is_single_quote(t_split_data *data)
 {
 	if (data->s[data->i] == '\'')
 	{
-		if (ft_strchr(data->sep, data->s[data->i - 1]) || 
-			g_all.last_cmd_type & e_var_to_get)
+		if (ft_strchr(data->sep, data->s[data->i - 1]))
 			add_cmd(data->s[data->i], e_quote);
 		else
 			add_cmd(data->s[data->i], 0);
+		g_all.last_cmd_type = g_all.last_cmd_type | e_quote;
 		data->i++;
 		while (data->s[data->i] && (data->first_time || data->s[data->i
 				- 1] != '\''))
@@ -379,11 +405,11 @@ int	is_double_quote(t_split_data *data)
 {
 	if (data->s[data->i] == '"')
 	{
-		if (!data->i || ft_strchr(data->sep, data->s[data->i - 1]) || 
-			g_all.last_cmd_type & e_var_to_get)
+		if (!data->i || ft_strchr(data->sep, data->s[data->i - 1]))
 			add_cmd(data->s[data->i], e_double_quote);
 		else
 			add_cmd(data->s[data->i], 0);
+			g_all.last_cmd_type = g_all.last_cmd_type | e_double_quote;
 		data->i++;
 		while (data->s[data->i] && (data->first_time || data->s[data->i
 				- 1] != '"'))
@@ -421,8 +447,38 @@ int	is_arg(t_split_data *data)
 	return (!data->first_time);
 }
 
+int is_delimiter(t_split_data *data)
+{
+	if(g_all.last_cmd_type != e_heredoc)
+		return 0;
+	data->first_time = 1;
+	if(data->s[data->i] == '$' && ft_strchr("\"'", data->s[data->i + 1]))
+		data->i++;
+	while (data->s[data->i] && (data->ch || !ft_strchr(" |<>\t", data->s[data->i])))
+	{
+		if(data->ch == '\0' && ft_strchr( "\"'", data->s[data->i]))
+			data->ch = data->s[data->i];
+		else if(data->ch == data->s[data->i])
+			data->ch = '\0';
+		else
+		{
+			if(data->first_time)
+			{
+				add_cmd(data->s[data->i], e_delimiter);
+				data->first_time = 0;
+			}
+			else
+				add_cmd(data->s[data->i], 0);
+		}
+		data->i++;
+	}
+	return 1;
+}
+
 void	check_tokens(t_split_data *data)
 {
+	if(is_delimiter(data))
+		;
 	if (is_arg(data))
 		;
 	else if (is_redirects_out_append(data))

@@ -42,7 +42,7 @@ void mandatory_Test4()
     t_token exp[] = {
         {"echo", e_args | e_cmd},
         {"$PWD", e_var_to_get | e_args},
-        {" $OLDPWD", e_var_to_get | e_args}
+        {"$OLDPWD", e_var_to_get | e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;

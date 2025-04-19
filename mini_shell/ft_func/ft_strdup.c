@@ -14,12 +14,14 @@
 
 char	*ft_strldup(const char *s1, size_t len)
 {
-	int		i;
+	size_t	i;
 	char	*s;
 
 	i = 0;
+	if(!len)
+		return NULL;
 	s = (char *)ft_calloc(sizeof(char), (len + 1));
-	while (s1[i])
+	while (i < len)
 	{
 		s[i] = s1[i];
 		i++;

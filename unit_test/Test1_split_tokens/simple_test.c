@@ -77,10 +77,9 @@ void simple_test8()
     data()->s = "cat minishell.h | grep \");\"$";
 
     t_token exp[] = { {"cat", e_args | e_cmd}, {"minishell.h", e_args}, 
-    {"|", e_pipe}, {"grep", e_args | e_cmd}, {"\");\"", e_double_quote | e_args}, 
-    {"$", e_var_to_get}};
+    {"|", e_pipe}, {"grep", e_args | e_cmd}, {"\");\"$", e_double_quote | e_args | e_var_to_get}};
     data()->exp = (t_token *)exp;
-    data()->count = 5;
+    data()->count = 4;
     split_tokens_test();
 }
 
@@ -173,10 +172,10 @@ void simple_test17()
     data()->s = "echo hh$test";
 
     t_token exp[] = { {"echo", e_args | e_cmd}, 
-    {"hh", e_args}, {"$test", e_var_to_get | e_args} 
+    {"hh$test", e_args | e_var_to_get} 
     };
     data()->exp = (t_token *)exp;
-    data()->count = 3;
+    data()->count = 2;
     split_tokens_test();
 }
 
@@ -184,7 +183,7 @@ void simple_test18()
 {
     data()->s = "echo hh $test";
 
-    t_token exp[] = { {"echo", e_args | e_cmd}, {"hh", e_args}, {" $test", e_var_to_get | e_args} 
+    t_token exp[] = { {"echo", e_args | e_cmd}, {"hh", e_args}, {"$test", e_var_to_get | e_args} 
     };
     data()->exp = (t_token *)exp;
     data()->count = 3;
@@ -195,7 +194,7 @@ void simple_test19()
 {
     data()->s = "echo GHOST=123 | env | grep GHOST";
 
-    t_token exp[] = { {"echo", e_args | e_cmd}, {"GHOST=123", e_args}};
+    t_token exp[] = { {"echo", e_args | e_cmd}, {"GHOST=123", e_args }};
     data()->exp = (t_token *)exp;
     data()->count = 2;
     split_tokens_test();

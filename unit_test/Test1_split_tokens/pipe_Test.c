@@ -44,11 +44,10 @@ void pipe_test3()
         {"minishell.h", e_args},
         {"|", e_pipe},
         {"grep", e_args | e_cmd},
-        {"\");\"", e_args | e_double_quote},
-        {"$", e_args}
+        {"\");\"$", e_args | e_double_quote | e_var_to_get}
     };
     data()->exp = (t_token *)exp;
-    data()->count = 6;
+    data()->count = 5;
     split_tokens_test();
 }
 

@@ -12,5 +12,11 @@
         "string.h": "c",
         "mini_shell.h": "c"
     },
-    "cmake.sourceDirectory": "/home/aazzaoui/Desktop/mini_shell_repo/unit_test/Unity-master"
+    "cmake.sourceDirectory": "/home/aazzaoui/Desktop/mini_shell_repo/unit_test/Unity-master",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    }
 }

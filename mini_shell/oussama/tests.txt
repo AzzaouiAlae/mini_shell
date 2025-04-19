@@ -13,4 +13,38 @@
 < file 
 
 
+-----------------------------------------------------------
 < hh
+
+$>: << EXIT echo $SHELL
+<< = e_heredoc 
+EXIT = e_delimiter 
+echo = e_args e_cmd 
+$SHELL = e_args e_var_to_get 
+Minishell : syntax error near unexpected token 'EXIT'
+
+-----------------------------------------------------------
+
+cat << end
+cat = e_args e_cmd 
+<< = e_heredoc 
+end = e_delimiter 
+Minishell : syntax error near unexpected token 'end'
+------------------------------
+cat = e_args e_cmd 
+<< = e_heredoc 
+end = e_delimiter 
+
+-------------------------------------------------------------
+
+$>: << end | ls
+<< = e_heredoc 
+end = e_delimiter 
+| = e_pipe 
+ls = e_args e_cmd 
+Minishell : syntax error near unexpected token 'end'
+------------------------------
+<< = e_heredoc 
+end = e_delimiter 
+| = e_pipe 
+ls = e_args e_cmd 

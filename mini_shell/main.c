@@ -28,12 +28,11 @@ char *get_enum_str(int type)
     return list->content;
 }
 
-void print_tokens(char *s)
+void print_tokens()
 {
     int i;
     t_token **t;
     
-    split_tokens(s, " |<>\t$", "\"'");
     i = 0;
     t = g_all.tokens->content;
     while(i < g_all.tokens->count)
@@ -41,7 +40,18 @@ void print_tokens(char *s)
         printf("%s = %s\n", t[i]->s, get_enum_str(t[i]->type));
         i++;
     }
+}
+
+void process_cmd(char *s)
+{
+
+    split_tokens(s, " |<>\t$", "\"'");
+    print_tokens();
     ft_check_syntax_error();
+    replace_vars();
+    add_var_to_set();
+    printf("\n------------------------------\n");
+    print_tokens();
 }
 
 // int main(int argc, char *argv[], char *env[])
@@ -56,7 +66,7 @@ void print_tokens(char *s)
 //             add_history(input);
 //         if(input && !ft_strcmp(input, "exit"))
 //             break;
-//         print_tokens(input);
+//         process_cmd(input);
 //         free(input);
 //         g_all.line_count++;
 //     }
