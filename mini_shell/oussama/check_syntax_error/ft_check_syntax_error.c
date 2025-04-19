@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 22:17:25 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 22:33:30 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:38:37 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int  check_pipe(t_token **token , int i)
         return(print_redir_error("HERDOC TATCHOFHA ALAA"), 0);
     return(1);
 }
-
 
 int check_redir_in_out_in_first(t_token **token , int i)
 {

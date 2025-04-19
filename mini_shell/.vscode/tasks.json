@@ -9,6 +9,7 @@
                 "-g",
                 "*.c",
                 "*/*.c",
+                "${workspaceFolder}/oussama/check_syntax_error/*.c",
                 "-lreadline",
                 "-o",
                 "${workspaceFolder}/mini_shell"

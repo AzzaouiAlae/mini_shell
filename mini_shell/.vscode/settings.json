@@ -10,5 +10,11 @@
         "ft_check_syntax.h": "c",
         "garbage_collector.h": "c",
         "readline.h": "c"
+    },
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
     }
 }

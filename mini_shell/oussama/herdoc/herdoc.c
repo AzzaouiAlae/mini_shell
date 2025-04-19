@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 22:37:21 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:40:12 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	here_doc(t_token **tokens, int i)
 	{
         if (!str)
         {
-			printf("warning: here-document at line %d delimited by ", g_all.line_count);
-            printf("end-of-file (wanted `%s')", limiter);
+			printf("warning: here-document at line %d ", g_all.line_count);
+            printf("delimited by end-of-file (wanted `%s')", limiter);
             ft_exit(0);
         }
 		write(fd, str, ft_strlen(str));

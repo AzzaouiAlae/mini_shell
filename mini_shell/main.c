@@ -28,14 +28,12 @@ char *get_enum_str(int type)
     return list->content;
 }
 
-
-
 void print_tokens(char *s)
 {
     int i;
     t_token **t;
     
-    split_tokens(s, " |<>\t$\n", "\"'");
+    split_tokens(s, " |<>\t$", "\"'");
     i = 0;
     t = g_all.tokens->content;
     while(i < g_all.tokens->count)
@@ -46,23 +44,23 @@ void print_tokens(char *s)
     ft_check_syntax_error();
 }
 
-int main(int argc, char *argv[], char *env[])
-{
-    char *input;
+// int main(int argc, char *argv[], char *env[])
+// {
+//     char *input;
 
-    init_g_all(env);
-    while(1)
-    {
-        input = readline("$>: ");
-        if(input && *input)
-            add_history(input);
-        if(input && !ft_strcmp(input, "exit"))
-            break;
-        print_tokens(input);
-        free(input);
-        g_all.line_count++;
-    }
-    free(input);
-    rl_clear_history();
-    return 1;
-}
+//     init_g_all(env);
+//     while(1)
+//     {
+//         input = readline("$>: ");
+//         if(input && *input)
+//             add_history(input);
+//         if(input && !ft_strcmp(input, "exit"))
+//             break;
+//         print_tokens(input);
+//         free(input);
+//         g_all.line_count++;
+//     }
+//     free(input);
+//     rl_clear_history();
+//     return 1;
+// }
