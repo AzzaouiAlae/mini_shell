@@ -214,7 +214,7 @@ void builtins_Test20() {
     data()->s = "echo $?";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"$?", e_error_status | e_args}
+        {"$?", e_var_to_get | e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;
@@ -225,11 +225,10 @@ void builtins_Test21() {
     data()->s = "echo $?HELLO";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"$?", e_args | e_error_status},
-        {"HELLO", e_args}
+        {"$?HELLO", e_args | e_var_to_get},
     };
     data()->exp = (t_token *)exp;
-    data()->count = 3;
+    data()->count = 2;
     split_tokens_test();
 }
 

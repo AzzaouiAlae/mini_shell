@@ -65,7 +65,7 @@ void mandatory_Test6()
     data()->s = "echo $?";
     t_token exp[] = {
         {"echo", e_args | e_cmd},
-        {"$?", e_error_status | e_args}
+        {"$?", e_var_to_get | e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;

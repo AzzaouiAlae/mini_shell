@@ -26,7 +26,7 @@ void pipe_test2()
     data()->s = "cat ./test_files/infile_big | grep oi";
     t_token exp[] = {
         {"cat", e_args | e_cmd},
-        {"./test_files/infile_big", e_args},
+        {"./test_files/infile_big", e_args | e_path},
         {"|", e_pipe},
         {"grep", e_args | e_cmd},
         {"oi", e_args}
@@ -44,7 +44,7 @@ void pipe_test3()
         {"minishell.h", e_args},
         {"|", e_pipe},
         {"grep", e_args | e_cmd},
-        {"\");\"$", e_args | e_double_quote | e_var_to_get}
+        {"\");\"$", e_args | e_double_quote}
     };
     data()->exp = (t_token *)exp;
     data()->count = 5;

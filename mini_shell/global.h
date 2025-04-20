@@ -1,6 +1,7 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 # include "cs_list/cs_list.h"
+#include "cpp_string/cpp_string.h"
 
 typedef enum e_token_type
 {
@@ -32,7 +33,7 @@ typedef struct s_token
 typedef struct s_globale
 {
     t_cs_list	*tokens;
-    t_cs_list	*token_str;
+    t_cpp_str	*token_str;
 	t_token		*token;
 	int cmd_error_status;
 	t_token_type	last_cmd_type;

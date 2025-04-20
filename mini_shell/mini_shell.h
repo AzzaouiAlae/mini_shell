@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/19 19:33:23 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/20 21:00:26 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,29 @@ void split_tokens(char *s, char *sep, char *special_sep);
 void init_g_all(char *env[]);
 void init_env_map();
 void add_env_var(char *kvp);
-void replace_vars();
+void get_variables_value();
 void process_cmd(char *s);
 void add_var_to_set();
+
+typedef struct s_fd
+{
+    int fd;
+    int type;
+} t_fd;
+
+typedef struct s_pipe
+{
+    int fd_read;
+    int fd_write;
+} t_pipe;
+
+typedef struct s_cmd
+{
+    char *cmd_path;
+    char **args;
+    t_pipe *pipe;
+    t_fd *fd;
+} t_cmd;
+
 
 #endif

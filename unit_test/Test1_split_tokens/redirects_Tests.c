@@ -82,7 +82,7 @@ void redirects_Test8()
     data()->s = "echo hi | cat \"./test_files/infile\"";
     t_token exp[] = {{"echo", e_args | e_cmd}, {"hi", e_args}, 
         {"|", e_pipe}, {"cat", e_args | e_cmd}, 
-        {"\"./test_files/infile\"", e_double_quote | e_args}};
+        {"\"./test_files/infile\"", e_double_quote | e_args | e_path}};
     data()->exp = (t_token *)exp;
     data()->count = 5;
     split_tokens_test();

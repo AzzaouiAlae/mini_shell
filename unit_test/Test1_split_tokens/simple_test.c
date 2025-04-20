@@ -65,7 +65,7 @@ void simple_test7()
 {
     data()->s = "cat ./test_files/infile_big | grep oi";
 
-    t_token exp[] = { {"cat", e_args | e_cmd}, {"./test_files/infile_big", e_args}, 
+    t_token exp[] = { {"cat", e_args | e_cmd}, {"./test_files/infile_big", e_args | e_path}, 
     {"|", e_pipe}, {"grep", e_args | e_cmd}, {"oi", e_args}};
     data()->exp = (t_token *)exp;
     data()->count = 5;
@@ -138,7 +138,7 @@ void simple_test14()
 
     t_token exp[] = { {"echo", e_args | e_cmd}, {"<", e_redir_in}, 
     {"\"./test_files/infile\"", e_double_quote | e_file_name}, 
-    {"\"bonjour       42\"", e_double_quote}};
+    {"\"bonjour       42\"", e_double_quote | e_args}};
     data()->exp = (t_token *)exp;
     data()->count = 4;
     split_tokens_test();

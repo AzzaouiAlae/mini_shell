@@ -29,6 +29,7 @@ int main(int argc, char **argv, char **env)
     mandatory_Tests();
     Test_cpp_map();
     Test_env_vars();
+    more_Tests();
     ft_free_all();
     return (UnityEnd());
 }

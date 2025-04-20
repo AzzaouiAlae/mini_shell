@@ -9,7 +9,9 @@
         "cs_list.h": "c",
         "ft_check_syntax.h": "c",
         "garbage_collector.h": "c",
-        "readline.h": "c"
+        "readline.h": "c",
+        "mini_shell.h": "c",
+        "split_by_token.h": "c"
     },
     "github.copilot.enable": {
         "*": false,

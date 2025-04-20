@@ -25,5 +25,6 @@ void heredoc_Test();
 void mandatory_Tests();
 void Test_cpp_map();
 void Test_env_vars();
+void more_Tests();
 
 #endif

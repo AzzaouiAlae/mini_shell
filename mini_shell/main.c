@@ -48,29 +48,29 @@ void process_cmd(char *s)
     split_tokens(s, " |<>\t$", "\"'");
     print_tokens();
     ft_check_syntax_error();
-    replace_vars();
+    get_variables_value();
     add_var_to_set();
     printf("\n------------------------------\n");
     print_tokens();
 }
 
-// int main(int argc, char *argv[], char *env[])
-// {
-//     char *input;
+int main(int argc, char *argv[], char *env[])
+{
+    char *input;
 
-//     init_g_all(env);
-//     while(1)
-//     {
-//         input = readline("$>: ");
-//         if(input && *input)
-//             add_history(input);
-//         if(input && !ft_strcmp(input, "exit"))
-//             break;
-//         process_cmd(input);
-//         free(input);
-//         g_all.line_count++;
-//     }
-//     free(input);
-//     rl_clear_history();
-//     return 1;
-// }
+    init_g_all(env);
+    while(1)
+    {
+        input = readline("$>: ");
+        if(input && *input)
+            add_history(input);
+        if(input && !ft_strcmp(input, "exit"))
+            break;
+        process_cmd(input);
+        free(input);
+        g_all.line_count++;
+    }
+    free(input);
+    rl_clear_history();
+    return 1;
+}
