@@ -20,5 +20,6 @@ void		cpp_str_add_char(t_cpp_str *str, char ch);
 t_cpp_str	*cpp_str_new_capacity(int capacity);
 t_cpp_str	*cpp_str_new(void);
 void	cpp_delete_char(t_cpp_str *str, int index);
+t_cpp_str	*cpp_str_new_substitute(char *s);
 
 #endif

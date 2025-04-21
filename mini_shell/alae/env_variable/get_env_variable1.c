@@ -16,7 +16,7 @@ void add_var_to_tokens(t_token **tokens, char **args, int i, int j)
         j++;
     }
     cs_list_delete(g_all.tokens, i);
-    while (args[j])
+    while (args && args[j])
     {
         if(g_all.tokens->count <= i)
             cs_list_add(g_all.tokens, (long)create_token(args[j], type));
@@ -28,15 +28,12 @@ void add_var_to_tokens(t_token **tokens, char **args, int i, int j)
     }
 }
 
-void create_value_token(t_token *token, t_cpp_str *new_str_token)
+void create_value_token(t_cpp_str *str, t_cpp_str *new_str_token)
 {
-    t_cpp_str *str;
     t_cs_list *value;
     char *key;
     int first_time;
 
-    str = cpp_str_new_capacity(ft_strlen(token->s) + 1);
-    cpp_str_add(str, token->s);
     first_time = 1;
     value = NULL;
     while(first_time || key[0])
@@ -73,16 +70,18 @@ void add_var_double_quote_to_tokens(t_cpp_str *value, int i, int type)
 int get_variable_value(t_token **tokens, int i, int type)
 {
     t_cpp_str *new_str_token;
+    t_cpp_str *str_token;
     char **args;
     int  j;
 
     j = 0;
     new_str_token = cpp_str_new();
-    create_value_token(tokens[i], new_str_token);
+    str_token = cpp_str_new_substitute(tokens[i]->s);
+    create_value_token(str_token, new_str_token);
     if(!(tokens[i]->type & (e_double_quote | e_quote)))
     {
         args = ft_super_split(new_str_token->content, " \t", "");
-        if(!args && !args[j])
+        if(!args || !args[j])
             return 0;
         add_var_to_tokens(tokens, args, i, j);
     }

@@ -68,11 +68,8 @@ void is_var_to_set(t_split_data *data, int *type)
         token = ((t_token **)(g_all.tokens->content))[g_all.tokens->count - 1];
     if(!g_all.tokens->count || (token->type & e_set_var))
     {
-        s = ft_strchr(" |<>\t\"'$=", data->s[data->i]);
-        i = -1;
-        while (!s)
-            s = ft_strchr(" |<>\t\"'$=", data->s[data->i + (++i)]);
-        if(s && *s == '=')
+        s = ft_strstrchr(&(data->s[data->i]), " |<>\t\"'$=*/-+");
+        if (s && (s[0] == '=' || (s[0] == '+' && s[1] == '=')))
             *type = e_var_to_set;
     }
 }

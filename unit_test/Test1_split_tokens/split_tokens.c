@@ -27,7 +27,7 @@ void split_tokens_test()
             printf("%s == %s\n", get_enum_str(data()->exp[i].type), get_enum_str(tokens[i]->type));
         }
         TEST_ASSERT_EQUAL_INT32(strlen(data()->exp[i].s), strlen(tokens[i]->s));
-        TEST_ASSERT_EQUAL_CHAR_ARRAY(data()->exp[i].s, tokens[i]->s, strlen(data()->exp[i].s));
+        TEST_ASSERT_EQUAL_CHAR_ARRAY(data()->exp[i].s, tokens[i]->s, strlen(data()->exp[i].s) + 1);
         if(data()->exp[i].type != tokens[i]->type)
         {
             printf("%s == %s\n", data()->exp[i].s, tokens[i]->s);
@@ -35,5 +35,8 @@ void split_tokens_test()
         } 
         TEST_ASSERT_EQUAL_INT32(data()->exp[i].type, tokens[i]->type);
     }
+    get_variables_value();
+    add_var_to_set();
+    rm_single_double_qoute();
 }
 

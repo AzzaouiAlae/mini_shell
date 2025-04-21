@@ -21,7 +21,10 @@ typedef enum e_token_type
 	e_set_var = 4096,
 	e_var_to_set = 8192,
 	e_delimiter = 16384,
-	e_error_status = 32768,
+	e_heredoc_fd = 32768,
+	e_redir_out_app_fd = 65536,
+	e_redir_out_trun = 131072,
+	e_redir_in = 262144,
 }				t_token_type;
 
 typedef struct s_token

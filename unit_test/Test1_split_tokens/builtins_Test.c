@@ -325,7 +325,7 @@ void builtins_Test30() {
     data()->s = "export HELLO-=123";
     t_token exp[] = {
         {"export", e_set_var | e_cmd},
-        {"HELLO-=123", e_var_to_set}
+        {"HELLO-=123", e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;

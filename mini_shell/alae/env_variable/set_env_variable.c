@@ -16,7 +16,7 @@ int is_tokens_has_cmd()
     return 1;
 }
 
-t_cs_list *create_value_list(char *s, int *value_len, t_cs_list *k)
+t_cs_list *create_value_list(char *s, int *value_len)
 {
     t_cs_list *str;
     char ch;
@@ -40,22 +40,18 @@ t_cs_list *create_value_list(char *s, int *value_len, t_cs_list *k)
 
 void add_env_var(char *kvp)
 {
-    t_cs_list *key_list;
+    t_cpp_str *str_key;
     t_cs_list *value_list;
     int value_len;
     int key_len;
     char *s;
 
-    s = ft_strchr(kvp, '=');
-    if(!s)
-        return ;
-    key_len = s - kvp;
-    if(*(s - 1) == '+')
-        key_len--;
-    key_list = cs_list_new_capacity(1, key_len);
-    cs_list_add_range(key_list, key_len, kvp);
-    value_list = create_value_list(s, &value_len, key_list);
-    cpp_map_add(g_all.custom_env, key_list->content, value_list);
+    s = ft_strstrchr(kvp, "+=");
+    key_len = ft_strstrlen(kvp, "+=");
+    str_key = cpp_str_new();
+    cpp_str_add_len(str_key, kvp, key_len);
+    value_list = create_value_list(s, &value_len);
+    cpp_map_add(g_all.custom_env, str_key->content, value_list);
 }
 
 void add_var_to_set()

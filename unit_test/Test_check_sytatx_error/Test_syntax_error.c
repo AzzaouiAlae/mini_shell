@@ -568,8 +568,23 @@ void Test_double_heredoc()
     TEST_ASSERT_EQUAL_INT32(exp, g_all.cmd_error_status);
 }
 
+void alae_Test1()
+{
+    t_token tokens[] = {
+        {"<", e_redir_in},
+        {"file", e_file_name},
+    };
+    cs_list_clear(g_all.tokens);
+    for(int i = 0; i < 2; i++)
+        cs_list_add(g_all.tokens, (long)&(tokens[i]));
+    int exp = 2;
+    ft_check_syntax_error();
+    TEST_ASSERT_EQUAL_INT32(exp, g_all.cmd_error_status);
+}
+
 void Test_syntax_error()
 {
+    //RUN_TEST(alae_Test1);
     RUN_TEST(Test_syntax_error1);
     RUN_TEST(Test_consecutive_pipes);
     RUN_TEST(Test_double_output_redirect);

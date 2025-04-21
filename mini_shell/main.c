@@ -16,7 +16,7 @@ char *get_enum_str(int type)
     char *strs[] = {"e_none", "e_args", "e_pipe", "e_heredoc",
  		"e_redir_out_app", "e_redir_out_trun", "e_redir_in", "e_var_to_get",
  		"e_quote", "e_double_quote", "e_file_name", "e_cmd", "e_path", 
-        "e_set_var", "e_var_to_set" ,"e_delimiter", "e_error_status", 0};
+        "e_set_var", "e_var_to_set" ,"e_delimiter", 0};
     for(int i = 1, j = 1; strs[j]; i *= 2, j++)
     {
         if((type & i) == i)
@@ -44,12 +44,14 @@ void print_tokens()
 
 void process_cmd(char *s)
 {
-
     split_tokens(s, " |<>\t$", "\"'");
     print_tokens();
     ft_check_syntax_error();
     get_variables_value();
     add_var_to_set();
+    printf("\n------------------------------\n");
+    print_tokens();
+    rm_single_double_qoute();
     printf("\n------------------------------\n");
     print_tokens();
 }

@@ -46,10 +46,10 @@ t_cs_list	*cs_list_new_capacity(int size_of_type, int capacity)
 	t_cs_list	*list;
 
 	list = ft_calloc(1, sizeof(t_cs_list));
-	list->content = ft_calloc(size_of_type, capacity);
+	list->content = ft_calloc(size_of_type, capacity + 1);
 	list->size_of_type = size_of_type;
 	list->count = 0;
-	list->capacity = capacity;
+	list->capacity = capacity + 1;
 	list->free_content = 1;
 	return (list);
 }
