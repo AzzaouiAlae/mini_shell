@@ -20,9 +20,9 @@ void env_vars_Test2()
     t_cpp_map *map = g_all.custom_env;
 
     //act
-    add_env_var("TEST=123456789");
-    add_env_var("TEST2=123456789");
-    add_env_var("TEST3=123456789");
+    add_env_var("TEST=123456789", 1);
+    add_env_var("TEST2=123456789", 1);
+    add_env_var("TEST3=123456789", 1);
 
     //assert
     //TEST_ASSERT_EQUAL(77, map->count);

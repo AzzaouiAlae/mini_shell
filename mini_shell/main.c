@@ -11,49 +11,107 @@ void init_g_all(char *env[])
 
 char *get_enum_str(int type)
 {
-    t_cs_list *list = cs_list_new(1);
+    t_cpp_str *str = cpp_str_new();
     int i = 0;
+
     char *strs[] = {"e_none", "e_args", "e_pipe", "e_heredoc",
  		"e_redir_out_app", "e_redir_out_trun", "e_redir_in", "e_var_to_get",
  		"e_quote", "e_double_quote", "e_file_name", "e_cmd", "e_path", 
-        "e_set_var", "e_var_to_set" ,"e_delimiter", 0};
+        "e_set_var", "e_var_to_set" ,"e_delimiter", "e_heredoc_fd", 
+        "e_redir_out_app_fd", "e_redir_out_trun_fd", "e_redir_in_fd", 0};
     for(int i = 1, j = 1; strs[j]; i *= 2, j++)
     {
         if((type & i) == i)
         {
-            cs_list_add_range(list, strlen(strs[j]), strs[j]);
-            cs_list_add(list, (long)' ');
+            cpp_str_add(str, strs[j]);
+            cpp_str_add_char(str, ' ');
         }
     }
-    return list->content;
+    return str->content;
 }
 
 void print_tokens()
 {
     int i;
     t_token **t;
+    int fd_type;
     
     i = 0;
     t = g_all.tokens->content;
+    fd_type = (e_heredoc_fd | e_redir_in_fd | e_redir_out_trun_fd | e_redir_out_app_fd);
     while(i < g_all.tokens->count)
     {   
-        printf("%s = %s\n", t[i]->s, get_enum_str(t[i]->type));
+        if((t[i]->type & fd_type))
+            printf("%d = %s\n", *((int *)t[i]->s), get_enum_str(t[i]->type));
+        else
+            printf("%s = %s\n", t[i]->s, get_enum_str(t[i]->type));
         i++;
     }
 }
 
+void print_cmd(t_cmd *cmd)
+{
+    printf("cmd_path = %s\n", cmd->cmd_path);
+    printf("args = ");
+    for(int i = 0; cmd->args[i]; i++)
+        printf("%s\t", cmd->args[i]);
+    printf("\nheredoc_fd = %d\t", cmd->heredoc_fd);
+    printf("redir_in_fd = %d\t", cmd->redir_in_fd);
+    printf("redir_out_app_fd = %d\t", cmd->redir_out_app_fd);
+    printf("redir_out_trun_fd = %d\t", cmd->redir_out_trun_fd);
+}
+
+void print_cmds()
+{
+    char *str = "create_cmd";
+    int i = 0;
+    int count = (34 - ft_strlen(str)) / 2;
+    printf("\n=================================\n");
+    while(count - 1 > i++)
+        printf(" ");
+    printf("%s\n", str);
+    printf("=================================\n");
+    create_cmd();
+    i = 0;
+    t_cmd **cmds = g_all.cmds->content;
+    while(i < g_all.cmds->count)
+    {
+        printf("command %d\n", i + 1);
+        print_cmd(cmds[i]);
+        printf("\n------------------------------\n");
+        i++;
+    }
+    printf("=================================\n");
+}
+
+void print_func_data(char *str, void (*func)(void))
+{
+    int count = (32 - ft_strlen(str)) / 2;
+    int i = 0;
+    printf("\n------------------------------\n");
+    while(count - 1 > i++)
+        printf(" ");
+    printf("%s\n", str);
+    printf("------------------------------\n");
+    if(!func)
+        return;
+    func();
+    print_tokens();
+    printf("=================================\n");
+}
+
 void process_cmd(char *s)
 {
+    print_func_data("split_tokens", NULL);
     split_tokens(s, " |<>\t$", "\"'");
     print_tokens();
+    printf("=================================\n");
     ft_check_syntax_error();
-    get_variables_value();
-    add_var_to_set();
-    printf("\n------------------------------\n");
-    print_tokens();
-    rm_single_double_qoute();
-    printf("\n------------------------------\n");
-    print_tokens();
+    print_func_data("get_variables_value", get_variables_value);
+    print_func_data("add_vars_to_env", add_vars_to_env);
+    print_func_data("rm_single_double_qoute", rm_single_double_qoute);
+    print_func_data("open_redirection_files", open_redirection_files);
+    print_cmds();
 }
 
 int main(int argc, char *argv[], char *env[])

@@ -1,6 +1,6 @@
 #include "cpp_string.h"
 
-void	cpp_delete_char(t_cpp_str *str, int index)
+void	cpp_str_delete_char(t_cpp_str *str, int index)
 {
 	if (!str || index > str->count - 1)
 		return ;
@@ -32,4 +32,17 @@ void	cpp_str_delete_len(t_cpp_str *str, int index, int len)
 		index++;
 	}
 	str->count -= len;
+}
+
+void cpp_str_clear(t_cpp_str *str)
+{
+	int i;
+
+	i = 0;
+	while(str->count > i)
+	{
+		str->content[i] = '\0';
+		i++;
+	}
+	str->count = 0;
 }

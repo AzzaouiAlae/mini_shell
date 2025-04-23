@@ -54,5 +54,6 @@ void cpp_map_add(t_cpp_map *map, char *key, void *value)
     kvp->key = key;
     kvp->value = value;
     index = cpp_map_hash_function(key) % map->capacity;
+    // printf("%d\n", index);
     add_item(map, lists, kvp, index);
 }

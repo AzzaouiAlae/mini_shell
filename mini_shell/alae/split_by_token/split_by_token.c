@@ -1,4 +1,3 @@
-#include "../../mini_shell.h"
 #include "split_by_token.h"
 
 t_token *create_token(char *s, int type)
@@ -34,6 +33,12 @@ void	check_tokens(t_split_data *data)
 		i++;
 	}
 	skip_space(data->s, &data->i);
+}
+
+void add_token(t_split_data *data)
+{
+    g_all.token = create_token(g_all.token_str->content, data->type);
+    cs_list_add(g_all.tokens, (long)g_all.token);
 }
 
 void split_tokens(char *s, char *sep, char *special_sep)

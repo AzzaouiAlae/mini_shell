@@ -10,7 +10,7 @@ size_t	ft_strchrlen(const char *s, char ch)
 	return (i);
 }
 
-size_t	ft_strstrlen(const char *s, char *sep)
+size_t	ft_strlen_delimiter(const char *s, char *sep)
 {
 	size_t	i;
 

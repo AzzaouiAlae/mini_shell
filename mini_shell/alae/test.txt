@@ -2,3 +2,5 @@
 < file1 "echo" hello | cat
 < file1 "$T" hello | cat
 < file1 '$T' hello | cat
+echo "aaa     bbb      c"$a
+echo hello this "$USERNAME" on $HOSTNAME using $SHELL > "$F"

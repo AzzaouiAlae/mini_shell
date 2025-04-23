@@ -11,7 +11,9 @@
         "garbage_collector.h": "c",
         "readline.h": "c",
         "mini_shell.h": "c",
-        "split_by_token.h": "c"
+        "split_by_token.h": "c",
+        "env_var.h": "c",
+        "set_env_vars.h": "c"
     },
     "github.copilot.enable": {
         "*": false,

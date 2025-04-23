@@ -22,13 +22,12 @@ typedef struct s_cs_list
 	int		size_of_type;
 	int		count;
 	int		capacity;
-	int		free_content;
+	int		type;
 }			t_cs_list;
 
 void		cs_list_add(t_cs_list *list, long item);
 void		cs_list_add_range(t_cs_list *list, int count, void *arr);
 t_cs_list	*cs_list_new(int size_of_type);
-t_cs_list	*cs_list_new_free_contante(int size_of_type, int free_cont);
 t_cs_list	*cs_list_new_capacity(int size_of_type, int capacity);
 void		cs_list_resize(t_cs_list *list, int capacity);
 void		*ft_memcpy(void *dst, const void *src, size_t n);

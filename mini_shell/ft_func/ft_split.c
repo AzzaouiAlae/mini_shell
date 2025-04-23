@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:42:24 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/19 13:02:45 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:09:06 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static int	count_words(const char *s, char *sep, char *special_sep)
 	{
 		while (is_sep(sep, s[i], cur_sep))
 		{
-			if (cur_sep == s[i])
-				cur_sep = '\0';
-			else if (ft_strchr(special_sep, s[i]))
+			if (!cur_sep && ft_strchr(special_sep, s[i]))
 				cur_sep = s[i];
+			else if (cur_sep == s[i])
+				cur_sep = '\0';
 			i++;
 		}
 		if (s[i])

@@ -21,23 +21,7 @@ t_cs_list	*cs_list_new(int size_of_type)
 	list->size_of_type = size_of_type;
 	list->count = 0;
 	list->capacity = 32;
-	list->free_content = 1;
-	return (list);
-}
-
-t_cs_list	*cs_list_new_free_contante(int size_of_type, int free_cont)
-{
-	t_cs_list	*list;
-
-	list = ft_calloc(1, sizeof(t_cs_list));
-	if (free_cont)
-		list->content = ft_calloc(size_of_type, 4);
-	else
-		list->content = ft_calloc_without_save(size_of_type, 4);
-	list->size_of_type = size_of_type;
-	list->count = 0;
-	list->capacity = 4;
-	list->free_content = free_cont;
+	list->type = 0;
 	return (list);
 }
 
@@ -50,6 +34,6 @@ t_cs_list	*cs_list_new_capacity(int size_of_type, int capacity)
 	list->size_of_type = size_of_type;
 	list->count = 0;
 	list->capacity = capacity + 1;
-	list->free_content = 1;
+	list->type = 0;
 	return (list);
 }

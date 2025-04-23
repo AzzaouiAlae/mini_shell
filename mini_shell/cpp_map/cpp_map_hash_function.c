@@ -10,7 +10,7 @@ int cpp_map_hash_function(char *str)
     i = 0;
     
     while(str && str[i])
-        num += str[i++];
+        num += str[i++] + i + (i % ft_strlen(str));
     if(!i)
         return num;
     if(str && str[i])

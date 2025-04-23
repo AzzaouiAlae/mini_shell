@@ -10,6 +10,7 @@
                 "*.c",
                 "*/*.c",
                 "alae/*/*.c",
+                "alae/*/*/*.c",
                 "${workspaceFolder}/oussama/check_syntax_error/*.c",
                 "-lreadline",
                 "-o",

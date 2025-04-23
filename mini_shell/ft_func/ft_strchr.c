@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:08:47 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/21 11:39:11 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:57:15 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strstrchr(const char *s, char *sep)
+char	*str_find_char(const char *s, char *sep)
 {
 	int i;
 	char *str;
