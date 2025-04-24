@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/24 09:47:38 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:30:31 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,7 @@ void				add_env_var(char *kvp, int type);
 void				get_variables_value(void);
 void				add_vars_to_env(void);
 void				create_cmd(void);
-void set_exit_status();
-
-typedef struct s_fd
-{
-	int				fd;
-	int				type;
-}					t_fd;
-
-typedef struct s_pipe
-{
-	int				fd_read;
-	int				fd_write;
-	struct s_pipe	*next;
-}					t_pipe;
-
-typedef struct s_cmd
-{
-	char			*cmd_path;
-	char			**args;
-	t_pipe			*pipe;
-	int				heredoc_fd;
-	int				redir_out_app_fd;
-	int				redir_out_trun_fd;
-	int				redir_in_fd;
-}					t_cmd;
+void				set_exit_status(void);
+void	print_export_vars_cmd(t_cmd *cmd);
 
 #endif

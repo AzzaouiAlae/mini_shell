@@ -26,6 +26,8 @@ int is_dir(char *cmd)
 
 int check_path(char *cmd, t_create_cmd *data)
 {
+    if (cpp_map_get(g_all.builtins, cmd))
+        return (1);
     if (cmd && is_dir(cmd))
     {
         data->error = "Is a directory\n";

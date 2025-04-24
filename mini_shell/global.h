@@ -34,6 +34,24 @@ typedef struct s_token
 	int				type;
 }					t_token;
 
+typedef struct s_pipe
+{
+	int				fd_read;
+	int				fd_write;
+	struct s_pipe	*next;
+}					t_pipe;
+
+typedef struct s_cmd
+{
+	char			*cmd_path;
+	char			**args;
+	t_pipe			*pipe;
+	int				heredoc_fd;
+	int				redir_out_app_fd;
+	int				redir_out_trun_fd;
+	int				redir_in_fd;
+}					t_cmd;
+
 typedef struct s_globale
 {
 	int				argc;
@@ -47,7 +65,8 @@ typedef struct s_globale
 	t_cpp_map		*custom_env;
 	t_cs_list		*tokens;
 	t_cs_list		*cmds;
-
+	t_cmd			*current_cmd;
+	t_cpp_map		*builtins;
 }					t_global;
 
 extern t_global		g_all;

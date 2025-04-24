@@ -22,6 +22,7 @@ void add_delimiter_char(t_split_data *data)
 		data->ch = '\0';
 	else
 		cpp_str_add_char(g_all.token_str, data->s[data->i]);
+	if (data->type)
 	data->i++;
 }
 
@@ -31,9 +32,9 @@ int is_delimiter(t_split_data *data)
 		return 0;
     g_all.token_str = cpp_str_new();
 	data->first_time = 1;
+	data->type = e_delimiter;
 	while (is_heredoc_delim(data))
 		add_delimiter_char(data);
-	data->type = e_delimiter;
 	add_token(data);
 	return 1;
 }

@@ -22,5 +22,7 @@ void			print_error_cmd_not_found(char *cmd, t_create_cmd *data,
 					int status);
 int				check_path(char *cmd, t_create_cmd *data);
 int				is_dir(char *cmd);
+int				check_builtins_cmd(t_create_cmd *data);
+void			run_builtin_cmds(t_create_cmd *data);
 
 #endif

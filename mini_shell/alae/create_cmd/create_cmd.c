@@ -40,7 +40,8 @@ char	*get_cmd_path(char *cmd_s, t_create_cmd *data)
 
 void	add_cmd_token(t_create_cmd *data)
 {
-	if (data->tkn->type & e_path || is_path(data->tkn->s))
+	if (data->tkn->type & e_path || is_path(data->tkn->s) || 
+		cpp_map_get(g_all.builtins, data->tkn->s))
 	{
 		check_path(data->tkn->s, data);
 		cs_list_add(data->cmd_args, (long)data->tkn->s);
@@ -96,4 +97,5 @@ void	create_cmd(void)
 		if (!data.cmd_not_found)
 			cs_list_add(g_all.cmds, (long)data.cmd);
 	}
+	run_builtin_cmds(&data);
 }

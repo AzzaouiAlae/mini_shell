@@ -5,14 +5,14 @@
 
 typedef struct s_set_env_vars
 {
-	int		has_cmd;
-	int		count;
 	int		i;
 	int		j;
-	int		is_export_args;
 	int		type;
-	t_token	**tokens;
+	int		count;
+	int		has_cmd;
+	int		is_export_args;
 	char	**args;
+	t_token	**tokens;
 }			t_set_env_vars;
 
 int	is_env_var(t_set_env_vars *data);
