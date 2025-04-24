@@ -1,8 +1,8 @@
 #ifndef SPLIT_BY_TOKEN_H
 # define SPLIT_BY_TOKEN_H
 # include "../../cpp_string/cpp_string.h"
+# include "../../global.h"
 # include "../../mini_shell.h"
-#include "../../global.h"
 
 typedef struct s_split_data
 {
@@ -32,11 +32,14 @@ int			is_single_quote(t_split_data *data);
 int			is_cmd_type(void);
 int			check_dollar_ch_arg(t_split_data *data);
 int			check_export_cmd(t_split_data *data, char *export);
-void		check_var_to_set(t_split_data *data);
 int			is_dollar_char(t_split_data *data);
 int			is_var_to_get(t_split_data *data);
 int			is_dollar_to_skip(t_split_data *data);
 int			check_quote_in_arg(t_split_data *data);
 void		add_token(t_split_data *data);
+int			is_var_to_set(t_split_data *data);
+int is_valid_var_name(char *str);
+int is_valid_var_name_char(char ch);
+int is_digit(char ch);
 
 #endif

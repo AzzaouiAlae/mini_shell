@@ -28,6 +28,7 @@ void	add_env_var(char *kvp, int type)
 	t_cpp_str *str_key;
 	t_cpp_str *str_val;
     t_cs_list *val_list;
+	t_cs_list *val;
     int val_len;
     int key_len;
     char *s;
@@ -39,8 +40,32 @@ void	add_env_var(char *kvp, int type)
     str_key = cpp_str_new();
     str_val = cpp_str_new();
 	cpp_str_add_len(str_key, kvp, key_len);
-	val_list = create_value_list(s, &val_len, type);
+	if (*s == '+')
+	{
+		val_list = cpp_map_get(g_all.custom_env, str_key->content);
+		s++;
+		val = create_value_list(s, &val_len, type);
+		cs_list_add_range(val_list, val->count, val->content);		
+	}
+	else
+		val_list = create_value_list(s, &val_len, type);
 	cpp_map_add(g_all.custom_env, str_key->content, val_list);
+}
+
+void print_export_error(t_set_env_vars *data)
+{
+	t_token *tkn;
+	t_cpp_str *str;
+
+	str = cpp_str_new();
+    tkn = data->tokens[data->i];
+	cpp_str_add(str, "mini-shell: export: `");
+	cpp_str_add(str, tkn->s);
+	cpp_str_add(str, "': not a valid identifier\n");
+	write(2, str->content, str->count);
+	g_all.cmd_error_status = 1;
+	cs_list_delete(g_all.tokens, data->i);
+    data->i--;
 }
 
 void	add_var_to_env(t_set_env_vars *data)
@@ -55,7 +80,14 @@ void	add_var_to_env(t_set_env_vars *data)
 		else
 			add_env_var(data->tokens[data->i]->s, data->type);
 		cs_list_delete(g_all.tokens, data->i);
-            data->i--;
+        data->i--;
+	}
+	else
+	{
+		if(data->is_export_args)
+			print_export_error(data);
+		else
+			tkn->type = e_args | is_cmd_type() | is_file_name() | is_path(tkn->s);
 	}
 }
 

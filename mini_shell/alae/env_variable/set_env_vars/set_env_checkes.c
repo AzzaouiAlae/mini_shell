@@ -5,6 +5,8 @@ int	is_env_var(t_set_env_vars *data)
     t_token *tkn;
 
     tkn = data->tokens[data->i];
+	if (!is_valid_var_name(tkn->s))
+		return 0;
 	if ((tkn->type & (e_var_to_set | e_set_var)))
 	{
 		if(tkn->type & e_set_var)
@@ -30,4 +32,18 @@ int	is_tokens_has_cmd(void)
 		i++;
 	}
 	return (0);
+}
+
+int is_path(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if(s[i] == '/')
+			return 1;
+		i++;
+	}
+	return 0;
 }

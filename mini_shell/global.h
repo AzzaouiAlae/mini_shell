@@ -1,9 +1,8 @@
 #ifndef GLOBAL_H
 # define GLOBAL_H
+# include "cpp_map/cpp_map.h"
 # include "cpp_string/cpp_string.h"
 # include "cs_list/cs_list.h"
-# include "cpp_map/cpp_map.h"
-
 
 typedef enum e_token_type
 {
@@ -37,15 +36,18 @@ typedef struct s_token
 
 typedef struct s_globale
 {
-	t_cs_list		*tokens;
-	t_cpp_str		*token_str;
-	t_token			*token;
-	int				cmd_error_status;
-	t_token_type	last_cmd_type;
-	char			**env;
-	t_cpp_map		*custom_env;
+	int				argc;
 	int				line_count;
+	int				cmd_error_status;
+	char			**env;
+	char			**argv;
+	t_token_type	last_cmd_type;
+	t_token			*token;
+	t_cpp_str		*token_str;
+	t_cpp_map		*custom_env;
+	t_cs_list		*tokens;
 	t_cs_list		*cmds;
+
 }					t_global;
 
 extern t_global		g_all;

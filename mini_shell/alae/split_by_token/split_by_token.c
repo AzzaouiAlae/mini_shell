@@ -20,10 +20,10 @@ void	check_tokens(t_split_data *data)
 {
 	int i;
 	static int (*func[] )(t_split_data *) =  {
-		is_delimiter, is_arg, is_redirects_out_append, 
-		is_redirects_out_truncate, is_redirects_heredoc,
-		is_redirects_input, is_pipe, is_expand_variable,
-		is_single_quote, is_double_quote, 0};
+		is_redirects_out_append, is_redirects_out_truncate, 
+		is_redirects_heredoc, is_redirects_input, is_pipe,
+		is_delimiter, is_arg, is_expand_variable, is_single_quote,
+		is_double_quote, 0};
 
 	i = 0;
 	while(func[i])

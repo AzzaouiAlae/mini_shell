@@ -4,7 +4,7 @@ void add_arg_type(t_split_data *data)
 {
     if(!is_dollar_to_skip(data))
         cpp_str_add_char(g_all.token_str, data->s[data->i]);
-    if(is_var_to_get(data))
+    if(is_var_to_get(data) && is_valid_var_name_char(data->s[data->i + 1]))
         data->type = data->type | e_var_to_get;
     else if(check_quote_in_arg(data))
         ;
@@ -17,8 +17,18 @@ void add_arg_type(t_split_data *data)
 
 int is_not_arg_type(t_split_data *data)
 {
-    if(ft_strchr(" |<>\t\"'$", data->s[data->i]))
+    char *s;
+
+    s = &(data->s[data->i]);
+    if(ft_strchr("|<>\"'", *s))
         return 1;
+    if (*s == '$')
+    {
+        if(*(s + 1) == '?')
+            return 1;
+        if (is_valid_var_name(s + 1))
+            return 1;
+    }
     return 0;
 }
 
@@ -43,7 +53,8 @@ int	is_arg(t_split_data *data)
     g_all.token_str = cpp_str_new();
     if(check_export_cmd(data, "export"))
         return 1;
-    check_var_to_set(data);
+    if(is_var_to_set(data))
+        data->type = e_var_to_set;
 	while (is_arg_char(data))
         add_arg_type(data);
     if (data->type & e_file_name)

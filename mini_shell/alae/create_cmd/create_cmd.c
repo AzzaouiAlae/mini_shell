@@ -13,58 +13,60 @@ void	add_fd_to_cmd(t_create_cmd *data)
 		data->cmd->redir_out_trun_fd = data->fd;
 }
 
-char	*get_cmd_path(char *cmd_s)
+char	*get_cmd_path(char *cmd_s, t_create_cmd *data)
 {
 	int			j;
 	char		**paths;
-	t_cpp_str	*str;
 	t_cs_list	*ps;
+	t_cpp_str	*str;
 
 	j = 0;
 	ps = cpp_map_get(g_all.custom_env, "PATH");
 	paths = ft_super_split(ps->content, ":", "");
 	str = cpp_str_new();
-	while (paths[j])
+	while (paths[j] && cmd_s[0])
 	{
 		cpp_str_add(str, paths[j]);
 		cpp_str_add_char(str, '/');
 		cpp_str_add(str, cmd_s);
-		if (!access(str->content, X_OK))
+		if (!access(str->content, X_OK) && !is_dir(str->content))
 			return (str->content);
 		cpp_str_clear(str);
 		j++;
 	}
+	check_path(str->content, data);
 	return (NULL);
 }
 
 void	add_cmd_token(t_create_cmd *data)
 {
-	if (data->tkn->type & e_path)
+	if (data->tkn->type & e_path || is_path(data->tkn->s))
 	{
+		check_path(data->tkn->s, data);
 		cs_list_add(data->cmd_args, (long)data->tkn->s);
 		data->cmd->cmd_path = data->tkn->s;
 	}
 	else
 	{
 		cs_list_add(data->cmd_args, (long)data->tkn->s);
-		data->cmd_path = get_cmd_path(data->tkn->s);
-		if (data->cmd_path)
-			data->cmd->cmd_path = data->cmd_path;
-		else
-			data->cmd->cmd_path = data->tkn->s;
+		data->cmd_path = get_cmd_path(data->tkn->s, data);
+		data->cmd->cmd_path = data->cmd_path;
 	}
 }
 
 void	add_token_to_cmd(t_create_cmd *data)
 {
 	data->tkn = data->tkns[data->i];
-	data->res_fd = (e_heredoc_fd | e_redir_in_fd | e_redir_out_app_fd | e_redir_out_trun_fd);
+	data->res_fd = (e_heredoc_fd | e_redir_in_fd | e_redir_out_app_fd | 
+		e_redir_out_trun_fd);
 	if (data->tkn->type & e_pipe)
 	{
 		data->cmd->args = data->cmd_args->content;
-		cs_list_add(g_all.cmds, (long)data->cmd);
+		if (!data->cmd_not_found)
+			cs_list_add(g_all.cmds, (long)data->cmd);
 		data->cmd = ft_calloc(1, sizeof(t_cmd));
-        cs_list_clear(data->cmd_args);
+        data->cmd_args = cs_list_new(sizeof(char *));
+		data->cmd_not_found = 0;
 	}
 	else if (data->tkn->type & data->res_fd)
 		add_fd_to_cmd(data);
@@ -91,6 +93,7 @@ void	create_cmd(void)
 	if (data.i)
 	{
 		data.cmd->args = data.cmd_args->content;
-		cs_list_add(g_all.cmds, (long)data.cmd);
+		if (!data.cmd_not_found)
+			cs_list_add(g_all.cmds, (long)data.cmd);
 	}
 }

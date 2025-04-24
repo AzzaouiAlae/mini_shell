@@ -26,7 +26,7 @@ void mandatory_Tests();
 void Test_cpp_map();
 void Test_env_vars();
 void more_Tests();
-
+void mini_shell_map_Tests();
 void builtins_Test31();
 
 #endif

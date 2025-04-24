@@ -18,7 +18,7 @@ int	is_expand_variable(t_split_data *data)
 
     if(data->s[data->i] != '$')
         return 0;
-    data->type = e_args | is_cmd_type() | is_file_name();
+    data->type = e_args | is_cmd_type() | is_file_name() | e_var_to_get;
     g_all.token_str = cpp_str_new();
     while(is_valid_var_char(data))
         add_arg_type(data);

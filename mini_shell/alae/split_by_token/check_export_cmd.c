@@ -2,7 +2,7 @@
 
 int is_str_cmd(t_split_data *data, char *s)
 {
-    if(ft_strcmp2(s, &(data->s[data->i])))
+    if(ft_strncmp(s, &(data->s[data->i]), ft_strlen(s)))
         return 0;
     if(!(data->type & e_cmd))
         return 0;
@@ -20,30 +20,6 @@ int check_export_cmd(t_split_data *data, char *export)
         return 1;
     }
     return 0;
-}
-
-int is_var_to_set(t_split_data *data)
-{
-    t_token *token;
-
-    if(!g_all.tokens->count)
-        return 1;
-    token = ((t_token **)(g_all.tokens->content))[g_all.tokens->count - 1];
-    if((token->type & e_set_var))
-        return 1;
-    return 0;
-}
-
-void check_var_to_set(t_split_data *data)
-{
-    char *s;
-
-    if(is_var_to_set(data))
-    {
-        s = str_find_char(&(data->s[data->i]), " |<>\t\"'=*/-+");
-        if (s && (s[0] == '=' || (s[0] == '+' && s[1] == '=')))
-            data->type = e_var_to_set;
-    }
 }
 
 int is_var_to_get(t_split_data *data)

@@ -30,6 +30,7 @@ int main(int argc, char **argv, char **env)
     Test_cpp_map();
     Test_env_vars();
     more_Tests();
+    mini_shell_map_Tests();
     ft_free_all();
     return (UnityEnd());
 }

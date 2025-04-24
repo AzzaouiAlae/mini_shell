@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/23 11:04:35 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:47:38 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 char				*get_enum_str(int type);
 void				print_tokens(void);
 void				split_tokens(char *s, char *sep, char *special_sep);
-void				init_g_all(char *env[]);
+void				init_g_all(int argc, char *argv[], char *env[]);
 void				init_env_map(void);
 void				get_variables_value(void);
 void				process_cmd(char *s);
@@ -39,6 +39,7 @@ void				add_env_var(char *kvp, int type);
 void				get_variables_value(void);
 void				add_vars_to_env(void);
 void				create_cmd(void);
+void set_exit_status();
 
 typedef struct s_fd
 {

@@ -14,7 +14,6 @@ int is_heredoc_delim(t_split_data *data)
 
 void add_delimiter_char(t_split_data *data)
 {
-	
 	if(is_dollar_to_skip(data))
 		data->i++;
 	if(data->ch == '\0' && ft_strchr( "\"'", data->s[data->i]))
@@ -25,7 +24,6 @@ void add_delimiter_char(t_split_data *data)
 		cpp_str_add_char(g_all.token_str, data->s[data->i]);
 	data->i++;
 }
-
 
 int is_delimiter(t_split_data *data)
 {

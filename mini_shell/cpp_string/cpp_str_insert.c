@@ -10,10 +10,11 @@ void	cpp_str_insert_char(t_cpp_str *str, char value, int index)
 		cpp_str_resize(str, str->capacity * 2);
 	while (count > index)
 	{
-		str->content[str->count] = str->content[count - 1];
+		str->content[count] = str->content[count - 1];
 		count--;
 	}
 	str->content[index] = value;
+	str->count++;
 }
 
 void	cpp_str_insert(t_cpp_str *str, char *value, int index)

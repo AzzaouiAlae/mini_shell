@@ -24,11 +24,9 @@ int is_cmd_type()
 	while(i < g_all.tokens->count)
 	{
 		j = g_all.tokens->count - 1 - i;
-		if (tokens[j]->type & (e_pipe))
-			return e_cmd;
 		if (tokens[j]->type & (e_cmd))
 			return 0;
-		if(!j)
+		if (!j || (tokens[j]->type & (e_pipe)))
 			return e_cmd;
 		i++;
 	}

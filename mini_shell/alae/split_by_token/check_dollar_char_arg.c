@@ -33,6 +33,7 @@ int is_dollar_to_skip(t_split_data *data)
 
 int check_dollar_ch_arg(t_split_data *data)
 {
+    
     if (is_dollar_to_add(data))
     {
         add_dollar_arg_token(data);
