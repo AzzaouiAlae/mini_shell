@@ -38,7 +38,3 @@ int is_var_start(t_cpp_str *str, char ch)
         return 0;
     return 1;
 }
-
-
-
-

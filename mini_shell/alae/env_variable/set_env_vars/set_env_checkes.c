@@ -47,3 +47,20 @@ int is_path(char *s)
 	}
 	return 0;
 }
+
+int delete_export_token(t_set_env_vars *data)
+{
+	int i;
+	t_token *tkn;
+
+	i = 0;
+	tkn = data->tokens[data->i + i];
+	while (tkn && !(tkn->type & e_pipe))
+	{
+		if (tkn->type & e_var_to_set)
+			return 1;
+		i++;
+		tkn = data->tokens[data->i + i];
+	}
+	return 0;
+}

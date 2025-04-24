@@ -4,7 +4,6 @@ void execute_cmd()
 {
     t_exe_cmd_data data;
     
-
     ft_bzero(&data, sizeof(t_exe_cmd_data));
     data.cmds = g_all.cmds->content;
     data.c = g_all.cmds->count;

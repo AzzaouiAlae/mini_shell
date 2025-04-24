@@ -15,6 +15,7 @@ typedef struct s_set_env_vars
 	t_token	**tokens;
 }			t_set_env_vars;
 
+int delete_export_token(t_set_env_vars *data);
 int	is_env_var(t_set_env_vars *data);
 int	is_tokens_has_cmd(void);
 int is_path(char *s);

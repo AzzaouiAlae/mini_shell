@@ -79,10 +79,13 @@ void	add_var_to_env(t_set_env_vars *data)
             data->is_export_args = 1;
 		else
 			add_env_var(data->tokens[data->i]->s, data->type);
-		cs_list_delete(g_all.tokens, data->i);
-        data->i--;
+		if (delete_export_token(data))
+		{
+			cs_list_delete(g_all.tokens, data->i);
+        	data->i--;
+		}
 	}
-	else
+	else if (tkn->type & e_var_to_set)
 	{
 		if(data->is_export_args)
 			print_export_error(data);
