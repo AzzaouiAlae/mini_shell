@@ -1,15 +1,13 @@
-#include "create_cmd.h"
+#include "builtins.h"
 
-int check_builtins_cmd(t_create_cmd *data)
+int is_builtin(char *cmd)
 {
-    void (*cmd)(t_cmd *c);
-
-    cmd = cpp_map_get(g_all.builtins, data->tkn->s);
-    if (cmd)
-        cmd(data->cmd);
+    if (cpp_map_get(g_all.builtins, cmd))
+        return 1;
+    return 0;
 }
 
-void run_builtin_cmds(t_create_cmd *data)
+void run_builtin_cmds()
 {
     int i;
     t_cmd **cmds;

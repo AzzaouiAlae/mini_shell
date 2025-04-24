@@ -97,5 +97,5 @@ void	create_cmd(void)
 		if (!data.cmd_not_found)
 			cs_list_add(g_all.cmds, (long)data.cmd);
 	}
-	run_builtin_cmds(&data);
+	//run_builtin_cmds(&data);
 }

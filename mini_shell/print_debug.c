@@ -98,6 +98,12 @@ void process_cmd(char *s)
         return ;
     }
     print_cmds();
+    if(!g_all.tokens->count)
+    {
+        set_exit_status();
+        return ;
+    }
+    execute_cmd();
     set_exit_status();
 }
 

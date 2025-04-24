@@ -16,7 +16,9 @@
         "set_env_vars.h": "c",
         "cpp_string.h": "c",
         "cpp_map.h": "c",
-        "global.h": "c"
+        "global.h": "c",
+        "execute_cmd.h": "c",
+        "builtins.h": "c"
     },
     "github.copilot.enable": {
         "*": false,
