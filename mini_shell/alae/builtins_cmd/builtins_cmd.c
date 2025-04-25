@@ -23,3 +23,15 @@ void run_builtin_cmds()
         i++;
     }
 }
+
+void init_builtins_map()
+{
+    g_all.builtins = cpp_map_new();
+    cpp_map_add(g_all.builtins, "export", print_export_vars_cmd);
+    cpp_map_add(g_all.builtins, "echo", echo);
+    cpp_map_add(g_all.builtins, "cd", cd);
+    cpp_map_add(g_all.builtins, "pwd", pwd);
+    cpp_map_add(g_all.builtins, "unset", unset);
+    cpp_map_add(g_all.builtins, "env", env);
+    cpp_map_add(g_all.builtins, "exit", exit_cmd);
+}

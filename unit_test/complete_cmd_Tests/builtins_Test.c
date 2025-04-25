@@ -293,8 +293,8 @@ void builtins_complete_Test18()
 void builtins_complete_Test19()
 {
     //Arrange
-    char *input = "echo \"aspas -> ' \"";
-    char *args[] = {"echo", "aspas -> ' ", 0};
+    char *input = "echo $";
+    char *args[] = {"echo", "$", 0};
     t_cmd cmd[] = {
         { "echo", args, 0, 0, 0, 0, 0 }, 
         0
@@ -307,8 +307,8 @@ void builtins_complete_Test19()
 void builtins_complete_Test20()
 {
     //Arrange
-    char *input = "echo \"aspas -> ' \"";
-    char *args[] = {"echo", "aspas -> ' ", 0};
+    char *input = "echo $?";
+    char *args[] = {"echo", "0", 0};
     t_cmd cmd[] = {
         { "echo", args, 0, 0, 0, 0, 0 }, 
         0
@@ -321,8 +321,8 @@ void builtins_complete_Test20()
 void builtins_complete_Test21()
 {
     //Arrange
-    char *input = "echo \"aspas -> ' \"";
-    char *args[] = {"echo", "aspas -> ' ", 0};
+    char *input = "echo $?HELLO";
+    char *args[] = {"echo", "$?HELLO", 0};
     t_cmd cmd[] = {
         { "echo", args, 0, 0, 0, 0, 0 }, 
         0
@@ -335,10 +335,10 @@ void builtins_complete_Test21()
 void builtins_complete_Test22()
 {
     //Arrange
-    char *input = "echo \"aspas -> ' \"";
-    char *args[] = {"echo", "aspas -> ' ", 0};
+    char *input = "pwd";
+    char *args[] = {"pwd", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "pwd", args, 0, 0, 0, 0, 0 }, 
         0
     };
 
@@ -349,10 +349,10 @@ void builtins_complete_Test22()
 void builtins_complete_Test23()
 {
     //Arrange
-    char *input = "echo \"aspas -> ' \"";
-    char *args[] = {"echo", "aspas -> ' ", 0};
+    char *input = "pwd oi";
+    char *args[] = {"pwd", "oi", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "pwd", args, 0, 0, 0, 0, 0 }, 
         0
     };
 

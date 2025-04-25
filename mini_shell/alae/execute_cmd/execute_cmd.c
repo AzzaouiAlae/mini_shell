@@ -1,5 +1,10 @@
 #include "execute_cmd.h"
 
+void run_cmds(t_exe_cmd_data *data)
+{
+    printf("run_cmds is not implemented yet\n");
+}
+
 void execute_cmd()
 {
     t_exe_cmd_data data;
@@ -13,6 +18,8 @@ void execute_cmd()
         data.builtin = cpp_map_get(g_all.builtins, data.cmd->cmd_path);
         if (data.builtin)
             data.builtin(data.cmd);
+        else
+            run_cmds(&data);
         data.i++;
     }
 }

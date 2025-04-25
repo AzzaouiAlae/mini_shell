@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/25 20:08:54 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:37:31 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	add_vars_to_env(void);
 void	create_cmd(void);
 void	set_exit_status(void);
 void	execute_cmd(void);
+void init_builtins_map();
 
 #endif

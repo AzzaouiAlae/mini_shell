@@ -12,14 +12,7 @@ void init_g_all(int argc, char *argv[], char *env_vars[])
     g_all.argc = argc;
     g_all.argv = argv;
     init_env_map();
-    g_all.builtins = cpp_map_new();
-    cpp_map_add(g_all.builtins, "export", print_export_vars_cmd);
-    cpp_map_add(g_all.builtins, "echo", echo);
-    cpp_map_add(g_all.builtins, "cd", cd);
-    cpp_map_add(g_all.builtins, "pwd", pwd);
-    cpp_map_add(g_all.builtins, "unset", unset);
-    cpp_map_add(g_all.builtins, "env", env);
-    cpp_map_add(g_all.builtins, "exit", exit_cmd);
+    init_builtins_map();
 }
 
 void set_exit_status()
