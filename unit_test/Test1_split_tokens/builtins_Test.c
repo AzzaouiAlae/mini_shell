@@ -336,7 +336,7 @@ void builtins_Test31() {
     data()->s = "export =";
     t_token exp[] = {
         {"export", e_set_var | e_cmd},
-        {"=", e_var_to_set}
+        {"=", e_args}
     };
     data()->exp = (t_token *)exp;
     data()->count = 2;

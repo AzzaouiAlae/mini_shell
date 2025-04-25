@@ -1,17 +1,25 @@
 //#include "mini_shell.h"
 #include "debug.h"
+#include "alae/builtins_cmd/builtins.h"
+
 
 t_global g_all;
 
-void init_g_all(int argc, char *argv[], char *env[])
+void init_g_all(int argc, char *argv[], char *env_vars[])
 {
     ft_bzero(&g_all, sizeof(t_global));
-    g_all.env = env;
+    g_all.env = env_vars;
     g_all.argc = argc;
     g_all.argv = argv;
     init_env_map();
     g_all.builtins = cpp_map_new();
     cpp_map_add(g_all.builtins, "export", print_export_vars_cmd);
+    cpp_map_add(g_all.builtins, "echo", echo);
+    cpp_map_add(g_all.builtins, "cd", cd);
+    cpp_map_add(g_all.builtins, "pwd", pwd);
+    cpp_map_add(g_all.builtins, "unset", unset);
+    cpp_map_add(g_all.builtins, "env", env);
+    cpp_map_add(g_all.builtins, "exit", exit_cmd);
 }
 
 void set_exit_status()
@@ -60,27 +68,27 @@ int is_input_to_skip2(char *input)
     return 0;
 }
 
-int main(int argc, char *argv[], char *env[])
-{
-    char *input;
+// int main(int argc, char *argv[], char *env[])
+// {
+//     char *input;
 
-    init_g_all(argc, argv, env);
-    while(1)
-    {
-        input = readline("$>: ");
-        if (is_input_to_skip1(input))
-            continue;
-        add_history(input);
-        if(input && !ft_strcmp(input, "exit"))
-            break;
-        if (is_input_to_skip2(input))
-            continue;
-        process_cmd(input);
-        free(input);
-        g_all.line_count++;
-    }
-    free(input);
-    ft_free_all();
-    rl_clear_history();
-    return 1;
-}
+//     init_g_all(argc, argv, env);
+//     while(1)
+//     {
+//         input = readline("$>: ");
+//         if (is_input_to_skip1(input))
+//             continue;
+//         add_history(input);
+//         if(input && !ft_strcmp(input, "exit"))
+//             break;
+//         if (is_input_to_skip2(input))
+//             continue;
+//         process_cmd(input);
+//         free(input);
+//         g_all.line_count++;
+//     }
+//     free(input);
+//     ft_free_all();
+//     rl_clear_history();
+//     return 1;
+// }

@@ -19,6 +19,8 @@ void	print_export_vars_cmd(t_cmd *cmd)
 	int	fd;
 	int	old_fd;
 
+	if (ft_strslen(cmd->args) > 1)
+		return ;
 	fd = 1;
 	if (cmd && cmd->redir_out_app_fd)
 		fd = cmd->redir_out_app_fd;

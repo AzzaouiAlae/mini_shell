@@ -21,3 +21,13 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+size_t	ft_strslen(char **strs)
+{
+	size_t	i;
+
+	i = 0;
+	while (strs && strs[i])
+		i++;
+	return (i);
+}

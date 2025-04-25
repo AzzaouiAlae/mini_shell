@@ -35,4 +35,5 @@ void add_var_to_tokens(t_get_env_data *data)
     cs_list_delete(g_all.tokens, data->i);
     while (data->args && data->args[data->j])
         add_var_args(data);
+    data->i--;
 }

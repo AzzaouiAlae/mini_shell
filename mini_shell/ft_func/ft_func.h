@@ -20,5 +20,6 @@ size_t		ft_strlen_delimiter(const char *s, char *sep);
 char		*str_find_char(const char *s, char *sep);
 t_cpp_str	*ft_itoa(int num);
 int			ft_strncmp(char *s1, char *s2, int n);
+size_t	ft_strslen(char **strs);
 
 #endif

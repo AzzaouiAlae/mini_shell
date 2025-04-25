@@ -31,6 +31,11 @@ void env_vars_Test2()
     TEST_ASSERT_EQUAL_CHAR_ARRAY("123456789", ((t_cs_list *)cpp_map_get(map, "TEST3"))->content, 10);
 }
 
+void env_vars_Tests3()
+{
+    
+}
+
 void Test_env_vars()
 {
     RUN_TEST(env_vars_Test1);

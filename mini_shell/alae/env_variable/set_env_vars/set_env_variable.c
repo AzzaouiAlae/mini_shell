@@ -107,6 +107,4 @@ void	add_vars_to_env(void)
 		add_var_to_env(&data);
 		data.i++;
 	}
-    if(data.count == 1 && data.is_export_args && !data.has_cmd)
-        print_env_vars();
 }

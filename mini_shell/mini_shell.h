@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/24 22:20:06 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/25 20:08:54 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <string.h>
 # include <unistd.h>
 
+
 char	*get_enum_str(int type);
 void	print_tokens(void);
 void	split_tokens(char *s, char *sep, char *special_sep);
@@ -40,7 +41,6 @@ void	get_variables_value(void);
 void	add_vars_to_env(void);
 void	create_cmd(void);
 void	set_exit_status(void);
-void	print_export_vars_cmd(t_cmd *cmd);
 void	execute_cmd(void);
 
 #endif

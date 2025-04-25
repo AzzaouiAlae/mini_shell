@@ -18,7 +18,8 @@
         "cpp_map.h": "c",
         "global.h": "c",
         "execute_cmd.h": "c",
-        "builtins.h": "c"
+        "builtins.h": "c",
+        "history.h": "c"
     },
     "github.copilot.enable": {
         "*": false,

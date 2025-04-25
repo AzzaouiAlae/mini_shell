@@ -67,6 +67,7 @@ void process_cmd(char *s)
         set_exit_status();
         return ;
     }
+    g_all.cmd_error_status = 0;
     //ft_check_syntax_error();
     if(g_all.cmd_error_status)
     {

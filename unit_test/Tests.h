@@ -27,6 +27,10 @@ void Test_cpp_map();
 void Test_env_vars();
 void more_Tests();
 void mini_shell_map_Tests();
+void set_vars_Tests();
+void get_vars_Tests();
+void complete_cmd_Tests();
 void builtins_Test31();
+
 
 #endif
