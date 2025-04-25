@@ -63,7 +63,7 @@ void	add_token_to_cmd(t_create_cmd *data)
 	if (data->tkn->type & e_pipe)
 	{
 		data->cmd->args = data->cmd_args->content;
-		if (!data->cmd_not_found)
+		if (!data->cmd_not_found && data->cmd->cmd_path)
 			cs_list_add(g_all.cmds, (long)data->cmd);
 		data->cmd = ft_calloc(1, sizeof(t_cmd));
         data->cmd_args = cs_list_new(sizeof(char *));
@@ -94,8 +94,7 @@ void	create_cmd(void)
 	if (data.i)
 	{
 		data.cmd->args = data.cmd_args->content;
-		if (!data.cmd_not_found)
+		if (!data.cmd_not_found && data.cmd->cmd_path)
 			cs_list_add(g_all.cmds, (long)data.cmd);
 	}
-	//run_builtin_cmds(&data);
 }
