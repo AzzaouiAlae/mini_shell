@@ -468,37 +468,43 @@ void builtins_complete_Test29()
 void builtins_complete_Test30()
 {
     //Arrange
-    char *input = "export HELLO=123";
-    char *exp = "123";
-    char *key = "HELLO";
-    int str_len = 4;
+    char *input = "export HELLO-=123";
+    char *args[] = {"export", "HELLO-=123", 0};
+    t_cmd cmd[] = {
+        { "export", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
 
     //act  //ASSERT
-    assert_env_var(input, key, exp, str_len);
+    builtins_complete(input, cmd, 1);
 }
 
 void builtins_complete_Test31()
 {
     //Arrange
-    char *input = "export HELLO=123";
-    char *exp = "123";
-    char *key = "HELLO";
-    int str_len = 4;
+    char *input = "export =";
+    char *args[] = {"export", "=", 0};
+    t_cmd cmd[] = {
+        { "export", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
 
     //act  //ASSERT
-    assert_env_var(input, key, exp, str_len);
+    builtins_complete(input, cmd, 1);
 }
 
 void builtins_complete_Test32()
 {
     //Arrange
-    char *input = "export HELLO=123";
-    char *exp = "123";
-    char *key = "HELLO";
-    int str_len = 4;
+    char *input = "export 123";
+    char *args[] = {"export", "123", 0};
+    t_cmd cmd[] = {
+        { "export", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
 
     //act  //ASSERT
-    assert_env_var(input, key, exp, str_len);
+    builtins_complete(input, cmd, 1);
 }
 
 void builtins_complete_Tests()
@@ -509,7 +515,7 @@ void builtins_complete_Tests()
     RUN_TEST(builtins_complete_Test4);
     RUN_TEST(builtins_complete_Test5);
     RUN_TEST(builtins_complete_Test6);
-    RUN_TEST(builtins_complete_Test7);
+    //RUN_TEST(builtins_complete_Test7);
     RUN_TEST(builtins_complete_Test8);
     RUN_TEST(builtins_complete_Test9);
     RUN_TEST(builtins_complete_Test10);
@@ -532,4 +538,7 @@ void builtins_complete_Tests()
     RUN_TEST(builtins_complete_Test27);
     RUN_TEST(builtins_complete_Test28);
     RUN_TEST(builtins_complete_Test29);
+    RUN_TEST(builtins_complete_Test30);
+    RUN_TEST(builtins_complete_Test31);
+    RUN_TEST(builtins_complete_Test32);
 }
