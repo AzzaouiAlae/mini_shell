@@ -1,5 +1,13 @@
 #include "complete_Tests.h"
 
+/*
+echo $HOME$ '$'$'$'
+echo $HOME$ $hey $hey '$'
+echo $HOME$ $P $ $P  $P '$'
+echo $HOME$ "$P'$' $PWD $USER $ P $P
+echo $<b "'$'$'$'" '$PWD'
+echo $$b
+*/
 void execute_cmd_input(char *input)
 {
     split_tokens(input, data()->sep, data()->special_sep);
