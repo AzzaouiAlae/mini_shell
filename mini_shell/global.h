@@ -54,6 +54,7 @@ typedef struct s_cmd
 
 typedef struct s_globale
 {
+	int	i;
 	int				argc;
 	int				line_count;
 	int				cmd_error_status;
