@@ -19,8 +19,8 @@ void		cpp_str_add(t_cpp_str *str, char *arr);
 void		cpp_str_add_char(t_cpp_str *str, char ch);
 t_cpp_str	*cpp_str_new_capacity(int capacity);
 t_cpp_str	*cpp_str_new(void);
-void	cpp_str_delete_char(t_cpp_str *str, int index);
+void		cpp_str_delete_char(t_cpp_str *str, int index);
 t_cpp_str	*cpp_str_new_substitute(char *s);
-void cpp_str_clear(t_cpp_str *str);
+void		cpp_str_clear(t_cpp_str *str);
 
 #endif

@@ -28,13 +28,23 @@ void add_delimiter_char(t_split_data *data)
 
 int is_delimiter(t_split_data *data)
 {
+	t_token **tkns;
+	t_token *tkn;
+
+	tkns = g_all.tokens->content;
 	if(last_cmd_type() != e_heredoc)
 		return 0;
     g_all.token_str = cpp_str_new();
 	data->first_time = 1;
 	data->type = e_delimiter;
+	tkn = tkns[g_all.tokens->count - 1];
+	tkn->type = tkn->type | e_var_to_get;
 	while (is_heredoc_delim(data))
+	{
 		add_delimiter_char(data);
+		if (data->ch)
+			tkn->type = e_heredoc;
+	}
 	add_token(data);
 	return 1;
 }
