@@ -1,6 +1,6 @@
 #include "builtins.h"
 
-void cd(t_cmd)
+void cd(t_cmd *cmd)
 {
     printf("this command is not implemented yet\n");
 }
