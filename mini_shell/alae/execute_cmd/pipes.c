@@ -1,7 +1,5 @@
 #include "execute_cmd.h"
 
-
-
 t_pipe *create_pipe()
 {
     int p[2];
@@ -14,3 +12,11 @@ t_pipe *create_pipe()
     return (_pipe);
 }
 
+// void add_pipe(t_pipe *p)
+// {
+//     t_pipe *pipe1;
+
+//     if (!g_all.pipes)
+//         g_all.pipes = p;
+//     while (pipe1->next)
+// }

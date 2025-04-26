@@ -15,6 +15,8 @@ void execute_cmd()
     while (data.c > data.i)
     {
         data.cmd = data.cmds[data.i];
+        if (data.cmds[data.i + 1])
+            data.cmd->pipe = create_pipe();
         data.builtin = cpp_map_get(g_all.builtins, data.cmd->cmd_path);
         if (data.builtin)
             data.builtin(data.cmd);

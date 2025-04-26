@@ -12,4 +12,6 @@ typedef struct s_exe_cmd_data
     void (*builtin)(t_cmd *c);
 } t_exe_cmd_data;
 
+t_pipe *create_pipe();
+
 #endif
