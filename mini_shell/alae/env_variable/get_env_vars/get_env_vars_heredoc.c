@@ -10,5 +10,6 @@ char *get_env_vars_heredoc(char *input)
     cpp_str_insert_char(data.str_token, '"', 0);
     cpp_str_add_char(data.str_token, '"');
     create_value_token(&data);
+    
     return data.new_str_token->content;
 }
