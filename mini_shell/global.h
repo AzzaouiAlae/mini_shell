@@ -69,6 +69,7 @@ typedef struct s_globale
 	t_cmd			*current_cmd;
 	t_cpp_map		*builtins;
 	t_cs_list		*files_to_remove;
+	t_pipe			*pipes;
 }					t_global;
 
 extern t_global		g_all;

@@ -2,7 +2,6 @@
 #include "debug.h"
 #include "alae/builtins_cmd/builtins.h"
 
-
 t_global g_all;
 
 void init_g_all(int argc, char *argv[], char *env_vars[])
