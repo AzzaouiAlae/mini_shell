@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/27 19:09:16 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/28 00:05:06 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,6 @@ int     is_input_to_skip1(char *input);
 int     is_space(char *input);
 int     is_input_to_skip2(char *input);
 int     ft_check_syntax_error();
+void    delete_files();
+void    print_redir_error (char *str);
 #endif

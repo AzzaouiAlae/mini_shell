@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 20:03:44 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/28 00:52:00 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,26 @@
 void check_here_doc()
 {
 	t_token **tokens;
-    int i;
+    int (i) = 0;
     
     tokens = g_all.tokens->content;
-    g_all.cmd_error_status = 0;
-    i = 0;
-	while(tokens[i])
+	while(tokens[i] && i < g_all.error_i)
 	{
-        if ((tokens[i]->type & e_heredoc) && tokens[i + 1])
+        if (tokens[i + 1] && (tokens[i]->type & e_heredoc) && (tokens[i + 1]->type & e_delimiter))
         {
             if (tokens[i]->type & e_var_to_get)
 			    here_doc(tokens, i, 1);
 		    else
 			    here_doc(tokens, i, 0);
-        }		
+        }
+		else if (tokens[i + 1] && (tokens[i]->type & e_heredoc) && !(tokens[i + 1]->type & e_delimiter))
+		{
+			if (!tokens[i + 1])
+				print_redir_error("newline");
+			else
+				print_redir_error(tokens[i + 1]->s);
+			return;
+		}
 		i++;
 	}
 }
@@ -52,7 +58,7 @@ int get_her_doc_line (t_her_doc *her_doc)
 	if (!her_doc->str)
     {
 		printf("warning: here-document at line %d ", g_all.i);
-        printf("delimited by end-of-file (wanted `%s')", her_doc->limiter);
+        printf("delimited by end-of-file (wanted `%s')\n", her_doc->limiter);
         g_all.cmd_error_status = 0;
 		return (0);
     }
@@ -65,23 +71,37 @@ int get_her_doc_line (t_her_doc *her_doc)
 	return (1);
 }
 
-int here_doc(t_token **tokens, int i, int expand_her)
+void rem_delimitter_and_heredoc(int i, int fd)
+{
+	t_token *token;
+	
+	token = ft_calloc(1, sizeof(t_token));
+    token->s = ft_calloc(1, sizeof(int));
+	token->type = e_heredoc_fd;
+    *((int *)(token->s)) = fd;
+	cs_list_inset_at(g_all.tokens, i,(long)token);
+	cs_list_delete(g_all.tokens, i + 1);
+	cs_list_delete(g_all.tokens, i + 1);
+}
+
+void here_doc(t_token **tokens, int i, int expand_her)
 {
 	t_her_doc her_doc;
 	
 	ft_bzero(&her_doc, sizeof(t_her_doc));
 	if (create_here_doc_file(&her_doc) == 0)
-		return (0);
+		return;
 	her_doc.str = readline("> ");
 	her_doc.limiter = tokens[i + 1]->s;
 	her_doc.expand_her = expand_her;
-	while (ft_strncmp(her_doc.limiter, her_doc.str, ft_strlen(her_doc.limiter)) != 0)
+	while (ft_strncmp(her_doc.limiter, her_doc.str, ft_strlen(her_doc.limiter) + 1) != 0)
 	{
 		if (get_her_doc_line (&her_doc) == 0)
-			return (0);
+			return;
 		free(her_doc.str);
+		g_all.i++;
 		her_doc.str = readline("> ");
 	}
 	free(her_doc.str);
-	return (1);
+	rem_delimitter_and_heredoc(i, her_doc.fd);
 }

@@ -66,8 +66,8 @@ void process_cmd(char *s)
         return ;
     }
     g_all.cmd_error_status = 0;
-    check_here_doc();
     ft_check_syntax_error();
+    check_here_doc();
     if(g_all.cmd_error_status)
     {
         set_exit_status();
@@ -105,6 +105,7 @@ void process_cmd(char *s)
     }
     execute_cmd();
     set_exit_status();
+    delete_files();
 }
 
 char *get_enum_str(int type)

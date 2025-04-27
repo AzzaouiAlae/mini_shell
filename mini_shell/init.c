@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:16:36 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 18:16:46 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/27 23:17:51 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void init_g_all(int argc, char *argv[], char *env_vars[])
     g_all.argv = argv;
     init_env_map();
     init_builtins_map();
+    g_all.files_to_remove = cs_list_new(sizeof(char *));
 }
 
 void set_exit_status()
