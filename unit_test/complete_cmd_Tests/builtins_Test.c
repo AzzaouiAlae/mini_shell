@@ -1,14 +1,5 @@
 #include "complete_Tests.h"
 
-/*
-echo $HOME$ '$'$'$'
-echo $HOME$ $hey $hey '$'
-echo $HOME$ $P $ $P  $P '$'
-echo $HOME$ "$P'$' $PWD $USER $ P $P
-echo $<b "'$'$'$'" '$PWD'
-echo $$b
-echo '$USER '$USER" hello $USER you are using  "$SHELL
-*/
 
 void builtins_complete_Test1()
 {
