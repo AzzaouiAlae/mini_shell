@@ -448,6 +448,272 @@ void builtins_complete_Test32()
     builtins_complete(input, cmd, 1);
 }
 
+void builtins_complete_Test33()
+{
+    //Arrange
+    char *input = "unset";
+    char *args[] = {"unset", 0};
+    t_cmd cmd[] = {
+        { "unset", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test34()
+{
+    //Arrange
+    char *input = "unset HELLO";
+    char *args[] = {"unset", "HELLO", 0};
+    t_cmd cmd[] = {
+        { "unset", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test35()
+{
+    //Arrange
+    char *input = "unset HELLO1 HELLO2";
+    char *args[] = {"unset", "HELLO1", "HELLO2", 0};
+    t_cmd cmd[] = {
+        { "unset", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test36()
+{
+    //Arrange
+    char *input = "unset HOME";
+    char *args[] = {"unset", "HOME", 0};
+    t_cmd cmd[] = {
+        { "unset", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test37()
+{
+    //Arrange
+    char *input = "unset PATH";
+    char *args[] = {"unset", "PATH", 0};
+    t_cmd cmd[] = {
+        { "unset", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test38()
+{
+    //Arrange
+    char *input = "unset SHELL";
+    char *args[] = {"unset", "SHELL", 0};
+    t_cmd cmd[] = {
+        { "unset", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test39()
+{
+    //Arrange
+    char *input = "cd $PWD";
+    char *args[] = {"cd", "$PWD", 0};
+    t_cmd cmd[] = {
+        { "cd", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test40()
+{
+    //Arrange
+    char *input = "cd $PWD hi";
+    char *args[] = {"cd", "$PWD", "hi", 0};
+    t_cmd cmd[] = {
+        { "cd", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test41()
+{
+    //Arrange
+    char *input = "cd 123123";
+    char *args[] = {"cd", "123123", 0};
+    t_cmd cmd[] = {
+        { "cd", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test42()
+{
+    //Arrange
+    char *input = "exit 123";
+    char *args[] = {"exit", "123", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test43()
+{
+    //Arrange
+    char *input = "exit 298";
+    char *args[] = {"exit", "298", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test44()
+{
+    //Arrange
+    char *input = "exit +100";
+    char *args[] = {"exit", "+100", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test45()
+{
+    //Arrange
+    char *input = "exit \"+100\"";
+    char *args[] = {"exit", "+100", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test46()
+{
+    //Arrange
+    char *input = "exit +\"100\"";
+    char *args[] = {"exit", "+100", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test47()
+{
+    //Arrange
+    char *input = "exit -100";
+    char *args[] = {"exit", "-100", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test48()
+{
+    //Arrange
+    char *input = "exit \"-100\"";
+    char *args[] = {"exit", "-100", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test49()
+{
+    //Arrange
+    char *input = "exit -\"100\"";
+    char *args[] = {"exit", "-100", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test50()
+{
+    //Arrange
+    char *input = "exit hello";
+    char *args[] = {"exit", "hello", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
+void builtins_complete_Test51()
+{
+    //Arrange
+    char *input = "exit 42 world";
+    char *args[] = {"exit", "42", "world", 0};
+    t_cmd cmd[] = {
+        { "exit", args, 0, 0, 0, 0, 0 }, 
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
+
 void builtins_complete_Tests()
 {
     RUN_TEST(builtins_complete_Test1);
@@ -482,4 +748,23 @@ void builtins_complete_Tests()
     RUN_TEST(builtins_complete_Test30);
     RUN_TEST(builtins_complete_Test31);
     RUN_TEST(builtins_complete_Test32);
+    RUN_TEST(builtins_complete_Test33);
+    RUN_TEST(builtins_complete_Test34);
+    RUN_TEST(builtins_complete_Test35);
+    RUN_TEST(builtins_complete_Test36);
+    RUN_TEST(builtins_complete_Test37);
+    RUN_TEST(builtins_complete_Test38);
+    RUN_TEST(builtins_complete_Test39);
+    RUN_TEST(builtins_complete_Test40);
+    RUN_TEST(builtins_complete_Test41);
+    RUN_TEST(builtins_complete_Test42);
+    RUN_TEST(builtins_complete_Test43);
+    RUN_TEST(builtins_complete_Test44);
+    RUN_TEST(builtins_complete_Test45);
+    RUN_TEST(builtins_complete_Test46);
+    RUN_TEST(builtins_complete_Test47);
+    RUN_TEST(builtins_complete_Test48);
+    RUN_TEST(builtins_complete_Test49);
+    RUN_TEST(builtins_complete_Test50);
+    RUN_TEST(builtins_complete_Test51);
 }

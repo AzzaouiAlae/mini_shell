@@ -565,8 +565,6 @@ void builtins_Test51() {
     split_tokens_test();
 }
 
-
-
 void builtins_Test()
 {
     RUN_TEST(builtins_Test1);
