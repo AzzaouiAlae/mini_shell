@@ -7,7 +7,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/../mini_shell/*.c",
+                //"${workspaceFolder}/../mini_shell/*.c",
+                "${workspaceFolder}/../mini_shell/init.c",
+                "${workspaceFolder}/../mini_shell/print_debug.c",
                 "${workspaceFolder}/../mini_shell/cs_list/*.c",
                 "${workspaceFolder}/../mini_shell/ft_func/*.c",
                 "${workspaceFolder}/../mini_shell/alae/*/*.c",

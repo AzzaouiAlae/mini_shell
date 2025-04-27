@@ -22,12 +22,10 @@ void	print_export_vars_cmd(t_cmd *cmd)
 	if (ft_strslen(cmd->args) > 1)
 		return ;
 	fd = 1;
-	if (cmd && cmd->redir_out_app_fd)
-		fd = cmd->redir_out_app_fd;
-	if (cmd && cmd->redir_out_trun_fd)
-		fd = cmd->redir_out_trun_fd;
 	if (cmd && cmd->pipe)
 		fd = cmd->pipe->fd_write;
+	if (cmd && cmd->redir_output_fd)
+		fd = cmd->redir_output_fd;
 	g_all.current_cmd = cmd;
 	old_fd = dup(1);
 	dup2(fd, 1);

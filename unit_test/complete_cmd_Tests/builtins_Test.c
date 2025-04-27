@@ -6,7 +6,7 @@ void builtins_complete_Test1()
     char *input = "echo hello world";
     char *args[] = {"echo", "hello", "world", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -20,7 +20,7 @@ void builtins_complete_Test2()
     char *input = "echo \"hello world\"";
     char *args[] = {"echo", "hello world", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -34,7 +34,7 @@ void builtins_complete_Test3()
     char *input = "echo 'hello world'";
     char *args[] = {"echo", "hello world", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -48,7 +48,7 @@ void builtins_complete_Test4()
     char *input = "echo hello'world'";
     char *args[] = {"echo", "helloworld", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -62,7 +62,7 @@ void builtins_complete_Test5()
     char *input = "echo hello\"\"world";
     char *args[] = {"echo", "helloworld", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -76,7 +76,7 @@ void builtins_complete_Test6()
     char *input = "echo ''";
     char *args[] = {"echo", "", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -90,7 +90,7 @@ void builtins_complete_Test7()
     char *input = "echo \"$PWD\"";
     char *args[] = {"echo", "/home/aazzaoui/Desktop/projects/mini_shell_All/mini_shell_Repo2/unit_test", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -104,7 +104,7 @@ void builtins_complete_Test8()
     char *input = "echo '$PWD'";
     char *args[] = {"echo", "$PWD", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -118,7 +118,7 @@ void builtins_complete_Test9()
     char *input = "echo \"aspas ->'\"";
     char *args[] = {"echo", "aspas ->'", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -132,7 +132,7 @@ void builtins_complete_Test10()
     char *input = "echo \"aspas -> ' \"";
     char *args[] = {"echo", "aspas -> ' ", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -146,7 +146,7 @@ void builtins_complete_Test11()
     char *input = "echo 'aspas ->\"'";
     char *args[] = {"echo", "aspas ->\"", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -160,7 +160,7 @@ void builtins_complete_Test12()
     char *input = "echo 'aspas -> \" '";
     char *args[] = {"echo", "aspas -> \" ", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -174,7 +174,7 @@ void builtins_complete_Test13()
     char *input = "echo \"> >> < * ? [ ] | ; [ ] || && ( ) & # $ \\ <<\"";
     char *args[] = {"echo", "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \\ <<", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -188,7 +188,7 @@ void builtins_complete_Test14()
     char *input = "echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \\ <<'";
     char *args[] = {"echo", "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \\ <<", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -202,7 +202,7 @@ void builtins_complete_Test15()
     char *input = "echo \"exit_code ->$? user ->$USER home -> $HOME\"";
     char *args[] = {"echo", "exit_code ->0 user ->aazzaoui home -> /home/aazzaoui", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -216,7 +216,7 @@ void builtins_complete_Test16()
     char *input = "echo 'exit_code ->$? user ->$USER home -> $HOME'";
     char *args[] = {"echo", "exit_code ->$? user ->$USER home -> $HOME", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -230,7 +230,7 @@ void builtins_complete_Test17()
     char *input = "echo \"$\"";
     char *args[] = {"echo", "$", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -244,7 +244,7 @@ void builtins_complete_Test18()
     char *input = "echo '$'";
     char *args[] = {"echo", "$", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -258,7 +258,7 @@ void builtins_complete_Test19()
     char *input = "echo $";
     char *args[] = {"echo", "$", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -272,7 +272,7 @@ void builtins_complete_Test20()
     char *input = "echo $?";
     char *args[] = {"echo", "0", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -286,7 +286,7 @@ void builtins_complete_Test21()
     char *input = "echo $?HELLO";
     char *args[] = {"echo", "0HELLO", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -300,7 +300,7 @@ void builtins_complete_Test22()
     char *input = "pwd";
     char *args[] = {"pwd", 0};
     t_cmd cmd[] = {
-        { "pwd", args, 0, 0, 0, 0, 0 }, 
+        { "pwd", args, 0, 0, 0}, 
         0
     };
 
@@ -314,7 +314,7 @@ void builtins_complete_Test23()
     char *input = "pwd oi";
     char *args[] = {"pwd", "oi", 0};
     t_cmd cmd[] = {
-        { "pwd", args, 0, 0, 0, 0, 0 }, 
+        { "pwd", args, 0, 0, 0}, 
         0
     };
 
@@ -328,7 +328,7 @@ void builtins_complete_Test24()
     char *input = "export hello";
     char *args[] = {"export", "hello", 0};
     t_cmd cmd[] = {
-        { "export", args, 0, 0, 0, 0, 0 }, 
+        { "export", args, 0, 0, 0}, 
         0
     };
 
@@ -354,7 +354,7 @@ void builtins_complete_Test26()
     char *input = "export A-";
     char *args[] = {"export", "A-", 0};
     t_cmd cmd[] = {
-        { "export", args, 0, 0, 0, 0, 0 }, 
+        { "export", args, 0, 0, 0}, 
         0
     };
 
@@ -397,7 +397,7 @@ void builtins_complete_Test29()
     int str_len = strlen(exp) + 1;
     char *args[] = {"export", "HELLO", "HELLO", 0};
     t_cmd cmd[] = {
-        { "export", args, 0, 0, 0, 0, 0 }, 
+        { "export", args, 0, 0, 0}, 
         0
     };
 
@@ -412,7 +412,7 @@ void builtins_complete_Test30()
     char *input = "export HELLO-=123";
     char *args[] = {"export", "HELLO-=123", 0};
     t_cmd cmd[] = {
-        { "export", args, 0, 0, 0, 0, 0 }, 
+        { "export", args, 0, 0, 0}, 
         0
     };
 
@@ -426,7 +426,7 @@ void builtins_complete_Test31()
     char *input = "export =";
     char *args[] = {"export", "=", 0};
     t_cmd cmd[] = {
-        { "export", args, 0, 0, 0, 0, 0 }, 
+        { "export", args, 0, 0, 0}, 
         0
     };
 
@@ -440,7 +440,7 @@ void builtins_complete_Test32()
     char *input = "export 123";
     char *args[] = {"export", "123", 0};
     t_cmd cmd[] = {
-        { "export", args, 0, 0, 0, 0, 0 }, 
+        { "export", args, 0, 0, 0}, 
         0
     };
 
@@ -454,7 +454,7 @@ void builtins_complete_Test33()
     char *input = "unset";
     char *args[] = {"unset", 0};
     t_cmd cmd[] = {
-        { "unset", args, 0, 0, 0, 0, 0 }, 
+        { "unset", args, 0, 0, 0}, 
         0
     };
 
@@ -468,7 +468,7 @@ void builtins_complete_Test34()
     char *input = "unset HELLO";
     char *args[] = {"unset", "HELLO", 0};
     t_cmd cmd[] = {
-        { "unset", args, 0, 0, 0, 0, 0 }, 
+        { "unset", args, 0, 0, 0}, 
         0
     };
 
@@ -482,7 +482,7 @@ void builtins_complete_Test35()
     char *input = "unset HELLO1 HELLO2";
     char *args[] = {"unset", "HELLO1", "HELLO2", 0};
     t_cmd cmd[] = {
-        { "unset", args, 0, 0, 0, 0, 0 }, 
+        { "unset", args, 0, 0, 0}, 
         0
     };
 
@@ -496,7 +496,7 @@ void builtins_complete_Test36()
     char *input = "unset HOME";
     char *args[] = {"unset", "HOME", 0};
     t_cmd cmd[] = {
-        { "unset", args, 0, 0, 0, 0, 0 }, 
+        { "unset", args, 0, 0, 0}, 
         0
     };
 
@@ -510,7 +510,7 @@ void builtins_complete_Test37()
     char *input = "unset PATH";
     char *args[] = {"unset", "PATH", 0};
     t_cmd cmd[] = {
-        { "unset", args, 0, 0, 0, 0, 0 }, 
+        { "unset", args, 0, 0, 0}, 
         0
     };
 
@@ -524,7 +524,7 @@ void builtins_complete_Test38()
     char *input = "unset SHELL";
     char *args[] = {"unset", "SHELL", 0};
     t_cmd cmd[] = {
-        { "unset", args, 0, 0, 0, 0, 0 }, 
+        { "unset", args, 0, 0, 0}, 
         0
     };
 
@@ -538,7 +538,7 @@ void builtins_complete_Test39()
     char *input = "cd $PWD";
     char *args[] = {"cd", "$PWD", 0};
     t_cmd cmd[] = {
-        { "cd", args, 0, 0, 0, 0, 0 }, 
+        { "cd", args, 0, 0, 0}, 
         0
     };
 
@@ -552,7 +552,7 @@ void builtins_complete_Test40()
     char *input = "cd $PWD hi";
     char *args[] = {"cd", "$PWD", "hi", 0};
     t_cmd cmd[] = {
-        { "cd", args, 0, 0, 0, 0, 0 }, 
+        { "cd", args, 0, 0, 0}, 
         0
     };
 
@@ -566,7 +566,7 @@ void builtins_complete_Test41()
     char *input = "cd 123123";
     char *args[] = {"cd", "123123", 0};
     t_cmd cmd[] = {
-        { "cd", args, 0, 0, 0, 0, 0 }, 
+        { "cd", args, 0, 0, 0}, 
         0
     };
 
@@ -580,7 +580,7 @@ void builtins_complete_Test42()
     char *input = "exit 123";
     char *args[] = {"exit", "123", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -594,7 +594,7 @@ void builtins_complete_Test43()
     char *input = "exit 298";
     char *args[] = {"exit", "298", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -608,7 +608,7 @@ void builtins_complete_Test44()
     char *input = "exit +100";
     char *args[] = {"exit", "+100", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -622,7 +622,7 @@ void builtins_complete_Test45()
     char *input = "exit \"+100\"";
     char *args[] = {"exit", "+100", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -636,7 +636,7 @@ void builtins_complete_Test46()
     char *input = "exit +\"100\"";
     char *args[] = {"exit", "+100", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -650,7 +650,7 @@ void builtins_complete_Test47()
     char *input = "exit -100";
     char *args[] = {"exit", "-100", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -664,7 +664,7 @@ void builtins_complete_Test48()
     char *input = "exit \"-100\"";
     char *args[] = {"exit", "-100", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -678,7 +678,7 @@ void builtins_complete_Test49()
     char *input = "exit -\"100\"";
     char *args[] = {"exit", "-100", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -692,7 +692,7 @@ void builtins_complete_Test50()
     char *input = "exit hello";
     char *args[] = {"exit", "hello", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 
@@ -706,7 +706,7 @@ void builtins_complete_Test51()
     char *input = "exit 42 world";
     char *args[] = {"exit", "42", "world", 0};
     t_cmd cmd[] = {
-        { "exit", args, 0, 0, 0, 0, 0 }, 
+        { "exit", args, 0, 0, 0}, 
         0
     };
 

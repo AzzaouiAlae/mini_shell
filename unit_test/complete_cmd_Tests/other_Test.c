@@ -17,7 +17,7 @@ void OthetTest1()
     char *input = "echo $HOME$ '$'$'$'";
     char *args[] = {"echo", "/home/aazzaoui$", "$$", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -31,7 +31,7 @@ void OthetTest2()
     char *input = "echo $HOME$ $hey $hey '$'";
     char *args[] = {"echo", "/home/aazzaoui$", "$", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -45,7 +45,7 @@ void OthetTest3()
     char *input = "echo $HOME$ $hey $hey '$'";
     char *args[] = {"echo", "/home/aazzaoui$", "$", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -59,7 +59,7 @@ void OthetTest4()
     char *input = "echo $H $H $H $H hhhh";
     char *args[] = {"echo", "hhhh", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -73,7 +73,7 @@ void OthetTest5()
     char *input = "echo \"$H\" \"$H\" \"$H\" \"$H\" hhhh";
     char *args[] = {"echo", "", "", "", "", "hhhh", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -87,7 +87,7 @@ void OthetTest6()
     char *input = "echo \"$H\"  hhhh";
     char *args[] = {"echo", "", "hhhh", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -101,7 +101,7 @@ void OthetTest7()
     char *input = "echo \"$H\" \"$H\" hhhh";
     char *args[] = {"echo", "", "", "hhhh", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -115,7 +115,7 @@ void OthetTest8()
     char *input = "echo \"$H\" \"$H\" \"$H\" hhhh";
     char *args[] = {"echo", "", "", "", "hhhh", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -129,7 +129,7 @@ void OthetTest9()
     char *input = "echo \"$H\" \"$H\" \"$H\" \"$H\" hhhh";
     char *args[] = {"echo", "", "", "", "", "hhhh", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -143,7 +143,7 @@ void OthetTest10()
     char *input = "echo $HOME$ $P $ $P  $P '$'";
     char *args[] = {"echo", "/home/aazzaoui$", "$", "$", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -157,7 +157,7 @@ void OthetTest11()
     char *input = "echo $ \"'$'$'$'\" '$PWD'";
     char *args[] = {"echo", "$", "'$'$'$'", "$PWD", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 }, 
+        { "echo", args, 0, 0, 0}, 
         0
     };
 
@@ -171,7 +171,7 @@ void OthetTest12()
     char *input = "echo $$b";
     char *args[] = {"echo", "$$b", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 },
+        { "echo", args, 0, 0, 0},
         0
     };
 
@@ -185,7 +185,7 @@ void OthetTest13()
     char *input = "echo '$USER '$USER\" hello $USER you are using  \"$SHELL";
     char *args[] = {"echo", "'$USER '$USER\" hello $USER you are using  \"$SHELL", 0};
     t_cmd cmd[] = {
-        { "echo", args, 0, 0, 0, 0, 0 },
+        { "echo", args, 0, 0, 0},
         0
     };
 

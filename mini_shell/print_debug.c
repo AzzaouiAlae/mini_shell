@@ -50,10 +50,8 @@ void print_cmd(t_cmd *cmd)
         else 
             printf("[%s]", cmd->args[i]);
     }
-    printf("\nheredoc_fd = %d\t", cmd->heredoc_fd);
-    printf("redir_in_fd = %d\t", cmd->redir_in_fd);
-    printf("redir_out_app_fd = %d\t", cmd->redir_out_app_fd);
-    printf("redir_out_trun_fd = %d\t", cmd->redir_out_trun_fd);
+    printf("\nredir_input_fd = %d\t", cmd->redir_input_fd);
+    printf("redir_output_fd = %d\t", cmd->redir_output_fd);
 }
 
 void process_cmd(char *s)

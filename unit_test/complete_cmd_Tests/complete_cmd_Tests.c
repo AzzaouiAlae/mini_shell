@@ -52,10 +52,8 @@ void builtins_complete(char *input, t_cmd *exp, int cmds_count)
             TEST_ASSERT_EQUAL_INT32(strlen(exp[i].args[j]), strlen(act_cmd[i]->args[j]));
             TEST_ASSERT_EQUAL_CHAR_ARRAY(exp[i].args[j], act_cmd[i]->args[j],  strlen(act_cmd[i]->args[j]) + 1);
         }
-        TEST_ASSERT_EQUAL_INT32(exp[i].heredoc_fd, act_cmd[i]->heredoc_fd);
-        TEST_ASSERT_EQUAL_INT32(exp[i].redir_out_app_fd, act_cmd[i]->redir_out_app_fd);
-        TEST_ASSERT_EQUAL_INT32(exp[i].redir_out_trun_fd, act_cmd[i]->redir_out_trun_fd);
-        TEST_ASSERT_EQUAL_INT32(exp[i].redir_in_fd, act_cmd[i]->redir_in_fd);
+        TEST_ASSERT_EQUAL_INT32(exp[i].redir_input_fd, act_cmd[i]->redir_input_fd);
+        TEST_ASSERT_EQUAL_INT32(exp[i].redir_output_fd, act_cmd[i]->redir_output_fd);
     }
 }
 
