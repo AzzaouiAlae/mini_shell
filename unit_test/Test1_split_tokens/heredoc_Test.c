@@ -113,6 +113,7 @@ void heredoc_Test7()
     data()->count = 3;
     split_tokens_test();
 }
+
 void heredoc_Test8()
 {
     data()->s = "<< echo oi";

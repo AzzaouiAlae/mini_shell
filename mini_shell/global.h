@@ -46,10 +46,8 @@ typedef struct s_cmd
 	char			*cmd_path;
 	char			**args;
 	t_pipe			*pipe;
-	int				heredoc_fd;
-	int				redir_out_app_fd;
-	int				redir_out_trun_fd;
-	int				redir_in_fd;
+	int				redir_output_fd;
+	int				redir_input_fd;
 }					t_cmd;
 
 typedef struct s_globale

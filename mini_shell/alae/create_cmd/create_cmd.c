@@ -4,13 +4,25 @@ void	add_fd_to_cmd(t_create_cmd *data)
 {
 	data->fd = *((int *)(data->tkn->s));
 	if (data->tkn->type & e_heredoc_fd)
-		data->cmd->heredoc_fd = data->fd;
+	{
+		close_fd(data->cmd->redir_input_fd);
+		data->cmd->redir_input_fd = data->fd;
+	}
 	else if (data->tkn->type & e_redir_in_fd)
-		data->cmd->redir_in_fd = data->fd;
+	{
+		close_fd(data->cmd->redir_input_fd);
+		data->cmd->redir_input_fd = data->fd;
+	}
 	else if (data->tkn->type & e_redir_out_app_fd)
-		data->cmd->redir_out_app_fd = data->fd;
+	{
+		close_fd(data->cmd->redir_output_fd);
+		data->cmd->redir_output_fd = data->fd;
+	}
 	else if (data->tkn->type & e_redir_out_trun_fd)
-		data->cmd->redir_out_trun_fd = data->fd;
+	{
+		close_fd(data->cmd->redir_output_fd);
+		data->cmd->redir_output_fd = data->fd;
+	}
 }
 
 char	*get_cmd_path(char *cmd_s, t_create_cmd *data)

@@ -19,7 +19,8 @@ int				del_set_var(int type);
 void			add_var_args(t_get_env_data *data);
 void			add_var_to_tokens(t_get_env_data *data);
 void			create_value_token(t_get_env_data *data);
-char *create_key_token(t_cpp_str *str, t_cpp_str *new_str_token, t_get_env_data *data);
+char			*create_key_token(t_cpp_str *str, t_cpp_str *new_str_token,
+					t_get_env_data *data);
 int				is_var_start(t_cpp_str *str, char ch, t_get_env_data *data);
 
 #endif

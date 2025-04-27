@@ -43,4 +43,8 @@ int check_path(char *cmd, t_create_cmd *data)
     return 1;
 }
 
-
+void close_fd(int fd)
+{
+    if(fd > 0)
+        close(fd);
+}

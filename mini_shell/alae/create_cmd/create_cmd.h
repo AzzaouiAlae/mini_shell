@@ -24,5 +24,6 @@ int				check_path(char *cmd, t_create_cmd *data);
 int				is_dir(char *cmd);
 int				check_builtins_cmd(t_create_cmd *data);
 void			run_builtin_cmds(t_create_cmd *data);
+void			close_fd(int fd);
 
 #endif
