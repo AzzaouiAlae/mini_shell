@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 17:02:09 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/27 17:57:28 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,26 @@ void check_here_doc()
 	}
 }
 
-// char *return_valid_delimiter(char *delimiter)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while(delimiter[i])
-// 	{
-// 		if ()
-// 	}
-// }
+int create_here_doc_file(t_her_doc *her_doc)
+{
+	her_doc->file_name = create_file_name();
+    cs_list_add(g_all.files_to_remove, her_doc->file_name);
+	her_doc->fd = open(her_doc->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
+	if (her_doc->fd == -1)
+	{
+		g_all.cmd_error_status = 127;
+		write(2, "ERROR HERDOC FILE CAN'T OPEN\n", 29);
+		return(0);
+	}
+	return (1);
+}
 
 char *here_doc(t_token **tokens, int i, int expand_her)
 {
-	g_all.i++;
     int fd;
-	char *(limiter), *(str), *(file_name), *(expand_str) = NULL;
-	file_name = create_file_name();
-    cs_list_add(g_all.files_to_remove, file_name);
-	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
-	if (fd == -1)
-		return (perror("ERROR HERDOC FILE"), ft_exit(127), NULL);
+	t_her_doc *her_doc;
+	
+	her_doc = ft_calloc(1, sizeof(t_her_doc));
 	str = readline("$>: ");
 	limiter = tokens[i + 1]->s;
 	while (ft_strncmp(limiter, str, ft_strlen(limiter)) != 0)
