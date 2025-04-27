@@ -18,7 +18,7 @@
                 "${workspaceFolder}/../mini_shell/cpp_map/*.c",
                 "${workspaceFolder}/../mini_shell/cpp_string/*.c",
                 "${workspaceFolder}/../mini_shell/garbage_collector/*.c",
-                "${workspaceFolder}/../mini_shell/oussama/check_syntax_error/*.c",
+                //"${workspaceFolder}/../mini_shell/oussama/check_syntax_error/*.c",
                 "${workspaceFolder}/*.c",
                 "${workspaceFolder}/*/*.c",
                 // "${workspaceFolder}/*/*/*.c",
