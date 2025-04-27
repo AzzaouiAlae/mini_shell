@@ -12,7 +12,6 @@ typedef enum e_var_type
 }		t_var_type;
 
 char	**split_var_token(t_cpp_str *str_token);
-int		is_var_start(t_cpp_str *str, char ch);
 void	print_env_vars(void);
 
 #endif

@@ -23,18 +23,3 @@ void init_env_map()
     }
     set_exit_status();
 }
-
-int is_var_start(t_cpp_str *str, char ch)
-{
-    if (!str->content[0])
-        return 1;
-    if (ch == '\'')
-        return 0;
-    if (str->content[0] == '$' && ft_strchr("\"' ", str->content[1]))
-        return 0;
-    if (str->content[0] == '$' && str->content[1] == '\0')
-        return 0;
-    if(str->content[0] != '$')
-        return 0;
-    return 1;
-}

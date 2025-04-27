@@ -1,5 +1,20 @@
 #include "get_env_vars.h"
 
+int is_var_start(t_cpp_str *str, char ch, t_get_env_data *data)
+{
+    if (!str->content[0])
+        return 1;
+    if (ch == data->special_ch)
+        return 0;
+    if (str->content[0] == '$' && ft_strchr("\"' ", str->content[1]))
+        return 0;
+    if (str->content[0] == '$' && str->content[1] == '\0')
+        return 0;
+    if(str->content[0] != '$')
+        return 0;
+    return 1;
+}
+
 void create_value_token(t_get_env_data *data)
 {
     t_cs_list *value;
@@ -10,7 +25,7 @@ void create_value_token(t_get_env_data *data)
     value = NULL;
     while(first_time || key[0])
     {
-        key = create_key_token(data->str_token, data->new_str_token);
+        key = create_key_token(data->str_token, data->new_str_token, data);
         if(key && key[0])
         {
             value = cpp_map_get(g_all.custom_env, key);
@@ -43,6 +58,7 @@ void get_variables_value()
     t_get_env_data data;
 
     ft_bzero(&data, sizeof(t_get_env_data));
+    data.special_ch = '\'';
     data.tokens = g_all.tokens->content;
     while(g_all.tokens->count > data.i)
     {
@@ -54,3 +70,4 @@ void get_variables_value()
         data.i++;
     }
 }
+
