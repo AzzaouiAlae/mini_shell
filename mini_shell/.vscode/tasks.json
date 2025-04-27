@@ -11,7 +11,7 @@
                 "*/*.c",
                 "alae/*/*.c",
                 "alae/*/*/*.c",
-                "${workspaceFolder}/oussama/check_syntax_error/*.c",
+                "${workspaceFolder}/oussama/*/*.c",
                 "-lreadline",
                 "-o",
                 "${workspaceFolder}/mini_shell"

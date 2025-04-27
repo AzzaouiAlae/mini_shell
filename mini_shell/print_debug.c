@@ -68,6 +68,7 @@ void process_cmd(char *s)
         return ;
     }
     g_all.cmd_error_status = 0;
+    check_here_doc();
     ft_check_syntax_error();
     if(g_all.cmd_error_status)
     {

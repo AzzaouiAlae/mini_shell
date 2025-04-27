@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 13:13:40 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/27 15:31:50 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ void check_here_doc()
     i = 0;
 	while(tokens[i])
 	{
-		if (tokens[i]->type & e_heredoc && tokens[i]->type & e_var_to_get)
-			here_doc(tokens, i, 1);
-		else
-			here_doc(tokens, i, 0);
+        if ((tokens[i]->type & e_heredoc) && tokens[i + 1])
+        {
+            if (tokens[i]->type & e_var_to_get)
+			    here_doc(tokens, i, 1);
+		    else
+			    here_doc(tokens, i, 0);
+        }		
 		i++;
 	}
 }
@@ -52,7 +55,7 @@ char *here_doc(t_token **tokens, int i, int expand_her)
 	if (fd == -1)
 		return (perror("ERROR HERDOC FILE"), ft_exit(127), NULL);
 	str = readline("$>: ");
-	limiter = ft_strjoin(tokens[i + 1]->s, "\n");
+	limiter = tokens[i + 1]->s;
 	while (ft_strncmp(limiter, str, ft_strlen(limiter)) != 0
 		|| ft_strncmp(limiter, str, ft_strlen(limiter) - 1) != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/26 22:30:39 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:07:58 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void	set_exit_status(void);
 void	execute_cmd(void);
 void	init_builtins_map(void);
 char *get_env_vars_heredoc(char *input);
+void check_here_doc();
 
 #endif
