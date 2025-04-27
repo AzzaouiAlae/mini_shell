@@ -176,6 +176,7 @@ void OthetTest12()
     };
 
     //act  //ASSERT
+    TEST_FAIL();
     builtins_complete(input, cmd, 1);
 }
 
@@ -183,7 +184,7 @@ void OthetTest13()
 {
     //Arrange
     char *input = "echo '$USER '$USER\" hello $USER you are using  \"$SHELL";
-    char *args[] = {"echo", "'$USER '$USER\" hello $USER you are using  \"$SHELL", 0};
+    char *args[] = {"echo", "$USER aazzaoui hello aazzaoui you are using  /bin/bash", 0};
     t_cmd cmd[] = {
         { "echo", args, 0, 0, 0},
         0

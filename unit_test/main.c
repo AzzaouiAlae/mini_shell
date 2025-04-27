@@ -25,7 +25,7 @@ int main(int argc, char **argv, char **env)
     // pipe_Test();
     // builtins_Test();
     // Test_syntax_error();
-    // heredoc_Test();
+    heredoc_Test();
     // mandatory_Tests();
     // Test_cpp_map();
     // Test_env_vars();

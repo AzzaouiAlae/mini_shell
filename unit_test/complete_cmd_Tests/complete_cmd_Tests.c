@@ -60,6 +60,5 @@ void builtins_complete(char *input, t_cmd *exp, int cmds_count)
 void complete_cmd_Tests()
 {
     builtins_complete_Tests();
-    heredoc_Tests();
     OthetTests();
 }

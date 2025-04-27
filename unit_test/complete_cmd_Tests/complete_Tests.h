@@ -3,7 +3,7 @@
 
 #include "../Tests.h"
 
-void heredoc_Tests();
+
 void builtins_complete_Tests();
 void OthetTests();
 void execute_cmd_input(char *input);

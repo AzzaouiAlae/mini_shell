@@ -535,8 +535,8 @@ void builtins_complete_Test38()
 void builtins_complete_Test39()
 {
     //Arrange
-    char *input = "cd $PWD";
-    char *args[] = {"cd", "$PWD", 0};
+    char *input = "cd $SHELL";
+    char *args[] = {"cd", "/bin/bash", 0};
     t_cmd cmd[] = {
         { "cd", args, 0, 0, 0}, 
         0
@@ -549,8 +549,8 @@ void builtins_complete_Test39()
 void builtins_complete_Test40()
 {
     //Arrange
-    char *input = "cd $PWD hi";
-    char *args[] = {"cd", "$PWD", "hi", 0};
+    char *input = "cd $SHELL hi";
+    char *args[] = {"cd", "/bin/bash", "hi", 0};
     t_cmd cmd[] = {
         { "cd", args, 0, 0, 0}, 
         0

@@ -35,9 +35,9 @@ void split_tokens_test()
         } 
         TEST_ASSERT_EQUAL_INT32(data()->exp[i].type, tokens[i]->type);
     }
-    get_variables_value();
-    add_vars_to_env();
-    rm_single_double_qoute();
-    open_redirection_files();
+    // get_variables_value();
+    // add_vars_to_env();
+    // rm_single_double_qoute();
+    // open_redirection_files();
 }
 
