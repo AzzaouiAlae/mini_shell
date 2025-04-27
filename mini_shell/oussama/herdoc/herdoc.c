@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 01:42:40 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/27 01:58:29 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,28 @@ char *here_doc(t_token **tokens, int i, int expand_her)
 }
 
 
-int main()
-{
-	
+int main() {
+    // Initialize global state
+    g_all = (t_global){0};
+
+    // Create test tokens: << EOF with variable expansion
+    t_token **tokens = malloc(sizeof(t_token*) * 3);
+    
+    tokens[0] = malloc(sizeof(t_token));
+    tokens[0]->s = "<<";
+    tokens[0]->type = e_heredoc | e_var_to_get;
+    
+    tokens[1] = malloc(sizeof(t_token));
+    tokens[1]->s = "EOF";
+    tokens[1]->type = e_delimiter;
+    
+    tokens[2] = NULL;
+
+    // Add tokens to global list
+    t_cs_list *token_list = cs_list_new(sizeof(t_cs_list));
+    token_list->content = tokens;
+    g_all.tokens = token_list;
+    // Test the heredoc functionality
+    check_here_doc();
+    return 0;
 }
