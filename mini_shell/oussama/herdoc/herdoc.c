@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 16:39:20 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/27 17:02:09 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ char *here_doc(t_token **tokens, int i, int expand_her)
             expand_str = get_env_vars_heredoc(str);
         else
             expand_str = str;
-		write(fd, expand_str, ft_strlen(str));
+		write(fd, expand_str, ft_strlen(expand_str));
+		write(fd, "\n", 1);
 		free(str);
 		str = readline("$>: ");
 	}
