@@ -182,8 +182,8 @@ void OthetTest12()
 void OthetTest13()
 {
     //Arrange
-    char *input = "echo $$b";
-    char *args[] = {"echo", "$$b", 0};
+    char *input = "echo '$USER '$USER\" hello $USER you are using  \"$SHELL";
+    char *args[] = {"echo", "'$USER '$USER\" hello $USER you are using  \"$SHELL", 0};
     t_cmd cmd[] = {
         { "echo", args, 0, 0, 0, 0, 0 },
         0
@@ -207,4 +207,5 @@ void OthetTests()
     RUN_TEST(OthetTest10);
     RUN_TEST(OthetTest11);
     RUN_TEST(OthetTest12);
+    RUN_TEST(OthetTest13);
 }

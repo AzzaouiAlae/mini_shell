@@ -1,6 +1,5 @@
 #include "complete_Tests.h"
 
-
 void builtins_complete_Test1()
 {
     //Arrange
