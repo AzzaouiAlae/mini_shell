@@ -23,6 +23,7 @@
                 "${workspaceFolder}/*/*.c",
                 // "${workspaceFolder}/*/*/*.c",
                 "${workspaceFolder}/Unity-master/src/unity.c",
+                "-lreadline",
                 "-o",
                 "${workspaceFolder}/mini_shell.a"
             ],
