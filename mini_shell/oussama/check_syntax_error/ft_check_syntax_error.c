@@ -6,11 +6,12 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 22:17:25 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/26 23:09:33 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/27 19:09:52 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_check_syntax.h"
+# include "../../mini_shell.h"
 
 int  check_pipe(t_token **token , int i)
 {

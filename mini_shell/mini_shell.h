@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/27 18:19:16 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/27 19:09:16 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "cpp_map/cpp_map.h"
 # include "ft_func/ft_func.h"
 # include "global.h"
-# include "oussama/check_syntax_error/ft_check_syntax.h"
 # include <ctype.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -49,4 +48,5 @@ void    set_exit_status();
 int     is_input_to_skip1(char *input);
 int     is_space(char *input);
 int     is_input_to_skip2(char *input);
+int     ft_check_syntax_error();
 #endif

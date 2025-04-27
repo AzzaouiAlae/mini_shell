@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 17:57:28 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/27 19:40:49 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,58 +47,41 @@ int create_here_doc_file(t_her_doc *her_doc)
 	return (1);
 }
 
-char *here_doc(t_token **tokens, int i, int expand_her)
+int get_her_doc_line (t_her_doc *her_doc)
 {
-    int fd;
+	if (!her_doc->str)
+    {
+		printf("warning: here-document at line %d ", g_all.i);
+        printf("delimited by end-of-file (wanted `%s')", her_doc->limiter);
+        g_all.cmd_error_status = 0;
+		return (0);
+    }
+    if (her_doc->expand_her)
+        her_doc->expand_str = get_env_vars_heredoc(her_doc->str);
+    else
+        her_doc->expand_str = her_doc->str;
+	write(her_doc->fd, her_doc->expand_str, ft_strlen(her_doc->str));
+	write(her_doc->fd, "\n", 1);
+	return (1);
+}
+
+int here_doc(t_token **tokens, int i, int expand_her)
+{
 	t_her_doc *her_doc;
 	
 	her_doc = ft_calloc(1, sizeof(t_her_doc));
-	str = readline("$>: ");
-	limiter = tokens[i + 1]->s;
-	while (ft_strncmp(limiter, str, ft_strlen(limiter)) != 0)
+	if (create_here_doc_file(her_doc) == 0)
+		return (0);
+	her_doc->str = readline("> ");
+	her_doc->limiter = tokens[i + 1]->s;
+	her_doc->expand_her = expand_her;
+	while (ft_strncmp(her_doc->limiter, her_doc->str, ft_strlen(her_doc->limiter)) != 0)
 	{
-        if (!str)
-        {
-			printf("warning: here-document at line %d ", g_all.i);
-            printf("delimited by end-of-file (wanted `%s')", limiter);
-            ft_exit(0);
-        }
-        if (expand_her)
-            expand_str = get_env_vars_heredoc(str);
-        else
-            expand_str = str;
-		write(fd, expand_str, ft_strlen(expand_str));
-		write(fd, "\n", 1);
-		free(str);
-		str = readline("$>: ");
+		if (get_her_doc_line (her_doc) == 0)
+			return (0);
+		free(her_doc->str);
+		her_doc->str = readline("> ");
 	}
-	free(str);
-	return (file_name);
+	free(her_doc->str);
+	return (1);
 }
-
-
-// int main() {
-//     // Initialize global state
-//     g_all = (t_global){0};
-
-//     // Create test tokens: << EOF with variable expansion
-//     t_token **tokens = malloc(sizeof(t_token*) * 3);
-    
-//     tokens[0] = malloc(sizeof(t_token));
-//     tokens[0]->s = "<<";
-//     tokens[0]->type = e_heredoc | e_var_to_get;
-    
-//     tokens[1] = malloc(sizeof(t_token));
-//     tokens[1]->s = "EOF";
-//     tokens[1]->type = e_delimiter;
-    
-//     tokens[2] = NULL;
-
-//     // Add tokens to global list
-//     t_cs_list *token_list = cs_list_new(sizeof(t_cs_list));
-//     token_list->content = tokens;
-//     g_all.tokens = token_list;
-//     // Test the heredoc functionality
-//     check_here_doc();
-//     return 0;
-// }

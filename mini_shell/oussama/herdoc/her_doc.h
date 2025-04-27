@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 12:42:26 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 17:46:25 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/27 19:41:31 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ typedef struct t_her_doc
     char    *str;
     char    *file_name;
     char    *expand_str;
+    char    *expand_her;
     int     fd;
 } t_her_doc;
 
 char	*create_file_name(void);
-char *here_doc(t_token **tokens, int i, int expand_her);
+int here_doc(t_token **tokens, int i, int expand_her);
 
 #endif
