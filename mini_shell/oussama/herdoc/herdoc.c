@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 15:31:50 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/04/27 16:39:20 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ char *here_doc(t_token **tokens, int i, int expand_her)
 		return (perror("ERROR HERDOC FILE"), ft_exit(127), NULL);
 	str = readline("$>: ");
 	limiter = tokens[i + 1]->s;
-	while (ft_strncmp(limiter, str, ft_strlen(limiter)) != 0
-		|| ft_strncmp(limiter, str, ft_strlen(limiter) - 1) != 0)
+	while (ft_strncmp(limiter, str, ft_strlen(limiter)) != 0)
 	{
         if (!str)
         {
@@ -78,28 +77,28 @@ char *here_doc(t_token **tokens, int i, int expand_her)
 }
 
 
-int main() {
-    // Initialize global state
-    g_all = (t_global){0};
+// int main() {
+//     // Initialize global state
+//     g_all = (t_global){0};
 
-    // Create test tokens: << EOF with variable expansion
-    t_token **tokens = malloc(sizeof(t_token*) * 3);
+//     // Create test tokens: << EOF with variable expansion
+//     t_token **tokens = malloc(sizeof(t_token*) * 3);
     
-    tokens[0] = malloc(sizeof(t_token));
-    tokens[0]->s = "<<";
-    tokens[0]->type = e_heredoc | e_var_to_get;
+//     tokens[0] = malloc(sizeof(t_token));
+//     tokens[0]->s = "<<";
+//     tokens[0]->type = e_heredoc | e_var_to_get;
     
-    tokens[1] = malloc(sizeof(t_token));
-    tokens[1]->s = "EOF";
-    tokens[1]->type = e_delimiter;
+//     tokens[1] = malloc(sizeof(t_token));
+//     tokens[1]->s = "EOF";
+//     tokens[1]->type = e_delimiter;
     
-    tokens[2] = NULL;
+//     tokens[2] = NULL;
 
-    // Add tokens to global list
-    t_cs_list *token_list = cs_list_new(sizeof(t_cs_list));
-    token_list->content = tokens;
-    g_all.tokens = token_list;
-    // Test the heredoc functionality
-    check_here_doc();
-    return 0;
-}
+//     // Add tokens to global list
+//     t_cs_list *token_list = cs_list_new(sizeof(t_cs_list));
+//     token_list->content = tokens;
+//     g_all.tokens = token_list;
+//     // Test the heredoc functionality
+//     check_here_doc();
+//     return 0;
+// }
