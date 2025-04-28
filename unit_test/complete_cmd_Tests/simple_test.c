@@ -30,7 +30,7 @@ void SimpleTest2()
         { "/usr/bin/sort", args2, 0, 0, 0},
         { "/usr/bin/grep", args3, 0, 0, 0},
         { "/usr/bin/grep", args4, 0, 0, 0},
-        { "echo", args4, 0, 0, 0},
+        { "echo", args5, 0, 0, 0},
         0
     };
 

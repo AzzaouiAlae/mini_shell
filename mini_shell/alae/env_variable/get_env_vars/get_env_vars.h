@@ -7,6 +7,7 @@ typedef struct s_get_env_data
 {
 	int			i;
 	int			j;
+	char ch;
 	int			type;
 	char		special_ch;
 	char		**args;

@@ -44,6 +44,7 @@ void create_value_token(t_get_env_data *data)
 
     first_time = 1;
     value = NULL;
+    data->ch = '\0';
     while(first_time || key[0])
     {
         key = create_key_token(data->str_token, data->new_str_token, data);

@@ -9,6 +9,7 @@ echo $HOME$ "$P'$' $PWD $USER $ P $P
 echo $<b "'$'$'$'" '$PWD'
 echo $$b
 echo '$USER '$USER" hello $USER you are using  "$SHELL
+echo "$a""'$a'"''"""$a"$a""$a
 */
 
 void OthetTest1()
@@ -192,6 +193,30 @@ void OthetTest13()
     //act  //ASSERT
     builtins_complete(input, cmd, 1);
 }
+//a=aa   bb    cc
+void OthetTest14_()
+{
+    //Arrange
+    char *input = "a=\"aa   bb    cc\"";
+    
+    //act  //ASSERT
+    builtins_complete(input, NULL, 0);
+}
+
+void OthetTest14()
+{
+    //Arrange
+    char *input = "echo \"$a\"\"'$a'\"''\"\"\"$a\"$a\"\"$a";
+    char *args[] = {"echo", "aa   bb    cc'aa   bb    cc'aa   bb    ccaa", 
+        "bb", "ccaa", "bb", "cc", 0};
+    t_cmd cmd[] = {
+        { "echo", args, 0, 0, 0},
+        0
+    };
+
+    //act  //ASSERT
+    builtins_complete(input, cmd, 1);
+}
 
 void OthetTests()
 {
@@ -208,4 +233,6 @@ void OthetTests()
     RUN_TEST(OthetTest11);
     RUN_TEST(OthetTest12);
     RUN_TEST(OthetTest13);
+    RUN_TEST(OthetTest14_);
+    RUN_TEST(OthetTest14);
 }

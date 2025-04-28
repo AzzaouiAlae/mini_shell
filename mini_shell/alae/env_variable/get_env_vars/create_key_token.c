@@ -56,17 +56,15 @@ int	create_str_key(t_cpp_str *str, t_cpp_str *key, int is_digt)
 char	*create_key_token(t_cpp_str *str, t_cpp_str *new_str_token,
 		t_get_env_data *data)
 {
-	char		ch;
 	int			is_digt;
 	int			first_time;
 	t_cpp_str	*key;
 
-	ch = '\0';
 	is_digt = 0;
 	key = cpp_str_new();
 	first_time = 1;
-	while (!is_var_start(str, ch, data))
-		copy_char_to_new_str(str, new_str_token, &ch);
+	while (!is_var_start(str, data->ch, data))
+		copy_char_to_new_str(str, new_str_token, &data->ch);
 	if (str->content[0] == '$')
 		cpp_str_delete_char(str, 0);
 	if (is_digit(str->content[0]))
