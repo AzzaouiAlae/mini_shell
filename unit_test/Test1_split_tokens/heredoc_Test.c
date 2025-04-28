@@ -166,6 +166,58 @@ void heredoc_Test11()
     split_tokens_test();
 }
 
+void heredoc_Test12()
+{
+    data()->s = "<< $\"$$$a\" oi";
+    t_token exp[] = {
+        {"<<", e_heredoc},
+        {"$$$a", e_delimiter},
+        {"oi", e_args | e_cmd}
+    };
+    data()->exp = (t_token *)exp;
+    data()->count = 3;
+    split_tokens_test();
+}
+
+void heredoc_Test13()
+{
+    data()->s = "<< $\"$$a\" oi";
+    t_token exp[] = {
+        {"<<", e_heredoc},
+        {"$$a", e_delimiter},
+        {"oi", e_args | e_cmd}
+    };
+    data()->exp = (t_token *)exp;
+    data()->count = 3;
+    split_tokens_test();
+}
+
+void heredoc_Test14()
+{
+    data()->s = "<< $\"$a\" oi";
+    t_token exp[] = {
+        {"<<", e_heredoc},
+        {"$a", e_delimiter},
+        {"oi", e_args | e_cmd}
+    };
+    data()->exp = (t_token *)exp;
+    data()->count = 3;
+    split_tokens_test();
+}
+
+void heredoc_Test15()
+{
+    data()->s = "<< $\"a\" oi";
+    t_token exp[] = {
+        {"<<", e_heredoc},
+        {"$a", e_delimiter},
+        {"oi", e_args | e_cmd}
+    };
+    data()->exp = (t_token *)exp;
+    data()->count = 3;
+    split_tokens_test();
+}
+
 void heredoc_Test()
 {
     RUN_TEST(heredoc_Test1);
@@ -179,4 +231,8 @@ void heredoc_Test()
     RUN_TEST(heredoc_Test9);
     RUN_TEST(heredoc_Test10);
     RUN_TEST(heredoc_Test11);
+    RUN_TEST(heredoc_Test12);
+    RUN_TEST(heredoc_Test13);
+    RUN_TEST(heredoc_Test14);
+    RUN_TEST(heredoc_Test15);
 }
