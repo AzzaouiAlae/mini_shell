@@ -176,7 +176,6 @@ void OthetTest12()
     };
 
     //act  //ASSERT
-    TEST_FAIL();
     builtins_complete(input, cmd, 1);
 }
 

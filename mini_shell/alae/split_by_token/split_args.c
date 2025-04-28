@@ -1,8 +1,24 @@
 #include "split_by_token.h"
 
+int check_double_dollar(t_split_data *data)
+{
+    if (data->type & e_var_to_get)
+        return 0;
+    if (data->s[data->i] == '$' && data->s[data->i + 1] == '$')
+    {
+        cpp_str_add_char(g_all.token_str, data->s[data->i]);
+        data->i++;
+        cpp_str_add_char(g_all.token_str, data->s[data->i]);
+        return 1;
+    }
+    return 0;
+}
+
 void add_arg_type(t_split_data *data)
 {
-    if(!is_dollar_to_skip(data))
+    if (check_double_dollar(data))
+        ;
+    else if(!is_dollar_to_skip(data))
         cpp_str_add_char(g_all.token_str, data->s[data->i]);
     if(is_var_to_get(data) && is_valid_var_name_char(data->s[data->i + 1]))
         data->type = data->type | e_var_to_get;
@@ -22,7 +38,7 @@ int is_not_arg_type(t_split_data *data)
     s = &(data->s[data->i]);
     if(ft_strchr("|<>\"'", *s))
         return 1;
-    if (*s == '$')
+    if (*s == '$' && *(s + 1) != '$')
     {
         if(*(s + 1) == '?')
             return 1;
