@@ -342,10 +342,9 @@ void builtins_complete_Test25()
     char *input = "export HELLO=123";
     char *exp = "123";
     char *key = "HELLO";
-    int str_len = 4;
 
     //act  //ASSERT
-    assert_env_var(input, key, exp, str_len);
+    assert_env_var(input, key, exp);
 }
 
 void builtins_complete_Test26()
@@ -368,10 +367,9 @@ void builtins_complete_Test27()
     char *input = "export HELLO=1234 A";
     char *exp = "1234";
     char *key = "HELLO";
-    int str_len = strlen(exp) + 1;
 
     //act  //ASSERT
-    assert_env_var(input, key, exp, str_len);
+    assert_env_var(input, key, exp);
     TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
 }
 
@@ -381,10 +379,9 @@ void builtins_complete_Test28()
     char *input = "export HELLO=\"123 A-\"";
     char *exp = "123 A-";
     char *key = "HELLO";
-    int str_len = strlen(exp) + 1;
 
     //act  //ASSERT
-    assert_env_var(input, key, exp, str_len);
+    assert_env_var(input, key, exp);
     TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
 }
 
@@ -394,7 +391,6 @@ void builtins_complete_Test29()
     char *input = "export HELLO   HELLO";
     char *exp = "123 A-";
     char *key = "HELLO";
-    int str_len = strlen(exp) + 1;
     char *args[] = {"export", "HELLO", "HELLO", 0};
     t_cmd cmd[] = {
         { "export", args, 0, 0, 0}, 
@@ -402,7 +398,7 @@ void builtins_complete_Test29()
     };
 
     //act  //ASSERT
-    assert_env_var(input, key, exp, str_len);
+    assert_env_var(input, key, exp);
     builtins_complete(input, cmd, 1);
 }
 

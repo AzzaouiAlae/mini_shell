@@ -30,7 +30,7 @@ int main(int argc, char **argv, char **env)
     // Test_cpp_map();
     // Test_env_vars();
     // more_Tests();
-    // mini_shell_map_Tests();
+    mini_shell_map_Tests();
     // set_vars_Tests();
     // get_vars_Tests();
     complete_cmd_Tests();

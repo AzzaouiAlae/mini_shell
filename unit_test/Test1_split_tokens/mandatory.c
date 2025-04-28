@@ -170,7 +170,6 @@ void mandatory_Test13()
     split_tokens_test();
 }
 
-
 void mandatory_Tests()
 {
     RUN_TEST(mandatory_Tests1);

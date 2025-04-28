@@ -9,9 +9,12 @@ void execute_cmd_input(char *input)
     rm_single_double_qoute();
     open_redirection_files();
     create_cmd();
+    //execute_cmd();
+    set_exit_status();
+    delete_files();
 }
 
-void assert_env_var(char *input, char *key, char *exp, int len)
+void assert_env_var(char *input, char *key, char *exp)
 {
     //Arrange
     t_cs_list *var;
@@ -20,8 +23,8 @@ void assert_env_var(char *input, char *key, char *exp, int len)
     execute_cmd_input(input);
 
     //ASSERT
-    var = cpp_map_get(g_all.custom_env, "HELLO");
-    TEST_ASSERT_EQUAL_CHAR_ARRAY(exp, var->content, 4);
+    var = cpp_map_get(g_all.custom_env, key);
+    TEST_ASSERT_EQUAL_CHAR_ARRAY(exp, var->content, strlen(exp) + 1);
 }
 
 void builtins_complete(char *input, t_cmd *exp, int cmds_count)
@@ -61,4 +64,6 @@ void complete_cmd_Tests()
 {
     builtins_complete_Tests();
     OthetTests();
+    MandatoryTests();
+    SimpleTests();
 }
