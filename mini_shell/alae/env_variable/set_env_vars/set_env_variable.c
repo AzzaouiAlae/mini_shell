@@ -79,7 +79,7 @@ void	add_var_to_env(t_set_env_vars *data)
 	{
 		if ((tkn->type & e_set_var))
             data->is_export_args = 1;
-		else
+		else if (!(data->has_cmd))
 			add_env_var(data->tokens[data->i]->s, data->type);
 		if (delete_export_token(data))
 		{
@@ -87,7 +87,7 @@ void	add_var_to_env(t_set_env_vars *data)
         	data->i--;
 		}
 	}
-	else if (tkn->type & (e_var_to_set | e_args))
+	else if (tkn->type & (e_var_to_set | e_args) && !(tkn->type & e_cmd))
 	{
 		if(data->is_export_args)
 			print_export_error(data);
@@ -104,7 +104,7 @@ void	add_vars_to_env(void)
 	data.has_cmd = is_tokens_has_cmd();
 	data.tokens = g_all.tokens->content;
     data.count = g_all.tokens->count;
-	while (g_all.tokens->count > data.i && !(data.has_cmd))
+	while (g_all.tokens->count > data.i)
 	{
 		add_var_to_env(&data);
 		data.i++;

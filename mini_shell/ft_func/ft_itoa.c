@@ -26,3 +26,14 @@ t_cpp_str *ft_itoa(int num)
     }
     return str;
 }
+
+int is_alpha(char ch)
+{
+    return (ch >= 'a' && ch <= 'z') || 
+        (ch >= 'A' && ch <= 'Z');
+}
+
+int is_digit(char ch)
+{
+    return (ch >= '0' && ch <= '9');
+}

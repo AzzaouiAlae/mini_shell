@@ -21,5 +21,7 @@ char		*str_find_char(const char *s, char *sep);
 t_cpp_str	*ft_itoa(int num);
 int			ft_strncmp(char *s1, char *s2, int n);
 size_t	ft_strslen(char **strs);
+int is_alpha(char ch);
+int is_digit(char ch);
 
 #endif
