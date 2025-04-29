@@ -79,13 +79,13 @@ void process_cmd(char *s)
         set_exit_status();
         return ;
     }
-    print_func_data("add_vars_to_env", add_vars_to_env);
+    print_func_data("rm_single_double_qoute", rm_single_double_qoute);
     if(!g_all.tokens->count)
     {
         set_exit_status();
         return ;
     }
-    print_func_data("rm_single_double_qoute", rm_single_double_qoute);
+    print_func_data("add_vars_to_env", add_vars_to_env); 
     if(!g_all.tokens->count)
     {
         set_exit_status();

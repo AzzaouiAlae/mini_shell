@@ -34,15 +34,37 @@ int is_valid_var_name(char *str)
     return 1;
 }
 
+char *find_str_key(t_split_data *data)
+{
+    char ch;
+    char *s;
+    int i;
+
+    ch = '\0';
+    s = &(data->s[data->i]);
+    i = 0;
+    while (s[i])
+    {
+        if (!ch && ft_strchr(" |<>\t=+", s[i]))
+            return &(s[i]);
+        else if (!ch && ft_strchr("'\"", s[i]))
+            ch = s[i];
+        else if (ch == s[i])
+            ch = '\0';
+        i++;
+    }
+    return NULL;
+}
+
 int is_var_to_set(t_split_data *data)
 {
     int res;
     char *s;
     t_token *token;
 
-    s = str_find_char(&(data->s[data->i]), " |<>\t\"'=+"); 
-    res = is_valid_var_name(&(data->s[data->i])) && s &&
-        (*s == '=' || (*s == '+' && *(s + 1) == '='));
+    s = find_str_key(data);
+    res = s && (*s == '=' || 
+        (*s == '+' && *(s + 1) == '='));
     if(!res)
         return 0;
     if(!g_all.tokens->count)

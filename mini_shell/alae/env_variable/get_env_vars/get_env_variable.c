@@ -31,6 +31,8 @@ int is_var_start(t_cpp_str *str, char ch, t_get_env_data *data)
         return 0;
     if (str->content[0] == '$' && str->content[1] == '\0')
         return 0;
+    if(str->content[0] == '$' && !is_valid_var_name_char(str->content[1]))
+        return 0;
     if(str->content[0] != '$')
         return 0;
     return 1;

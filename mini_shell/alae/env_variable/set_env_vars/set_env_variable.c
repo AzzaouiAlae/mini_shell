@@ -73,6 +73,8 @@ void	add_var_to_env(t_set_env_vars *data)
     t_token *tkn;
 
     tkn = data->tokens[data->i];
+	if (tkn->type & e_pipe)
+		data->is_export_args = 0;
 	if (is_env_var(data))
 	{
 		if ((tkn->type & e_set_var))
@@ -85,7 +87,7 @@ void	add_var_to_env(t_set_env_vars *data)
         	data->i--;
 		}
 	}
-	else if (tkn->type & e_var_to_set)
+	else if (tkn->type & (e_var_to_set | e_args))
 	{
 		if(data->is_export_args)
 			print_export_error(data);

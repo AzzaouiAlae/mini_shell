@@ -2,6 +2,13 @@
 #include "debug.h"
 #include "alae/builtins_cmd/builtins.h"
 
+/*
+export mesage error
+export 'a'='a b c d e f'
+export "a b"="a c"
+echo $PWD-$-"$$"'$-dlks'
+*/
+
 int main(int argc, char *argv[], char *env[])
 {
     char *input;

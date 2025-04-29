@@ -5,8 +5,8 @@ void execute_cmd_input(char *input)
     split_tokens(input, data()->sep, data()->special_sep);
     ft_check_syntax_error();
     get_variables_value();
-    add_vars_to_env();
     rm_single_double_qoute();
+    add_vars_to_env();
     open_redirection_files();
     create_cmd();
     //execute_cmd();
@@ -24,7 +24,10 @@ void assert_env_var(char *input, char *key, char *exp)
 
     //ASSERT
     var = cpp_map_get(g_all.custom_env, key);
-    TEST_ASSERT_EQUAL_CHAR_ARRAY(exp, var->content, strlen(exp) + 1);
+    if (var)
+        TEST_ASSERT_EQUAL_CHAR_ARRAY(exp, var->content, strlen(exp) + 1);
+    else 
+        TEST_ASSERT_EQUAL_INT64(exp, var);
 }
 
 void builtins_complete(char *input, t_cmd *exp, int cmds_count)

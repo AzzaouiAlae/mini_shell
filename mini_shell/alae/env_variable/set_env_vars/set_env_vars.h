@@ -1,5 +1,6 @@
 #ifndef SET_ENV_VARS_H
 # define SET_ENV_VARS_H
+#include "../../../ft_func/ft_func.h"
 # include "../../split_by_token/split_by_token.h"
 # include "../env_var.h"
 

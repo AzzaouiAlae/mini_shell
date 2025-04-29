@@ -1,11 +1,30 @@
 #include "set_env_vars.h"
 
+int valid_var_name(char *str)
+{
+    int i;
+	char s;
+
+    i = 1;
+    if(!is_alpha(str[0]) && str[0] != '_')
+        return 0;
+    while(str[i] && !ft_strchr(" |<>\t\"'=+", str[i]))
+    {
+        if(!is_valid_var_name_char(str[i]) && str[i] != '?')
+            return 0;
+        i++;
+    }
+	if (str[i] == '=' || (str[i] == '+' && str[i] == '=') || !str[i])
+    	return 1;
+	return 0;
+}
+
 int	is_env_var(t_set_env_vars *data)
 {
     t_token *tkn;
 
     tkn = data->tokens[data->i];
-	if (!is_valid_var_name(tkn->s))
+	if (!valid_var_name(tkn->s))
 		return 0;
 	if ((tkn->type & (e_var_to_set | e_set_var)))
 	{
@@ -57,7 +76,7 @@ int delete_export_token(t_set_env_vars *data)
 	tkn = data->tokens[data->i + i];
 	while (tkn && !(tkn->type & e_pipe))
 	{
-		if (tkn->type & e_var_to_set)
+		if (tkn->type & e_var_to_set || (tkn->type & e_args && data->is_export_args))
 			return 1;
 		i++;
 		tkn = data->tokens[data->i + i];

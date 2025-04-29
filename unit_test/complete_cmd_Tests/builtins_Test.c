@@ -326,14 +326,12 @@ void builtins_complete_Test24()
 {
     //Arrange
     char *input = "export hello";
-    char *args[] = {"export", "hello", 0};
-    t_cmd cmd[] = {
-        { "export", args, 0, 0, 0}, 
-        0
-    };
+    char *exp = NULL;
+    char *key = "hello";
 
     //act  //ASSERT
-    builtins_complete(input, cmd, 1);
+    assert_env_var(input, key, exp);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
 }
 
 void builtins_complete_Test25()
@@ -345,20 +343,19 @@ void builtins_complete_Test25()
 
     //act  //ASSERT
     assert_env_var(input, key, exp);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
 }
 
 void builtins_complete_Test26()
 {
     //Arrange
     char *input = "export A-";
-    char *args[] = {"export", "A-", 0};
-    t_cmd cmd[] = {
-        { "export", args, 0, 0, 0}, 
-        0
-    };
+    char *exp = NULL;
+    char *key = "A-";
 
     //act  //ASSERT
-    builtins_complete(input, cmd, 1);
+    assert_env_var(input, key, exp);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
 }
 
 void builtins_complete_Test27()
@@ -399,35 +396,25 @@ void builtins_complete_Test29()
 
     //act  //ASSERT
     assert_env_var(input, key, exp);
-    builtins_complete(input, cmd, 1);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
 }
 
 void builtins_complete_Test30()
 {
     //Arrange
     char *input = "export HELLO-=123";
-    char *args[] = {"export", "HELLO-=123", 0};
-    t_cmd cmd[] = {
-        { "export", args, 0, 0, 0}, 
-        0
-    };
 
     //act  //ASSERT
-    builtins_complete(input, cmd, 1);
+    builtins_complete(input, NULL, 0);
 }
 
 void builtins_complete_Test31()
 {
     //Arrange
     char *input = "export =";
-    char *args[] = {"export", "=", 0};
-    t_cmd cmd[] = {
-        { "export", args, 0, 0, 0}, 
-        0
-    };
 
     //act  //ASSERT
-    builtins_complete(input, cmd, 1);
+    builtins_complete(input, NULL, 0);
 }
 
 void builtins_complete_Test32()
@@ -441,7 +428,7 @@ void builtins_complete_Test32()
     };
 
     //act  //ASSERT
-    builtins_complete(input, cmd, 1);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
 }
 
 void builtins_complete_Test33()
@@ -710,6 +697,76 @@ void builtins_complete_Test51()
     builtins_complete(input, cmd, 1);
 }
 
+void builtins_complete_Test52()
+{
+    //Arrange
+    char *input = "export 'HELLO'=123";
+
+    //act  //ASSERT
+    builtins_complete(input, NULL, 0);
+}
+
+
+void builtins_complete_Test53()
+{
+    //Arrange
+    char *input = "export 'HELLO'=1234 A";
+    char *exp = "1234";
+    char *key = "HELLO";
+
+    //act  //ASSERT
+    assert_env_var(input, key, exp);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
+}
+
+void builtins_complete_Test54()
+{
+    //Arrange
+    char *input = "export 'HELLO=12'34 A";
+    char *exp = "1234";
+    char *key = "HELLO";
+
+    //act  //ASSERT
+    assert_env_var(input, key, exp);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
+}
+
+void builtins_complete_Test55()
+{
+    //Arrange
+    char *input = "export HEL'LO=12'34 A";
+    char *exp = "1234";
+    char *key = "HELLO";
+
+    //act  //ASSERT
+    assert_env_var(input, key, exp);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
+}
+
+void builtins_complete_Test55_()
+{
+    //Arrange
+    char *input = "export HEL'LO1=12'34 A";
+    char *exp = "1234";
+    char *key = "HELLO1";
+
+    //act  //ASSERT
+    assert_env_var(input, key, exp);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
+}
+
+void builtins_complete_Test56()
+{
+    //Arrange
+    char *input = "export HEL'LO2\"=12'34 A";
+    char *exp = NULL;
+    char *key = "HELLO2";
+
+    //act  //ASSERT
+    assert_env_var(input, key, exp);
+    TEST_ASSERT_EQUAL_INT32(0, g_all.cmds->count);
+}
+
 void builtins_complete_Tests()
 {
     RUN_TEST(builtins_complete_Test1);
@@ -763,4 +820,10 @@ void builtins_complete_Tests()
     RUN_TEST(builtins_complete_Test49);
     RUN_TEST(builtins_complete_Test50);
     RUN_TEST(builtins_complete_Test51);
+    RUN_TEST(builtins_complete_Test52);
+    RUN_TEST(builtins_complete_Test53);
+    RUN_TEST(builtins_complete_Test54);
+    RUN_TEST(builtins_complete_Test55);
+    RUN_TEST(builtins_complete_Test55_);
+    RUN_TEST(builtins_complete_Test56);
 }

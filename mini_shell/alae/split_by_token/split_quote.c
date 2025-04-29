@@ -20,6 +20,8 @@ int	is_double_quote(t_split_data *data)
     g_all.token_str = cpp_str_new();
     if(check_export_cmd(data, "\"export\""))
         return 1;
+    if(is_var_to_set(data))
+        data->type = e_var_to_set;
 	while (is_char_in_db_quote(data))
         add_arg_type(data);
     if ((data->type & e_file_name) && (data->type & e_args))
@@ -38,6 +40,8 @@ int	is_single_quote(t_split_data *data)
     g_all.token_str = cpp_str_new();
     if(check_export_cmd(data, "'export'"))
         return 1;
+    if(is_var_to_set(data))
+        data->type = e_var_to_set;
 	while (data->s[data->i] && (data->ch || !ft_strchr(" |<>\t", data->s[data->i])))
         add_arg_type(data);
     if ((data->type & e_file_name) && (data->type & e_args))

@@ -19,7 +19,8 @@
         "global.h": "c",
         "execute_cmd.h": "c",
         "builtins.h": "c",
-        "history.h": "c"
+        "history.h": "c",
+        "debug.h": "c"
     },
     "github.copilot.enable": {
         "*": false,
