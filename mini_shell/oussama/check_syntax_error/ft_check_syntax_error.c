@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 22:17:25 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/28 22:00:53 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/29 04:42:37 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int  check_pipe(t_token **token , int i)
     if(token[i + 1] && token[i]->type & e_pipe && (token[i + 1]->type & e_pipe))
         return(print_redir_error("|"), 0);
     if(token[i]->type & e_pipe && !token[i + 1])
-        return(print_redir_error("HERDOC TATCHOFHA ALAA"), 0);
+        return(print_redir_error("newline"), 0);
     return(1);
 }
 
@@ -41,26 +41,17 @@ int check_redir_in_out_in_first(t_token **token , int i)
 
 int check_redir(t_token **token , int i)
 {
-    int after_cmd, (berfor_cmd), (last);
-    // berfor_cmd = (i > 0) && (e_args | e_pipe | e_file_name | e_heredoc_fd) & token[i - 1]->type;
+    int after_cmd, (last);
     after_cmd = token[i + 1] && (e_file_name | e_set_var | e_delimiter) & token[i + 1]->type;
     last = (e_redir_out_app | e_redir_out_trun | e_redir_in | e_heredoc) & token[i]->type;
     if (last && !token[i + 1])
         return(print_redir_error("newline"), 0);
-    // if(token[i]->type & e_redir_out_trun && (i > 0) && !berfor_cmd)
-    //     return(print_redir_error(token[i - 1]->s), 0);
     else if(token[i]->type & e_redir_out_trun && !after_cmd)
         return(print_redir_error(token[i + 1]->s), 0);
-    // if(token[i]->type & e_redir_in && (i > 0) && !berfor_cmd)
-    //     return(print_redir_error(token[i - 1]->s), 0);
     else if(token[i]->type & e_redir_in && !after_cmd)
         return(print_redir_error(token[i + 1]->s), 0);
-    // if(token[i]->type & e_redir_out_app && (i > 0) && !berfor_cmd)
-    //     return(print_redir_error(token[i - 1]->s), 0);
     else if(token[i]->type & e_redir_out_app && !after_cmd)
         return(print_redir_error(token[i + 1]->s), 0);
-    // if(token[i]->type & e_heredoc && (i > 0) && !berfor_cmd)
-    //     return(print_redir_error(token[i - 1]->s), 0);
     else if(token[i]->type & e_heredoc && !after_cmd)
         return(print_redir_error(token[i + 1]->s), 0);
     return (1);
