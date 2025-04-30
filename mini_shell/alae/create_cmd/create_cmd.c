@@ -1,28 +1,30 @@
 #include "create_cmd.h"
 
+void add_input_fd(t_create_cmd *data)
+{
+	if (data->cmd->input_fd)
+		close(data->cmd->input_fd);
+	data->cmd->input_fd = data->fd;
+}
+
+void add_output_fd(t_create_cmd *data)
+{
+	if (data->cmd->output_fd)
+		close(data->cmd->output_fd);
+	data->cmd->output_fd = data->fd;
+}
+
 void	add_fd_to_cmd(t_create_cmd *data)
 {
 	data->fd = *((int *)(data->tkn->s));
 	if (data->tkn->type & e_heredoc_fd)
-	{
-		close_fd(data->cmd->redir_input_fd);
-		data->cmd->redir_input_fd = data->fd;
-	}
+		add_input_fd(data);
 	else if (data->tkn->type & e_redir_in_fd)
-	{
-		close_fd(data->cmd->redir_input_fd);
-		data->cmd->redir_input_fd = data->fd;
-	}
+		add_input_fd(data);
 	else if (data->tkn->type & e_redir_out_app_fd)
-	{
-		close_fd(data->cmd->redir_output_fd);
-		data->cmd->redir_output_fd = data->fd;
-	}
+		add_output_fd(data);
 	else if (data->tkn->type & e_redir_out_trun_fd)
-	{
-		close_fd(data->cmd->redir_output_fd);
-		data->cmd->redir_output_fd = data->fd;
-	}
+		add_output_fd(data);
 }
 
 char	*get_cmd_path(char *cmd_s, t_create_cmd *data)
@@ -75,8 +77,9 @@ void	add_token_to_cmd(t_create_cmd *data)
 	if (data->tkn->type & e_pipe)
 	{
 		data->cmd->args = data->cmd_args->content;
-		if (!data->cmd_not_found && data->cmd->cmd_path)
-			cs_list_add(g_all.cmds, (long)data->cmd);
+		if (data->cmd_not_found)
+			data->cmd->cmd_path = NULL;
+		cs_list_add(g_all.cmds, (long)data->cmd);
 		data->cmd = ft_calloc(1, sizeof(t_cmd));
         data->cmd_args = cs_list_new(sizeof(char *));
 		data->cmd_not_found = 0;
@@ -106,7 +109,8 @@ void	create_cmd(void)
 	if (data.i)
 	{
 		data.cmd->args = data.cmd_args->content;
-		if (!data.cmd_not_found && data.cmd->cmd_path)
-			cs_list_add(g_all.cmds, (long)data.cmd);
+		if (data.cmd_not_found)
+			data.cmd->cmd_path = NULL;
+		cs_list_add(g_all.cmds, (long)data.cmd);
 	}
 }

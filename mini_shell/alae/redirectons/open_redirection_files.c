@@ -49,6 +49,8 @@ void open_redirection_file(t_token **tokens, int i)
     fd = open(tokens[i + 1]->s, open_perm, 0666);
     if(fd == -1)
         print_error(tokens[i + 1]->s);
+    if (tokens[i]->type & (e_redir_out_app | e_redir_out_trun))
+        dup2(fd, 1);
     token = ft_calloc(1, sizeof(t_token));
     token->s = ft_calloc(1, sizeof(int));
     *((int *)(token->s)) = fd;
@@ -63,13 +65,19 @@ void open_redirection_files()
     t_token **tokens;
     int i;
     int res;
+    int old_fd;
 
-    tokens = g_all.tokens->content;
     i = 0;
+    old_fd = dup(1);
+    tokens = g_all.tokens->content;
     while(g_all.tokens->count > i)
     {
         if(tokens[i]->type & (e_redir_in | e_redir_out_app | e_redir_out_trun))
             open_redirection_file(tokens, i);
+        if (tokens[i]->type & e_pipe)
+            dup2(old_fd, 1);
         i++;
     }
+    dup2(old_fd, 1);
+    close(old_fd);
 }

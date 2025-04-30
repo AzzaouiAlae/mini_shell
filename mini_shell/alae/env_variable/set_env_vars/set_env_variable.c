@@ -83,8 +83,8 @@ void	add_var_to_env(t_set_env_vars *data)
 			add_env_var(data->tokens[data->i]->s, data->type);
 		if (delete_export_token(data))
 		{
-			cs_list_delete(g_all.tokens, data->i);
-        	data->i--;
+			// cs_list_delete(g_all.tokens, data->i);
+        	// data->i--;
 		}
 	}
 	else if (tkn->type & (e_var_to_set | e_args) && !(tkn->type & e_cmd))

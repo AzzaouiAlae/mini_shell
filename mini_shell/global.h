@@ -46,8 +46,8 @@ typedef struct s_cmd
 	char			*cmd_path;
 	char			**args;
 	t_pipe			*pipe;
-	int				redir_output_fd;
-	int				redir_input_fd;
+	int		output_fd;
+	int		input_fd;
 }					t_cmd;
 
 typedef struct s_globale

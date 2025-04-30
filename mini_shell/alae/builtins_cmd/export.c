@@ -16,19 +16,20 @@ void	print_env_vars(void)
 
 void	print_export_vars_cmd(t_cmd *cmd)
 {
+	int i;
 	int	fd;
 	int	old_fd;
 
-	if (ft_strslen(cmd->args) > 1)
-		return ;
-	fd = 1;
+	i = 0;
 	if (cmd && cmd->pipe)
+	{
 		fd = cmd->pipe->fd_write;
-	if (cmd && cmd->redir_output_fd)
-		fd = cmd->redir_output_fd;
+		dup2(fd, 1);
+	}
 	g_all.current_cmd = cmd;
-	old_fd = dup(1);
-	dup2(fd, 1);
+	if (cmd && cmd->output_fd)
+		dup2(cmd->output_fd, 1);
+	if(cmd->args)
+		return ;
 	cpp_map_foreach(g_all.custom_env, print_env_var);
-	dup2(old_fd, 1);
 }

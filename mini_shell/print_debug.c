@@ -50,11 +50,11 @@ void print_cmd(t_cmd *cmd)
         else 
             printf("[%s]", cmd->args[i]);
     }
-    printf("\nredir_input_fd = %d\t", cmd->redir_input_fd);
-    printf("redir_output_fd = %d\t", cmd->redir_output_fd);
+    printf("\nredir_input_fd = %d\t", cmd->input_fd);
+    printf("redir_output_fd = %d\t", cmd->output_fd);
 }
 
-void process_cmd(char *s)
+void process_cmd_debug(char *s)
 {
     print_func_data("split_tokens", NULL);
     split_tokens(s, " |<>\t$", "\"'");
@@ -103,6 +103,29 @@ void process_cmd(char *s)
         set_exit_status();
         return ;
     }
+    execute_cmd();
+    set_exit_status();
+    delete_files();
+}
+
+void process_cmd(char *s)
+{
+    split_tokens(s, " |<>\t$", "\"'");
+    g_all.cmd_error_status = 0;
+    if (!g_all.cmd_error_status)
+        ft_check_syntax_error();
+    if (!g_all.cmd_error_status)
+        check_here_doc();
+    if (!g_all.cmd_error_status)
+        get_variables_value();
+    if (!g_all.cmd_error_status)
+        rm_single_double_qoute();
+    if (!g_all.cmd_error_status)
+        add_vars_to_env();
+    if (!g_all.cmd_error_status)
+        open_redirection_files();
+    if (!g_all.cmd_error_status)
+        create_cmd();
     execute_cmd();
     set_exit_status();
     delete_files();
