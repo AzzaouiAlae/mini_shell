@@ -43,7 +43,7 @@ void	find_to_free(void *mem)
 	{
 		prev = head;
 		head = head->next;
-		if (head->mem == mem)
+		if (head && head->mem == mem)
 		{
 			prev->next = head->next;
 			free(head->mem);

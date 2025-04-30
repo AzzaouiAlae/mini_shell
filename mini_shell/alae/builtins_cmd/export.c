@@ -6,7 +6,7 @@ void	print_env_var(t_key_value *kvp)
 
 	value = kvp->value;
 	if (value->type)
-		printf("declare -x %s=\"%s\"\n", kvp->key, value->content);
+		printf("declare -x %s=\"%s\"\n", kvp->key, (char *)(value->content));
 }
 
 void	print_env_vars(void)

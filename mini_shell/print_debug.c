@@ -122,8 +122,32 @@ char *replace_char(char *s, char ch, char ch_to_replace)
     return s;
 }
 
+void init_new_env()
+{
+    if (!g_all.new_env)
+        g_all.new_env = cs_list_new(sizeof(char *));
+    else 
+        cs_list_clear(g_all.new_env);
+}
+
+void	add_env(t_key_value *kvp)
+{
+	t_cs_list	*value;
+    t_cpp_str *str;
+
+    value = kvp->value;
+    if (!value->type)
+        return ;
+    str = cpp_str_new();
+    cpp_str_add(str, kvp->key);
+    cpp_str_add(str, "=");
+    cpp_str_add(str, value->content);
+    cs_list_add(g_all.new_env, (long)str->content);
+}
+
 void process_cmd(char *s)
 {
+    init_new_env();
     split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
     g_all.cmd_error_status = 0;
     if (!g_all.cmd_error_status)
@@ -140,7 +164,8 @@ void process_cmd(char *s)
         open_redirection_files();
     if (!g_all.cmd_error_status)
         create_cmd();
-    print_cmds();
+    //print_cmds();
+    cpp_map_foreach(g_all.custom_env, add_env);
     execute_cmd();
     set_exit_status();
     delete_files();

@@ -25,6 +25,9 @@ int use_fork(t_exe_cmd_data *data)
         return 0;
     if (!ft_strncmp(data->cmd->cmd_path, "cd", 3))
         return 0;
+    if (!ft_strncmp(data->cmd->cmd_path, "exit", 5))
+        return 0;
+    
     return 1;
 }
 
@@ -49,7 +52,7 @@ void run_cmds(t_exe_cmd_data *data)
         }
         else if (data->cmd->cmd_path)
         {
-            execve(data->cmd->cmd_path, data->cmd->args, g_all.env);
+            execve(data->cmd->cmd_path, data->cmd->args, (char **)(g_all.new_env->content));
             ft_exit(127);
         }
     }

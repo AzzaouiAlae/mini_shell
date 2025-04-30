@@ -36,7 +36,11 @@ char	*get_cmd_path(char *cmd_s, t_create_cmd *data)
 
 	j = 0;
 	ps = cpp_map_get(g_all.custom_env, "PATH");
+	if (!ps)
+		return NULL;
 	paths = ft_super_split(ps->content, ":", "");
+	if (!paths)
+		return NULL;
 	str = cpp_str_new();
 	while (paths[j] && cmd_s[0])
 	{
