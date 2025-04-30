@@ -12,15 +12,17 @@ echo $PWD-$-"$$"'$-dlks'
 int main(int argc, char *argv[], char *env[])
 {
     char *input;
-
     init_g_all(argc, argv, env);
+    add_the_past_history();
     while(1)
     {
         g_all.i++;
+        g_all.current_cmd_file = NULL;
         input = readline("$>: ");
         if (is_input_to_skip1(input))
             continue;
-        add_history(input);
+        // add histor
+        add_new_cmd_history(input, 1);
         if(input && !ft_strcmp(input, "exit"))
             break;
         if (is_input_to_skip2(input))

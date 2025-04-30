@@ -57,6 +57,7 @@ typedef struct s_globale
 	int				argc;
 	int				line_count;
 	int				cmd_error_status;
+	char 			*current_cmd_file;
 	char			**env;
 	char			**argv;
 	t_token_type	last_cmd_type;

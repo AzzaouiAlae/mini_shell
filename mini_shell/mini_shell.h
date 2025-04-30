@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/28 00:05:06 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/04/30 07:19:28 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,6 @@ int     is_input_to_skip2(char *input);
 int     ft_check_syntax_error();
 void    delete_files();
 void    print_redir_error (char *str);
+void    add_new_cmd_history(char *input, int new);
+void    add_the_past_history();
 #endif
