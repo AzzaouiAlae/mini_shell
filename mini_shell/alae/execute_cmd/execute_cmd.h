@@ -2,6 +2,7 @@
 #define EXECUTE_CMD_H
 #include <sys/wait.h>
 #include "../../global.h"
+#include "../../ft_func/ft_func.h"
 
 typedef struct s_exe_cmd_data
 {

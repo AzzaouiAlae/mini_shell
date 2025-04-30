@@ -17,11 +17,24 @@ void create_pipes(t_exe_cmd_data *data)
         data->cmd->pipe = create_pipe();
 }
 
+int use_fork(t_exe_cmd_data *data)
+{
+   if (g_all.cmds->count != 1)
+        return 1;
+    if (!ft_strncmp(data->cmd->cmd_path, "unset", 6))
+        return 0;
+    if (!ft_strncmp(data->cmd->cmd_path, "cd", 3))
+        return 0;
+    return 1;
+}
+
 void run_cmds(t_exe_cmd_data *data)
 {
     int p;
 
-    p = fork();
+    p = 0;
+    if(use_fork(data))
+        p = fork();
     if(p)
         cs_list_add(data->pid_list, p);
     else
@@ -31,11 +44,14 @@ void run_cmds(t_exe_cmd_data *data)
         if (data->builtin)
         {
             data->builtin(data->cmd);
-            ft_exit(0);
+            if (use_fork(data))
+                ft_exit(0);
         }
         else if (data->cmd->cmd_path)
+        {
             execve(data->cmd->cmd_path, data->cmd->args, g_all.env);
-        ft_exit(127);
+            ft_exit(127);
+        }
     }
 }
 

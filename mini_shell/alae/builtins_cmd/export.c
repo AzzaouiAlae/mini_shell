@@ -6,7 +6,7 @@ void	print_env_var(t_key_value *kvp)
 
 	value = kvp->value;
 	if (value->type)
-		printf("%s=%s\n", kvp->key, value->content);
+		printf("declare -x %s=\"%s\"\n", kvp->key, value->content);
 }
 
 void	print_env_vars(void)
@@ -29,7 +29,7 @@ void	print_export_vars_cmd(t_cmd *cmd)
 	g_all.current_cmd = cmd;
 	if (cmd && cmd->output_fd)
 		dup2(cmd->output_fd, 1);
-	if(cmd->args)
+	if(cmd->args[1])
 		return ;
 	cpp_map_foreach(g_all.custom_env, print_env_var);
 }

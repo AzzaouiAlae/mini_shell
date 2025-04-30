@@ -108,9 +108,23 @@ void process_cmd_debug(char *s)
     delete_files();
 }
 
+char *replace_char(char *s, char ch, char ch_to_replace)
+{
+    int i;
+
+    i = 0;
+    while(s[i])
+    {
+        if (s[i] == ch)
+            s[i] = ch_to_replace;
+        i++;
+    }
+    return s;
+}
+
 void process_cmd(char *s)
 {
-    split_tokens(s, " |<>\t$", "\"'");
+    split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
     g_all.cmd_error_status = 0;
     if (!g_all.cmd_error_status)
         ft_check_syntax_error();
@@ -126,6 +140,7 @@ void process_cmd(char *s)
         open_redirection_files();
     if (!g_all.cmd_error_status)
         create_cmd();
+    print_cmds();
     execute_cmd();
     set_exit_status();
     delete_files();
