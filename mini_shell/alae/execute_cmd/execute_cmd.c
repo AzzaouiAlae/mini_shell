@@ -2,19 +2,18 @@
 
 void create_pipes(t_exe_cmd_data *data)
 {
-    if (data->c <= data->i || data->c == 1)
+    if (data->c - 1 <= data->i || data->c == 1)
         return ;
-    if (data->cmd->pipe)
+    if (!data->i)
     {
-        if (data->cmds[data->i] && data->cmd->pipe->next)
-            data->cmds[data->i]->pipe = data->cmd->pipe->next;
-        else
-            data->cmds[data->i]->pipe = data->cmd->pipe;
-        if (data->cmds[data->i + 1])
-            data->cmds[data->i]->pipe->next = create_pipe();
+        data->cmds[0]->pipe = create_pipe();
+        data->cmds[1]->pipe = data->cmds[0]->pipe;
     }
-    else if (data->c > 1)
-        data->cmd->pipe = create_pipe();
+    else 
+    {
+        data->cmds[data->i]->pipe->next = create_pipe();
+        data->cmds[data->i + 1]->pipe = data->cmds[data->i]->pipe->next;
+    }
 }
 
 int use_fork(t_exe_cmd_data *data)
@@ -87,10 +86,9 @@ void execute_cmd()
     data.pid_list = cs_list_new(sizeof(int));
     while (data.c > data.i)
     {
-        create_pipes(&data);
         data.cmd = data.cmds[data.i];
+        create_pipes(&data);
         run_cmds(&data);
-        close_fd(&data);
         data.i++;
     }
     close_fd(&data);

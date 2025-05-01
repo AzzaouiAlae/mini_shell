@@ -14,7 +14,7 @@ void clear_read_line(int signo)
     printf("\n");
     rl_on_new_line();
     rl_replace_line("", 0);
-    //rl_redisplay();
+    rl_redisplay();
 }
 
 int main(int argc, char *argv[], char *env[])
