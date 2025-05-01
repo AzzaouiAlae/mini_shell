@@ -165,7 +165,7 @@ void process_cmd(char *s)
         open_redirection_files();
     if (!g_all.cmd_error_status)
         create_cmd();
-    print_cmds();
+    //print_cmds();
     cpp_map_foreach(g_all.custom_env, add_env);
     execute_cmd();
     set_exit_status();

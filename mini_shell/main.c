@@ -20,6 +20,7 @@ void clear_read_line(int signo)
 int main(int argc, char *argv[], char *env[])
 {
     char *input;
+    
     init_g_all(argc, argv, env);
     add_the_past_history();
     signal(SIGINT, clear_read_line);
