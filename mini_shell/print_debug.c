@@ -151,12 +151,12 @@ void last_arg()
     t_cmd *cmd;
     t_cs_list *value;
 
-    if (g_all.cmds->count != 1)
+    if (!g_all.cmds || g_all.cmds->count != 1)
         return;
     i = 0;
     cmd = ((t_cmd **)(g_all.cmds->content))[g_all.cmds->count - 1];
     value = cs_list_new(sizeof(char));
-    while (cmd->args[i])
+    while (value && cmd && cmd->args && cmd->args[i])
         i++;
     cs_list_add_range(value, ft_strlen(cmd->args[i - 1]), cmd->args[i - 1]);
     cpp_map_add(g_all.custom_env, "_", value);
@@ -168,10 +168,8 @@ void process_cmd(char *s)
     //process_cmd_debug(s);
     split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
     g_all.cmd_error_status = 0;
-    if (!g_all.cmd_error_status)
-        ft_check_syntax_error();
-    if (!g_all.cmd_error_status)
-        check_here_doc(s);
+    ft_check_syntax_error();
+    check_here_doc(s);
     if (!g_all.cmd_error_status)
         get_variables_value();
     if (!g_all.cmd_error_status)
