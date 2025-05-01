@@ -3,7 +3,7 @@
 
 #include "../../global.h"
 #include "../../ft_func/ft_func.h"
-
+#include "../../mini_shell.h"
 void print_export_vars_cmd(t_cmd *cmd);
 void cd(t_cmd *cmd);
 void echo(t_cmd *cmd);

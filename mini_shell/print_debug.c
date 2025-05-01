@@ -148,7 +148,7 @@ void	add_env(t_key_value *kvp)
 void process_cmd(char *s)
 {
     init_new_env();
-    //process_cmd_debug(s);
+    // process_cmd_debug(s);
     split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
     g_all.cmd_error_status = 0;
     if (!g_all.cmd_error_status)
