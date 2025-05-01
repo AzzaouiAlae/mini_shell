@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 07:09:48 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/01 06:54:19 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:46:24 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,13 @@ char	*ft_read(int fd, char *buf)
 
 	while (1)
 	{
-		tmp = (char *)malloc((size_t)(BUFFER_SIZE) + 1);
-		if (!tmp)
-			return (free(buf), NULL);
+		tmp = (char *)ft_calloc(1, (size_t)(BUFFER_SIZE) + 1);
 		b = read(fd, tmp, BUFFER_SIZE);
-		if (b == -1)
-			return (free(tmp), free(buf), NULL);
 		tmp[b] = '\0';
 		stored_buffer = buf;
 		buf = my_ft_strjoin(buf, tmp);
 		if (!buf)
 			return (NULL);
-		if (stored_buffer)
-			free(stored_buffer);
-		if (tmp)
-			free(tmp);
 		if (ft_line_verifier(buf) == 1 || (b != BUFFER_SIZE))
 			return (buf);
 	}
@@ -53,16 +45,10 @@ char	*ft_saver(char **str)
 		i++;
 	if (((*str)[i] == '\0' && ft_line_verifier((*str)) == 0)
 		|| ((*str)[i] != '\0' && (*str)[i + 1] == '\0'))
-	{
-		free((*str));
 		return (NULL);
-	}
 	else
-	{
 		tmp = (*str);
 		(*str) = ft_strdup((*str) + (i + 1));
-		free(tmp);
-	}
 	return ((*str));
 }
 
@@ -77,7 +63,7 @@ char	*line_extracter(char *str)
 	j = 0;
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
-	line = (char *)malloc((size_t)(i + 1 + (str[i] == '\n')));
+	line = (char *)ft_calloc(1, (size_t)(i + 1 + (str[i] == '\n')));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -97,20 +83,18 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		free(buf);
 		buf = NULL;
 		return (line);
 	}
 	buf = ft_read(fd, buf);
 	if (!buf || buf[0] == '\0')
 	{
-		free(buf);
 		buf = NULL;
 		return (line);
 	}
 	line = line_extracter(buf);
 	if (!line)
-		return (free(buf), NULL);
+		return (NULL);
 	buf = ft_saver(&buf);
 	return (line);
 }

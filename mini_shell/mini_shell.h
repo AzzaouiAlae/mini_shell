@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/01 09:20:38 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:18:42 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
+#include <signal.h>
 
 char	*get_enum_str(int type);
 void	print_tokens(void);

@@ -57,7 +57,7 @@ void print_cmd(t_cmd *cmd)
 void process_cmd_debug(char *s)
 {
     print_func_data("split_tokens", NULL);
-    split_tokens(s, " |<>\t$", "\"'");
+    split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
     print_tokens();
     printf("=================================\n");
     if(!g_all.tokens->count)
@@ -148,6 +148,7 @@ void	add_env(t_key_value *kvp)
 void process_cmd(char *s)
 {
     init_new_env();
+    //process_cmd_debug(s);
     split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
     g_all.cmd_error_status = 0;
     if (!g_all.cmd_error_status)

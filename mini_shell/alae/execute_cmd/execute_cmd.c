@@ -21,13 +21,14 @@ int use_fork(t_exe_cmd_data *data)
 {
    if (g_all.cmds->count != 1)
         return 1;
+    if (!data->cmd->cmd_path)
+        return 0;
     if (!ft_strncmp(data->cmd->cmd_path, "unset", 6))
         return 0;
     if (!ft_strncmp(data->cmd->cmd_path, "cd", 3))
         return 0;
     if (!ft_strncmp(data->cmd->cmd_path, "exit", 5))
         return 0;
-    
     return 1;
 }
 
@@ -42,7 +43,8 @@ void run_cmds(t_exe_cmd_data *data)
         cs_list_add(data->pid_list, p);
     else
     {
-        dup_fd(data);
+        if (data->cmd->cmd_path)
+            dup_fd(data);
         data->builtin = cpp_map_get(g_all.builtins, data->cmd->cmd_path);
         if (data->builtin)
         {

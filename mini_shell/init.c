@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:16:36 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 23:17:51 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:17:12 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,13 @@ void set_exit_status()
 
 int is_input_to_skip1(char *input)
 {
-    if(!input || !(*input))
+    if(!input)
+        ft_exit(0);
+    if(!(*input))
         return 1;
     if (!ft_strcmp(input, "\n"))
     {
+        free(input);
         printf("\n");
         return 1;
     }
