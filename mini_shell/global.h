@@ -46,18 +46,18 @@ typedef struct s_cmd
 	char			*cmd_path;
 	char			**args;
 	t_pipe			*pipe;
-	int		output_fd;
-	int		input_fd;
+	int				output_fd;
+	int				input_fd;
 }					t_cmd;
 
 typedef struct s_globale
 {
-	int	i;
-	int error_i;
+	int				i;
+	int				error_i;
 	int				argc;
 	int				line_count;
 	int				cmd_error_status;
-	char 			*current_cmd_file;
+	char			*current_cmd_file;
 	char			**env;
 	char			**argv;
 	t_token_type	last_cmd_type;
@@ -70,7 +70,7 @@ typedef struct s_globale
 	t_cpp_map		*builtins;
 	t_cs_list		*files_to_remove;
 	t_pipe			*pipes;
-	t_cs_list	*new_env;
+	t_cs_list		*new_env;
 }					t_global;
 
 extern t_global		g_all;
