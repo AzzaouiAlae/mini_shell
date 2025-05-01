@@ -84,6 +84,7 @@ void execute_cmd()
     data.c = g_all.cmds->count;
     data.cmd = data.cmds[data.i];
     data.pid_list = cs_list_new(sizeof(int));
+    
     while (data.c > data.i)
     {
         data.cmd = data.cmds[data.i];

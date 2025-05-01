@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/05/01 12:51:14 by aazzaoui         ###   ########.fr       */
-=======
-/*   Updated: 2025/04/30 05:59:22 by oel-bann         ###   ########.fr       */
->>>>>>> f4bc0d2 (auto commit)
+/*   Updated: 2025/05/01 15:57:01 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +27,12 @@ int count_here_doc()
 	}
 	return (herdoc_count);
 }
-<<<<<<< HEAD
 
 char *get_line(char *input, int flag)
 {
 	static int fd;
 
-	if (flag)
+	if (flag == 1)
 	{
 		fd = open("./temp.txt", O_CREAT | O_TRUNC | O_RDWR, 0666);
 		if (fd == -1)
@@ -58,9 +53,6 @@ char *get_line(char *input, int flag)
 }
 
 void check_here_doc(char *input)
-=======
-void check_here_doc()
->>>>>>> f4bc0d2 (auto commit)
 {
 	t_token **tokens;
     int (i) = 0;
@@ -72,10 +64,7 @@ void check_here_doc()
 		write(2, "Minishell: maximum here-document count exceeded\n",48);
 		return;
 	}
-<<<<<<< HEAD
 	get_line(input, 1);    
-=======
->>>>>>> f4bc0d2 (auto commit)
 	while(tokens[i] && i < g_all.error_i)
 	{
         if (tokens[i + 1] && (tokens[i]->type & e_heredoc) && (tokens[i + 1]->type & e_delimiter))
@@ -130,13 +119,21 @@ int get_her_doc_line (t_her_doc *her_doc)
 	return (1);
 }
 
-void rem_delimitter_and_heredoc(int i, int fd)
+void rem_delimitter_and_heredoc(int i, int fd, char *file_name)
 {
 	t_token *token;
 	
 	token = ft_calloc(1, sizeof(t_token));
     token->s = ft_calloc(1, sizeof(int));
 	token->type = e_heredoc_fd;
+	close(fd);
+	fd = open(file_name, O_RDONLY, 0666);
+	if (fd == -1)
+	{
+		g_all.cmd_error_status = 127;
+		write(2, "ERROR HERDOC FILE CAN'T OPEN\n", 29);
+		return;
+	}
     *((int *)(token->s)) = fd;
 	cs_list_inset_at(g_all.tokens, i,(long)token);
 	cs_list_delete(g_all.tokens, i + 1);
@@ -167,12 +164,8 @@ void here_doc(t_token **tokens, int i, int expand_her)
 			her_doc.str = readline("> ");
 	}
 	add_new_cmd_history(her_doc.str, 0);
-<<<<<<< HEAD
 	ft_free(her_doc.str);
-=======
-	free(her_doc.str);
->>>>>>> f4bc0d2 (auto commit)
-	rem_delimitter_and_heredoc(i, her_doc.fd);
+	rem_delimitter_and_heredoc(i, her_doc.fd, her_doc.file_name);
 }
 /*
 history

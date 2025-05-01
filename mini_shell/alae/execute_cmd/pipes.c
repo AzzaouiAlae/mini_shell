@@ -15,14 +15,25 @@ t_pipe *create_pipe()
 void close_fd(t_exe_cmd_data *data)
 {
     t_pipe *p;
+    int i;
 
+    i = 0;
     p = data->cmds[0]->pipe;
     while (p)
     {
+        if (data->cmds[i]->input_fd)
+            close(data->cmds[i]->input_fd);
+        if (data->cmds[i]->output_fd)
+            close(data->cmds[i]->output_fd);
         close(p->fd_read);
         close(p->fd_write);
         p = p->next;
+        i++;
     }
+    if (data->cmds[i] && data->cmds[i]->input_fd)
+        close(data->cmds[i]->input_fd);
+    if (data->cmds[i] && data->cmds[i]->output_fd)
+        close(data->cmds[i]->output_fd);
 }
 
 void dup_fd(t_exe_cmd_data *data)

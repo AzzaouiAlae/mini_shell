@@ -30,7 +30,6 @@ int main(int argc, char *argv[], char *env[])
         input = readline("$>: ");
         if (is_input_to_skip1(input))
             continue;
-        // add histor
         add_new_cmd_history(input, 1);
         if(input && !ft_strcmp(input, "exit"))
             break;
