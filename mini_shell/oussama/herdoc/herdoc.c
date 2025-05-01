@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/30 05:59:22 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:16:19 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,29 @@ int count_here_doc()
 	}
 	return (herdoc_count);
 }
-void check_here_doc()
+
+char *get_line(char *input, int flag)
+{
+	static int fd;
+
+	if (flag)
+	{
+		fd = open("./temp.txt", O_CREAT | O_TRUNC | O_RDWR, 0666);
+		if (fd == -1)
+			return(NULL);
+		write(fd, input, ft_strlen(input));
+		close(fd);
+		fd = open("./temp.txt", O_RDWR, 0666);
+		get_next_line(fd);
+	}
+	else if (flag == 2)
+		unlink("./temp.txt");
+	else
+		return(get_next_line(fd));
+	return(NULL);
+}
+
+void check_here_doc(char *input)
 {
 	t_token **tokens;
     int (i) = 0;
@@ -39,6 +61,7 @@ void check_here_doc()
 		write(2, "Minishell: maximum here-document count exceeded\n",48);
 		return;
 	}
+	get_line(input, 1);    
 	while(tokens[i] && i < g_all.error_i)
 	{
         if (tokens[i + 1] && (tokens[i]->type & e_heredoc) && (tokens[i + 1]->type & e_delimiter))
@@ -58,6 +81,7 @@ void check_here_doc()
 		// }
 		i++;
 	}
+	get_line(NULL, 2);
 }
 
 int create_here_doc_file(t_her_doc *her_doc)
@@ -108,11 +132,13 @@ void rem_delimitter_and_heredoc(int i, int fd)
 void here_doc(t_token **tokens, int i, int expand_her)
 {
 	t_her_doc her_doc;
-	
+	char *(*input) = NULL;
 	ft_bzero(&her_doc, sizeof(t_her_doc));
 	if (create_here_doc_file(&her_doc) == 0)
 		return;
-	her_doc.str = readline("> ");
+	her_doc.str = get_line(NULL, 0);
+	if (!her_doc.str)
+		her_doc.str = readline("> ");
 	her_doc.limiter = tokens[i + 1]->s;
 	her_doc.expand_her = expand_her;
 	while (ft_strncmp(her_doc.limiter, her_doc.str, ft_strlen(her_doc.limiter) + 1) != 0)
@@ -122,7 +148,9 @@ void here_doc(t_token **tokens, int i, int expand_her)
 			return;
 		free(her_doc.str);
 		g_all.i++;
-		her_doc.str = readline("> ");
+		her_doc.str = get_line(NULL, 0);
+		if (!her_doc.str)
+			her_doc.str = readline("> ");
 	}
 	add_new_cmd_history(her_doc.str, 0);
 	free(her_doc.str);

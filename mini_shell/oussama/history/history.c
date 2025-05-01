@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:44:16 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/30 07:07:38 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:23:02 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,24 @@ void free_for_new_cmd()
 void add_new_cmd_history(char *input, int new)
 {
     int fd;
+    char *new_input;
 
+    new_input = replace_char(ft_strdup(input), '\n', '\0');
     free_for_new_cmd();
     if (!g_all.current_cmd_file)
         g_all.current_cmd_file = create_cmd_file();
     if (new == 1)
     {
         fd = open(g_all.current_cmd_file, O_CREAT | O_RDWR, 0666);
-        write(fd, input, ft_strlen(input));
+        write(fd, new_input, ft_strlen(new_input));
         close(fd);
-        add_history(input);
+        add_history(new_input);
     }
     else
     {
         fd = open(g_all.current_cmd_file, O_RDWR | O_APPEND, 0666);
         write(fd, "\n", 1);
-        write(fd, input, ft_strlen(input));
+        write(fd, new_input, ft_strlen(new_input));
         close(fd);
         rl_clear_history();
         add_the_past_history();

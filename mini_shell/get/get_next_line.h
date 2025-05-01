@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   her_doc.h                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 12:42:26 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/01 05:34:07 by oel-bann         ###   ########.fr       */
+/*   Created: 2024/12/24 07:06:45 by oel-bann          #+#    #+#             */
+/*   Updated: 2025/05/01 06:53:55 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HER_DOC_H
-#define HER_DOC_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include "../../mini_shell.h"
-#include "../../get/get_next_line.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include "../ft_func/ft_func.h"
 
-typedef struct t_her_doc
-{
-    char    *limiter;
-    char    *str;
-    char    *file_name;
-    char    *expand_str;
-    int     expand_her;
-    int     fd;
-} t_her_doc;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
-char	*create_file_name(void);
-void    here_doc(t_token **tokens, int i, int expand_her);
-
+char	*get_next_line(int fd);
+int		ft_line_verifier(char *buf);
+char	*my_ft_strjoin(char const *s1, char const *s2);
 #endif

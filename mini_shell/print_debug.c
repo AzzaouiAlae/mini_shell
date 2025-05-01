@@ -67,7 +67,7 @@ void process_cmd_debug(char *s)
     }
     g_all.cmd_error_status = 0;
     ft_check_syntax_error();
-    check_here_doc();
+    check_here_doc(s);
     if(g_all.cmd_error_status)
     {
         set_exit_status();
@@ -153,7 +153,7 @@ void process_cmd(char *s)
     if (!g_all.cmd_error_status)
         ft_check_syntax_error();
     if (!g_all.cmd_error_status)
-        check_here_doc();
+        check_here_doc(s);
     if (!g_all.cmd_error_status)
         get_variables_value();
     if (!g_all.cmd_error_status)

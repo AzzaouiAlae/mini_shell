@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/30 07:19:28 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:20:38 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	set_exit_status(void);
 void	execute_cmd(void);
 void	init_builtins_map(void);
 char    *get_env_vars_heredoc(char *input);
-void    check_here_doc();
+void    check_here_doc(char *input);
 void    init_g_all(int argc, char *argv[], char *env_vars[]);
 void    set_exit_status();
 int     is_input_to_skip1(char *input);
@@ -53,4 +53,6 @@ void    delete_files();
 void    print_redir_error (char *str);
 void    add_new_cmd_history(char *input, int new);
 void    add_the_past_history();
+char *replace_char(char *s, char ch, char ch_to_replace);
+
 #endif
