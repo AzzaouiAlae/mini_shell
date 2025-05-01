@@ -6,7 +6,11 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/05/01 12:51:14 by aazzaoui         ###   ########.fr       */
+=======
+/*   Updated: 2025/04/30 05:59:22 by oel-bann         ###   ########.fr       */
+>>>>>>> f4bc0d2 (auto commit)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +31,7 @@ int count_here_doc()
 	}
 	return (herdoc_count);
 }
+<<<<<<< HEAD
 
 char *get_line(char *input, int flag)
 {
@@ -53,6 +58,9 @@ char *get_line(char *input, int flag)
 }
 
 void check_here_doc(char *input)
+=======
+void check_here_doc()
+>>>>>>> f4bc0d2 (auto commit)
 {
 	t_token **tokens;
     int (i) = 0;
@@ -64,7 +72,10 @@ void check_here_doc(char *input)
 		write(2, "Minishell: maximum here-document count exceeded\n",48);
 		return;
 	}
+<<<<<<< HEAD
 	get_line(input, 1);    
+=======
+>>>>>>> f4bc0d2 (auto commit)
 	while(tokens[i] && i < g_all.error_i)
 	{
         if (tokens[i + 1] && (tokens[i]->type & e_heredoc) && (tokens[i + 1]->type & e_delimiter))
@@ -156,7 +167,11 @@ void here_doc(t_token **tokens, int i, int expand_her)
 			her_doc.str = readline("> ");
 	}
 	add_new_cmd_history(her_doc.str, 0);
+<<<<<<< HEAD
 	ft_free(her_doc.str);
+=======
+	free(her_doc.str);
+>>>>>>> f4bc0d2 (auto commit)
 	rem_delimitter_and_heredoc(i, her_doc.fd);
 }
 /*

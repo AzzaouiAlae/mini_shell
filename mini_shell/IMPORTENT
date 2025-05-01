@@ -1,11 +1,12 @@
-$_
-here_doc add history
-history after the program shutdown
+# $_
+# here_doc add history
+# history after the program shutdown
 
+# << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 <<  12 << 13 << 14 << 15 << 16 << 17
+# bash: maximum here-document count exceeded
 
-
-test
-$> << ho$la$"$a"$$"b"
-> ho$la$$a$$b
-> ho$la$a$$b
-$> 
+# test
+# $> << ho$la$"$a"$$"b"
+# > ho$la$$a$$b
+# > ho$la$a$$b
+# $> 

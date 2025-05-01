@@ -22,7 +22,10 @@ int main(int argc, char *argv[], char *env[])
     char *input;
     init_g_all(argc, argv, env);
     add_the_past_history();
+<<<<<<< HEAD
     signal(SIGINT, clear_read_line);
+=======
+>>>>>>> f4bc0d2 (auto commit)
     while(1)
     {
         g_all.i++;
@@ -30,6 +33,10 @@ int main(int argc, char *argv[], char *env[])
         input = readline("$>: ");
         if (is_input_to_skip1(input))
             continue;
+<<<<<<< HEAD
+=======
+        // add histor
+>>>>>>> f4bc0d2 (auto commit)
         add_new_cmd_history(input, 1);
         if(input && !ft_strcmp(input, "exit"))
             break;
