@@ -40,6 +40,11 @@ void open_file(t_token **tokens, int i, int *fd, int *p_error)
 {
     int open_perm;
 
+    if (!(*p_error))
+    {
+        *fd = -1;
+        return ;
+    }
     open_perm = get_open_permission(tokens[i]->type);
     *fd = open(tokens[i + 1]->s, open_perm, 0666);
     if(*fd == -1)
@@ -58,11 +63,6 @@ void open_redirection_file(t_token **tokens, int i, int *p_error)
         return ;
     }
     open_file(tokens, i, &fd, p_error);
-    if (!(*p_error) && fd != -1)
-    {
-        close(fd);
-        fd = -1;
-    }
     token = ft_calloc(1, sizeof(t_token));
     token->s = ft_calloc(1, sizeof(int));
     *((int *)(token->s)) = fd;

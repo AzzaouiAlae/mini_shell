@@ -22,6 +22,8 @@ int use_fork(t_exe_cmd_data *data)
         return 1;
     if (!data->cmd->cmd_path)
         return 0;
+    if (data->cmd->input_fd == -1 || data->cmd->output_fd == -1)
+        return 0;
     if (!ft_strncmp(data->cmd->cmd_path, "export", 7) && 
         ft_strslen(data->cmd->args) > 1)
         return 0;
@@ -48,8 +50,11 @@ void run(t_exe_cmd_data *data)
     else if (data->cmd->cmd_path)
     {
         if (data->cmd->input_fd != -1 && data->cmd->output_fd != -1)
+        {
             execve(data->cmd->cmd_path, data->cmd->args, 
                 (char **)(g_all.new_env->content));
+            ft_exit(errno);
+        }
         ft_exit(g_all.cmd_error_status);
     }
 }
