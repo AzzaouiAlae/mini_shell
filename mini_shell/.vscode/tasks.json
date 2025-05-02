@@ -14,7 +14,7 @@
                 "${workspaceFolder}/oussama/*/*.c",
                 "-lreadline",
                 "-o",
-                "${workspaceFolder}/mini_shell"
+                "${workspaceFolder}/minishell"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

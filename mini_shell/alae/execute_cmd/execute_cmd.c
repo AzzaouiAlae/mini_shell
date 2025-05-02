@@ -31,6 +31,26 @@ int use_fork(t_exe_cmd_data *data)
     return 1;
 }
 
+void run(t_exe_cmd_data *data)
+{
+    if (data->cmd->cmd_path)
+        dup_fd(data);
+    data->builtin = cpp_map_get(g_all.builtins, data->cmd->cmd_path);
+    if (data->builtin)
+    {
+        data->builtin(data->cmd);
+        if (use_fork(data))
+            ft_exit(0);
+    }
+    else if (data->cmd->cmd_path)
+    {
+        if (data->cmd->input_fd != -1 && data->cmd->output_fd != -1)
+            execve(data->cmd->cmd_path, data->cmd->args, 
+                (char **)(g_all.new_env->content));
+        ft_exit(127);
+    }
+}
+
 void run_cmds(t_exe_cmd_data *data)
 {
     int p;
@@ -41,36 +61,26 @@ void run_cmds(t_exe_cmd_data *data)
     if(p)
         cs_list_add(data->pid_list, p);
     else
-    {
-        if (data->cmd->cmd_path)
-            dup_fd(data);
-        data->builtin = cpp_map_get(g_all.builtins, data->cmd->cmd_path);
-        if (data->builtin)
-        {
-            data->builtin(data->cmd);
-            if (use_fork(data))
-                ft_exit(0);
-        }
-        else if (data->cmd->cmd_path)
-        {
-            execve(data->cmd->cmd_path, data->cmd->args, (char **)(g_all.new_env->content));
-            ft_exit(127);
-        }
-    }
+        run(data);
 }
 
 void wait_cmds(t_exe_cmd_data *data)
 {
-    int *pids;
     int i;
+    int status;
+    int *pids;
 
     i = 0;
     pids = data->pid_list->content;
     while (i < data->pid_list->count)
     {
-        waitpid(pids[i], 0, 0);
+        waitpid(pids[i], &status, 0);
         i++;
     }
+    if (data->pid_list->count)
+        g_all.cmd_error_status = 0;
+    if (WIFEXITED(status))
+        g_all.cmd_error_status = WEXITSTATUS(status);
 }
 
 void execute_cmd()

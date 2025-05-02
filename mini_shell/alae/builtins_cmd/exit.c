@@ -9,7 +9,7 @@ int check_too_many_arguments(t_cmd *cmd)
         i++;
     if (i > 2)
     {
-        write (2, "Minishell: exit: too many arguments", 36);
+        write (2, "Minishell: exit: too many arguments\n", 36);
         ft_exit(1);
     }
 }

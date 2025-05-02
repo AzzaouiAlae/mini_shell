@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:44:16 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/01 09:23:02 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:19:44 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void add_the_past_history()
 {
     char *file_name, (full_cmd[204800]);
     int fd, (cread);
+    char *file;
 
+    file = "/var/tmp/history/cmd_9999.txt";
     file_name = get_cmd_file(1);
-    while(file_name)
+    while(file_name && ft_strcmp(file_name, file))
     {
         fd = open(file_name, O_RDONLY, 0666);
         cread = read(fd,full_cmd,204799);
@@ -35,13 +37,16 @@ void free_for_new_cmd()
 {
     char *before, *(after), (full_cmd[204800]);
     int fd_before, (fd_after) = 0, (cread);
+    char *file;
+    
+    file = "/var/tmp/history/cmd_9999.txt";
     cread = 0;
     fd_before = 0;
     if (access("/var/tmp/history/cmd_9999.txt", F_OK) == 0)
 	{
         before = get_cmd_file(1);
         after = get_cmd_file(0);
-        while(after)
+        while(after && ft_strcmp(file, after));
         {
             fd_after = open(after, O_RDONLY, 0666);
             cread = read(fd_after,full_cmd,204799);
