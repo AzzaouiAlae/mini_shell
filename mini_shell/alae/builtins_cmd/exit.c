@@ -9,7 +9,7 @@ int check_too_many_arguments(t_cmd *cmd)
         i++;
     if (i > 2)
     {
-        write (2, "exit\nMinishell: exit: too many arguments", 41);
+        write (2, "Minishell: exit: too many arguments", 36);
         ft_exit(1);
     }
 }
@@ -32,7 +32,7 @@ void print_num_error(char *arg)
     t_cpp_str *str;
 
     str = cpp_str_new();
-    cpp_str_add(str, "exit\nexit: ");
+    cpp_str_add(str, "exit: ");
     cpp_str_add(str, arg);
     cpp_str_add(str, ": numeric argument required");
     write (2, str->content, str->count);
