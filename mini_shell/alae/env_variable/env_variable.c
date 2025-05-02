@@ -1,5 +1,11 @@
 #include "env_var.h"
 
+void create_kvp()
+{
+    t_key_value *kvp;
+    
+}
+
 void init_env_map()
 {
     int i;

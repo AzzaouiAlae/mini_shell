@@ -36,7 +36,7 @@ int check_path(char *cmd, t_create_cmd *data)
     }
     else if (!cmd || access(cmd, X_OK))
     {
-        data->error = "command not found...\n";
+        data->error = "command not found\n";
         print_error_cmd_not_found(data->tkn->s, data, 127);
         return 0;
     }

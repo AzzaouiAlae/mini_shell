@@ -32,8 +32,6 @@ int main(int argc, char *argv[], char *env[])
         if (is_input_to_skip1(input))
             continue;
         add_new_cmd_history(input, 1);
-        if(input && !ft_strcmp(input, "exit"))
-            break;
         if (is_input_to_skip2(input))
             continue;
         process_cmd(input);
