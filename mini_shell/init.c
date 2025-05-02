@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:16:36 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/01 12:17:12 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/02 23:45:41 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ int is_input_to_skip2(char *input)
     if(is_space(input))
         return 1;
     if (ft_strlen(input) == 1 && str_find_char(input, ":!#"))
+    {
+        if (str_find_char(input, "!"))
+        {
+            g_all.cmd_error_status = 1;
+            set_exit_status();
+        }
         return 1;
+    }
     return 0;
 }

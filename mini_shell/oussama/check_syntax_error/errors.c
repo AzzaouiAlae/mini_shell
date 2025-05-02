@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:15:26 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 19:09:57 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/02 23:25:30 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void print_redir_error (char *str)
 {
-    printf("Minishell : syntax error near unexpected token '%s'\n",str);
+    write(2, "Minishell : syntax error near unexpected token `", 48);
+    write(2, str, ft_strlen(str));
+    write(2, "'\n", 2);
     g_all.cmd_error_status = 2;
 }

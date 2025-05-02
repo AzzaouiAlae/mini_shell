@@ -164,6 +164,8 @@ void last_arg()
 
 void process_cmd(char *s)
 {
+    int fd;
+
     init_new_env();
     //process_cmd_debug(s);
     split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
@@ -171,15 +173,17 @@ void process_cmd(char *s)
     ft_check_syntax_error();
     check_here_doc(s);
     if (!g_all.cmd_error_status)
+    {
         get_variables_value();
-    if (!g_all.cmd_error_status)
-        rm_single_double_qoute();
-    if (!g_all.cmd_error_status)
-        open_redirection_files();
-    create_cmd();
-    //print_cmds();
-    cpp_map_foreach(g_all.custom_env, add_env);
-    execute_cmd();
+        if (!g_all.cmd_error_status)
+            rm_single_double_qoute();
+        if (!g_all.cmd_error_status)
+            open_redirection_files();
+        create_cmd();
+        //print_cmds();
+        cpp_map_foreach(g_all.custom_env, add_env);
+        execute_cmd();
+    }
     set_exit_status();
     last_arg();
     delete_files(1);

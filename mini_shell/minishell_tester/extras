@@ -13,3 +13,58 @@ minishell.h
 $
 $?
 README.md
+|
+| echo oi
+| |
+| $
+| >
+>
+>>
+>>>
+<
+<<
+echo hi <
+cat    <| ls
+echo hi | >
+echo hi | > >>
+echo hi | < |
+echo hi |   |
+echo hi |  "|"
+:
+!
+>
+<
+>>
+<<
+< >
+>>>>>
+>>>>>>>>>>>>>>>
+<<<<<
+<< << <<<<<<<<<<<<
+> > > >
+>> >> >> >>
+>>>> >> >> >>
+/
+//
+/.
+/
+///////
+\\\\\\\\
+-
+|
+| hola
+| | |
+| |
+| | | ||
+| | | ||||||||||
+>>|><
+""
+"hola"
+'hola'
+''
+..
+ABC=hola
+4ABC=hola
+hola
+hola que tal
+Makefile

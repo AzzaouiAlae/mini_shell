@@ -53,6 +53,8 @@ int is_var_to_set(t_split_data *data)
     char *s;
     t_token *token;
 
+    if (is_digit(data->s[data->i]))
+        return 0;
     s = find_str_key(data);
     res = s && (*s == '=' || 
         (*s == '+' && *(s + 1) == '='));
