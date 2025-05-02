@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/01 21:12:04 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:28:23 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ int     is_input_to_skip1(char *input);
 int     is_space(char *input);
 int     is_input_to_skip2(char *input);
 int     ft_check_syntax_error();
-void    delete_files();
+void    delete_files(int flag);
 void    print_redir_error (char *str);
 void    add_new_cmd_history(char *input, int new);
 void    add_the_past_history();
 char    *replace_char(char *s, char ch, char ch_to_replace);
 char	*my_ft_strjoin(char const *s1, char const *s2);
+char	*get_cmd_file(int reset, char *file_to_start);
 
 
 #endif

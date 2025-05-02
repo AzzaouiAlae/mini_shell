@@ -31,7 +31,7 @@ int main(int argc, char *argv[], char *env[])
         input = readline("$>: ");
         if (is_input_to_skip1(input))
             continue;
-        //add_new_cmd_history(input, 1);
+        add_new_cmd_history(input, 1);
         if (is_input_to_skip2(input))
             continue;
         process_cmd(input);

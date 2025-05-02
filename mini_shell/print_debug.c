@@ -105,7 +105,7 @@ void process_cmd_debug(char *s)
     }
     execute_cmd();
     set_exit_status();
-    delete_files();
+    delete_files(1);
 }
 
 char *replace_char(char *s, char ch, char ch_to_replace)
@@ -182,7 +182,7 @@ void process_cmd(char *s)
     execute_cmd();
     set_exit_status();
     last_arg();
-    delete_files();
+    delete_files(1);
 }
 
 char *get_enum_str(int type)

@@ -3,25 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   delete_files.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:42:44 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/27 21:57:33 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:27:56 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "her_doc.h"
 
-void delete_files()
+void delete_files(int flag)
 {
     int i;
     char **files;
+    char *next_file;
 
-    files = g_all.files_to_remove->content;
-    i = 0;
-    while (files[i])
+    if (flag == 1)
     {
-        unlink(files[i]);
-        i++;
+        files = g_all.files_to_remove->content;
+        i = 0;
+        while (files[i])
+        {
+            unlink(files[i]);
+            i++;
+        }
     }
+    if (flag == 100)
+    {
+        next_file = get_cmd_file(1, "/var/tmp/history/cmd_400.txt");
+        while(next_file)
+        {
+            unlink(next_file);
+            next_file = get_cmd_file(1, next_file);
+        }
+    }
+    
 }

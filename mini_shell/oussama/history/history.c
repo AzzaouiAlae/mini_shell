@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:44:16 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/02 19:53:48 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:34:55 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void free_for_new_cmds()
 	{
         before = get_cmd_file(1, "/var/tmp/history/cmd_00/.txt");
         after = get_cmd_file(1, "/var/tmp/history/cmd_099.txt");
-        while(after);
+        while(after)
         {
             fd_after = open(after, O_RDONLY, 0666);
             cread = read(fd_after,full_cmd,204799);
@@ -54,6 +54,7 @@ void free_for_new_cmds()
             before = get_cmd_file(1, before);
             after = get_cmd_file(1, after);
         }
+        delete_files(100);
         rl_clear_history();
         add_the_past_history();
     }
@@ -65,7 +66,7 @@ void add_new_cmd_history(char *input, int new)
     char *new_input;
 
     new_input = replace_char(ft_strdup(input), '\n', '\0');
-    free_for_new_cmd();
+    free_for_new_cmds();
     if (!g_all.current_cmd_file)
         g_all.current_cmd_file = create_cmd_file();
     if (new == 1)
