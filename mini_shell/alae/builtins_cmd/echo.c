@@ -51,6 +51,7 @@ void echo(t_cmd *cmd)
     first_args = 1;
     if (cmd->input_fd == -1 || cmd->output_fd == -1)
             ft_exit(g_all.cmd_error_status);
+    g_all.cmd_error_status = 0;
     while(cmd->args && cmd->args[i])
     {
         print_arg(cmd, i, &first_args, &new_line);

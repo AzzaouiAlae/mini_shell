@@ -3,10 +3,7 @@
 #include "alae/builtins_cmd/builtins.h"
 #include <signal.h>
 /*
-export mesage error
-export 'a'='a b c d e f'
-export "a b"="a c"
-echo $PWD-$-"$$"'$-dlks'
+bash: $gg: ambiguous redirect
 */
 
 void clear_read_line(int signo)
