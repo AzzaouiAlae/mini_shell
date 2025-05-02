@@ -22,6 +22,9 @@ int use_fork(t_exe_cmd_data *data)
         return 1;
     if (!data->cmd->cmd_path)
         return 0;
+    if (!ft_strncmp(data->cmd->cmd_path, "export", 7) && 
+        ft_strslen(data->cmd->args) > 1)
+        return 0;
     if (!ft_strncmp(data->cmd->cmd_path, "unset", 6))
         return 0;
     if (!ft_strncmp(data->cmd->cmd_path, "cd", 3))
@@ -40,14 +43,14 @@ void run(t_exe_cmd_data *data)
     {
         data->builtin(data->cmd);
         if (use_fork(data))
-            ft_exit(0);
+            ft_exit(g_all.cmd_error_status);
     }
     else if (data->cmd->cmd_path)
     {
         if (data->cmd->input_fd != -1 && data->cmd->output_fd != -1)
             execve(data->cmd->cmd_path, data->cmd->args, 
                 (char **)(g_all.new_env->content));
-        ft_exit(127);
+        ft_exit(g_all.cmd_error_status);
     }
 }
 
@@ -94,7 +97,6 @@ void execute_cmd()
     data.c = g_all.cmds->count;
     data.cmd = data.cmds[data.i];
     data.pid_list = cs_list_new(sizeof(int));
-    
     while (data.c > data.i)
     {
         data.cmd = data.cmds[data.i];

@@ -175,8 +175,6 @@ void process_cmd(char *s)
     if (!g_all.cmd_error_status)
         rm_single_double_qoute();
     if (!g_all.cmd_error_status)
-        add_vars_to_env();
-    if (!g_all.cmd_error_status)
         open_redirection_files();
     create_cmd();
     //print_cmds();
