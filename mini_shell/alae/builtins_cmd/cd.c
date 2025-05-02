@@ -17,7 +17,7 @@ void cd(t_cmd *cmd)
     if (count_args(cmd->args) > 2)
     {
         g_all.cmd_error_status = 1;
-        printf("Minishell : %s: too many arguments\n", cmd->args[0]);
+        write (2, "Minishell : cd: too many arguments\n", 35);
         return;
     }
     else if (count_args(cmd->args) == 1)
