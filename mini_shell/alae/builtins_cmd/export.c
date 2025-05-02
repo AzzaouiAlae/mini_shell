@@ -14,6 +14,17 @@ void	print_env_vars(void)
 	cpp_map_foreach(g_all.custom_env, print_env_var);
 }
 
+void count_args(t_cmd *cmd)
+{
+	int i;
+
+	i = 0;
+	while (cmd->args[i])
+		i++;
+	if (i > 1)
+		ft_exit(0);
+}
+
 void	print_export_vars_cmd(t_cmd *cmd)
 {
 	int i;
@@ -21,6 +32,7 @@ void	print_export_vars_cmd(t_cmd *cmd)
 	int	old_fd;
 
 	i = 0;
+	count_args(cmd);
 	if (cmd && cmd->pipe)
 	{
 		fd = cmd->pipe->fd_write;
