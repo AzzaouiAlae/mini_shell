@@ -11,5 +11,5 @@ void env(t_cmd *cmd);
 void exit_cmd(t_cmd *cmd);
 void pwd(t_cmd *cmd);
 void unset(t_cmd *cmd);
-
+int count_args(char **args);
 #endif
