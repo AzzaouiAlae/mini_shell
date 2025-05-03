@@ -24,5 +24,7 @@ size_t	ft_strslen(char **strs);
 int is_alpha(char ch);
 int is_digit(char ch);
 int	ft_atoi(const char *str, int *error);
+char	*ft_strrchr(const char *s, int c);
+
 
 #endif

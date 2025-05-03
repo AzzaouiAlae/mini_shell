@@ -1,12 +1,12 @@
 #include "builtins.h"
 
-int get_stell_home (int set)
+int get_stell_home (t_home_status set)
 {
     static int home;
 
-    if (set == 100)
+    if (set == e_exist_home)
         home = 1;
-    else if (set == 200)
+    else if (set == e_missing_home)
         home = 0;
     return (home);
     
@@ -47,13 +47,12 @@ t_cpp_str *get_from_env(char *var, t_cmd *cmd)
     t_cpp_str *str;
     t_cs_list *value;
 
-
     str = cpp_str_new();
     value = cpp_map_get(g_all.custom_env, var);
     if (!value)
     {
-        if (ft_strncmp("HOME", var, ft_strlen(var)))
-            get_stell_home(200);
+        if (!ft_strncmp("HOME", var, ft_strlen(var)))
+            get_stell_home(e_missing_home);
         return str;
     }
     cpp_str_add(str, value->content);
@@ -62,18 +61,24 @@ t_cpp_str *get_from_env(char *var, t_cmd *cmd)
     return str;
 }
 
-// void invalid_cwd(char *cwd, char *arg, char *buf)
-// {
-    
-// }
-// tmjnina hadi
+void invalid_cwd(char **cwd, char *arg, char *buf)
+{
+    *cwd = getcwd(buf, 4097);
+    if (!(*cwd))
+    {
+        *cwd = my_ft_strjoin(get_from_env("PWD", NULL)->content, "/");
+        *cwd = my_ft_strjoin(*cwd, arg);
+        write(2, "error retrieving current directory: ", 36);
+        write(2, "getcwd: cannot access parent directories: ",42);
+        write(2, "No such file or directory\n", 26);
+    }
+}
+
 void cd(t_cmd *cmd)
 {
-    char *cwd, (buf[4097]);
-
-    // ft_calloc (1, 4097);
-    ft_bzero(buf, 4097);
-    get_stell_home(100);
+    char *cwd, *(buf);
+    buf = ft_calloc (1, 4097);
+    get_stell_home(e_exist_home);
     if (count_args(cmd->args) > 2)
     {
         g_all.cmd_error_status = 1;
@@ -92,15 +97,7 @@ void cd(t_cmd *cmd)
     {
         if (chdir(cmd->args[1]) == -1 && print_cd_error(cmd->args[1]))
             return;
-        cwd = getcwd(buf, 4097);
-        if (!cwd)
-        {
-            cwd = my_ft_strjoin(get_from_env("PWD", NULL)->content, "/");
-            cwd = my_ft_strjoin(cwd, cmd->args[1]);
-            write(2, "error retrieving current directory: ", 36);
-            write(2, "getcwd: cannot access parent directories: ",42);
-            write(2, "No such file or directory\n", 26);
-        }
+        invalid_cwd(&cwd, cmd->args[1], buf);
         add_to_env(get_from_env("PWD", NULL), NULL, "OLDPWD");
         add_to_env(NULL, cwd, "PWD");
     }

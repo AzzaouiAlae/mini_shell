@@ -5,6 +5,12 @@
 #include "../../ft_func/ft_func.h"
 #include "../../mini_shell.h"
 
+typedef enum e_home_status
+{
+    e_exist_home = 100,
+    e_missing_home = 200,
+} t_home_status;
+
 void print_export_vars_cmd(t_cmd *cmd);
 void cd(t_cmd *cmd);
 void echo(t_cmd *cmd);

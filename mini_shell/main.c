@@ -14,6 +14,23 @@ void clear_read_line(int signo)
     rl_redisplay();
 }
 
+char *get_prompt()
+{
+    char *prompt;
+    char buf[4097];
+
+    ft_bzero(buf, 4097);
+    prompt = getcwd(buf, 4097);
+    if (!prompt)
+    {
+        prompt = get_from_env("PWD", NULL)->content;
+    }
+    prompt = ft_strrchr(prompt, '/') + 1;
+    prompt = my_ft_strjoin("➜ ", prompt);
+    prompt = my_ft_strjoin(prompt, " $>: ");
+    return prompt;
+}
+
 int main(int argc, char *argv[], char *env[])
 {
     char *input;
@@ -25,7 +42,7 @@ int main(int argc, char *argv[], char *env[])
     {
         g_all.i++;
         g_all.current_cmd_file = NULL;
-        input = readline("$>: ");
+        input = readline(get_prompt());
         if (is_input_to_skip1(input))
             continue;
         add_new_cmd_history(input, 1);
