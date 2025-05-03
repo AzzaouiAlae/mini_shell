@@ -16,3 +16,31 @@ echo -nnn --------nnnn
 echo -n Hola
 echo -n
 echo "-n" Hola
+echo -n test1
+echo -n "test1 test2"
+echo -n "test1 test2" test3
+echo -n test1     test2
+echo test1 -n
+echo "test1 -n"
+echo -n -n test1
+echo -n -n -n -n -n test1
+echo "test1 -n test2"
+echo ~42
+echo -n -n -nasd
+echo -n -n -n-nnnnn
+echo -n -nnnnnnn -n -nnn -nnnnn -n-n
+echo -n -nnnnnnn -n -nnn -nnnnn -n feel my pain
+echo -n -n -n-n
+echo "-nnnnn "
+ECHO -nn
+ECHO -n -n
+ECHO "-"""n""n""n""n""n""nnnnnn-n
+ECHO "-"""n""n""n""n""n""nnnnnn -n
+export T=nnnnnnnn
+echo "-""$T"nnnnnnnnnnnnn -nnnnnnnn"$T" '-'"$T"
+export T=nnnnnnnn
+echo "-""$T"nnnnnnnnnnnnn -nnnnnnnn"$T" '-''$T'
+export T=nnnnnnnn
+echo "-"'$T'nnnnnnnnnnnnn -nnnnnnnn'$T' '-'"$T "
+export T=nnnnnnnn
+echo "-"'$T'nnnnnnnnnnnnn -nnnnnnnn$T '-''$T '

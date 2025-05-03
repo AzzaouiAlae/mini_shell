@@ -24,40 +24,39 @@ int is_dir(char *cmd)
     return 0;
 }
 
-int path_error(char *cmd, t_create_cmd *data)
+int get_error_status(char *s)
 {
-    if (access(cmd, F_OK))
-    {
-        data->error = "No such file or directory\n";
-        print_error_cmd_not_found(data->tkn->s, data, 127);
-        return 1;
-    }
-    return 0;
+    if (s == "Is a directory\n")
+        return 126;
+    if (s == "filename argument required\n")
+        return 2;
+    if (s == "No such file or directory\n")
+        return 127;
+    if (s == "command not found\n")
+        return 127;
+    if (s == "Permission denied\n")
+        return 126;
 }
 
-int check_path(char *cmd, t_create_cmd *data)
+void check_path(char *cmd, t_create_cmd *data)
 {
+    data->error = NULL;
     if (cpp_map_get(g_all.builtins, cmd))
-        return (1);
+        return ;
     if (cmd && is_dir(cmd))
-    {
         data->error = "Is a directory\n";
-        print_error_cmd_not_found(data->tkn->s, data, 126);
-        return 0;
-    }
-    else if (is_path(cmd) && path_error(cmd, data))
-        return 0;
+    else if (data->tkn->s[0] == '.' && ft_strlen(data->tkn->s) == 1)
+        data->error = "filename argument required\n";
+    else if (is_path(data->tkn->s) && access(cmd, F_OK))
+        data->error = "No such file or directory\n";
     else if (!cmd || access(cmd, F_OK))
-    {
         data->error = "command not found\n";
-        print_error_cmd_not_found(data->tkn->s, data, 127);
-        return 0;
-    }
     else if (!cmd || access(cmd, X_OK))
+            data->error = "Permission denied\n";
+    if (!g_all.is_error_printed && data->error)
     {
-        data->error = "Permission denied\n";
-        print_error_cmd_not_found(data->tkn->s, data, 126);
-        return 0;
+        print_error_cmd_not_found(data->tkn->s, data, 
+            get_error_status(data->error));
+        g_all.is_error_printed = 1;
     }
-    return 1;
 }

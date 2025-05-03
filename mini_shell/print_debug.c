@@ -155,6 +155,8 @@ void last_arg()
         return;
     i = 0;
     cmd = ((t_cmd **)(g_all.cmds->content))[g_all.cmds->count - 1];
+    if (!(cmd->args) || !(cmd->args[0]))
+        return ;
     value = cs_list_new(sizeof(char));
     while (value && cmd && cmd->args && cmd->args[i])
         i++;
@@ -166,6 +168,7 @@ void process_cmd(char *s)
 {
     int fd;
 
+    g_all.is_error_printed = 0;
     init_new_env();
     //process_cmd_debug(s);
     split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");

@@ -24,10 +24,8 @@ int	is_double_quote(t_split_data *data)
         data->type = e_var_to_set;
 	while (is_char_in_db_quote(data))
         add_arg_type(data);
-    if ((data->type & e_file_name) && (data->type & e_args))
-        data->type -= e_args;
-    if ((data->type & e_file_name) && (data->type & e_path))
-        data->type -= e_path;
+    if ((data->type & e_file_name))
+        data->type = e_file_name | e_double_quote;
     add_token(data);
 	return (1);
 }
@@ -44,10 +42,8 @@ int	is_single_quote(t_split_data *data)
         data->type = e_var_to_set;
 	while (data->s[data->i] && (data->ch || !ft_strchr(" |<>\t", data->s[data->i])))
         add_arg_type(data);
-    if ((data->type & e_file_name) && (data->type & e_args))
-        data->type -= e_args;
-    if ((data->type & e_file_name) && (data->type & e_path))
-        data->type -= e_path;
+    if ((data->type & e_file_name))
+        data->type = e_file_name | e_quote;
     add_token(data);
 	return (1);
 }

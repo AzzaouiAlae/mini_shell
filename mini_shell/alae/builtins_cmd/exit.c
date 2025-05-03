@@ -16,7 +16,7 @@ int check_too_many_arguments(t_cmd *cmd)
 
 int is_num(t_cmd *cmd, int i)
 {
-    if (i >= 19)
+    if (i > 19)
         return 1;
     if ((!i && cmd->args[1][i] == '-'))
         return 0;
@@ -39,7 +39,7 @@ void print_num_error(char *arg)
     ft_exit(2);
 }
 
-int check_is_num(t_cmd *cmd)
+void check_is_num(t_cmd *cmd)
 {
     int i;
     t_cpp_str *str;
@@ -51,6 +51,8 @@ int check_is_num(t_cmd *cmd)
             print_num_error(cmd->args[1]);
         i++;
     }
+    if (!i)
+        print_num_error(cmd->args[1]);
 }
 
 void exit_cmd(t_cmd *cmd)

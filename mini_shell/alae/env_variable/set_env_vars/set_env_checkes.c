@@ -14,7 +14,7 @@ int valid_var_name(char *str)
             return 0;
         i++;
     }
-	if (str[i] == '=' || (str[i] == '+' && str[i] == '=') || !str[i])
+	if (str[i] == '=' || (str[i] == '+' && str[i + 1] == '=') || !str[i])
     	return 1;
 	return 0;
 }
@@ -63,23 +63,6 @@ int is_path(char *s)
 		if(s[i] == '/')
 			return 1;
 		i++;
-	}
-	return 0;
-}
-
-int delete_export_token(t_set_env_vars *data)
-{
-	int i;
-	t_token *tkn;
-
-	i = 0;
-	tkn = data->tokens[data->i + i];
-	while (tkn && !(tkn->type & e_pipe))
-	{
-		if (tkn->type & e_var_to_set || (tkn->type & e_args && data->is_export_args))
-			return 1;
-		i++;
-		tkn = data->tokens[data->i + i];
 	}
 	return 0;
 }

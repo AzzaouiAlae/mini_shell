@@ -11,7 +11,7 @@ int is_char(char *str, char ch)
             return 0;
         i++;
     }
-    return 1;
+    return i > 1;
 }
 
 void print_str(char *str, int *first_args)

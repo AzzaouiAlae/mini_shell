@@ -16,6 +16,17 @@ typedef struct s_set_env_vars
 	t_token	**tokens;
 }			t_set_env_vars;
 
+typedef struct s_add_env_var
+{
+	t_cpp_str *str_key;
+	t_cpp_str *str_val;
+    t_cs_list *val_list;
+	t_cs_list *val;
+    int val_len;
+    int key_len;
+    char *s;
+} t_add_env_var;
+
 int delete_export_token(t_set_env_vars *data);
 int	is_env_var(t_set_env_vars *data);
 int	is_tokens_has_cmd(void);

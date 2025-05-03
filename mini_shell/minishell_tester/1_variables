@@ -1,0 +1,107 @@
+echo $?
+echo $HOME
+echo $HOME$USER
+echo $HOME$NOTHING$USER$
+export a="asd"
+export a="asd" b="de" o= c="hellomi" X
+export miert ne lehetne ezt is
+export a="asd"
+unset a
+export a="asd" b="de" o= c="hellomi" X
+unset o
+export a="asd" b="de" o= c="hellomi" X
+unset X
+export a="asd" b="de" o= c="hellomi" X
+unset o a X b c
+export a="asd" b="de" o= c="hellomi" X
+unset o asd B x X wqd c
+export T=a T=b T=c
+echo $T
+export miert ne lehetne ezt is
+echo $"HOME"$USER
+echo $"HOM"E$USER
+echo $"'HOM'E"$USER
+echo $'HOM'E$USER
+echo $"HOME"
+echo $'HOME'
+echo $
+echo "$"
+echo '$='
+echo "$""$"
+echo $"$"
+echo $"42$"
+echo "$"$
+echo $'$'
+echo '$'$
+echo "$ "
+echo '$ '
+echo $TESTNOTFOUND
+echo $HOME$TESTNOTFOUND
+echo $TESTNOTFOUND$HOME
+echo $TESTNOTFOUND$HOME$
+cd ..$PWD
+mkdir test
+cd $PWD/test
+cd..
+rm -rf test
+echo $PWD/random_folder
+echo ""$?""
+echo " "$?" "
+echo $?"42"
+echo ''$?''"42"
+echo 'HELLO'$?:''"42"
+echo "$?"
+echo '$?'
+echo "'$?'"
+echo '"$?"'
+mkdir "tmp_test_folder"
+echo $PWD
+cd "tmp_test_folder"
+echo $PWD
+cd ..
+echo $PWD
+rm -rf "tmp_test_folder"
+mkdir "tmp_test folder"
+echo $PWD
+cd "tmp_test folder"
+echo $PWD
+cd ..
+echo $PWD
+rm -rf "tmp_test folder"
+export tmp_test="echo 42"
+$tmp_test
+$tmp_test 42
+export tmp_test="echo"
+$tmp_test 42 42
+export tmp_test="echo 42"
+"tmp_test"
+export X="  A  B  "
+echo "1"$X'2'
+export X=" A  B  "
+echo "1"$X'2'
+export X="A  B  "
+echo "1"$X'2'
+export X="  A  B "
+echo "1"$X'2'
+export X="  A  B"
+echo "1"$X'2'
+export X="  A B  "
+echo "1"$X'2'
+export X="  AB  "
+echo "1"$X'2'
+export X="  A  B  "
+echo $X'2'
+export X="  A  B  "
+echo $X"1"
+export X=""
+echo "1"$X'2'
+export X=" "
+echo "1"$X'2'
+export X="   "
+echo "1"$X'2'
+export X="  A  B  "
+echo ?$X'2'
+export X="  A  B  "
+echo "1"$X?
+export X="  A  B  "
+echo "1"$X2?

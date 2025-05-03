@@ -25,31 +25,28 @@ t_cs_list	*create_value_list(char *s, int *val_len, int type)
 
 void	add_env_var(char *kvp, int type)
 {
-	t_cpp_str *str_key;
-	t_cpp_str *str_val;
-    t_cs_list *val_list;
-	t_cs_list *val;
-    int val_len;
-    int key_len;
-    char *s;
+	t_add_env_var data;
 
-	s = str_find_char(kvp, "+=");
-	if (!s)
+	ft_bzero(&data, sizeof(t_add_env_var));
+	data.s = str_find_char(kvp, "+=");
+	if (!(data.s))
 		return ;
-    key_len = ft_strlen_delimiter(kvp, "+=");
-    str_key = cpp_str_new();
-    str_val = cpp_str_new();
-	cpp_str_add_len(str_key, kvp, key_len);
-	if (*s == '+')
+	data.key_len = ft_strlen_delimiter(kvp, "+=");
+	data.str_key = cpp_str_new();
+	data.str_val = cpp_str_new();
+	cpp_str_add_len(data.str_key, kvp, data.key_len);
+	if (*(data.s) == '+')
 	{
-		val_list = cpp_map_get(g_all.custom_env, str_key->content);
-		s++;
-		val = create_value_list(s, &val_len, type);
-		cs_list_add_range(val_list, val->count, val->content);		
+		data.val_list = cpp_map_get(g_all.custom_env, data.str_key->content);
+		if (!(data.val_list))
+			data.val_list = create_value_list(data.s, &(data.val_len), type);
+		(data.s)++;
+		data.val = create_value_list(data.s, &(data.val_len), type);
+		cs_list_add_range(data.val_list, data.val->count, data.val->content);		
 	}
 	else
-		val_list = create_value_list(s, &val_len, type);
-	cpp_map_add(g_all.custom_env, str_key->content, val_list);
+		data.val_list = create_value_list(data.s, &(data.val_len), type);
+	cpp_map_add(g_all.custom_env, data.str_key->content, data.val_list);
 }
 
 void print_export_error(t_set_env_vars *data)
@@ -61,9 +58,16 @@ void print_export_error(t_set_env_vars *data)
     tkn = data->tokens[data->i];
 	cpp_str_add(str, "mini-shell: export: `");
 	cpp_str_add(str, tkn->s);
-	cpp_str_add(str, "': not a valid identifier\n");
-	write(2, str->content, str->count);
 	g_all.cmd_error_status = 1;
+	if (tkn->s[0] == '-')
+	{
+		g_all.cmd_error_status = 2;
+		cpp_str_add(str, "': invalid option\n");
+	}
+	else
+		cpp_str_add(str, "': not a valid identifier\n");
+	write(2, str->content, str->count);
+	
 	cs_list_delete(g_all.tokens, data->i);
     data->i--;
 }
@@ -81,11 +85,6 @@ void	add_var_to_env(t_set_env_vars *data)
             data->is_export_args = 1;
 		else if (!(data->has_cmd))
 			add_env_var(data->tokens[data->i]->s, data->type);
-		if (delete_export_token(data))
-		{
-			// cs_list_delete(g_all.tokens, data->i);
-        	// data->i--;
-		}
 	}
 	else if (tkn->type & (e_var_to_set | e_args) && !(tkn->type & e_cmd))
 	{

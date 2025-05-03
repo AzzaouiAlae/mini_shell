@@ -9,6 +9,17 @@ if [[ $1 ]]; then
 	)
 else
 	test_lists=(
+		"10_parsing_hell"
+		"9_go_wild"
+		"8_syntax_errors"
+		"2_path_check"
+		"2_correction"
+		"1_variables"
+		"1_scmds"
+		"1_redirs"
+		"1_pipelines"
+		"1_builtins"
+		"0_compare_parsing"
 		"echo_without_new_line"
 		"builtins"
 		"pipes"
@@ -46,7 +57,7 @@ echo "                                                                          
 echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥";
 echo "                                                                                              ";
 
-PROMPT=$(echo -e "\nexit\n" | $MINISHELL_PATH | head -n 1 | sed "s/\x1B\[[0-9;]\{1,\}[A-Za-z]//g" )
+PROMPT=$(echo "$>: " )
 # Helper commands:
 REMOVE_COLORS="sed s/\x1B\[[0-9;]\{1,\}[A-Za-z]//g"
 REMOVE_EXIT="grep -v ^exit$"

@@ -53,6 +53,7 @@ typedef struct s_cmd
 typedef struct s_globale
 {
 	int				i;
+	int is_error_printed;
 	int				error_i;
 	int				argc;
 	int				line_count;
