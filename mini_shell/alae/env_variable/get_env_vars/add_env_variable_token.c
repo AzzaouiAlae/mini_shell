@@ -33,6 +33,10 @@ void add_var_to_tokens(t_get_env_data *data)
 {
     data->j = 0;
     data->type = del_set_var(data->tokens[data->i]->type) | is_cmd_type();
+    if (data->type & e_double_quote)
+        data->type -= e_double_quote;
+    if (data->type & e_quote)
+        data->type -= e_quote;
     add_var_cmd(data);
     cs_list_delete(g_all.tokens, data->i);
     while (data->args && data->args[data->j])

@@ -117,4 +117,3 @@ void get_variables_value()
         data.i++;
     }
 }
-
