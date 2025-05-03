@@ -62,24 +62,17 @@ t_cpp_str *get_from_env(char *var, t_cmd *cmd)
     return str;
 }
 
-void invalid_cwd(char *cwd, char *arg, char *buf)
-{
-    cwd = getcwd(buf, 4097);
-    if (!cwd)
-    {
-        cwd = my_ft_strjoin(get_from_env("PWD", NULL)->content, "/");
-        cwd = my_ft_strjoin(cwd, arg);
-        write(2, "error retrieving current directory: ", 36);
-        write(2, "getcwd: cannot access parent directories: ",42);
-        write(2, "No such file or directory\n", 26);
-    }
-}
-
+// void invalid_cwd(char *cwd, char *arg, char *buf)
+// {
+    
+// }
+// tmjnina hadi
 void cd(t_cmd *cmd)
 {
-    char *cwd, *(buf);
+    char *cwd, (buf[4097]);
 
-    ft_calloc (1, 4097);
+    // ft_calloc (1, 4097);
+    ft_bzero(buf, 4097);
     get_stell_home(100);
     if (count_args(cmd->args) > 2)
     {
@@ -99,7 +92,15 @@ void cd(t_cmd *cmd)
     {
         if (chdir(cmd->args[1]) == -1 && print_cd_error(cmd->args[1]))
             return;
-        invalid_cwd(cwd, cmd->args[1], buf);
+        cwd = getcwd(buf, 4097);
+        if (!cwd)
+        {
+            cwd = my_ft_strjoin(get_from_env("PWD", NULL)->content, "/");
+            cwd = my_ft_strjoin(cwd, cmd->args[1]);
+            write(2, "error retrieving current directory: ", 36);
+            write(2, "getcwd: cannot access parent directories: ",42);
+            write(2, "No such file or directory\n", 26);
+        }
         add_to_env(get_from_env("PWD", NULL), NULL, "OLDPWD");
         add_to_env(NULL, cwd, "PWD");
     }

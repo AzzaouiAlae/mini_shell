@@ -12,4 +12,6 @@ void exit_cmd(t_cmd *cmd);
 void pwd(t_cmd *cmd);
 void unset(t_cmd *cmd);
 int count_args(char **args);
+t_cpp_str *get_from_env(char *var, t_cmd *cmd);
+
 #endif

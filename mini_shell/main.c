@@ -25,7 +25,8 @@ int main(int argc, char *argv[], char *env[])
     {
         g_all.i++;
         g_all.current_cmd_file = NULL;
-        input = readline("$>: ");
+
+        input = readline(my_ft_strjoin( get_from_env("PWD", NULL)->content, "$>: "));
         if (is_input_to_skip1(input))
             continue;
         add_new_cmd_history(input, 1);

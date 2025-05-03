@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/02 20:28:23 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/03 05:56:06 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ void    add_the_past_history();
 char    *replace_char(char *s, char ch, char ch_to_replace);
 char	*my_ft_strjoin(char const *s1, char const *s2);
 char	*get_cmd_file(int reset, char *file_to_start);
-
 
 #endif
