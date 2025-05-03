@@ -16,7 +16,8 @@ void	copy_char_to_new_str(t_cpp_str *str, t_cpp_str *new_str_token, char *ch)
 		*ch = first_char;
 	else if (*ch == first_char)
 		*ch = '\0';
-	cpp_str_add_char(new_str_token, first_char);
+	else
+		cpp_str_add_char(new_str_token, first_char);
 	cpp_str_delete_char(str, 0);
 }
 

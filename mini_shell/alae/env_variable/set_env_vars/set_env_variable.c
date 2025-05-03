@@ -11,12 +11,7 @@ t_cs_list	*create_value_list(char *s, int *val_len, int type)
 	ch = '\0';
 	while (s[i])
 	{
-		if (ch == '\0' && (s[i] == '\"' || s[i] == '\''))
-			ch = s[i];
-		else if (s[i] == '\"' || s[i] == '\'')
-			ch = '\0';
-		else
-			cs_list_add(str, s[i]);
+		cs_list_add(str, s[i]);
 		i++;
 	}
     str->type = type;
