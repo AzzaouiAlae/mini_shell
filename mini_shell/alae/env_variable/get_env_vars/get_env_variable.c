@@ -67,7 +67,7 @@ int cmd_type(int i)
 	t_token **tokens;
 
     tokens = g_all.tokens->content;
-    while (i && tokens[i]->type & e_pipe)
+    while (i && !(tokens[i]->type & e_pipe))
         i--;
 	while(i < g_all.tokens->count)
 	{
@@ -89,7 +89,7 @@ int get_variable_value(t_get_env_data *data)
     if(!data->args || !data->args[0])
     {
         cs_list_delete(g_all.tokens, data->i);
-        if (!g_all.tokens->count)
+        if (!g_all.tokens->count || !(data->tokens[data->i]))
             return 0;
         data->tokens[data->i]->type = data->tokens[data->i]->type | 
         cmd_type(data->i);

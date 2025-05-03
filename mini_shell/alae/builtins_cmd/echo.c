@@ -14,18 +14,19 @@ int is_char(char *str, char ch)
     return 1;
 }
 
-void print_str(char *str)
+void print_str(char *str, int *first_args)
 {
     if (str)
-        printf("%s", str);
+        write(1, str, ft_strlen(str));
     else
-        printf(" ");
+        write(1, " ", 1);
+    *first_args = 0;
 }
 
 void print_arg(t_cmd *cmd, int i, int *first_args, int *new_line)
 {
-    if (i > 1)
-        printf(" ");
+    if (i > 1 && !(*first_args))
+        write(1, " ", 1);
     if (*first_args && cmd->args[i][0] == '-')
     {
         if (is_char(cmd->args[i] + 1, 'n'))
@@ -33,11 +34,11 @@ void print_arg(t_cmd *cmd, int i, int *first_args, int *new_line)
         else
         {
             *first_args = 0;
-            print_str(cmd->args[i]);
+            print_str(cmd->args[i], first_args);
         }
     }
     else
-        print_str(cmd->args[i]);
+        print_str(cmd->args[i], first_args);
 }
 
 void echo(t_cmd *cmd)
@@ -58,5 +59,5 @@ void echo(t_cmd *cmd)
         i++;
     }
     if (new_line)
-        printf("\n");
+        write(1, "\n", 1);
 }

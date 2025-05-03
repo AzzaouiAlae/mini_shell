@@ -57,6 +57,8 @@ void run(t_exe_cmd_data *data)
         }
         ft_exit(g_all.cmd_error_status);
     }
+    if (use_fork(data))
+            ft_exit(g_all.cmd_error_status);
 }
 
 void run_cmds(t_exe_cmd_data *data)
