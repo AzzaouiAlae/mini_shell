@@ -9,7 +9,7 @@ void pwd(t_cmd *cmd)
     cwd = getcwd(buf, 4097);
     if (!cwd)
     {
-        printf("%s\n", get_from_env("PWD", NULL)->content);
+        printf("%s\n", get_from_env("PWD")->content);
         return;
     }
     printf("%s\n", cwd);
