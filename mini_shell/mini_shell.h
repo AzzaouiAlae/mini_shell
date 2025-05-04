@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/04 05:54:40 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/05 00:37:42 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ char    *replace_char(char *s, char ch, char ch_to_replace);
 char	*my_ft_strjoin(char const *s1, char const *s2);
 char	*get_cmd_file(int reset, char *file_to_start);
 int     ft_check_syntax_after_pars();
-
+void add_to_env(t_cpp_str *s, char *str_to_change, char *var);
 #endif

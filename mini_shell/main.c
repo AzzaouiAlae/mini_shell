@@ -31,6 +31,23 @@ char *get_prompt()
     return prompt;
 }
 
+void augment_shell_level()
+{
+    t_cpp_str *str;
+    t_cs_list *value;
+    int shlvl;
+    int error;
+
+    shlvl = 0;
+    str = cpp_str_new();
+    value = cpp_map_get(g_all.custom_env, "SHLVL");
+    if (!value)
+        cpp_str_add(str, ft_strdup("1"));
+    shlvl = ft_atoi(value->content, &error) + 1;
+    cpp_str_add(str, ft_itoa(shlvl)->content);
+    add_to_env(str, NULL, "SHLVL");
+}
+
 int main(int argc, char *argv[], char *env[])
 {
     char *input;
@@ -38,6 +55,7 @@ int main(int argc, char *argv[], char *env[])
     init_g_all(argc, argv, env);
     add_the_past_history();
     signal(SIGINT, clear_read_line);
+    augment_shell_level();
     while(1)
     {
         g_all.i++;

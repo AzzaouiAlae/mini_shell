@@ -82,7 +82,6 @@ int cmd_type(int i)
 
 int get_variable_value(t_get_env_data *data)
 {
-    cs_list_add(g_all.variables_name, (long)ft_strdup(data->tokens[data->i]->s));
     data->new_str_token = cpp_str_new();
     data->str_token = cpp_str_new_substitute(data->tokens[data->i]->s);
     create_value_token(data);
@@ -110,6 +109,8 @@ void get_variables_value()
     data.tokens = g_all.tokens->content;
     while(g_all.tokens->count > data.i)
     {
+        if (data.tokens[data.i]->type & e_file_name)
+            cs_list_add(g_all.variables_name, (long)ft_strdup(data.tokens[data.i]->s));
         if(data.tokens[data.i]->type & e_var_to_get)
         {
             data.type = data.tokens[data.i]->type;
