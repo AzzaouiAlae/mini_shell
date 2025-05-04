@@ -36,6 +36,7 @@ typedef struct s_token
 
 typedef struct s_pipe
 {
+	int				bad_fd;
 	int				fd_read;
 	int				fd_write;
 	struct s_pipe	*next;

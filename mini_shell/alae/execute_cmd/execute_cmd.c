@@ -64,8 +64,17 @@ void run(t_exe_cmd_data *data)
 void run_cmds(t_exe_cmd_data *data)
 {
     int p;
+    // t_cpp_str *s_err;
 
     p = 0;
+    // if (data->cmd->pipe && data->cmd->pipe->bad_fd)
+    // {
+    //     s_err = cpp_str_new();
+    //     cpp_str_add(s_err, data->cmd->args[0]);
+    //     cpp_str_add(s_err, ": write error: Bad file descriptor\n");
+    //     write(2, s_err->content, s_err->count);
+    //     return ;
+    // }
     if(use_fork(data))
         p = fork();
     if(p)

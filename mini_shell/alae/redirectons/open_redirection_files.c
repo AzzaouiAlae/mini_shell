@@ -88,7 +88,7 @@ void open_redirection_files()
     {
         if(tokens[i]->type & (e_redir_in | e_redir_out_app | e_redir_out_trun))
             open_redirection_file(tokens, i, &p_error);
-        if (tokens[i]->type & e_pipe)
+        if (g_all.tokens->count && tokens[i]->type & e_pipe)
         {
             p_error = 1;
             dup2(old_fd, 1);

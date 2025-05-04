@@ -42,7 +42,7 @@ int main(int argc, char *argv[], char *env[])
     {
         g_all.i++;
         g_all.current_cmd_file = NULL;
-        input = readline(get_prompt());
+        input = readline("$>: ");
         if (is_input_to_skip1(input))
             continue;
         add_new_cmd_history(input, 1);

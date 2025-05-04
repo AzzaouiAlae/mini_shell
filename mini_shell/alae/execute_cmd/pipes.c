@@ -5,9 +5,12 @@ t_pipe *create_pipe()
     int p[2];
     t_pipe *_pipe;
 
-    if (pipe(p))
-        g_all.cmd_error_status = 1;
     _pipe = ft_calloc(1, sizeof(t_pipe));
+    if (pipe(p))
+    {
+        g_all.cmd_error_status = 1;
+        _pipe->bad_fd = 1;
+    }
     _pipe->fd_read = p[0];
     _pipe->fd_write = p[1];
     return (_pipe);
