@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:16:36 by oel-bann          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/05/04 22:31:25 by aazzaoui         ###   ########.fr       */
+=======
+/*   Updated: 2025/05/04 05:46:33 by oel-bann         ###   ########.fr       */
+>>>>>>> dc66282 (auto commit)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +29,7 @@ void init_g_all(int argc, char *argv[], char *env_vars[])
     init_builtins_map();
     g_all.ch_i = cs_list_new(sizeof(int));
     g_all.files_to_remove = cs_list_new(sizeof(char *));
+    g_all.variables_name = cs_list_new(sizeof(char *));
 }
 
 void set_exit_status()

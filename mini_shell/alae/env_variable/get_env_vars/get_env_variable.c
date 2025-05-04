@@ -82,6 +82,7 @@ int cmd_type(int i)
 
 int get_variable_value(t_get_env_data *data)
 {
+    cs_list_add(g_all.variables_name, (long)ft_strdup(data->tokens[data->i]->s));
     data->new_str_token = cpp_str_new();
     data->str_token = cpp_str_new_substitute(data->tokens[data->i]->s);
     create_value_token(data);

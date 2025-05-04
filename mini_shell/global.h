@@ -73,7 +73,11 @@ typedef struct s_globale
 	t_cs_list		*files_to_remove;
 	t_pipe			*pipes;
 	t_cs_list		*new_env;
+<<<<<<< HEAD
 	t_cs_list		*ch_i;
+=======
+	t_cs_list		*variables_name;
+>>>>>>> dc66282 (auto commit)
 }					t_global;
 
 extern t_global		g_all;

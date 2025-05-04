@@ -178,6 +178,7 @@ void process_cmd(char *s)
     if (!g_all.cmd_error_status)
     {
         get_variables_value();
+        ft_check_syntax_after_pars();
         if (!g_all.cmd_error_status)
             rm_single_double_qoute();
         if (!g_all.cmd_error_status)

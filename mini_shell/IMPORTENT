@@ -13,3 +13,9 @@ $>
 
 $>: $>: ^C
 
+
+oel-bann@e1r10p9:~/Desktop/mini$ export ss="sssss sss.txt"
+oel-bann@e1r10p9:~/Desktop/mini$ < $ss
+bash: $ss: ambiguous redirect
+oel-bann@e1r10p9:~/Desktop/mini$ 
+
