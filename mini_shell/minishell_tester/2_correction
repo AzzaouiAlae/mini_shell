@@ -78,11 +78,11 @@ echo "$"$
 echo $'$'
 echo '$'$
 env | grep "^HOME"
-env | grep $USER
+env | grep "^MAIL"
 export USER=
-env | grep "^USER"
+env | grep "^USER="
 export USER="@?/"
-env | grep "^USER"
+env | grep "^USERNAME"
 export NEW="4 2"
 env | grep NEW
 export NEW="4=2"
