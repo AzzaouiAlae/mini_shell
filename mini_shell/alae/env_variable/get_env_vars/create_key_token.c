@@ -13,11 +13,16 @@ void	copy_char_to_new_str(t_cpp_str *str, t_cpp_str *new_str_token, char *ch)
 
 	first_char = str->content[0];
 	if (!(*ch) && (first_char == '\'' || first_char == '"'))
+	{
 		*ch = first_char;
+		cs_list_add(g_all.ch_i, (long)new_str_token->count);
+	}
 	else if (*ch == first_char)
+	{
 		*ch = '\0';
-	else
-		cpp_str_add_char(new_str_token, first_char);
+		cs_list_add(g_all.ch_i, (long)new_str_token->count);
+	}
+	cpp_str_add_char(new_str_token, first_char);
 	cpp_str_delete_char(str, 0);
 }
 

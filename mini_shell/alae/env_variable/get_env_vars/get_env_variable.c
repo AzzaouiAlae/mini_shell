@@ -112,6 +112,7 @@ void get_variables_value()
         if(data.tokens[data.i]->type & e_var_to_get)
         {
             data.type = data.tokens[data.i]->type;
+            cs_list_clear(g_all.ch_i);
             get_variable_value(&data);
         }
         data.i++;

@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:16:36 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/02 23:45:41 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/04 22:31:25 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void init_g_all(int argc, char *argv[], char *env_vars[])
     g_all.argv = argv;
     init_env_map();
     init_builtins_map();
+    g_all.ch_i = cs_list_new(sizeof(int));
     g_all.files_to_remove = cs_list_new(sizeof(char *));
 }
 
