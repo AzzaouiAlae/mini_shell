@@ -54,6 +54,7 @@ void augment_shell_level()
         cs_list_add(value, (long)(str->content));
     }
     shlvl = ft_atoi(value->content, &error) + 1;
+    cpp_str_clear(str);
     cpp_str_add(str, ft_itoa(shlvl)->content);
     add_to_env(str, NULL, "SHLVL");
 }
@@ -69,6 +70,7 @@ char *read_input()
 		line = get_next_line(0);
         if (ft_strlen(line))
             line[ft_strlen(line) - 1] = '\0';
+        printf("'%s'\n",line);
 		return line;
 	}
 }
