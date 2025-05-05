@@ -92,6 +92,7 @@ void wait_cmds(t_exe_cmd_data *data)
     int *pids;
 
     i = 0;
+    status = 0;
     pids = data->pid_list->content;
     while (i < data->pid_list->count)
     {

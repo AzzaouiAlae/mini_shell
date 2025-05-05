@@ -59,12 +59,15 @@ void augment_shell_level()
     add_to_env(str, NULL, "SHLVL");
 }
 
-char *read_input()
+char *read_input(int *Shoul_free)
 {
     char *line;
 
     if (isatty(fileno(stdin)))
+    {
+        *Shoul_free = 1;
 		return readline(get_prompt());
+    }
 	else
 	{
 		line = get_next_line(0);
@@ -78,7 +81,9 @@ char *read_input()
 int main(int argc, char *argv[], char *env[])
 {
     char *input;
+    int ShoulFree;
     
+    ShoulFree = 0;
     init_g_all(argc, argv, env);
     add_the_past_history();
     signal(SIGINT, clear_read_line);
@@ -88,17 +93,19 @@ int main(int argc, char *argv[], char *env[])
         g_all.i++;
         g_all.current_cmd_file = NULL;
         //input = readline("$>: ");
-        input = read_input();
+        input = read_input(&ShoulFree);
         if (is_input_to_skip1(input))
             continue;
         add_new_cmd_history(input, 1);
         if (is_input_to_skip2(input))
             continue;
         process_cmd(input);
-        //free(input);
+        if (ShoulFree)
+            free(input);
         g_all.line_count++;
     }
-    //free(input);
+    if (ShoulFree)
+        free(input);
     ft_free_all();
     rl_clear_history();
     return (g_all.cmd_error_status);
