@@ -1,6 +1,6 @@
 #include "env_var.h"
 
-void create_arg_token(t_cpp_str *arg, t_cpp_str *str_token, int i)
+void create_arg_token(t_cpp_str *arg, t_cpp_str *str_token, int *i)
 {
     char ch;
 
@@ -8,16 +8,17 @@ void create_arg_token(t_cpp_str *arg, t_cpp_str *str_token, int i)
     while(str_token->content[0])
     {
         if(!ch && ft_strchr("\"'", str_token->content[0]) && 
-            cs_list_contains(g_all.ch_i, i))
+            cs_list_contains(g_all.ch_i, *i))
             ch = str_token->content[0];
         else if (ch == str_token->content[0] && 
-            cs_list_contains(g_all.ch_i, i))
+            cs_list_contains(g_all.ch_i, *i))
             ch = '\0';
         else if (ch || !ft_strchr(" \t", str_token->content[0]))
             cpp_str_add_char(arg, str_token->content[0]);
         else
             return;
         cpp_str_delete_char(str_token, 0);
+        (*i)++;
     }
 }
 
@@ -41,7 +42,7 @@ char **split_var_token(t_cpp_str *str_token)
     i = 0;
     while (str_token->content[0])
     {
-        create_arg_token(arg, str_token, i);
+        create_arg_token(arg, str_token, &i);
         if(arg->count)
             cs_list_add(args, (long)arg->content);
         else

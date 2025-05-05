@@ -145,21 +145,24 @@ void	add_env(t_key_value *kvp)
     cs_list_add(g_all.new_env, (long)str->content);
 }
 
-void last_arg()
+void last_arg(int is_child)
 {
     int i;
     t_cmd *cmd;
     t_cs_list *value;
 
-    if (!g_all.cmds || g_all.cmds->count != 1)
+    if ((!g_all.cmds || g_all.cmds->count != 1) && !is_child)
         return;
     i = 0;
     cmd = ((t_cmd **)(g_all.cmds->content))[g_all.cmds->count - 1];
+    if (is_child)
+        cmd = ((t_cmd **)(g_all.cmds->content))[0];
     if (!(cmd->args) || !(cmd->args[0]))
         return ;
     value = cs_list_new(sizeof(char));
     while (value && cmd && cmd->args && cmd->args[i])
         i++;
+    value->type = e_global_var;
     cs_list_add_range(value, ft_strlen(cmd->args[i - 1]), cmd->args[i - 1]);
     cpp_map_add(g_all.custom_env, "_", value);
 }
@@ -189,7 +192,7 @@ void process_cmd(char *s)
         execute_cmd();
     }
     set_exit_status();
-    last_arg();
+    last_arg(0);
     delete_files(1);
 }
 

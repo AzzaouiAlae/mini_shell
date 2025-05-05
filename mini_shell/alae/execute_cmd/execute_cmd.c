@@ -38,15 +38,18 @@ int use_fork(t_exe_cmd_data *data)
 
 void run(t_exe_cmd_data *data)
 {
-    if (data->cmd->cmd_path)
+    if (use_fork(data) && data->cmds[0] == data->cmd &&
+        !ft_strncmp(data->cmd->cmd_path, "env", 4))
+    {
+        init_new_env();
+        last_arg(1);
+        cpp_map_foreach(g_all.custom_env, add_env);
+    }
+    if (data->cmd->cmd_path && use_fork(data))
         dup_fd(data);
     data->builtin = cpp_map_get(g_all.builtins, data->cmd->cmd_path);
     if (data->builtin)
-    {
         data->builtin(data->cmd);
-        if (use_fork(data))
-            ft_exit(g_all.cmd_error_status);
-    }
     else if (data->cmd->cmd_path)
     {
         if (data->cmd->input_fd != -1 && data->cmd->output_fd != -1)
@@ -55,26 +58,25 @@ void run(t_exe_cmd_data *data)
                 (char **)(g_all.new_env->content));
             ft_exit(errno);
         }
-        ft_exit(g_all.cmd_error_status);
     }
     if (use_fork(data))
-            ft_exit(g_all.cmd_error_status);
+        ft_exit(g_all.cmd_error_status);
 }
 
 void run_cmds(t_exe_cmd_data *data)
 {
     int p;
-    // t_cpp_str *s_err;
+    t_cpp_str *s_err;
 
     p = 0;
-    // if (data->cmd->pipe && data->cmd->pipe->bad_fd)
-    // {
-    //     s_err = cpp_str_new();
-    //     cpp_str_add(s_err, data->cmd->args[0]);
-    //     cpp_str_add(s_err, ": write error: Bad file descriptor\n");
-    //     write(2, s_err->content, s_err->count);
-    //     return ;
-    // }
+    if (data->cmd->pipe && data->cmd->pipe->bad_fd)
+    {
+        s_err = cpp_str_new();
+        cpp_str_add(s_err, data->cmd->args[0]);
+        cpp_str_add(s_err, ": write error: Bad file descriptor\n");
+        write(2, s_err->content, s_err->count);
+        return ;
+    }
     if(use_fork(data))
         p = fork();
     if(p)
@@ -107,7 +109,7 @@ void execute_cmd()
     t_exe_cmd_data data;
 
     if (!g_all.cmds || !g_all.cmds->count)
-        return ;
+    return ;
     ft_bzero(&data, sizeof(t_exe_cmd_data));
     data.cmds = g_all.cmds->content;
     data.c = g_all.cmds->count;

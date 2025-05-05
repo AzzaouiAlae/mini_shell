@@ -32,7 +32,7 @@ void set_exit_status()
 int is_input_to_skip1(char *input)
 {
     if(!input)
-        ft_exit(0);
+        ft_exit(g_all.cmd_error_status);
     if(!(*input))
         return 1;
     if (!ft_strcmp(input, "\n"))

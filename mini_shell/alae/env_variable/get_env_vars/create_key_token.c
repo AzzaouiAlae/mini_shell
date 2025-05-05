@@ -46,10 +46,13 @@ int	create_str_key(t_cpp_str *str, t_cpp_str *key, int is_digt)
 	char	ch;
 
 	ch = str->content[0];
-	if (ch == '$' || ch == '?')
+	if (ch == '?')
 	{
-		cpp_str_add_char(key, ch);
-		cpp_str_delete_char(str, 0);
+		if (!key->count)
+		{
+			cpp_str_add_char(key, ch);
+			cpp_str_delete_char(str, 0);
+		}
 		return (1);
 	}
 	cpp_str_add_char(key, ch);

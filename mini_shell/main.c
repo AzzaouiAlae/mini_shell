@@ -2,6 +2,8 @@
 #include "debug.h"
 #include "alae/builtins_cmd/builtins.h"
 #include <signal.h>
+#include <stdio.h>
+#include "get/get_next_line.h"
 /*
 bash: $gg: ambiguous redirect
 */
@@ -48,6 +50,21 @@ void augment_shell_level()
     add_to_env(str, NULL, "SHLVL");
 }
 
+char *read_input()
+{
+    char *line;
+
+    // if (isatty(fileno(stdin)))
+	// 	return readline(get_prompt());
+	// else
+	// {
+		line = get_next_line(0);
+        if (ft_strlen(line))
+            line[ft_strlen(line) - 1] = '\0';
+		return line;
+	// }
+}
+
 int main(int argc, char *argv[], char *env[])
 {
     char *input;
@@ -60,18 +77,19 @@ int main(int argc, char *argv[], char *env[])
     {
         g_all.i++;
         g_all.current_cmd_file = NULL;
-        input = readline("$>: ");
+        //input = readline("$>: ");
+        input = read_input();
         if (is_input_to_skip1(input))
             continue;
         add_new_cmd_history(input, 1);
         if (is_input_to_skip2(input))
             continue;
         process_cmd(input);
-        free(input);
+        //free(input);
         g_all.line_count++;
     }
-    free(input);
+    //free(input);
     ft_free_all();
     rl_clear_history();
-    return 1;
+    return (g_all.cmd_error_status);
 }

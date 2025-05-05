@@ -1,23 +1,8 @@
 #include "get_env_vars.h"
 
-int init_vars(char *ch1, char *ch2, t_cpp_str *str)
-{
-    if (str->count)
-        *ch1 = str->content[str->count - 1];
-    else
-        *ch1 = 0;
-    if (str->count > 1)
-        *ch2 = str->content[str->count - 2];
-    else
-        *ch2 = 0;
-}
 
 int is_var_start(t_cpp_str *str, char ch, t_get_env_data *data)
 {
-    char c;
-    char c2;
-
-    init_vars(&c, &c2, data->new_str_token);
     if (!str->content[0])
         return 1;
     if (ch == data->special_ch)
