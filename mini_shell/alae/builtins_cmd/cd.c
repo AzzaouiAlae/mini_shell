@@ -67,7 +67,7 @@ void cd_dash(t_cmd *cmd, char *buf)
     }
     else if (!ft_strncmp("--", cmd->args[1], 3))
     {
-        free(cmd->args[1]);
+        ft_free(cmd->args[1]);
         cmd->args[1] = NULL;
         cd(cmd);
     }
