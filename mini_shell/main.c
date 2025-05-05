@@ -73,7 +73,6 @@ char *read_input(int *Shoul_free)
 		line = get_next_line(0);
         if (ft_strlen(line))
             line[ft_strlen(line) - 1] = '\0';
-        printf("'%s'\n",line);
 		return line;
 	}
 }

@@ -183,13 +183,14 @@ void process_cmd(char *s)
         get_variables_value();
         ft_check_syntax_after_pars();
         if (!g_all.cmd_error_status)
+        {
             rm_single_double_qoute();
-        if (!g_all.cmd_error_status)
             open_redirection_files();
-        create_cmd();
-        //print_cmds();
-        cpp_map_foreach(g_all.custom_env, add_env);
-        execute_cmd();
+            create_cmd();
+            //print_cmds();
+            cpp_map_foreach(g_all.custom_env, add_env);
+            execute_cmd();
+        }
     }
     set_exit_status();
     last_arg(0);
