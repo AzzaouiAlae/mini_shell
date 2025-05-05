@@ -101,7 +101,7 @@ void wait_cmds(t_exe_cmd_data *data)
     }
     if (data->pid_list->count)
         g_all.cmd_error_status = 0;
-    if (WIFEXITED(status))
+    if (data->pid_list->count && WIFEXITED(status))
         g_all.cmd_error_status = WEXITSTATUS(status);
 }
 
