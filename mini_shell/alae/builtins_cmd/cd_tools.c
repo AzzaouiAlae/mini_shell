@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 02:36:00 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/04 05:00:17 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/06 00:21:19 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,15 @@ int print_cd_error(char *arg)
     else
         write(2, "Minishell: cd: HOME not set\n", 28);
     return 1;
+}
+
+void print_dash_error()
+{
+    char *old_path;
+
+    old_path = get_from_env("OLDPWD")->content;
+    write(2, "Minishell: cd:", 14);
+    write(2, old_path, ft_strlen(old_path));
+    write(2, ": No such file or directory\n", 28);
+    
 }

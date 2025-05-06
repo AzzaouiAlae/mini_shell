@@ -22,6 +22,6 @@ int count_args(char **args);
 t_cpp_str *get_from_env(char *var);
 int get_stell_home (t_home_status set);
 int print_cd_error(char *arg);
-
+void print_dash_error();
 
 #endif

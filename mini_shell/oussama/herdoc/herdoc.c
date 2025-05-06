@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/01 15:57:01 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/05 23:41:16 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,12 @@ void here_doc(t_token **tokens, int i, int expand_her)
 		return;
 	her_doc.str = replace_char(get_line(NULL, 0), '\n', '\0');
 	if (!her_doc.str)
-		her_doc.str = readline("> ");
+	{
+		her_doc.str = get_next_line(0);
+		if (ft_strlen(her_doc.str))
+			her_doc.str[ft_strlen(her_doc.str) - 1] = '\0';
+	}
+		//her_doc.str = readline("> ");
 	her_doc.limiter = tokens[i + 1]->s;
 	her_doc.expand_her = expand_her;
 	while (ft_strncmp(her_doc.limiter, her_doc.str, ft_strlen(her_doc.limiter) + 1) != 0)
@@ -161,7 +166,12 @@ void here_doc(t_token **tokens, int i, int expand_her)
 		g_all.i++;
 		her_doc.str = replace_char(get_line(NULL, 0), '\n', '\0');
 		if (!her_doc.str)
-			her_doc.str = readline("> ");
+		{
+			her_doc.str = get_next_line(0);
+			if (ft_strlen(her_doc.str))
+				her_doc.str[ft_strlen(her_doc.str) - 1] = '\0';
+		}
+			//her_doc.str = readline("> ");
 	}
 	add_new_cmd_history(her_doc.str, 0);
 	ft_free(her_doc.str);

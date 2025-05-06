@@ -59,15 +59,28 @@ void cd_dash(t_cmd *cmd, char *buf)
 
     if (cmd->args[1][0] == '-' && cmd->args[1][1] == '\0')
     {
-        if (chdir(get_from_env("OLDPWD")->content) == -1)
+        int res;
+        char *path;
+
+        path = get_from_env("OLDPWD")->content;
+        res = chdir(get_from_env("OLDPWD")->content);
+        if (res != -1 )
+        {
+            write(1, path, ft_strlen(path));
+            write(1, "\n", 1);
+        }
+            //printf("%s\n", path);
+        if (res == -1)
+        {
+            print_dash_error();
             return;
+        }
         cwd = getcwd(buf, 4097);
         add_to_env(get_from_env("PWD"), NULL, "OLDPWD");
         add_to_env(NULL, cwd, "PWD");
     }
     else if (!ft_strncmp("--", cmd->args[1], 3))
     {
-        ft_free(cmd->args[1]);
         cmd->args[1] = NULL;
         cd(cmd);
     }
