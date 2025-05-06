@@ -20,11 +20,12 @@ typedef struct s_create_cmd
 
 void			print_error_cmd_not_found(char *cmd, t_create_cmd *data,
 					int status);
-void				check_path(char *cmd, t_create_cmd *data);
+void				check_path(char *cmd, t_create_cmd *data, int is_path);
 int				is_dir(char *cmd);
 int				check_builtins_cmd(t_create_cmd *data);
 void			run_builtin_cmds(t_create_cmd *data);
 void			close_fd(int fd);
 char	*get_cmd_path(char *cmd_s, t_create_cmd *data);
+int get_error_status(char *s);
 
 #endif

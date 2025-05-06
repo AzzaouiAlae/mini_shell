@@ -25,7 +25,7 @@ char *get_prompt()
     prompt = getcwd(buf, 4097);
     if (!prompt)
     {
-        prompt = get_from_env("PWD")->content;
+        prompt = get_from_env("PWD", NULL)->content;
     }
     prompt = ft_strrchr(prompt, '/') + 1;
     prompt = my_ft_strjoin("➜ ", prompt);

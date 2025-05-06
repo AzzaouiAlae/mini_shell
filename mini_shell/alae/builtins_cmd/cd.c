@@ -19,7 +19,7 @@ void add_to_env(t_cpp_str *s, char *str_to_change, char *var)
     }
 }
 
-t_cpp_str *get_from_env(char *var)
+t_cpp_str *get_from_env(char *var, char *arg)
 {
     t_cpp_str *str;
     t_cs_list *value;
@@ -35,6 +35,8 @@ t_cpp_str *get_from_env(char *var)
         return str;
     }
     cpp_str_add(str, value->content);
+    if (arg && arg[0] == '~')
+        cpp_str_add(str, &arg[1]);
     return str;
 }
 
@@ -43,13 +45,13 @@ void invalid_cwd(char **cwd, char *arg, char *buf)
     *cwd = getcwd(buf, 4097);
     if (!(*cwd))
     {
-        *cwd = my_ft_strjoin(get_from_env("PWD")->content, "/");
+        *cwd = my_ft_strjoin(get_from_env("PWD", NULL)->content, "/");
         *cwd = my_ft_strjoin(*cwd, arg);
         write(2, "error retrieving current directory: ", 36);
         write(2, "getcwd: cannot access parent directories: ",42);
         write(2, "No such file or directory\n", 26);
     }
-    add_to_env(get_from_env("PWD"), NULL, "OLDPWD");
+    add_to_env(get_from_env("PWD", NULL), NULL, "OLDPWD");
     add_to_env(NULL, *cwd, "PWD");
 }
 
@@ -62,8 +64,8 @@ void cd_dash(t_cmd *cmd, char *buf)
         int res;
         char *path;
 
-        path = get_from_env("OLDPWD")->content;
-        res = chdir(get_from_env("OLDPWD")->content);
+        path = get_from_env("OLDPWD", NULL)->content;
+        res = chdir(get_from_env("OLDPWD", NULL)->content);
         if (res != -1 )
         {
             write(1, path, ft_strlen(path));
@@ -76,7 +78,7 @@ void cd_dash(t_cmd *cmd, char *buf)
             return;
         }
         cwd = getcwd(buf, 4097);
-        add_to_env(get_from_env("PWD"), NULL, "OLDPWD");
+        add_to_env(get_from_env("PWD", NULL), NULL, "OLDPWD");
         add_to_env(NULL, cwd, "PWD");
     }
     else if (!ft_strncmp("--", cmd->args[1], 3))
@@ -99,10 +101,10 @@ void cd(t_cmd *cmd)
     }
     else if (count_args(cmd->args) == 1 || (cmd->args[1] && cmd->args[1][0] == '~'))
     {
-        if (chdir(get_from_env("HOME")->content) == -1 \
-            && print_cd_error(get_from_env("HOME")->content))
+        if (chdir(get_from_env("HOME", cmd->args[1])->content) == -1 \
+            && print_cd_error(cmd->args[1]))
             return;
-        add_to_env(get_from_env("PWD"), NULL, "OLDPWD");
+        add_to_env(get_from_env("PWD", NULL), NULL, "OLDPWD");
         add_to_env(NULL, getcwd(buf, 4097), "PWD");
     }
     else if (cmd->args[1] && (!ft_strncmp("--", cmd->args[1], 3) || !ft_strncmp("-", cmd->args[1], 2)))

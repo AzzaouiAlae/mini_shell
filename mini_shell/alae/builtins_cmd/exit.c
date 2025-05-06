@@ -62,7 +62,7 @@ void exit_cmd(t_cmd *cmd)
 
     error = 0;
     if (!cmd->args[1])
-        exit(0);
+        ft_exit(g_all.cmd_error_status);
     check_is_num(cmd);
     check_too_many_arguments(cmd);
     res = ft_atoi(cmd->args[1], &error);

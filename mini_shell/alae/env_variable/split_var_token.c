@@ -22,10 +22,13 @@ void create_arg_token(t_cpp_str *arg, t_cpp_str *str_token, int *i)
     }
 }
 
-void pass_space(t_cpp_str *str_token)
+void pass_space(t_cpp_str *str_token, int *i)
 {
     while (ft_strchr(" \t", str_token->content[0]))
+    {
+        (*i)++;
         cpp_str_delete_char(str_token, 0);
+    }
 }
 
 char **split_var_token(t_cpp_str *str_token)
@@ -38,8 +41,8 @@ char **split_var_token(t_cpp_str *str_token)
     ch = '\0';
     args = cs_list_new(sizeof(char *));
     arg = cpp_str_new();
-    pass_space(str_token);
     i = 0;
+    pass_space(str_token, &i);
     while (str_token->content[0])
     {
         create_arg_token(arg, str_token, &i);
@@ -48,8 +51,7 @@ char **split_var_token(t_cpp_str *str_token)
         else
             return args->content;
         arg = cpp_str_new();
-        pass_space(str_token);
-        i++;
+        pass_space(str_token, &i);
     }
     return args->content;
 }

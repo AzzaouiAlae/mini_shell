@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 02:36:00 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/06 00:21:19 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:24:18 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ int print_cd_error(char *arg)
     if (get_stell_home(0) == 1)
     {
         g_all.cmd_error_status = 1;
+        if (arg[0] == '~' && (arg[1] && arg[1] != '~'))
+        {
+            perror(my_ft_strjoin("Minishell cd: ", get_from_env("HOME", arg)->content));
+            return(1);
+        }
         perror(my_ft_strjoin("Minishell cd: ", arg));
     }
     else
@@ -52,7 +57,7 @@ void print_dash_error()
 {
     char *old_path;
 
-    old_path = get_from_env("OLDPWD")->content;
+    old_path = get_from_env("OLDPWD", NULL)->content;
     write(2, "Minishell: cd:", 14);
     write(2, old_path, ft_strlen(old_path));
     write(2, ": No such file or directory\n", 28);

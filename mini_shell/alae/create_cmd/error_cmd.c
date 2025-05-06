@@ -26,19 +26,20 @@ int is_dir(char *cmd)
 
 int get_error_status(char *s)
 {
-    if (s == "Is a directory\n")
+    if (!ft_strncmp(s, "Is a directory\n", 16))
         return 126;
-    if (s == "filename argument required\n")
+    if (!ft_strncmp(s, "filename argument required\n", 28))
         return 2;
-    if (s == "No such file or directory\n")
+    if (!ft_strncmp(s, "No such file or directory\n", 27))
         return 127;
-    if (s == "command not found\n")
+    if (!ft_strncmp(s, "command not found\n", 19))
         return 127;
-    if (s == "Permission denied\n")
+    if (!ft_strncmp(s, "Permission denied\n", 19))
         return 126;
+    return 127;
 }
 
-void check_path(char *cmd, t_create_cmd *data)
+void check_path(char *cmd, t_create_cmd *data, int is_path)
 {
     data->error = NULL;
     if (cpp_map_get(g_all.builtins, cmd))
@@ -47,7 +48,7 @@ void check_path(char *cmd, t_create_cmd *data)
         data->error = "Is a directory\n";
     else if (data->tkn->s[0] == '.' && ft_strlen(data->tkn->s) == 1)
         data->error = "filename argument required\n";
-    else if (is_path(data->tkn->s) && access(cmd, F_OK))
+    else if (is_path && access(cmd, F_OK))
         data->error = "No such file or directory\n";
     else if (!cmd || access(cmd, F_OK))
         data->error = "command not found\n";

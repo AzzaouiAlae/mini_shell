@@ -19,7 +19,7 @@ void exit_cmd(t_cmd *cmd);
 void pwd(t_cmd *cmd);
 void unset(t_cmd *cmd);
 int count_args(char **args);
-t_cpp_str *get_from_env(char *var);
+t_cpp_str *get_from_env(char *var, char *arg);
 int get_stell_home (t_home_status set);
 int print_cd_error(char *arg);
 void print_dash_error();

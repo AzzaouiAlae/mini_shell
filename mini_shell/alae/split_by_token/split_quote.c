@@ -24,8 +24,8 @@ int	is_double_quote(t_split_data *data)
         data->type = e_var_to_set;
 	while (is_char_in_db_quote(data))
         add_arg_type(data);
-    if ((data->type & e_file_name))
-        data->type = e_file_name | e_double_quote;
+    if ((data->type & e_file_name) && (data->type & e_cmd))
+        data->type -= e_cmd;
     add_token(data);
 	return (1);
 }

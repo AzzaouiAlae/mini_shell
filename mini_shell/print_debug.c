@@ -173,7 +173,7 @@ void process_cmd(char *s)
 
     g_all.is_error_printed = 0;
     init_new_env();
-    //process_cmd_debug(s);
+    // process_cmd_debug(s);
     split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
     g_all.cmd_error_status = 0;
     ft_check_syntax_error();
@@ -187,7 +187,7 @@ void process_cmd(char *s)
             rm_single_double_qoute();
             open_redirection_files();
             create_cmd();
-            //print_cmds();
+            print_cmds();
             cpp_map_foreach(g_all.custom_env, add_env);
             execute_cmd();
         }

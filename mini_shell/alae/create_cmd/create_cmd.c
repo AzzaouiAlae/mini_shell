@@ -36,13 +36,10 @@ char	*get_cmd_path(char *cmd_s, t_create_cmd *data)
 
 	j = 0;
 	ps = cpp_map_get(g_all.custom_env, "PATH");
-	if (!ps)
-		return NULL;
-	paths = ft_super_split(ps->content, ":", "");
-	if (!paths)
-		return NULL;
 	str = cpp_str_new();
-	while (paths[j] && cmd_s[0])
+	if (ps)
+		paths = ft_super_split(ps->content, ":", "");
+	while (ps && paths && paths[j] && cmd_s[0])
 	{
 		cpp_str_add(str, paths[j]);
 		cpp_str_add_char(str, '/');
@@ -52,16 +49,22 @@ char	*get_cmd_path(char *cmd_s, t_create_cmd *data)
 		cpp_str_clear(str);
 		j++;
 	}
-	check_path(str->content, data);
-	return (NULL);
+	cpp_str_clear(str);
+	cpp_str_add(str, cmd_s);
+	if (ps)
+		check_path(NULL, data, 0);
+	else
+		check_path(str->content, data, 1);
+	return (str->content);
 }
 
 void	add_cmd_token(t_create_cmd *data)
 {
+	//lilmona9acha lbach lakenti fi /bin o unset PATH odriti cmd tatkhdm wach khssna nhadliwha 
 	if (data->tkn->type & e_path || is_path(data->tkn->s) || 
 		cpp_map_get(g_all.builtins, data->tkn->s))
 	{
-		check_path(data->tkn->s, data);
+		check_path(data->tkn->s, data, 1);
 		cs_list_add(data->cmd_args, (long)data->tkn->s);
 		data->cmd->cmd_path = data->tkn->s;
 	}
