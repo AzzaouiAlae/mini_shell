@@ -18,8 +18,8 @@ char	*ft_strldup(const char *s1, size_t len)
 	char	*s;
 
 	i = 0;
-	if(!len)
-		return NULL;
+	if (!len)
+		return (NULL);
 	s = (char *)ft_calloc(sizeof(char), (len + 1));
 	while (i < len)
 	{

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   global.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:57:14 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:57:15 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GLOBAL_H
 # define GLOBAL_H
 # include "cpp_map/cpp_map.h"
@@ -54,7 +66,7 @@ typedef struct s_cmd
 typedef struct s_globale
 {
 	int				i;
-	int is_error_printed;
+	int				is_error_printed;
 	int				error_i;
 	int				argc;
 	int				line_count;

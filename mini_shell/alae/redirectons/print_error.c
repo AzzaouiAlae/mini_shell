@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 22:18:33 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:18:34 by aazzaoui         ###   ########.fr       */
+/*   Created: 2025/05/06 22:21:10 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:21:11 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../../mini_shell.h"
 
-void	unset(t_cmd *cmd)
+void	print_error(char *file_name, int *p_error)
 {
-	int	i;
+	t_cpp_str	*str;
 
-	i = 1;
-	while (cmd->args && cmd->args[i])
-	{
-		cpp_map_delete(g_all.custom_env, cmd->args[i]);
-		i++;
-	}
+	if (!(*p_error))
+		return ;
+	*p_error = 0;
+	str = cpp_str_new();
+	cpp_str_add(str, "mini-shell: ");
+	cpp_str_add(str, file_name);
+	perror(str->content);
+	g_all.cmd_error_status = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 07:09:48 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/01 12:46:24 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:44:01 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,31 @@ char	*ft_saver(char **str)
 		return (NULL);
 	else
 		tmp = (*str);
-		(*str) = ft_strdup((*str) + (i + 1));
+	(*str) = ft_strdup((*str) + (i + 1));
 	return ((*str));
 }
 
 char	*line_extracter(char *str)
 {
-	char	*line;
+	t_gnl	data;
 
-	int i, (j);
 	if (!str || str[0] == '\0')
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (str[i] != '\n' && str[i] != '\0')
-		i++;
-	line = (char *)ft_calloc(1, (size_t)(i + 1 + (str[i] == '\n')));
-	if (!line)
+	data.i = 0;
+	data.j = 0;
+	while (str[data.i] != '\n' && str[data.i] != '\0')
+		data.i++;
+	data.line = (char *)ft_calloc(1, (size_t)(data.i + 1
+				+ (str[data.i] == '\n')));
+	if (!data.line)
 		return (NULL);
-	i = 0;
-	while (str[i] != '\n' && str[i] != '\0')
-		line[j++] = str[i++];
-	if (str[i] == '\n')
-		line[j++] = '\n';
-	line[j] = '\0';
-	return (line);
+	data.i = 0;
+	while (str[data.i] != '\n' && str[data.i] != '\0')
+		data.line[data.j++] = str[data.i++];
+	if (str[data.i] == '\n')
+		data.line[data.j++] = '\n';
+	data.line[data.j] = '\0';
+	return (data.line);
 }
 
 char	*get_next_line(int fd)

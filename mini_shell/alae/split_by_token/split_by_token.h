@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_by_token.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:21:47 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:21:48 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SPLIT_BY_TOKEN_H
 # define SPLIT_BY_TOKEN_H
 # include "../../cpp_string/cpp_string.h"
@@ -38,8 +50,8 @@ int			is_dollar_to_skip(t_split_data *data);
 int			check_quote_in_arg(t_split_data *data);
 void		add_token(t_split_data *data);
 int			is_var_to_set(t_split_data *data);
-int is_valid_var_name(char *str);
-int is_valid_var_name_char(char ch);
-int is_digit(char ch);
+int			is_valid_var_name(char *str);
+int			is_valid_var_name_char(char ch);
+int			is_digit(char ch);
 
 #endif

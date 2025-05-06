@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cpp_str_add.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:22:48 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:22:49 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cpp_string.h"
 
 void	cpp_str_add_char(t_cpp_str *str, char ch)
@@ -26,7 +38,7 @@ void	cpp_str_add(t_cpp_str *str, char *arr)
 
 void	cpp_str_add_len(t_cpp_str *str, char *arr, int len)
 {
-	int i;
+	int	i;
 
 	if (!str || !arr || !arr[0])
 		return ;

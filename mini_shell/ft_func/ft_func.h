@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_func.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:23:14 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:23:15 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_FUNC_H
 # define FT_FUNC_H
 # include "../cpp_map/cpp_map.h"
@@ -20,11 +32,10 @@ size_t		ft_strlen_delimiter(const char *s, char *sep);
 char		*str_find_char(const char *s, char *sep);
 t_cpp_str	*ft_itoa(int num);
 int			ft_strncmp(char *s1, char *s2, int n);
-size_t	ft_strslen(char **strs);
-int is_alpha(char ch);
-int is_digit(char ch);
-int	ft_atoi(const char *str, int *error);
-char	*ft_strrchr(const char *s, int c);
-
+size_t		ft_strslen(char **strs);
+int			is_alpha(char ch);
+int			is_digit(char ch);
+int			ft_atoi(const char *str, int *error);
+char		*ft_strrchr(const char *s, int c);
 
 #endif

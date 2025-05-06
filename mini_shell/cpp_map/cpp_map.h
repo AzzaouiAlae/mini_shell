@@ -1,5 +1,17 @@
-#ifndef CS_cpp_map_H
-# define CS_cpp_map_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cpp_map.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:22:37 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:56:14 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CPP_MAP_H
+# define CPP_MAP_H
 # include "../cs_list/cs_list.h"
 
 typedef struct key_value
@@ -25,6 +37,6 @@ void		cpp_map_delete(t_cpp_map *map, char *key);
 void		cpp_map_clear(t_cpp_map *map);
 int			next_prime(int n);
 void		cpp_map_resize(t_cpp_map *map, int capacity);
-void cpp_map_foreach(t_cpp_map *map, void (*f)(t_key_value *));
+void		cpp_map_foreach(t_cpp_map *map, void (*f)(t_key_value *));
 
 #endif

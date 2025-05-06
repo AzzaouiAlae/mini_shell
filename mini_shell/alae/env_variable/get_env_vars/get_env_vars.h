@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_env_vars.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:19:57 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:19:58 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_ENV_VARS_H
 # define GET_ENV_VARS_H
 # include "../../split_by_token/split_by_token.h"
@@ -7,7 +19,7 @@ typedef struct s_get_env_data
 {
 	int			i;
 	int			j;
-	char ch;
+	char		ch;
 	int			type;
 	char		special_ch;
 	char		**args;

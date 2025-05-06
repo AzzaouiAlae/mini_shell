@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_var.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:20:23 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:20:26 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENV_VAR_H
 # define ENV_VAR_H
-# include "../../global.h"
-# include "../../mini_shell.h"
 # include "../../ft_func/ft_func.h"
+# include "../../mini_shell.h"
 # include "../split_by_token/split_by_token.h"
 
 typedef enum e_var_type

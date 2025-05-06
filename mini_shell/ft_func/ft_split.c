@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:42:24 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/22 13:09:06 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:19:04 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_sep(char *sep, char ch, char cur_sep)
 {
-	if(!ch)
+	if (!ch)
 		return (0);
 	if (!cur_sep && ft_strchr(sep, ch))
 		return (1);

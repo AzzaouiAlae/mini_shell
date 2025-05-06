@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 07:09:52 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/01 22:43:21 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:43:47 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,27 @@ int	ft_line_verifier(char *buf)
 
 char	*my_ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
+	t_gnl	data;
 
-	int lenstr, (i), (y);
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (ft_strdup(s1));
-	lenstr = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)ft_calloc(1, lenstr + 1);
-	if (!str)
+	data.lenstr = ft_strlen(s1) + ft_strlen(s2);
+	data.str = (char *)ft_calloc(1, data.lenstr + 1);
+	if (!data.str)
 		return (NULL);
-	i = 0;
-	while (s1[i])
+	data.i = 0;
+	while (s1[data.i])
 	{
-		str[i] = s1[i];
-		i++;
+		data.str[data.i] = s1[data.i];
+		data.i++;
 	}
-	y = 0;
-	while (s2[y])
-		str[i++] = s2[y++];
-	str[i] = '\0';
-	return (str);
+	data.y = 0;
+	while (s2[data.y])
+		data.str[data.i++] = s2[data.y++];
+	data.str[data.i] = '\0';
+	return (data.str);
 }

@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:33:14 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/02 20:11:53 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:47:56 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ char	*create_cmd_file(void)
 
 char	*get_cmd_file(int reset, char *file_to_start)
 {
-	static char *(current_file);
-	int fd;
+	static char	*current_file;
+	int			fd;
 
 	if (reset == 1)
 		current_file = ft_strdup(file_to_start);

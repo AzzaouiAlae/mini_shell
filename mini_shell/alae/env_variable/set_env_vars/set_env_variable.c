@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_env_variable.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:20:11 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 23:05:32 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "set_env_vars.h"
 
 t_cs_list	*create_value_list(char *s, int *val_len, int type)
@@ -14,13 +26,13 @@ t_cs_list	*create_value_list(char *s, int *val_len, int type)
 		cs_list_add(str, s[i]);
 		i++;
 	}
-    str->type = type;
+	str->type = type;
 	return (str);
 }
 
 void	add_env_var(char *kvp, int type)
 {
-	t_add_env_var data;
+	t_add_env_var	data;
 
 	ft_bzero(&data, sizeof(t_add_env_var));
 	data.s = str_find_char(kvp, "+=");
@@ -37,20 +49,20 @@ void	add_env_var(char *kvp, int type)
 			data.val_list = create_value_list(data.s, &(data.val_len), type);
 		(data.s)++;
 		data.val = create_value_list(data.s, &(data.val_len), type);
-		cs_list_add_range(data.val_list, data.val->count, data.val->content);		
+		cs_list_add_range(data.val_list, data.val->count, data.val->content);
 	}
 	else
 		data.val_list = create_value_list(data.s, &(data.val_len), type);
 	cpp_map_add(g_all.custom_env, data.str_key->content, data.val_list);
 }
 
-void print_export_error(t_set_env_vars *data)
+void	print_export_error(t_set_env_vars *data)
 {
-	t_token *tkn;
-	t_cpp_str *str;
+	t_token		*tkn;
+	t_cpp_str	*str;
 
 	str = cpp_str_new();
-    tkn = data->tokens[data->i];
+	tkn = data->tokens[data->i];
 	cpp_str_add(str, "mini-shell: export: `");
 	cpp_str_add(str, tkn->s);
 	g_all.cmd_error_status = 1;
@@ -62,42 +74,42 @@ void print_export_error(t_set_env_vars *data)
 	else
 		cpp_str_add(str, "': not a valid identifier\n");
 	write(2, str->content, str->count);
-	
 	cs_list_delete(g_all.tokens, data->i);
-    data->i--;
+	data->i--;
 }
 
 void	add_var_to_env(t_set_env_vars *data)
 {
-    t_token *tkn;
+	t_token	*tkn;
 
-    tkn = data->tokens[data->i];
+	tkn = data->tokens[data->i];
 	if (tkn->type & e_pipe)
 		data->is_export_args = 0;
 	if (is_env_var(data))
 	{
 		if ((tkn->type & e_set_var))
-            data->is_export_args = 1;
+			data->is_export_args = 1;
 		else if (!(data->has_cmd))
 			add_env_var(data->tokens[data->i]->s, data->type);
 	}
 	else if (tkn->type & (e_var_to_set | e_args) && !(tkn->type & e_cmd))
 	{
-		if(data->is_export_args)
+		if (data->is_export_args)
 			print_export_error(data);
 		else
-			tkn->type = e_args | is_cmd_type() | is_file_name() | is_path(tkn->s);
+			tkn->type = e_args | is_cmd_type() | is_file_name()
+				| is_path(tkn->s);
 	}
 }
 
 void	add_vars_to_env(void)
 {
-    t_set_env_vars data;
+	t_set_env_vars	data;
 
 	ft_bzero(&data, sizeof(t_set_env_vars));
 	data.has_cmd = is_tokens_has_cmd();
 	data.tokens = g_all.tokens->content;
-    data.count = g_all.tokens->count;
+	data.count = g_all.tokens->count;
 	while (g_all.tokens->count > data.i)
 	{
 		add_var_to_env(&data);

@@ -1,111 +1,93 @@
-//#include "mini_shell.h"
-#include "debug.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 22:23:51 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:23:52 by aazzaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "alae/builtins_cmd/builtins.h"
-#include <signal.h>
-#include <stdio.h>
-#include "get/get_next_line.h"
-/*
-bash: $gg: ambiguous redirect
-*/
+#include "mini_shell.h"
 
-void clear_read_line(int signo)
+void	clear_read_line(int signo)
 {
-    printf("\n");
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
-char *get_prompt()
+char	*get_prompt(void)
 {
-    char *prompt;
-    char buf[4097];
+	char	*prompt;
+	char	buf[4097];
 
-    ft_bzero(buf, 4097);
-    prompt = getcwd(buf, 4097);
-    if (!prompt)
-    {
-        prompt = get_from_env("PWD", NULL)->content;
-    }
-    prompt = ft_strrchr(prompt, '/') + 1;
-    prompt = my_ft_strjoin("➜ ", prompt);
-    prompt = my_ft_strjoin(prompt, " $>: ");
-    return prompt;
+	ft_bzero(buf, 4097);
+	prompt = getcwd(buf, 4097);
+	if (!prompt)
+	{
+		prompt = get_from_env("PWD", NULL)->content;
+	}
+	prompt = ft_strrchr(prompt, '/') + 1;
+	prompt = my_ft_strjoin("➜ ", prompt);
+	prompt = my_ft_strjoin(prompt, " $>: ");
+	return (prompt);
 }
 
-void augment_shell_level()
+char	*read_input(int *Shoul_free)
 {
-    t_cpp_str *str;
-    t_cs_list *value;
-    int shlvl;
-    int error;
-    char *buf;
+	char	*line;
 
-    shlvl = 0;
-    error = 0;
-    str = cpp_str_new();
-    buf = ft_calloc(1, 4097);
-    value = cpp_map_get(g_all.custom_env, "SHLVL");
-    if (!value)
-    {
-        add_to_env(NULL, getcwd(buf, 4097), "PWD");
-        cpp_str_add(str, ft_strdup("0"));
-        value = cs_list_new(sizeof(char));
-        cs_list_add(value, (long)(str->content));
-    }
-    shlvl = ft_atoi(value->content, &error) + 1;
-    cpp_str_clear(str);
-    cpp_str_add(str, ft_itoa(shlvl)->content);
-    add_to_env(str, NULL, "SHLVL");
-}
-
-char *read_input(int *Shoul_free)
-{
-    char *line;
-
-    if (isatty(fileno(stdin)))
-    {
-        *Shoul_free = 1;
-		return readline(get_prompt());
-    }
+	if (isatty(fileno(stdin)))
+	{
+		*Shoul_free = 1;
+		return (readline(get_prompt()));
+	}
 	else
 	{
 		line = get_next_line(0);
-        if (ft_strlen(line))
-            line[ft_strlen(line) - 1] = '\0';
-		return line;
+		if (ft_strlen(line))
+			line[ft_strlen(line) - 1] = '\0';
+		return (line);
 	}
 }
 
-int main(int argc, char *argv[], char *env[])
+void	process_line(int *ShoulFree, char **input)
 {
-    char *input;
-    int ShoulFree;
-    
-    ShoulFree = 0;
-    init_g_all(argc, argv, env);
-    add_the_past_history();
-    signal(SIGINT, clear_read_line);
-    augment_shell_level();
-    while(1)
-    {
-        g_all.i++;
-        g_all.current_cmd_file = NULL;
-        //input = readline("$>: ");
-        input = read_input(&ShoulFree);
-        if (is_input_to_skip1(input))
-            continue;
-        add_new_cmd_history(input, 1);
-        if (is_input_to_skip2(input))
-            continue;
-        process_cmd(input);
-        if (ShoulFree)
-            free(input);
-        g_all.line_count++;
-    }
-    if (ShoulFree)
-        free(input);
-    ft_free_all();
-    rl_clear_history();
-    return (g_all.cmd_error_status);
+	g_all.i++;
+	g_all.current_cmd_file = NULL;
+	// input = readline("$>: ");
+	*input = read_input(ShoulFree);
+	if (is_input_to_skip1(*input))
+		return ;
+	add_new_cmd_history(*input, 1);
+	if (is_input_to_skip2(*input))
+		return ;
+	process_cmd(*input);
+	if (*ShoulFree)
+		free(*input);
+	g_all.line_count++;
+}
+
+int	main(int argc, char *argv[], char *env[])
+{
+	char	*input;
+	int		ShoulFree;
+
+	ShoulFree = 0;
+	init_g_all(argc, argv, env);
+	add_the_past_history();
+	signal(SIGINT, clear_read_line);
+	augment_shell_level();
+	while (1)
+		process_line(&ShoulFree, &input);
+	if (ShoulFree)
+		free(input);
+	ft_free_all();
+	rl_clear_history();
+	return (g_all.cmd_error_status);
 }

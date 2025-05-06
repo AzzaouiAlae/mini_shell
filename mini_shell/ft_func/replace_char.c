@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   replace_char.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 22:18:33 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:18:34 by aazzaoui         ###   ########.fr       */
+/*   Created: 2025/05/06 22:23:37 by aazzaoui          #+#    #+#             */
+/*   Updated: 2025/05/06 22:53:06 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "ft_func.h"
 
-void	unset(t_cmd *cmd)
+char	*replace_char(char *s, char ch, char ch_to_replace)
 {
 	int	i;
 
-	i = 1;
-	while (cmd->args && cmd->args[i])
+	i = 0;
+	while (s && s[i])
 	{
-		cpp_map_delete(g_all.custom_env, cmd->args[i]);
+		if (s[i] == ch)
+			s[i] = ch_to_replace;
 		i++;
 	}
+	return (s);
 }
