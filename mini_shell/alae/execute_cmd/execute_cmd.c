@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:50 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:20:51 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:34:03 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	run(t_exe_cmd_data *data)
 	if (data->cmd->cmd_path && use_fork(data))
 		dup_fd(data);
 	data->builtin = cpp_map_get(g_all.builtins, data->cmd->cmd_path);
-	if (data->builtin)
+	if (data->builtin && data->cmd->input_fd != -1
+		&& data->cmd->output_fd != -1)
 		data->builtin(data->cmd);
 	else if (data->cmd->cmd_path)
 	{
@@ -61,10 +62,9 @@ void	run(t_exe_cmd_data *data)
 
 void	run_cmds(t_exe_cmd_data *data)
 {
-	int			p;
 	t_cpp_str	*s_err;
 
-	p = 0;
+	g_all.current_pid = 0;
 	if (data->cmd->pipe && data->cmd->pipe->bad_fd)
 	{
 		s_err = cpp_str_new();
@@ -74,9 +74,9 @@ void	run_cmds(t_exe_cmd_data *data)
 		return ;
 	}
 	if (use_fork(data))
-		p = fork();
-	if (p)
-		cs_list_add(data->pid_list, p);
+		g_all.current_pid = fork();
+	if (g_all.current_pid)
+		cs_list_add(data->pid_list, g_all.current_pid);
 	else
 		run(data);
 }
@@ -89,16 +89,24 @@ void	wait_cmds(t_exe_cmd_data *data)
 
 	i = 0;
 	status = 0;
-	pids = data->pid_list->content;
-	while (i < data->pid_list->count)
+	signal(SIGINT, SIG_IGN);
+	while (data->pid_list->count)
 	{
-		waitpid(pids[i], &status, 0);
+		pids = data->pid_list->content;
+		waitpid(pids[0], &status, 0);
+		cs_list_delete(data->pid_list, 0);
 		i++;
 	}
-	if (data->pid_list->count)
+	signal(SIGINT, clear_read_line);
+	if (i && !g_all.ctrl_c)
 		g_all.cmd_error_status = 0;
-	if (data->pid_list->count && WIFEXITED(status))
+	if (i && WIFEXITED(status) && !g_all.ctrl_c)
 		g_all.cmd_error_status = WEXITSTATUS(status);
+	if (status == 2)
+	{
+		printf("\n");
+		g_all.cmd_error_status = 130;
+	}
 }
 
 void	execute_cmd(void)
@@ -111,7 +119,10 @@ void	execute_cmd(void)
 	data.cmds = g_all.cmds->content;
 	data.c = g_all.cmds->count;
 	data.cmd = data.cmds[data.i];
-	data.pid_list = cs_list_new(sizeof(int));
+	if (!g_all.pid_list)
+		g_all.pid_list = cs_list_new(sizeof(int));
+	data.pid_list = g_all.pid_list;
+	g_all.ctrl_c = 0;
 	while (data.c > data.i)
 	{
 		data.cmd = data.cmds[data.i];

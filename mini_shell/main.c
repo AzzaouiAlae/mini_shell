@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:51 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:23:52 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/07 21:31:38 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 
 void	clear_read_line(int signo)
 {
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	g_all.ctrl_c = 1;
+	if (!(g_all.pid_list) || !(g_all.pid_list->count))
+	{		
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_all.cmd_error_status = 130;
+		set_exit_status();
+	}
 }
 
 char	*get_prompt(void)
@@ -60,7 +66,7 @@ void	process_line(int *ShoulFree, char **input)
 {
 	g_all.i++;
 	g_all.current_cmd_file = NULL;
-	// input = readline("$>: ");
+	// input = readline(get_prompt());
 	*input = read_input(ShoulFree);
 	if (is_input_to_skip1(*input))
 		return ;
@@ -82,6 +88,7 @@ int	main(int argc, char *argv[], char *env[])
 	init_g_all(argc, argv, env);
 	add_the_past_history();
 	signal(SIGINT, clear_read_line);
+	signal(SIGQUIT, SIG_IGN);
 	augment_shell_level();
 	while (1)
 		process_line(&ShoulFree, &input);

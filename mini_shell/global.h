@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:57:14 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:57:15 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/07 21:26:33 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,17 @@ typedef struct s_cmd
 typedef struct s_globale
 {
 	int				i;
-	int				is_error_printed;
-	int				error_i;
 	int				argc;
+	int				error_i;
+	int				current_pid;
 	int				line_count;
+	int				is_error_printed;
 	int				cmd_error_status;
+	int				ctrl_c;
+	t_token_type	last_cmd_type;
 	char			*current_cmd_file;
 	char			**env;
 	char			**argv;
-	t_token_type	last_cmd_type;
 	t_token			*token;
 	t_cpp_str		*token_str;
 	t_cpp_map		*custom_env;
@@ -87,6 +89,7 @@ typedef struct s_globale
 	t_cs_list		*new_env;
 	t_cs_list		*ch_i;
 	t_cs_list		*variables_name;
+	t_cs_list		*pid_list;
 }					t_global;
 
 extern t_global		g_all;

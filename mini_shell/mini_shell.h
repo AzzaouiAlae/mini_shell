@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 21:14:51 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:39:02 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <string.h>
 # include <unistd.h>
 
+void	clear_sig_quit(int signo);
 char	*get_enum_str(int type);
 void	print_tokens(void);
 void	split_tokens(char *s, char *sep, char *special_sep);

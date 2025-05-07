@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:44:16 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/06 22:47:15 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:58:37 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	add_the_past_history(void)
 		cread = read(fd, full_cmd, 204799);
 		full_cmd[cread] = '\0';
 		close(fd);
-		add_history(full_cmd);
+		add_history((const char *)full_cmd);
 		file_name = get_cmd_file(0, NULL);
 	}
 }

@@ -1,0 +1,31 @@
+{
+    "files.associations": {
+        "ft_func.h": "c",
+        "compare": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "string.h": "c",
+        "stdio.h": "c",
+        "cs_list.h": "c",
+        "ft_check_syntax.h": "c",
+        "garbage_collector.h": "c",
+        "readline.h": "c",
+        "mini_shell.h": "c",
+        "split_by_token.h": "c",
+        "env_var.h": "c",
+        "set_env_vars.h": "c",
+        "cpp_string.h": "c",
+        "cpp_map.h": "c",
+        "global.h": "c",
+        "execute_cmd.h": "c",
+        "builtins.h": "c",
+        "history.h": "c",
+        "debug.h": "c"
+    },
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    }
+}
