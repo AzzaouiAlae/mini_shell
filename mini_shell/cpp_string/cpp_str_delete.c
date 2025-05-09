@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cpp_str_delete.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:22:51 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:45:17 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:46:55 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	cpp_str_delete_char(t_cpp_str *str, int index)
 void	cpp_str_delete_len(t_cpp_str *str, int index, int len)
 {
 	int	ln;
-	int	i;
 
 	if (index > str->count - 1 || index < 0 || len < 0 || !str)
 		return ;

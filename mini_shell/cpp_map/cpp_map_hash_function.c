@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cpp_map_hash_function.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:22:32 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:55:22 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:45:48 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	cpp_map_hash_function(char *str)
 	num = 1;
 	i = 0;
 	while (str && str[i])
-		num += str[i++] + i + (i % ft_strlen(str));
+	{
+		num += str[i] + i + (i % ft_strlen(str));
+		i++;
+	}
 	if (!i)
 		return (num);
 	if (str && str[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cpp_map_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:22:14 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:22:15 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:44:55 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	cpp_map_clear(t_cpp_map *map)
 	int			index;
 	int			i;
 	t_cs_list	**lists;
-	t_key_value	**key_values;
 
 	index = -1;
 	lists = map->content;
@@ -28,7 +27,6 @@ void	cpp_map_clear(t_cpp_map *map)
 		i = 0;
 		while (lists[index]->count > i)
 		{
-			key_values = lists[index]->content;
 			cs_list_delete(lists[index], i);
 			i++;
 		}

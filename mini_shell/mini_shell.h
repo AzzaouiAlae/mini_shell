@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/07 20:39:02 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 05:29:52 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_SHELL_H
 # define MINI_SHELL_H
-# include "alae/env_variable/env_var.h"
+# include "env_variable/env_var.h"
 # include "cpp_map/cpp_map.h"
 # include "ft_func/ft_func.h"
 # include "get/get_next_line.h"

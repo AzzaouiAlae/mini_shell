@@ -12,7 +12,7 @@
 
 #include "ft_func.h"
 
-static int	memory_allocation(size_t *s_len, size_t len, char **str)
+static int	memory_allocation(int *s_len, int len, char **str)
 {
 	if (*s_len > len)
 	{
@@ -24,18 +24,18 @@ static int	memory_allocation(size_t *s_len, size_t len, char **str)
 	return (1);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, int start, int len)
 {
-	size_t	s_len;
+	int	s_len;
 	char	*str;
-	size_t	i;
+	int	i;
 
 	if (!s)
 		return (NULL);
 	if (!len || !s[0])
 		return (ft_strdup(""));
 	i = ft_strlen(s) - start;
-	if (i <= 0 || start > ft_strlen(s) - 1)
+	if (i <= 0 || (start > ft_strlen(s) - 1))
 		return (ft_strdup(""));
 	s_len = i;
 	i = 0;

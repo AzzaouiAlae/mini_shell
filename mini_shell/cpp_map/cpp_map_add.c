@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cpp_map_add.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:22:10 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:22:11 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:43:37 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ void	add_item(t_cpp_map *map, t_cs_list **lists, t_key_value *kvp, int i)
 void	cpp_map_add(t_cpp_map *map, char *key, void *value)
 {
 	int			index;
-	int			i;
 	t_key_value	*kvp;
 	t_cs_list	**lists;
 
 	if (map->count > map->max_size)
 		cpp_map_resize(map, next_prime(map->capacity * 2));
-	i = 0;
 	lists = map->content;
 	kvp = ft_calloc(1, sizeof(t_key_value));
 	kvp->key = key;

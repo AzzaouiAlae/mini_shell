@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:06:05 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/04/24 14:20:16 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:51:07 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strcmp(char *s1, char *s2)
 	size_t	i;
 
 	i = 0;
-	if (!s1 && s2 || s1 && !s2)
+	if ((!s1 && s2) || (s1 && !s2))
 		return (1);
 	if (!s1 && !s2)
 		return (0);
@@ -32,10 +32,10 @@ int	ft_strcmp(char *s1, char *s2)
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	if (!s1 && s2 || s1 && !s2)
+	if ((!s1 && s2) || (s1 && !s2))
 		return (1);
 	if (!s1 && !s2)
 		return (0);

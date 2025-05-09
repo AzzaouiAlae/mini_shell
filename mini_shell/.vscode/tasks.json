@@ -9,9 +9,7 @@
                 "-g",
                 "*.c",
                 "*/*.c",
-                "alae/*/*.c",
-                "alae/*/*/*.c",
-                "${workspaceFolder}/oussama/*/*.c",
+                "*/*/*.c",
                 "-lreadline",
                 "-o",
                 "${workspaceFolder}/minishell"

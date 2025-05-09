@@ -20,7 +20,18 @@
         "execute_cmd.h": "c",
         "builtins.h": "c",
         "history.h": "c",
-        "debug.h": "c"
+        "debug.h": "c",
+        "sstream": "c",
+        "charconv": "c",
+        "chrono": "c",
+        "optional": "c",
+        "format": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "cstdlib": "c"
     },
     "github.copilot.enable": {
         "*": false,

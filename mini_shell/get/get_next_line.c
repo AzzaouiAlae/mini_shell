@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 07:09:48 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/06 22:44:01 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:56:36 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*ft_read(int fd, char *buf)
 {
-	char	*stored_buffer;
 	char	*tmp;
 	ssize_t	b;
 
@@ -23,7 +22,6 @@ char	*ft_read(int fd, char *buf)
 		tmp = (char *)ft_calloc(1, (size_t)(BUFFER_SIZE) + 1);
 		b = read(fd, tmp, BUFFER_SIZE);
 		tmp[b] = '\0';
-		stored_buffer = buf;
 		buf = my_ft_strjoin(buf, tmp);
 		if (!buf)
 			return (NULL);
@@ -35,7 +33,6 @@ char	*ft_read(int fd, char *buf)
 
 char	*ft_saver(char **str)
 {
-	char	*tmp;
 	int		i;
 
 	if (!str)
@@ -46,8 +43,6 @@ char	*ft_saver(char **str)
 	if (((*str)[i] == '\0' && ft_line_verifier((*str)) == 0)
 		|| ((*str)[i] != '\0' && (*str)[i + 1] == '\0'))
 		return (NULL);
-	else
-		tmp = (*str);
 	(*str) = ft_strdup((*str) + (i + 1));
 	return ((*str));
 }

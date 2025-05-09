@@ -12,9 +12,9 @@
 
 #include "ft_func.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s && s[i])
@@ -22,9 +22,9 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strslen(char **strs)
+int	ft_strslen(char **strs)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (strs && strs[i])

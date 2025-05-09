@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:45 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:23:46 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:01:34 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "alae/builtins_cmd/builtins.h"
+#include "builtins_cmd/builtins.h"
 #include "mini_shell.h"
 
 t_global	g_all;

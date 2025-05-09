@@ -31,6 +31,7 @@ void	ft_free_all(void)
 	mem = current_working_mem(NULL, 0);
 	free(mem);
 	current_working_mem(NULL, 1);
+	rl_clear_history();
 }
 
 void	find_to_free(void *mem)

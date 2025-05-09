@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:56 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:23:57 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:25:02 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,24 @@ void	process_cmd(char *s)
 {
 	g_all.is_error_printed = 0;
 	init_new_env();
-	split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
 	g_all.cmd_error_status = 0;
-	ft_check_syntax_error();
-	check_here_doc(s);
+	split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
 	if (!g_all.cmd_error_status)
 	{
-		get_variables_value();
-		ft_check_syntax_after_pars();
+		ft_check_syntax_error();
+		check_here_doc(s);
 		if (!g_all.cmd_error_status)
 		{
-			rm_single_double_qoute();
-			open_redirection_files();
-			create_cmd();
-			cpp_map_foreach(g_all.custom_env, add_env);
-			execute_cmd();
+			get_variables_value();
+			ft_check_syntax_after_pars();
+			if (!g_all.cmd_error_status)
+			{
+				rm_single_double_qoute();
+				open_redirection_files();
+				create_cmd();
+				cpp_map_foreach(g_all.custom_env, add_env);
+				execute_cmd();
+			}
 		}
 	}
 	set_exit_status();

@@ -6,16 +6,16 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:51:07 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/04/18 13:05:18 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:51:31 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_func.h"
 
-char	*ft_strnstr(char *haystack, char *needle, size_t len)
+char	*ft_strnstr(char *haystack, char *needle, int len)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = 0;
 	if (needle[i] == '\0')

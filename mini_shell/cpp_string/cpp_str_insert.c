@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cpp_str_insert.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:22:54 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/07 23:05:36 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:49:30 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,21 @@ void	cpp_str_insert_len(t_cpp_str *str, char *value, int index, int s_len)
 	len = ft_strlen(value);
 	if (s_len < len)
 		len = s_len;
-	if (str->capacity - 1 == str->count + len)
-		cpp_str_resize(str, str->capacity * 2);
+	if (str->capacity - 1 <= str->count + len)
+	{
+		while (str->capacity - 1 <= str->count + len)
+			str->capacity *= 2;
+		cpp_str_resize(str, str->capacity);
+	}
+	i = -1;
 	while (count > index)
 	{
 		str->content[count - 1 + len] = str->content[count - 1];
 		count--;
 	}
-	while (i < len)
+	while (++i < len)
 	{
 		str->content[index + i] = value[i];
 		str->count++;
-		i++;
 	}
 }

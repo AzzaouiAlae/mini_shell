@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:18 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:54:29 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:54:18 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 t_cpp_str	*ft_itoa(int num)
 {
-	int			i;
 	long		n;
 	t_cpp_str	*str;
 
-	i = 0;
 	n = num;
 	str = cpp_str_new();
 	if (n < 0)

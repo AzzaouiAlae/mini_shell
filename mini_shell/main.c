@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:51 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/07 21:31:38 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:54:48 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "alae/builtins_cmd/builtins.h"
+#include "builtins_cmd/builtins.h"
 #include "mini_shell.h"
 
 void	clear_read_line(int signo)
 {
+	(void)signo;
 	g_all.ctrl_c = 1;
 	if (!(g_all.pid_list) || !(g_all.pid_list->count))
 	{		
@@ -44,13 +45,12 @@ char	*get_prompt(void)
 	return (prompt);
 }
 
-char	*read_input(int *Shoul_free)
+char	*read_input()
 {
 	char	*line;
 
 	if (isatty(fileno(stdin)))
 	{
-		*Shoul_free = 1;
 		return (readline(get_prompt()));
 	}
 	else
@@ -62,39 +62,34 @@ char	*read_input(int *Shoul_free)
 	}
 }
 
-void	process_line(int *ShoulFree, char **input)
+void	process_line(char **input)
 {
 	g_all.i++;
 	g_all.current_cmd_file = NULL;
-	// input = readline(get_prompt());
-	*input = read_input(ShoulFree);
+	//*input = readline(get_prompt());
+	*input = read_input();
 	if (is_input_to_skip1(*input))
 		return ;
 	add_new_cmd_history(*input, 1);
 	if (is_input_to_skip2(*input))
 		return ;
 	process_cmd(*input);
-	if (*ShoulFree)
-		free(*input);
+	//free(*input);
 	g_all.line_count++;
 }
 
 int	main(int argc, char *argv[], char *env[])
 {
 	char	*input;
-	int		ShoulFree;
 
-	ShoulFree = 0;
 	init_g_all(argc, argv, env);
 	add_the_past_history();
 	signal(SIGINT, clear_read_line);
 	signal(SIGQUIT, SIG_IGN);
 	augment_shell_level();
 	while (1)
-		process_line(&ShoulFree, &input);
-	if (ShoulFree)
-		free(input);
+		process_line(&input);
+	free(input);
 	ft_free_all();
-	rl_clear_history();
 	return (g_all.cmd_error_status);
 }
