@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:53 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 05:36:24 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 22:10:15 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@
 typedef struct s_exe_cmd_data
 {
 	int			i;
+	int			j;
 	int			c;
+	int	status;
+	int	*pids;
+	int print_nl;
 	t_cmd		*cmd;
 	t_cmd		*old_cmd;
 	t_cmd		**cmds;

@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:50 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 16:30:43 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/11 22:34:04 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_cmd.h"
+
+void sig_quit(int signo)
+{
+	(void)signo;
+	write(1, "Quit (core dumped)\n", 20);
+}
 
 int	use_fork(t_exe_cmd_data *data)
 {
@@ -87,30 +93,30 @@ void	run_cmds(t_exe_cmd_data *data)
 
 void	wait_cmds(t_exe_cmd_data *data)
 {
-	int	i;
-	int	status;
-	int	*pids;
-
-	i = 0;
-	status = 0;
+	data->j = 0;
+	data->status = 0;
+	data->print_nl = 1;
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, sig_quit);
 	while (data->pid_list->count)
 	{
-		pids = data->pid_list->content;
-		waitpid(pids[0], &status, 0);
+		data->pids = data->pid_list->content;
+		waitpid(data->pids[0], &(data->status), 0);
+		if (data->status == 2 && data->print_nl)
+		{
+			write(1, "\n", 1);
+			g_all.cmd_error_status = 130;
+			data->print_nl = 0;
+		}
 		cs_list_delete(data->pid_list, 0);
-		i++;
+		data->j++;
 	}
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, clear_read_line);
-	if (i && !g_all.ctrl_c)
+	if (data->j && !g_all.ctrl_c)
 		g_all.cmd_error_status = 0;
-	if (i && WIFEXITED(status) && !g_all.ctrl_c)
-		g_all.cmd_error_status = WEXITSTATUS(status);
-	if (status == 2)
-	{
-		write(1, "\n", 1);
-		g_all.cmd_error_status = 130;
-	}
+	if (data->j && WIFEXITED(data->status) && !g_all.ctrl_c)
+		g_all.cmd_error_status = WEXITSTATUS(data->status);
 }
 
 void	execute_cmd(void)

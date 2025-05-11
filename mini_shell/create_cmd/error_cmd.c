@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:19:10 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:31:45 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/11 22:37:38 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	print_error_cmd_not_found(char *cmd, t_create_cmd *data, int status)
 {
 	t_cpp_str	*str;
 
+	if (data->cmd->input_fd == -1 || data->cmd->output_fd == -1)
+		return ;
 	str = cpp_str_new();
 	cpp_str_add(str, "mini-shell: ");
 	cpp_str_add(str, cmd);
