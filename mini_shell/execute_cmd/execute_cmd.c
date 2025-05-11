@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:50 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 13:39:14 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 05:37:10 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	wait_cmds(t_exe_cmd_data *data)
 		g_all.cmd_error_status = WEXITSTATUS(status);
 	if (status == 2)
 	{
-		printf("\n");
+		write(1, "\n", 1);
 		g_all.cmd_error_status = 130;
 	}
 }

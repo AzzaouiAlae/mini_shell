@@ -12,11 +12,11 @@
 
 #include "ft_func.h"
 
-void ft_putstr_fd(int fd, char *s, int len)
+void	ft_putstr_fd(int fd, char *s, int len)
 {
-    if (!s || fd < 0)
-        return ;
-    if (!len)
-        len = ft_strlen(s);
-    write(fd, s, len);
+	if (!s || fd < 0)
+		return ;
+	if (!len)
+		len = ft_strlen(s);
+	write(fd, s, len);
 }

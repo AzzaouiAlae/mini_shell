@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:51 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 11:54:48 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/10 22:16:51 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 void	clear_read_line(int signo)
 {
 	(void)signo;
-	g_all.ctrl_c = 1;
 	if (!(g_all.pid_list) || !(g_all.pid_list->count))
-	{		
-		printf("\n");
+	{
+		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -45,7 +44,7 @@ char	*get_prompt(void)
 	return (prompt);
 }
 
-char	*read_input()
+char	*read_input(void)
 {
 	char	*line;
 
@@ -74,7 +73,7 @@ void	process_line(char **input)
 	if (is_input_to_skip2(*input))
 		return ;
 	process_cmd(*input);
-	//free(*input);
+	// free(*input);
 	g_all.line_count++;
 }
 

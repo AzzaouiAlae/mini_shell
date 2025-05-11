@@ -51,7 +51,7 @@ void	print_num_error(char *arg)
 
 void	check_is_num(t_cmd *cmd)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (cmd->args[1][i])

@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:44:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 05:29:52 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/10 19:11:54 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <string.h>
 # include <unistd.h>
 
+void	clear_read_line(int signo);
 void	clear_sig_quit(int signo);
 char	*get_enum_str(int type);
 void	print_tokens(void);

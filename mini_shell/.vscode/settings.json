@@ -31,7 +31,8 @@
         "array": "c",
         "functional": "c",
         "tuple": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "her_doc.h": "c"
     },
     "github.copilot.enable": {
         "*": false,

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cpp_string.h"
 #include "../ft_func/ft_func.h"
+#include "cpp_string.h"
 
 t_cpp_str	*cpp_str_new(void)
 {

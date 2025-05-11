@@ -26,9 +26,9 @@ static int	memory_allocation(int *s_len, int len, char **str)
 
 char	*ft_substr(const char *s, int start, int len)
 {
-	int	s_len;
+	int		s_len;
 	char	*str;
-	int	i;
+	int		i;
 
 	if (!s)
 		return (NULL);

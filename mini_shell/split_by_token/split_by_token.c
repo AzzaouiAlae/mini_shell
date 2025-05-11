@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:21:44 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 11:18:26 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 05:35:43 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	skip_space(char *s, int *i)
 
 void	check_tokens(t_split_data *data)
 {
+	int	i;
 	static int	(*func[])(t_split_data *) = {is_redirects_out_append,
 		is_redirects_out_truncate, is_redirects_heredoc, is_redirects_input,
 		is_pipe, is_delimiter, is_arg, is_expand_variable, is_single_quote,
 		is_double_quote, 0};
-	int			i;
 
 	i = 0;
 	while (func[i])

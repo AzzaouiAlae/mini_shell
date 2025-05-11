@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:21:04 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 11:52:46 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/10 22:37:31 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	open_file(t_token **tokens, int i, int *fd, int *p_error)
 		return ;
 	}
 	open_perm = get_open_permission(tokens[i]->type);
-	*fd = open(tokens[i + 1]->s, open_perm, 0666);
+	*fd = ft_open(tokens[i + 1]->s, open_perm, 0666);
 	if (*fd == -1)
 		print_error(tokens[i + 1]->s, p_error);
 	if (tokens[i]->type & (e_redir_out_app | e_redir_out_trun))

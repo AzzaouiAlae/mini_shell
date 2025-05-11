@@ -37,7 +37,7 @@ char	*ft_strdup(const char *s1)
 	size_t	len;
 
 	if (!s1)
-		return NULL;
+		return (NULL);
 	i = 0;
 	len = ft_strlen(s1);
 	s = (char *)ft_calloc(sizeof(char), (len + 1));

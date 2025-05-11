@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:33:14 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/08 11:52:20 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/10 22:37:18 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_cmd_file(int reset, char *file_to_start)
 		current_file[22] = '0';
 		current_file[23] = '0';
 	}
-	fd = open(current_file, O_RDONLY, 0666);
+	fd = ft_open(current_file, O_RDONLY, 0666);
 	if (fd != -1)
 	{
 		ft_close(fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:55 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 23:06:13 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/11 05:44:22 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	add_cmd_token(t_create_cmd *data)
 		cs_list_add(data->cmd_args, (long)data->tkn->s);
 		data->cmd->cmd_path = data->tkn->s;
 	}
-	else
+	else if (data->tkn->s)
 	{
 		cs_list_add(data->cmd_args, (long)data->tkn->s);
 		data->cmd_path = get_cmd_path(data->tkn->s, data);
@@ -71,7 +71,7 @@ void	add_token_to_cmd(t_create_cmd *data)
 {
 	data->tkn = data->tkns[data->i];
 	data->res_fd = (e_heredoc_fd | e_redir_in_fd | e_redir_out_app_fd
-			| e_redir_out_trun_fd);
+		| e_redir_out_trun_fd);
 	if (data->tkn->type & e_pipe)
 	{
 		data->cmd->args = data->cmd_args->content;

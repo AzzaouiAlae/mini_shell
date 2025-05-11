@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:03 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 10:56:44 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:57:35 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	valid_var_name(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	if (!is_alpha(str[0]) && str[0] != '_')
@@ -69,7 +69,7 @@ int	is_path(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		if (s[i] == '/')
 			return (1);

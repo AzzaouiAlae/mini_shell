@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 04:47:57 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/08 11:46:14 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 05:10:50 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ char	*get_line(char *input, int flag)
 
 	if (flag == 1)
 	{
-		fd = open("/tmp/temp.txt", O_CREAT | O_TRUNC | O_RDWR, 0666);
+		fd = ft_open("/tmp/temp.txt", O_CREAT | O_TRUNC | O_RDWR, 0666);
 		if (fd == -1)
 			return (NULL);
 		ft_putstr_fd(fd, input, 0);
 		ft_close(fd);
-		fd = open("/tmp/temp.txt", O_RDWR, 0666);
+		fd = ft_open("/tmp/temp.txt", O_RDWR, 0666);
 		get_next_line(fd);
 	}
 	else if (flag == 2)

@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 07:09:48 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/08 10:56:36 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/09 23:44:23 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*ft_read(int fd, char *buf)
 	{
 		tmp = (char *)ft_calloc(1, (size_t)(BUFFER_SIZE) + 1);
 		b = read(fd, tmp, BUFFER_SIZE);
+		if (b == -1)
+			return (NULL);
 		tmp[b] = '\0';
 		buf = my_ft_strjoin(buf, tmp);
 		if (!buf)
@@ -33,7 +35,7 @@ char	*ft_read(int fd, char *buf)
 
 char	*ft_saver(char **str)
 {
-	int		i;
+	int	i;
 
 	if (!str)
 		return (NULL);

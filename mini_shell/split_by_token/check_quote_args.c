@@ -30,7 +30,7 @@ int	check_quote_in_arg(t_split_data *data)
 			data->type = data->type | e_quote;
 		else if (data->ch == '"')
 			data->type = data->type | e_double_quote;
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
