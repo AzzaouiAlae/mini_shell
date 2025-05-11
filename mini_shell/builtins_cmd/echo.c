@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:15 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 05:01:24 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:09:52 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,12 @@ void	print_str(char *str, int *first_args)
 {
 	if (str && str[0])
 		write(1, str, ft_strlen(str));
-	else
-		write(1, " ", 1);
 	*first_args = 0;
 }
 
 void	print_arg(t_cmd *cmd, int i, int *first_args, int *new_line)
 {
-	// echo '' -n output {  -n} bash { -n} check cmd->args[i - 1][0] if not null to add space
-	if (i > 1 && cmd->args[i - 1][0] && !(*first_args))
+	if (i > 1 && !(*first_args))
 		write(1, " ", 1);
 	if (*first_args && cmd->args[i][0] == '-')
 	{

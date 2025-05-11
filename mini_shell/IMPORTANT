@@ -1,1 +1,5 @@
-echo '' -n output {  -n} bash { -n} check cmd->args[i - 1][0] if not null to add space
+echo '' -n 
+output {  -n} 
+bash { -n} 
+check cmd->args[i - 1][0] 
+if not null to add space

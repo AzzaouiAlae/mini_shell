@@ -15,8 +15,8 @@
 void	ft_exit(int num)
 {
 	ft_free_all();
+	rl_clear_history();
 	exit(num);
-	return ;
 }
 
 void	*current_working_mem(void *mem, int set_to_null)

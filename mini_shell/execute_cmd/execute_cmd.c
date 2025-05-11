@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:50 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 05:37:10 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 16:30:43 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,11 @@ void	run_cmds(t_exe_cmd_data *data)
 		return ;
 	}
 	if (use_fork(data))
+	{
 		g_all.current_pid = fork();
+		if (!g_all.current_pid)
+			signal(SIGQUIT, SIG_DFL);
+	}
 	if (g_all.current_pid)
 		cs_list_add(data->pid_list, g_all.current_pid);
 	else

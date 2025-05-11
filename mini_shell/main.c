@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:51 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/10 22:16:51 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:59:09 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	process_line(char **input)
 	if (is_input_to_skip2(*input))
 		return ;
 	process_cmd(*input);
-	// free(*input);
+	ft_free(*input);
 	g_all.line_count++;
 }
 
@@ -88,7 +88,7 @@ int	main(int argc, char *argv[], char *env[])
 	augment_shell_level();
 	while (1)
 		process_line(&input);
-	free(input);
+	ft_free(input);
 	ft_free_all();
 	return (g_all.cmd_error_status);
 }

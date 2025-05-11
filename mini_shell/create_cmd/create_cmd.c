@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:55 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 05:44:22 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 19:07:52 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,11 @@ void	add_token_to_cmd(t_create_cmd *data)
 		data->cmd = ft_calloc(1, sizeof(t_cmd));
 		data->cmd_args = cs_list_new(sizeof(char *));
 		data->cmd_not_found = 0;
+		data->cmd->cmd_path = NULL;
 	}
 	else if (data->tkn->type & data->res_fd)
 		add_fd_to_cmd(data);
-	else if (data->tkn->type & e_cmd)
+	else if ((data->tkn->type & e_cmd) || !data->cmd->cmd_path)
 		add_cmd_token(data);
 	else
 		cs_list_add(data->cmd_args, (long)data->tkn->s);

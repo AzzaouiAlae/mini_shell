@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_tools2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:17:18 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/11 05:43:09 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:34:38 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,32 @@ int	delete_dots(t_cpp_str *str, char *arg, int *i)
 		*i += 2;
 		return (1);
 	}
+	else if (!ft_strncmp(&(arg[*i]), ".", 1))
+	{
+		(*i)++;
+		return (1);
+	}
 	return (0);
+}
+
+int is_absolute_path(t_cpp_str	*str, char *arg)
+{
+	int i;
+
+	i = 0;
+	if (arg && arg[0] == '/')
+	{
+		while (arg[i])
+		{
+			if (!i || !(arg[i - 1] == '/' && arg[i] == '/') )
+				cpp_str_add_char(str, arg[i]);
+			i++;
+		}
+		
+	}
+	if (str->count)
+		return (1);
+	return 0;
 }
 
 t_cpp_str	*get_path(char *pwd, char *arg)
@@ -69,9 +94,7 @@ t_cpp_str	*get_path(char *pwd, char *arg)
 
 	i = 0;
 	str = cpp_str_new();
-	if (arg && arg[0] == '/')
-		cpp_str_add(str, arg);
-	if (str->count)
+	if (is_absolute_path(str, arg))
 		return (str);
 	cpp_str_add(str, pwd);
 	while (arg && arg[i])
