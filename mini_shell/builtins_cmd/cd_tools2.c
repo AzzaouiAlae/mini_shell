@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:17:18 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/11 20:34:38 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/11 21:49:32 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,31 @@ int	delete_dots(t_cpp_str *str, char *arg, int *i)
 	return (0);
 }
 
+char *clean_slash(char *arg)
+{
+	int i;
+	t_cpp_str	*str;
+	
+	str = cpp_str_new();
+	cpp_str_add(str, arg);
+	i = 0;
+	while (i < str->count)
+	{
+		if (i && str->content[i - 1] == '/' && str->content[i] == '/')
+			cpp_str_delete_char(str, i);
+		else
+			i++;
+	}
+	return str->content;
+}
+
 int is_absolute_path(t_cpp_str	*str, char *arg)
 {
 	int i;
 
 	i = 0;
 	if (arg && arg[0] == '/')
-	{
-		while (arg[i])
-		{
-			if (!i || !(arg[i - 1] == '/' && arg[i] == '/') )
-				cpp_str_add_char(str, arg[i]);
-			i++;
-		}
-		
-	}
+		cpp_str_add(str, arg);
 	if (str->count)
 		return (1);
 	return 0;
@@ -93,6 +103,7 @@ t_cpp_str	*get_path(char *pwd, char *arg)
 	t_cpp_str	*str;
 
 	i = 0;
+	arg = clean_slash(arg);
 	str = cpp_str_new();
 	if (is_absolute_path(str, arg))
 		return (str);
