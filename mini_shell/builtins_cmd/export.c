@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:26 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 11:05:19 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 22:54:23 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ void	print_env_var(t_key_value *kvp)
 	t_cs_list	*value;
 
 	value = kvp->value;
-	if (value->type)
+	if (value->type == e_global_var && value->content)
 		printf("declare -x %s=\"%s\"\n", kvp->key, (char *)(value->content));
+	else if (value->type == e_global_var)
+		printf("declare -x %s=\n", kvp->key);
+	else if (value->type == e_export_var)
+		printf("declare -x %s\n", kvp->key);
 }
 
 void	print_env_vars(void)

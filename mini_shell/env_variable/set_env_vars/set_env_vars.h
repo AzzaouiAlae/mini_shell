@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_vars.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:18 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 05:25:52 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 23:03:14 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int				delete_export_token(t_set_env_vars *data);
 int				is_env_var(t_set_env_vars *data);
 int				is_tokens_has_cmd(void);
 int				is_path(char *s);
+void			add_export_var(char *kvp, t_var_type type);
+void			init_data(t_add_env_var *data, char *kvp);
 
 #endif

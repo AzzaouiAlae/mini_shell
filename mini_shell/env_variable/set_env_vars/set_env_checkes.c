@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_checkes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:03 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/10 18:57:35 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 23:08:11 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,17 @@ int	is_path(char *s)
 		i++;
 	}
 	return (0);
+}
+
+void add_export_var(char *kvp, t_var_type type)
+{
+	t_cs_list	*val;
+	
+	if (!kvp || !kvp[0])
+		return ;
+	val = cs_list_new(sizeof(char));
+	val->type = type;
+	if (kvp[ft_strlen(kvp) - 1] == '=')
+		kvp[ft_strlen(kvp) - 1] = '\0';
+	cpp_map_add(g_all.custom_env, kvp, val);
 }

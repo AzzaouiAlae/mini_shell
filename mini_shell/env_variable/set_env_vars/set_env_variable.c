@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:11 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 05:38:49 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/11 23:04:06 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ void	add_env_var(char *kvp, int type)
 
 	ft_bzero(&data, sizeof(t_add_env_var));
 	data.s = str_find_char(kvp, "+=");
-	if (!(data.s))
+	if (!(data.s) || (data.s[0] == '=' && !(data.s[1])))
+	{
+		if (data.s)
+			add_export_var(kvp, e_global_var);
+		else
+			add_export_var(kvp, e_export_var);
 		return ;
-	data.key_len = ft_strlen_delimiter(kvp, "+=");
-	data.str_key = cpp_str_new();
-	data.str_val = cpp_str_new();
-	cpp_str_add_len(data.str_key, kvp, data.key_len);
+	}
+	init_data(&data, kvp);
 	if (*(data.s) == '+')
 	{
 		data.val_list = cpp_map_get(g_all.custom_env, data.str_key->content);
