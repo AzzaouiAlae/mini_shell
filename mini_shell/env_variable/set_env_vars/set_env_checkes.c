@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_checkes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:03 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 23:08:11 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 05:18:06 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int	is_path(char *s)
 	return (0);
 }
 
-void add_export_var(char *kvp, t_var_type type)
+void	add_export_var(char *kvp, t_var_type type)
 {
 	t_cs_list	*val;
-	
+
 	if (!kvp || !kvp[0])
 		return ;
 	val = cs_list_new(sizeof(char));

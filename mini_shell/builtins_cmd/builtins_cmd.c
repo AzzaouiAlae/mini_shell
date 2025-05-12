@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:17:59 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 05:47:38 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 04:50:58 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	run_builtin_cmds(void)
 {
 	int		i;
 	t_cmd	**cmds;
-	void (*cmd)(t_cmd * c);
+	void	(*cmd)(t_cmd *c);
 
 	i = 0;
 	cmds = g_all.cmds->content;

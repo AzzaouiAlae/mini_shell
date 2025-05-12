@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:55 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 19:07:52 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 05:17:45 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	add_token_to_cmd(t_create_cmd *data)
 {
 	data->tkn = data->tkns[data->i];
 	data->res_fd = (e_heredoc_fd | e_redir_in_fd | e_redir_out_app_fd
-		| e_redir_out_trun_fd);
+			| e_redir_out_trun_fd);
 	if (data->tkn->type & e_pipe)
 	{
 		data->cmd->args = data->cmd_args->content;

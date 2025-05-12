@@ -6,17 +6,11 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:50 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 22:34:04 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 05:23:08 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_cmd.h"
-
-void sig_quit(int signo)
-{
-	(void)signo;
-	write(1, "Quit (core dumped)\n", 20);
-}
 
 int	use_fork(t_exe_cmd_data *data)
 {

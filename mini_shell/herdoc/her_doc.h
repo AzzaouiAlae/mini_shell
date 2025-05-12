@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   her_doc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 12:42:26 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/11 16:47:30 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 05:33:24 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,9 @@ void		here_doc(t_token **tokens, int i, int expand_her,
 				t_her_doc *her_doc);
 void		rem_delimitter_and_heredoc(int i, int fd, char *file_name);
 int			create_here_doc_file(t_her_doc *her_doc);
+int			create_here_doc_file(t_her_doc *her_doc);
+int			is_token(t_her_doc her_doc);
+void		exit_her_doc(int signo);
+int			is_heredoc_token(t_her_doc her_doc);
 
 #endif

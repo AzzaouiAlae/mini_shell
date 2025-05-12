@@ -3,46 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/11 18:45:39 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 05:32:18 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "her_doc.h"
 
-void	exit_her_doc(int signo)
-{
-	(void)signo;
-	write(1, "\n", 1);
-	g_all.cmd_error_status = 130;
-	ft_exit(g_all.cmd_error_status);
-}
-
-int is_token(t_her_doc her_doc)
-{
-	if (!(her_doc.tokens[her_doc.i]))
-		return 0;
-	if (!(her_doc.i < g_all.error_i))
-		return 0;
-	if (g_all.ctrl_c)
-		return 0;
-	return 1;
-}
-
-int is_heredoc_token(t_her_doc her_doc)
-{
-	if (!(her_doc.tokens[her_doc.i + 1]))
-		return 0;
-	if (!(her_doc.tokens[her_doc.i]->type & e_heredoc))
-		return 0;
-	if (!(her_doc.tokens[her_doc.i + 1]->type & e_delimiter))
-		return 0;
-	return 1;
-}
-
-void prosses_heredoc(t_her_doc	her_doc)
+void	prosses_heredoc(t_her_doc her_doc)
 {
 	if (create_here_doc_file(&her_doc) == 0)
 		return ;
@@ -91,20 +61,6 @@ void	check_here_doc(char *input)
 		her_doc.i++;
 	}
 	get_line(NULL, 2);
-}
-
-int	create_here_doc_file(t_her_doc *her_doc)
-{
-	her_doc->file_name = create_file_name();
-	cs_list_add(g_all.files_to_remove, (long)her_doc->file_name);
-	her_doc->fd = ft_open(her_doc->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
-	if (her_doc->fd == -1)
-	{
-		g_all.cmd_error_status = 127;
-		write(2, "ERROR HERDOC FILE CAN'T OPEN\n", 29);
-		return (0);
-	}
-	return (1);
 }
 
 void	rem_delimitter_and_heredoc(int i, int fd, char *file_name)

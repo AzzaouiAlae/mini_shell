@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:03 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 03:20:39 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 04:45:59 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		cd(t_cmd *cmd);
 void		echo(t_cmd *cmd);
 void		env(t_cmd *cmd);
 void		exit_cmd(t_cmd *cmd);
-void		pwd();
+void		pwd(t_cmd *cmd);
 void		unset(t_cmd *cmd);
 int			count_args(char **args);
 t_cpp_str	*get_from_env(char *var, char *arg);

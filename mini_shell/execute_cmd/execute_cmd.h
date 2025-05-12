@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:53 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/11 22:10:15 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 05:24:11 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ typedef struct s_exe_cmd_data
 	int			i;
 	int			j;
 	int			c;
-	int	status;
-	int	*pids;
-	int print_nl;
+	int			status;
+	int			*pids;
+	int			print_nl;
 	t_cmd		*cmd;
 	t_cmd		*old_cmd;
 	t_cmd		**cmds;
@@ -43,5 +43,6 @@ void			init_new_env(void);
 void			create_pipes(t_exe_cmd_data *data);
 void			clear_read_line2(int signo);
 void			clear_read_line(int signo);
+void			sig_quit(int signo);
 
 #endif

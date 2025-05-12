@@ -22,7 +22,8 @@ SRC =./cpp_map/cpp_map_add.c ./cpp_map/cpp_map_clear.c ./cpp_map/cpp_map_delete.
 ./history/create_cmd_file.c ./history/history.c ./augment_shell_level.c ./init.c ./input.c ./main.c ./process_cmd.c ./builtins_cmd/builtins_cmd.c \
 ./builtins_cmd/cd.c ./builtins_cmd/cd_tools.c ./builtins_cmd/echo.c ./builtins_cmd/env.c ./builtins_cmd/exit.c ./builtins_cmd/export.c ./builtins_cmd/pwd.c \
 ./builtins_cmd/unset.c ./create_cmd/cmd_fds.c ./create_cmd/create_cmd.c ./create_cmd/error_cmd.c ./check_syntax_after_parssing/ft_check_syntax_after_pars.c \
-ft_func/ft_close.c ft_func/ft_putstr_fd.c ft_func/ft_open.c env_variable/set_env_vars/init_data.c
+ft_func/ft_close.c ft_func/ft_putstr_fd.c ft_func/ft_open.c env_variable/set_env_vars/init_data.c execute_cmd/execute_cmd_tools.c builtins_cmd/cd_tools3.c builtins_cmd/cd_tools2.c \
+herdoc/herdoc_tools2.c
 
 OBJ = $(SRC:.c=.o)
 
