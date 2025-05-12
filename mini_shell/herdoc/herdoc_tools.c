@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 04:47:57 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 14:51:06 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:26:21 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,32 @@ int	count_here_doc(void)
 	}
 	return (herdoc_count);
 }
+// echo "ssssssssssssssssssssssssss
+// ssssssssssssssssssssss" | << qq cat > f2
+// www
+// qq
 
 void read_first_line(int fd)
 {
 	char *str;
+	char ch;
+	int i;
 
+	ch = '\0';
+	i = 0;
 	str = get_next_line(fd);
-	while (str && str[0])
+	while (str && str[i])
 	{
-		
-		str = str_find_char(str, "\"'");
-		if (str && !ft_strchr(str + 1, str[0]))
+		if (!ch && ft_strchr("\"'",  str[i]))
+			ch = str[i];
+		else if (ch ==  str[i])
+			ch = '\0';
+		else if (ch && !str[i + 1])
 		{
-			while (str && !ft_strchr(str + 1, str[0]))
-				str = get_next_line(fd);
+			str = get_next_line(fd);
+			i = -1;
 		}
-		else if (str && ft_strchr(str + 1, str[0]))
-			str = ft_strchr(str + 1, str[0]);
-		else if (str)
-			str++;
+		i++;
 	}
 }
 
@@ -63,7 +70,6 @@ char	*get_line(char *input, int flag)
 		ft_close(fd);
 		fd = ft_open("/tmp/temp.txt", O_RDWR, 0666);
 		read_first_line(fd);
-		
 	}
 	else if (flag == 2)
 	{
