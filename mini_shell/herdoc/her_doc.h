@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   her_doc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 12:42:26 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 11:27:22 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:47:24 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../mini_shell.h"
 # include <signal.h>
 # include <sys/wait.h>
-//
+
 typedef struct t_her_doc
 {
 	int		i;
@@ -43,5 +43,6 @@ int			create_here_doc_file(t_her_doc *her_doc);
 int			is_token(t_her_doc her_doc);
 void		exit_her_doc(int signo);
 int			is_heredoc_token(t_her_doc her_doc);
+void		read_first_line(int fd);
 
 #endif

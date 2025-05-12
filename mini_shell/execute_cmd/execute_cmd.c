@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:50 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 14:48:26 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:00:02 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ void	execute_cmd(void)
 		data.cmd = data.cmds[data.i];
 		create_pipes(&data);
 		run_cmds(&data);
+		close_fd_parent(&data);
 		data.i++;
 	}
-	close_fd(&data);
 	wait_cmds(&data);
 }

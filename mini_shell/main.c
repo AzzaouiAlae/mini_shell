@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:51 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 10:08:15 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:45:31 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ char	*get_prompt(void)
 	ft_bzero(buf, 4097);
 	prompt = getcwd(buf, 4097);
 	if (!prompt)
-	{
 		prompt = get_from_env("PWD", NULL)->content;
-	}
 	prompt = ft_strrchr(prompt, '/') + 1;
 	prompt = my_ft_strjoin("➜ ", prompt);
 	prompt = my_ft_strjoin(prompt, " $>: ");
@@ -46,19 +44,19 @@ char	*get_prompt(void)
 
 void	process_line(char **input)
 {
+	char	*in;
+
 	g_all.i++;
 	g_all.current_cmd_file = NULL;
 	*input = readline(get_prompt());
-	if (is_input_to_skip1(*input))
-		return ;
-	add_new_cmd_history(*input, 1);
-	if (is_input_to_skip2(*input))
-	{
-		free(*input);
-		return ;
-	}
-	process_cmd(*input);
+	in = ft_strdup(*input);
 	free(*input);
+	if (is_input_to_skip1(in))
+		return ;
+	add_new_cmd_history(in, 1);
+	if (is_input_to_skip2(in))
+		return ;
+	process_cmd(in);
 	g_all.line_count++;
 }
 
@@ -73,7 +71,6 @@ int	main(int argc, char *argv[], char *env[])
 	augment_shell_level();
 	while (1)
 		process_line(&input);
-	free(input);
 	ft_free_all();
 	return (g_all.cmd_error_status);
 }

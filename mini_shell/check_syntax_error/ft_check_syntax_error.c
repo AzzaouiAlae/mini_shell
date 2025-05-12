@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_syntax_error.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 22:17:25 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/11 05:25:52 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:35:26 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,3 @@ int	ft_check_syntax_error(void)
 	}
 	return (1);
 }
-/*
------------------ RAH SALIT HANJI SBAH NDIR LES
-TESTS LHADCHI BACH NCHOFO CHI HAJA KHRA ---------------------
-
-int main ()
-{
-	printf("return (%d && status[%d]\n", ft_check_syntax_error(),
-	g_all.cmd_error_status));
-}
-*/

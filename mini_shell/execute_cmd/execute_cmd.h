@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:53 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 05:24:11 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:55:52 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "../ft_func/ft_func.h"
 # include "../global.h"
-# include <sys/wait.h>
 # include <signal.h>
+# include <sys/wait.h>
 
 typedef struct s_exe_cmd_data
 {
@@ -44,5 +44,6 @@ void			create_pipes(t_exe_cmd_data *data);
 void			clear_read_line2(int signo);
 void			clear_read_line(int signo);
 void			sig_quit(int signo);
+void			close_fd_parent(t_exe_cmd_data *data);
 
 #endif

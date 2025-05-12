@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 07:09:48 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/09 23:44:23 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:32:42 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,3 @@ char	*get_next_line(int fd)
 	buf = ft_saver(&buf);
 	return (line);
 }
-
-// int main()
-// {
-//     int fd = open("file.txt",O_RDWR);
-//     char * str = NULL;
-//     // int i = 0;
-
-//         str = get_next_line(fd);
-//         printf("[%s]",str);
-//         free(str);
-
-//     close(fd);
-// }
