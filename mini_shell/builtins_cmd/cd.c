@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 04:52:36 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/11 05:45:55 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 04:18:15 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,16 @@ void	change_pwd_oldpwd(char *cmd, char *cwd)
 
 	add_to_env(get_from_env("PWD", NULL), NULL, "OLDPWD");
 	if (cwd)
+	{
+		if (!ft_strncmp(cmd, cwd, ft_strlen(cmd)))
+			cwd = getcwd(cwd, 4097);
 		add_to_env(NULL, cwd, "PWD");
+	}
 	else
 	{
 		pwd = get_from_env("PWD", cmd)->content;
+		if (!pwd || !pwd[0])
+			pwd = getcwd(cwd, 4097);
 		add_to_env(NULL, pwd, "PWD");
 	}
 }
