@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:56 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 11:59:17 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:48:44 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	dup_fd(t_exe_cmd_data *data)
 		dup2(data->cmd->input_fd, 0);
 	if (data->cmd->output_fd)
 		dup2(data->cmd->output_fd, 1);
-	write(g_all.terminal_fd, data->cmd->cmd_path, ft_strlen(data->cmd->cmd_path));
-	write(g_all.terminal_fd, " close in child\n", 16);
 	close_fd(data);
 }
 

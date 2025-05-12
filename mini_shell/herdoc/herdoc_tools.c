@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 04:47:57 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 11:26:25 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:51:06 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ void read_first_line(int fd)
 	str = get_next_line(fd);
 	while (str && str[0])
 	{
-		// "aaa"  'aaa
-		// bbb'
+		
 		str = str_find_char(str, "\"'");
 		if (str && !ft_strchr(str + 1, str[0]))
-			str = get_next_line(fd);
+		{
+			while (str && !ft_strchr(str + 1, str[0]))
+				str = get_next_line(fd);
+		}
 		else if (str && ft_strchr(str + 1, str[0]))
 			str = ft_strchr(str + 1, str[0]);
 		else if (str)
@@ -61,6 +63,7 @@ char	*get_line(char *input, int flag)
 		ft_close(fd);
 		fd = ft_open("/tmp/temp.txt", O_RDWR, 0666);
 		read_first_line(fd);
+		
 	}
 	else if (flag == 2)
 	{

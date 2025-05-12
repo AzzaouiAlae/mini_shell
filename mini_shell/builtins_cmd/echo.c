@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:15 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 11:53:35 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:49:40 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	is_char(char *str, char ch)
 
 void	print_str(char *str, int *first_args)
 {
-	write(g_all.terminal_fd, "echo ch pross\n", 14);
 	if (str && str[0])
 		write(1, str, ft_strlen(str));
 	*first_args = 0;

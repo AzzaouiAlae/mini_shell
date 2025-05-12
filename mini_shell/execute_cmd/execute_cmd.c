@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:50 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 11:57:33 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:48:26 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void	execute_cmd(void)
 		run_cmds(&data);
 		data.i++;
 	}
-	write(g_all.terminal_fd, "close in parent\n", 16);
 	close_fd(&data);
 	wait_cmds(&data);
 }
