@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:48 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/07 21:25:36 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:06:23 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	is_input_to_skip1(char *input)
 	if (!input)
 		ft_exit(g_all.cmd_error_status);
 	if (!(*input))
+	{
+		free(input);
 		return (1);
+	}
 	if (!ft_strcmp(input, "\n"))
 	{
 		free(input);

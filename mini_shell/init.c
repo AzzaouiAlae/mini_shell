@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:45 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 11:01:34 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:52:46 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_g_all(int argc, char *argv[], char *env_vars[])
 			"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
 		cpp_map_add(g_all.custom_env, "PATH", paths);
 	}
+	g_all.terminal_fd = dup(1);
 }
 
 void	set_exit_status(void)

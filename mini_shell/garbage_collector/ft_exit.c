@@ -11,10 +11,12 @@
 /* ************************************************************************** */
 
 #include "garbage_collector.h"
+#include "../mini_shell.h"
 
 void	ft_exit(int num)
 {
 	ft_free_all();
+	ft_close(g_all.terminal_fd);
 	rl_clear_history();
 	exit(num);
 }

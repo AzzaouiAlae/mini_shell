@@ -6,7 +6,7 @@
 /*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:19:00 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 05:23:09 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:55:55 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void			check_path(char *cmd, t_create_cmd *data, int is_path);
 int				is_dir(char *cmd);
 int				check_builtins_cmd(t_create_cmd *data);
 void			run_builtin_cmds(t_create_cmd *data);
-void			close_fd(int fd);
 char			*get_cmd_path(char *cmd_s, t_create_cmd *data);
 int				get_error_status(char *s);
 void			add_input_fd(t_create_cmd *data);

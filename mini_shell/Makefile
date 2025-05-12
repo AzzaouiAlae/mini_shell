@@ -2,7 +2,7 @@ NAME = minishell
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRC =./cpp_map/cpp_map_add.c ./cpp_map/cpp_map_clear.c ./cpp_map/cpp_map_delete.c ./cpp_map/cpp_map_foreach.c ./cpp_map/cpp_map_get.c \
 ./cpp_map/cpp_map_hash_function.c ./cpp_map/cpp_map_new.c ./cpp_map/cpp_resize.c ./cpp_map/prime_nums.c ./cpp_string/cpp_str_add.c ./cpp_string/cpp_str_delete.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 09:41:09 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:27:19 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ void	check_here_doc(char *input)
 	while (is_token(her_doc))
 	{
 		if (is_heredoc_token(her_doc))
+		{
 			prosses_heredoc(her_doc);
+			rl_clear_history();
+			add_the_past_history();
+		}
 		her_doc.i++;
 	}
 	get_line(NULL, 2);
@@ -115,7 +119,8 @@ void	here_doc(t_token **tokens, int i, int expand_her, t_her_doc *her_doc)
 {
 	signal(SIGINT, exit_her_doc);
 	her_doc->str = replace_char(get_line(NULL, 0), '\n', '\0');
-	her_doc->str = readline("> ");
+	if (!her_doc->str)
+		her_doc->str = readline("> ");
 	her_doc->limiter = tokens[i + 1]->s;
 	her_doc->expand_her = expand_her;
 	while (ft_strncmp(her_doc->limiter, her_doc->str,
@@ -127,7 +132,8 @@ void	here_doc(t_token **tokens, int i, int expand_her, t_her_doc *her_doc)
 		ft_free(her_doc->str);
 		g_all.i++;
 		her_doc->str = replace_char(get_line(NULL, 0), '\n', '\0');
-		her_doc->str = readline("> ");
+		if (!her_doc->str)
+			her_doc->str = readline("> ");
 	}
 	add_new_cmd_history(her_doc->str, 0);
 	ft_free(her_doc->str);

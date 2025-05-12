@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:57:14 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/07 21:26:33 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:50:50 by oel-bann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_cmd
 typedef struct s_globale
 {
 	int				i;
+	int				terminal_fd;
 	int				argc;
 	int				error_i;
 	int				current_pid;
