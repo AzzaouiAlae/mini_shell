@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:51 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 15:45:31 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:07:09 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,33 @@ char	*get_prompt(void)
 	return (prompt);
 }
 
+char	*read_input()
+{
+	char	*line;
+
+	if (isatty(fileno(stdin)))
+	{
+		return (readline(get_prompt()));
+	}
+	else
+	{
+		line = get_next_line(0);
+		if (ft_strlen(line))
+			line[ft_strlen(line) - 1] = '\0';
+		return (line);
+	}
+}
+
 void	process_line(char **input)
 {
 	char	*in;
 
 	g_all.i++;
 	g_all.current_cmd_file = NULL;
-	*input = readline(get_prompt());
+	*input = read_input();
+	//*input = readline(get_prompt());
 	in = ft_strdup(*input);
-	free(*input);
+	ft_free(*input);
 	if (is_input_to_skip1(in))
 		return ;
 	add_new_cmd_history(in, 1);
