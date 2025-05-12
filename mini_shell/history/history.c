@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:44:16 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/11 18:05:35 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 09:30:23 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,25 @@ void	add_the_past_history(void)
 
 void	free_for_new_cmds(void)
 {
-	char	full_cmd[204800];
+	t_history_data	data;
 
-	char *before, *(after);
-	int fd_before, (fd_after) = 0, (cread);
-	cread = 0;
-	fd_before = 0;
+	ft_bzero(&data, sizeof(t_history_data));
 	if (access("/var/tmp/history/cmd_500.txt", F_OK) == 0)
 	{
-		before = get_cmd_file(1, "/var/tmp/history/cmd_00/.txt");
-		after = get_cmd_file(1, "/var/tmp/history/cmd_099.txt");
-		while (after)
+		data.before = get_cmd_file(1, "/var/tmp/history/cmd_00/.txt");
+		data.after = get_cmd_file(1, "/var/tmp/history/cmd_099.txt");
+		while (data.after)
 		{
-			fd_after = ft_open(after, O_RDONLY, 0666);
-			cread = read(fd_after, full_cmd, sizeof(full_cmd) - 1);
-			full_cmd[cread] = '\0';
-			ft_close(fd_after);
-			fd_before = ft_open(before, O_RDWR | O_TRUNC, 0666);
-			ft_putstr_fd(fd_before, full_cmd, 0);
-			ft_close(fd_before);
-			before = get_cmd_file(1, before);
-			after = get_cmd_file(1, after);
+			data.fd_after = ft_open(data.after, O_RDONLY, 0666);
+			data.cread = read(data.fd_after, data.full_cmd,
+					sizeof(data.full_cmd) - 1);
+			data.full_cmd[data.cread] = '\0';
+			ft_close(data.fd_after);
+			data.fd_before = ft_open(data.before, O_RDWR | O_TRUNC, 0666);
+			ft_putstr_fd(data.fd_before, data.full_cmd, 0);
+			ft_close(data.fd_before);
+			data.before = get_cmd_file(1, data.before);
+			data.after = get_cmd_file(1, data.after);
 		}
 		delete_files(100);
 		rl_clear_history();
