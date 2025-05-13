@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   delete_files.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:42:44 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/06 22:48:23 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:58:31 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "her_doc.h"
+
+void	clean_files(char **files)
+{
+	int	i;
+
+	i = 0;
+	if (files[i])
+	{
+		ft_free(files[i]);
+		i++;
+	}
+	cs_list_clear(g_all.files_to_remove);
+}
 
 void	delete_files(int flag)
 {
@@ -23,10 +36,8 @@ void	delete_files(int flag)
 		files = g_all.files_to_remove->content;
 		i = 0;
 		while (files[i])
-		{
-			unlink(files[i]);
-			i++;
-		}
+			unlink(files[i++]);
+		clean_files(files);
 	}
 	if (flag == 100)
 	{
@@ -35,6 +46,7 @@ void	delete_files(int flag)
 		{
 			unlink(next_file);
 			next_file = get_cmd_file(1, next_file);
+			ft_free(next_file);
 		}
 	}
 }

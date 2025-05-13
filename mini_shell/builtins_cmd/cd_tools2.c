@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_tools2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:17:18 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 05:22:04 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:44:46 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ char	*clean_slash(char *arg)
 
 int	is_absolute_path(t_cpp_str	*str, char *arg)
 {
-	int	i;
-
-	i = 0;
 	if (arg && arg[0] == '/')
 		cpp_str_add(str, arg);
 	if (str->count)

@@ -6,29 +6,34 @@
 /*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 07:09:48 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 15:32:42 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:32:42 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../cpp_string/cpp_string.h"
 #include "get_next_line.h"
 
 char	*ft_read(int fd, char *buf)
 {
-	char	*tmp;
-	ssize_t	b;
+	char		ch;
+	t_cpp_str	*str;
+	ssize_t		b;
 
+	str = cpp_str_new();
+	cpp_str_add(str, buf);
 	while (1)
 	{
-		tmp = (char *)ft_calloc(1, (size_t)(BUFFER_SIZE) + 1);
-		b = read(fd, tmp, BUFFER_SIZE);
+		b = read(fd, &ch, 1);
 		if (b == -1)
 			return (NULL);
-		tmp[b] = '\0';
-		buf = my_ft_strjoin(buf, tmp);
-		if (!buf)
-			return (NULL);
-		if (ft_line_verifier(buf) == 1 || (b != BUFFER_SIZE))
+		if (b > 0)
+			cpp_str_add_char(str, ch);
+		if (ft_line_verifier(str->content) == 1 || (b != BUFFER_SIZE))
+		{
+			buf = str->content;
+			ft_free(str);
 			return (buf);
+		}
 	}
 	return (NULL);
 }

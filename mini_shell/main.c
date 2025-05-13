@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:51 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 17:07:09 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:53:55 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	clear_read_line(int signo)
 
 char	*get_prompt(void)
 {
+	char	*tmp;
 	char	*prompt;
 	char	buf[4097];
 
@@ -38,35 +39,23 @@ char	*get_prompt(void)
 		prompt = get_from_env("PWD", NULL)->content;
 	prompt = ft_strrchr(prompt, '/') + 1;
 	prompt = my_ft_strjoin("➜ ", prompt);
+	tmp = prompt;
 	prompt = my_ft_strjoin(prompt, " $>: ");
+	ft_free(tmp);
 	return (prompt);
-}
-
-char	*read_input()
-{
-	char	*line;
-
-	if (isatty(fileno(stdin)))
-	{
-		return (readline(get_prompt()));
-	}
-	else
-	{
-		line = get_next_line(0);
-		if (ft_strlen(line))
-			line[ft_strlen(line) - 1] = '\0';
-		return (line);
-	}
 }
 
 void	process_line(char **input)
 {
 	char	*in;
+	char	*prompt;
 
+	(void)prompt;
 	g_all.i++;
 	g_all.current_cmd_file = NULL;
-	*input = read_input();
-	//*input = readline(get_prompt());
+	prompt = get_prompt();
+	*input = readline(prompt);
+	ft_free(prompt);
 	in = ft_strdup(*input);
 	ft_free(*input);
 	if (is_input_to_skip1(in))

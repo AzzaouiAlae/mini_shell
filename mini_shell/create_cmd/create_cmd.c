@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:55 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 05:17:45 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:59:08 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	is_cmd_path(char *cmd_s, t_cpp_str *str, char **paths, int j)
 char	*get_cmd_path(char *cmd_s, t_create_cmd *data)
 {
 	int			j;
-	char		**paths;
 	t_cs_list	*ps;
 	t_cpp_str	*str;
 
@@ -34,10 +33,10 @@ char	*get_cmd_path(char *cmd_s, t_create_cmd *data)
 	ps = cpp_map_get(g_all.custom_env, "PATH");
 	str = cpp_str_new();
 	if (ps)
-		paths = ft_super_split(ps->content, ":", "");
-	while (ps && paths && paths[j] && cmd_s[0])
+		data->paths = ft_super_split(ps->content, ":", "");
+	while (ps && data->paths && data->paths[j] && cmd_s[0])
 	{
-		if (is_cmd_path(cmd_s, str, paths, j))
+		if (is_cmd_path(cmd_s, str, data->paths, j))
 			return (str->content);
 		j++;
 	}
@@ -63,6 +62,7 @@ void	add_cmd_token(t_create_cmd *data)
 	{
 		cs_list_add(data->cmd_args, (long)data->tkn->s);
 		data->cmd_path = get_cmd_path(data->tkn->s, data);
+		free_path(data);
 		data->cmd->cmd_path = data->cmd_path;
 	}
 }

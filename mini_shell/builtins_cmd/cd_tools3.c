@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_tools3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 05:20:47 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 05:22:32 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:59:20 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ t_cpp_str	*get_from_env(char *var, char *arg)
 	t_cpp_str	*str;
 	t_cs_list	*value;
 
-	char *(cwd);
 	str = cpp_str_new();
-	cwd = ft_calloc(1, 4097);
 	value = cpp_map_get(g_all.custom_env, var);
 	if (!value)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_by_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:21:44 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 05:19:51 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:59:19 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	check_tokens(t_split_data *data)
 void	add_token(t_split_data *data)
 {
 	g_all.token = create_token(g_all.token_str->content, data->type);
+	ft_free(g_all.token_str);
 	cs_list_add(g_all.tokens, (long)g_all.token);
 }
 

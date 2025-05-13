@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aazzaoui <aazzaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:21:41 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/06 22:21:42 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:52:18 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	is_arg(t_split_data *data)
 		data->type = e_var_to_set;
 	while (is_arg_char(data))
 		add_arg_type(data);
-	if (data->type & e_file_name)
-		data->type = e_file_name;
+	if ((data->type & e_file_name) && (data->type & e_cmd))
+		data->type -= e_cmd;
 	add_token(data);
 	return (1);
 }

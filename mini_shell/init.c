@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:45 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 11:52:46 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:59:44 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,27 @@ void	set_exit_status(void)
 	str = cs_list_new(sizeof(char));
 	exit_str = ft_itoa(g_all.cmd_error_status);
 	cs_list_add_range(str, exit_str->count, exit_str->content);
+	ft_free(exit_str->content);
+	ft_free(exit_str);
 	cpp_map_add(g_all.custom_env, "?", str);
 }
 
 void	init_new_env(void)
 {
+	char	**env;
+	int		i;
+
 	if (!g_all.new_env)
 		g_all.new_env = cs_list_new(sizeof(char *));
 	else
+	{
+		env = g_all.new_env->content;
+		i = 0;
+		while (g_all.new_env->count > i)
+		{
+			ft_free(env[i]);
+			i++;
+		}
 		cs_list_clear(g_all.new_env);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_fds.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:42 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/08 11:45:29 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:42:16 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,20 @@ void	add_fd_to_cmd(t_create_cmd *data)
 		add_output_fd(data);
 	else if (data->tkn->type & e_redir_out_trun_fd)
 		add_output_fd(data);
+}
+
+void	free_path(t_create_cmd *data)
+{
+	int	i;
+
+	i = 0;
+	if (!data->paths)
+		return ;
+	while (data->paths[i])
+	{
+		ft_free(data->paths[i]);
+		i++;
+	}
+	ft_free(data->paths);
+	data->paths = NULL;
 }

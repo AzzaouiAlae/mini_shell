@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   create_cmd.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:19:00 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 11:55:55 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:41:53 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CREATE_CMD_H
 # define CREATE_CMD_H
-# include "../mini_shell.h"
 # include "../env_variable/set_env_vars/set_env_vars.h"
+# include "../mini_shell.h"
 # include <dirent.h>
 
 typedef struct s_create_cmd
@@ -24,6 +24,7 @@ typedef struct s_create_cmd
 	int			cmd_not_found;
 	char		*cmd_path;
 	char		*error;
+	char		**paths;
 	t_token		**tkns;
 	t_token		*tkn;
 	t_cmd		*cmd;
@@ -41,5 +42,6 @@ int				get_error_status(char *s);
 void			add_input_fd(t_create_cmd *data);
 void			add_output_fd(t_create_cmd *data);
 void			add_fd_to_cmd(t_create_cmd *data);
+void			free_path(t_create_cmd *data);
 
 #endif

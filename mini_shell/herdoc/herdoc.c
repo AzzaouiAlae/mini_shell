@@ -6,34 +6,35 @@
 /*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:16:53 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 17:08:35 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:58:05 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "her_doc.h"
 
-void	prosses_heredoc(t_her_doc her_doc)
+void	prosses_heredoc(t_her_doc *her_doc)
 {
-	if (create_here_doc_file(&her_doc) == 0)
+	if (create_here_doc_file(her_doc) == 0)
 		return ;
 	signal(SIGINT, SIG_IGN);
-	her_doc.pid = fork();
-	if (her_doc.pid == 0)
+	her_doc->pid = fork();
+	if (her_doc->pid == 0)
 	{
-		if (her_doc.tokens[her_doc.i]->type & e_var_to_get)
-			here_doc(her_doc.tokens, her_doc.i, 1, &her_doc);
+		if (her_doc->tokens[her_doc->i]->type & e_var_to_get)
+			here_doc(her_doc->tokens, her_doc->i, 1, her_doc);
 		else
-			here_doc(her_doc.tokens, her_doc.i, 0, &her_doc);
+			here_doc(her_doc->tokens, her_doc->i, 0, her_doc);
 		ft_exit(g_all.cmd_error_status);
 	}
 	else
 	{
-		waitpid(her_doc.pid, &(her_doc.status), 0);
+		waitpid(her_doc->pid, &(her_doc->status), 0);
 		signal(SIGINT, clear_read_line);
-		rem_delimitter_and_heredoc(her_doc.i, her_doc.fd, her_doc.file_name);
-		if (!g_all.cmd_error_status || WEXITSTATUS(her_doc.status))
+		rem_delimitter_and_heredoc(her_doc->i, her_doc->fd,
+			her_doc->file_name);
+		if (!g_all.cmd_error_status || WEXITSTATUS(her_doc->status))
 		{
-			g_all.cmd_error_status = WEXITSTATUS(her_doc.status);
+			g_all.cmd_error_status = WEXITSTATUS(her_doc->status);
 			if (g_all.cmd_error_status)
 				g_all.ctrl_c = 1;
 		}
@@ -58,7 +59,7 @@ void	check_here_doc(char *input)
 	{
 		if (is_heredoc_token(her_doc))
 		{
-			prosses_heredoc(her_doc);
+			prosses_heredoc(&her_doc);
 			rl_clear_history();
 			add_the_past_history();
 		}
@@ -84,8 +85,7 @@ void	rem_delimitter_and_heredoc(int i, int fd, char *file_name)
 	}
 	*((int *)(token->s)) = fd;
 	cs_list_inset_at(g_all.tokens, i, (long)token);
-	cs_list_delete(g_all.tokens, i + 1);
-	cs_list_delete(g_all.tokens, i + 1);
+	clear_heredoc_tokens(i);
 }
 
 int	get_her_doc_line(t_her_doc *her_doc, int i)
@@ -120,13 +120,7 @@ void	here_doc(t_token **tokens, int i, int expand_her, t_her_doc *her_doc)
 	signal(SIGINT, exit_her_doc);
 	her_doc->str = replace_char(get_line(NULL, 0), '\n', '\0');
 	if (!her_doc->str)
-	{
-		her_doc->str = get_next_line(0);
-		if (ft_strlen(her_doc->str))
-			her_doc->str[ft_strlen(her_doc->str) - 1] = '\0';
-	}
-	// if (!her_doc->str)
-	// 	her_doc->str = readline("> ");
+		her_doc->str = readline("> ");
 	her_doc->limiter = tokens[i + 1]->s;
 	her_doc->expand_her = expand_her;
 	while (ft_strncmp(her_doc->limiter, her_doc->str,
@@ -139,13 +133,7 @@ void	here_doc(t_token **tokens, int i, int expand_her, t_her_doc *her_doc)
 		g_all.i++;
 		her_doc->str = replace_char(get_line(NULL, 0), '\n', '\0');
 		if (!her_doc->str)
-	{
-		her_doc->str = get_next_line(0);
-		if (ft_strlen(her_doc->str))
-			her_doc->str[ft_strlen(her_doc->str) - 1] = '\0';
-	}
-		// if (!her_doc->str)
-		// 	her_doc->str = readline("> ");
+			her_doc->str = readline("> ");
 	}
 	add_new_cmd_history(her_doc->str, 0);
 	ft_free(her_doc->str);

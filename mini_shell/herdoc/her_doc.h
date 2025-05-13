@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 12:42:26 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 15:47:24 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:58:15 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int			is_token(t_her_doc her_doc);
 void		exit_her_doc(int signo);
 int			is_heredoc_token(t_her_doc her_doc);
 void		read_first_line(int fd);
+void		clear_heredoc_tokens(int i);
 
 #endif

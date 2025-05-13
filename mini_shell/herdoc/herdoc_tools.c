@@ -6,7 +6,7 @@
 /*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 04:47:57 by oel-bann          #+#    #+#             */
-/*   Updated: 2025/05/12 15:47:31 by aazzaoui         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:02:21 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	create_here_doc_file(t_her_doc *her_doc)
 	her_doc->fd = ft_open(her_doc->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (her_doc->fd == -1)
 	{
+		ft_free(her_doc->file_name);
 		g_all.cmd_error_status = 127;
 		write(2, "ERROR HERDOC FILE CAN'T OPEN\n", 29);
 		return (0);

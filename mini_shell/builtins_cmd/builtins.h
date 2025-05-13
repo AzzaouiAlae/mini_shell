@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:03 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 04:45:59 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:36:40 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ int			print_cd_error(char *arg);
 int			check_dash(char *str);
 void		print_dash_error(void);
 t_cpp_str	*get_path(char *pwd, char *arg);
-t_cpp_str	*get_from_env(char *var, char *arg);
 
 #endif

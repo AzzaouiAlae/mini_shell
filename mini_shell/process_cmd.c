@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:56 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/09 16:19:26 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/13 21:00:08 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,67 @@ void	last_arg(int is_child)
 	cpp_map_add(g_all.custom_env, "_", value);
 }
 
-void	process_cmd(char *s)
+void	init_input(void)
 {
 	g_all.is_error_printed = 0;
-	init_new_env();
 	g_all.cmd_error_status = 0;
+	init_new_env();
+}
+
+void	free_cmd(t_cmd *cmd, int j)
+{
+	int	i;
+	int	free_cmd;
+
+	i = 0;
+	free_cmd = 1;
+	if (cmd->args[i] == cmd->cmd_path)
+		free_cmd = 0;
+	while (cmd->args && cmd->args[i])
+	{
+		ft_free(cmd->args[i]);
+		i++;
+	}
+	ft_free(cmd->args);
+	if (free_cmd)
+		ft_free(cmd->cmd_path);
+	if (j)
+		ft_free(cmd->pipe);
+	ft_free(cmd);
+}
+
+void	clean_cmd(void)
+{
+	t_token	**tokens;
+	t_cmd	**cmds;
+	int		i;
+
+	i = 0;
+	set_exit_status();
+	last_arg(0);
+	delete_files(1);
+	tokens = g_all.tokens->content;
+	while (tokens && i < g_all.tokens->count)
+	{
+		ft_free(tokens[i]);
+		i++;
+	}
+	if (!g_all.cmds)
+		return ;
+	cmds = g_all.cmds->content;
+	i = 0;
+	while (i < g_all.cmds->count)
+	{
+		free_cmd(cmds[i], i);
+		i++;
+	}
+	cs_list_clear(g_all.tokens);
+	cs_list_clear(g_all.cmds);
+}
+
+void	process_cmd(char *s)
+{
+	init_input();
 	split_tokens(replace_char(ft_strdup(s), '\n', '\0'), " |<>\t$", "\"'");
 	if (!g_all.cmd_error_status)
 	{
@@ -58,7 +114,5 @@ void	process_cmd(char *s)
 			}
 		}
 	}
-	set_exit_status();
-	last_arg(0);
-	delete_files(1);
+	clean_cmd();
 }

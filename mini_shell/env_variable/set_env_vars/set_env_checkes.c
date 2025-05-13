@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_checkes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-bann <oel-bann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aazzaoui <aazzaoui@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:20:03 by aazzaoui          #+#    #+#             */
-/*   Updated: 2025/05/12 05:18:06 by oel-bann         ###   ########.fr       */
+/*   Updated: 2025/05/13 21:47:53 by aazzaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,5 @@ void	add_export_var(char *kvp, t_var_type type)
 	val->type = type;
 	if (kvp[ft_strlen(kvp) - 1] == '=')
 		kvp[ft_strlen(kvp) - 1] = '\0';
-	cpp_map_add(g_all.custom_env, kvp, val);
+	cpp_map_add(g_all.custom_env, ft_strdup(kvp), val);
 }
